@@ -134,6 +134,7 @@ class ClaimBelief(Schema):
 class Decision(Schema):
     action: Literal["ANSWER", "SEARCH_MORE", "RESOLVE_CONFLICT", "ASK", "ABSTAIN"]
     target_claim_id: Text | None = None
+    blocking_claims: list[Text] = Field(default_factory=list)
     rationale: Text
     confidence: Score | None = Field(
         default=None, description="Uncalibrated score, not probability"
