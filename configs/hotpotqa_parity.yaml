@@ -1,0 +1,27 @@
+schema_version: 1
+run_id: hotpotqa-parity-pilot
+seed: 42
+method: naive_rag
+budget:
+  max_search_calls: 3
+  max_documents: 6
+  max_retrieved_tokens: 50000
+  max_llm_calls: 24
+  max_total_llm_input_tokens: 100000
+  max_total_llm_output_tokens: 32000
+  max_latency_seconds: 300
+rag:
+  backend: openai
+  model: gpt-4o-mini-2024-07-18
+  k: 2
+  max_output_tokens: 2048
+  max_rounds: 3
+  timeout_seconds: 60
+evaluation:
+  dataset_path: ../artifacts/benchmarks/hotpot_dev.parquet.json
+  output_dir: ../artifacts/hotpotqa-parity-pilot
+  dataset_name: hotpotqa-distractor-dev
+  format: hotpotqa
+  split: dev
+  snapshot_at: '2026-10-23T00:00:00Z'
+  limit: 2

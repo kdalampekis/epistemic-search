@@ -96,6 +96,14 @@ class GuardedModel:
     async def complete(self, request: ModelRequest) -> ModelResponse:
         run = self.accounting
         assert run.config.rag is not None
+        ceiling = run.config.budget.max_total_llm_output_tokens
+        if ceiling is not None:
+            remaining = ceiling - run.ledger.total().completion_tokens
+            if remaining <= 0:
+                run.block("Output token budget exhausted")
+            request = request.model_copy(
+                update={"max_output_tokens": min(request.max_output_tokens, remaining)}
+            )
         expected = Usage(
             model_calls=1,
             prompt_tokens=count_tokens(request.prompt),

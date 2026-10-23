@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Next: **Phase 12 — Baseline parity**.
+are in `tests/test_providers.py`. Current: **Phase 12 — Baseline parity**, implemented offline; real-model execution pending.
 
 ## 11. Naive RAG baseline
 
@@ -371,3 +371,15 @@ downloads, licenses, actual release counts and smoke configs.
 Hotpot/2Wiki report versioned answer-only scores. ConfRAG retains its multiple
 viewpoints and reports no single-answer EM/F1; its dedicated experiments remain
 Phase 14. The bundled configs use scripted abstention, not a real model study.
+
+## 17. Matched baseline comparison
+
+```sh
+uv run --locked epistemic-search compare configs/parity_fixture.yaml
+```
+
+Runs closed-book, naive, iterative, premise-only and full methods with one shared
+configuration and a cold decomposition cache per method/example. It records
+actual use, failures, per-method traces and a comparison manifest. This bundled
+run is scripted. [Phase 12](docs/phases/PHASE_12.md) lists the real-data pilot
+configs and the missing local provider dependency. Phase 13 has not started.

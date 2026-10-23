@@ -60,11 +60,14 @@ class BeliefConfig(Schema):
     threshold: Annotated[float, Field(gt=0, le=1, allow_inf_nan=False)] = 0.5
 
 
+Method = Literal["closed_book", "naive_rag", "iterative_rag", "premise_only", "epistemic_search"]
+
+
 class RunConfig(Schema):
     schema_version: Literal[1] = 1
     run_id: Text
     seed: Count = 0
-    method: Literal["naive_rag", "iterative_rag", "epistemic_search"] = "naive_rag"
+    method: Method = "naive_rag"
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
     budget: BudgetLimits = Field(default_factory=BudgetLimits)
     rag: RagConfig | None = None

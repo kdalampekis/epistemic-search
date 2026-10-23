@@ -11,7 +11,8 @@ from epistemic_search.adapters import (
     FixtureSearchProvider,
     OpenAIModelProvider,
 )
-from epistemic_search.baseline import RunResult, run_baseline
+from epistemic_search.baseline import RunResult
+from epistemic_search.comparators import run_comparator, run_guarded_baseline
 from epistemic_search.config import RagConfig, RunConfig
 from epistemic_search.engine import run_epistemic
 from epistemic_search.models import QueryCase
@@ -33,7 +34,9 @@ async def execute_case(
 ) -> RunResult:
     if config.rag is None:
         raise ValueError("rag configuration is required")
-    if documents is not None:
+    if config.method == "closed_book":
+        search = FixtureSearchProvider([])
+    elif documents is not None:
         search = FixtureSearchProvider(documents)
     elif config.rag.corpus_path is not None:
         search = FixtureSearchProvider.from_path(base_dir / config.rag.corpus_path)
@@ -41,10 +44,20 @@ async def execute_case(
         raise ValueError("A corpus_path or explicit benchmark document pool is required")
     async with httpx.AsyncClient() as client:
         model = configured_model(config.rag, base_dir, client)
+        if config.method in {"closed_book", "premise_only"}:
+            if config.method == "premise_only" and config.decomposition is None:
+                raise ValueError("premise_only requires decomposition cache settings")
+            return await run_comparator(
+                case,
+                config,
+                search,
+                model,
+                base_dir / config.decomposition.cache_dir if config.decomposition else base_dir,
+            )
         if config.method == "epistemic_search":
             if config.decomposition is None:
                 raise ValueError("epistemic_search requires decomposition cache settings")
             return await run_epistemic(
                 case, config, search, model, base_dir / config.decomposition.cache_dir
             )
-        return await run_baseline(case, config, search, model)
+        return await run_guarded_baseline(case, config, search, model)

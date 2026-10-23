@@ -49,11 +49,17 @@ class Answer(Schema):
         return self
 
 
+class MemoryAnswer(Schema):
+    """Closed-book output: no retrieved citations or claim of evidence support."""
+
+    answer: Text | None
+
+
 class RunResult(Schema):
     query_id: Text
     method: str = "naive_rag"
     status: Literal["completed", "error", "budget_exhausted"]
-    output: Answer | None = None
+    output: Answer | MemoryAnswer | None = None
     sources: list[Source] = Field(default_factory=list)
     usage: Usage
     usage_complete: bool = True
@@ -62,6 +68,15 @@ class RunResult(Schema):
     error: str | None = None
     decision: Decision | None = None
     state: EpistemicState | None = None
+
+    @model_validator(mode="after")
+    def validate_grounding(self) -> Self:
+        if self.output is not None:
+            if self.method == "closed_book" and not isinstance(self.output, MemoryAnswer):
+                raise ValueError("Closed-book output must be explicitly ungrounded")
+            if self.method != "closed_book" and not isinstance(self.output, Answer):
+                raise ValueError("Retrieval methods require the cited-answer schema")
+        return self
 
 
 class IterativeStep(Schema):
@@ -96,6 +111,8 @@ async def run_baseline(
 ) -> RunResult:
     if config.rag is None:
         raise ValueError("rag configuration is required")
+    if config.method not in {"naive_rag", "iterative_rag"}:
+        raise ValueError("run_baseline supports only naive_rag and iterative_rag")
     cfg, limits = config.rag, config.budget
     iterative = config.method == "iterative_rag"
     prompt_version = "iterative-relevance-v1" if iterative else PROMPT_VERSION

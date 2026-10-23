@@ -1,0 +1,24 @@
+{
+  "premise-decomposition-v1": [
+    "{\n  \"claims\": [\n    {\"id\": \"a\", \"text\": \"Paris is the capital of France.\", \"polarity\": \"POSITIVE\"},\n    {\"id\": \"b\", \"text\": \"France is in Europe.\", \"polarity\": \"POSITIVE\"}\n  ],\n  \"nodes\": [\n    {\"id\": \"na\", \"kind\": \"CLAIM\", \"children\": [], \"claim_id\": \"a\"},\n    {\"id\": \"nb\", \"kind\": \"CLAIM\", \"children\": [], \"claim_id\": \"b\"},\n    {\"id\": \"both\", \"kind\": \"AND\", \"children\": [\"na\", \"nb\"], \"claim_id\": null},\n    {\"id\": \"root\", \"kind\": \"CONCLUSION\", \"children\": [\"both\"], \"claim_id\": null}\n  ],\n  \"conclusion_id\": \"root\"\n}\n"
+  ],
+  "evidence-stance-v1": [
+    "{\"items\": [{\"span\": \"Paris is the capital of France.\", \"stance\": \"SUPPORT\", \"stance_score\": 0.8}]}",
+    "{\"items\": [{\"span\": \"France is in Europe.\", \"stance\": \"SUPPORT\", \"stance_score\": 0.8}]}"
+  ],
+  "epistemic-answer-v1": [
+    "{\"answer\": \"Paris; yes.\", \"citation_ids\": [\"facts\"]}"
+  ],
+  "closed-book-answer-v1": [
+    "{\"answer\": \"Paris; yes.\"}"
+  ],
+  "naive-answer-v1": [
+    "{\"answer\": \"Paris; yes.\", \"citation_ids\": [\"facts\"]}"
+  ],
+  "iterative-relevance-v1": [
+    "{\"action\": \"ANSWER\", \"query\": null, \"answer\": \"Paris; yes.\", \"citation_ids\": [\"facts\"]}"
+  ],
+  "premise-only-decision-v1": [
+    "{\"action\": \"ANSWER\", \"target_claim_id\": null, \"answer\": \"Paris; yes.\", \"citation_ids\": [\"facts\"]}"
+  ]
+}

@@ -15,6 +15,7 @@ from epistemic_search.decomposition import DecompositionResult, decompose
 from epistemic_search.evaluation import DatasetAdapter, JsonlDataset, evaluate, manifest
 from epistemic_search.execution import configured_model, execute_case
 from epistemic_search.models import QueryCase
+from epistemic_search.parity import compare
 from epistemic_search.tracing import configure_logging
 
 app = typer.Typer(no_args_is_help=True)
@@ -103,6 +104,20 @@ def benchmark(config_path: Path) -> None:
         raise typer.Exit(code=1) from exc
     typer.echo(summary.model_dump_json(indent=2))
     if summary.errors:
+        raise typer.Exit(code=1)
+
+
+@app.command("compare")
+def compare_methods(config_path: Path) -> None:
+    """Run five methods with shared inputs, budgets, models and metrics."""
+    try:
+        summaries = asyncio.run(compare(load_config(config_path), config_path.parent))
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"Comparison failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    for method, summary in summaries.items():
+        typer.echo(f"{method}: {summary.model_dump_json()}")
+    if any(summary.errors for summary in summaries.values()):
         raise typer.Exit(code=1)
 
 
