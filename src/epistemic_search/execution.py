@@ -1,6 +1,7 @@
 """Construct configured providers at the application boundary."""
 
 import os
+import shlex
 from pathlib import Path
 
 import httpx
@@ -17,13 +18,52 @@ from epistemic_search.config import RagConfig, RunConfig
 from epistemic_search.engine import run_epistemic
 from epistemic_search.models import QueryCase
 from epistemic_search.providers import ModelProvider
+from epistemic_search.spending import SpendLedger
+
+
+def local_api_key(base_dir: Path) -> str:
+    """Read only the requested key in memory; never mutate environment or files."""
+    if key := os.environ.get("OPENAI_API_KEY"):
+        return key
+    root = base_dir.parent if (base_dir.parent / "pyproject.toml").exists() else base_dir
+    path = root / ".env"
+    if not path.exists():
+        return ""
+    for line in path.read_text().splitlines():
+        name, separator, value = line.removeprefix("export ").partition("=")
+        if separator and name.strip() == "OPENAI_API_KEY":
+            try:
+                parts = shlex.split(value, comments=True)
+            except ValueError:
+                raise ValueError("Invalid OPENAI_API_KEY quoting in .env") from None
+            if len(parts) > 1:
+                raise ValueError("Invalid OPENAI_API_KEY assignment in .env")
+            return parts[0] if parts else ""
+    return ""
+
+
+def configured_spend(config: RagConfig, base_dir: Path) -> SpendLedger | None:
+    if config.experiment_spend is None:
+        if config.backend == "openai":
+            raise ValueError("Paid research calls require project and per-run budget settings")
+        return None
+    settings = config.experiment_spend.model_copy(deep=True)
+    settings.ledger_path = (base_dir / settings.ledger_path).resolve()
+    return SpendLedger(settings)
 
 
 def configured_model(config: RagConfig, base_dir: Path, client: httpx.AsyncClient) -> ModelProvider:
     if config.backend == "fixture":
         assert config.responses_path is not None
         return FixtureModelProvider.from_path(base_dir / config.responses_path)
-    return OpenAIModelProvider(client, os.environ.get("OPENAI_API_KEY", ""), config)
+    if config.experiment_spend is None:
+        raise ValueError("Paid research calls require project and per-run budget settings")
+    resolved = config.model_copy(deep=True)
+    if resolved.experiment_spend is not None:
+        resolved.experiment_spend.ledger_path = (
+            base_dir / resolved.experiment_spend.ledger_path
+        ).resolve()
+    return OpenAIModelProvider(client, local_api_key(base_dir), resolved)
 
 
 async def execute_case(

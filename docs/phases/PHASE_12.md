@@ -1,69 +1,90 @@
 # Phase 12 — Baseline parity
 
-Status: implementation ready; real-model execution blocked by missing local
-provider credentials. Model/spend preferences were also requested. **Not complete.**
-Phase 11 commit `d8baae2` passed hosted CI before implementation began.
+Status: **complete locally**; final commit/push and hosted CI gate pending.
+Phase 11 commit `d8baae2` and the offline checkpoint `1e44d3b` passed hosted CI.
 
 ## Implementation
 
-Added closed-book and premise-only baselines, shared provider guards for
-configured naive/iterative runs, and a five-method `compare` command. One config
-controls the model, retriever, dataset subset, budgets and scorer. Manifests
-record method order and actual usage; failures remain in comparison outputs.
-Cold caches are isolated per method and example and decomposition is charged.
+Closed-book, naive top-k, iterative relevance, premise-directed without
+belief/formal reasoning, and full Epistemic Search run through the same provider
+guards. A single configuration fixes the model, reasoning, retriever, seed,
+example subset, ceilings and scorer. All structured model outputs are validated;
+all failures remain in the evaluation denominator. Closed-book has an uncited
+output schema and never searches. Premise-only shares decomposition and targeted
+query generation but uses a generative sufficiency judge.
 
-Closed-book has an explicit uncited output schema; it never searches or
-fabricates citations. Premise-only uses the same decomposition/query components,
-then a generative unresolved-premise judge without stance/belief/formal logic.
-Provider calls use the common output allowance and cumulative guard protocol.
-See ADR 0005 for the precise parity boundary and remaining budget limitations.
+The user's revised strategy makes **Luna/medium primary and $50 the total project
+allowance**, replacing the earlier Sol-primary/per-phase plan. Added:
+
+- `spending.py`: persistent SQLite per-run/project reservations, protected $5
+  final-validation reserve, retained crash/unknown charges, and settled usage.
+- `campaign.py`: small explicit smoke/pilot stages, cost estimates, hash-bound
+  smoke audit, exact completed-artifact reuse and no automatic full benchmark.
+- Provider exact input-token preflight, configured reasoning, standard tier,
+  cached/write/reasoning token accounting, API-call counts and output reuse.
+- Logical token/call charging on reuse, with actual API spend and cache hits
+  separately visible. Local retrieval caches identical queries per corpus.
+- Read-only local `.env` support; no credentials are serialized. A duplicate key
+  in the tracked `.env.example` was removed; `.env` remained unchanged and ignored.
+- Partial evaluation summaries record planned versus executed cases and a stop
+  reason when the project/run cap prevents another call.
+
+[ADR 0005](../decisions/0005-baseline-parity.md) defines the method boundary;
+[ADR 0006](../decisions/0006-project-budget-and-output-reuse.md) updates paid cache
+and budget semantics. No prompts, answer graders or evidence-validation rules
+were tuned during this pilot.
 
 ## Validation
 
-- `compare configs/parity_fixture.yaml`: all five methods ran without errors.
-  Recorded model calls: closed-book 1, naive 1, iterative 1, premise-only 2,
-  full 4. Closed-book search calls 0; each other method 1. These counts describe
-  the scripted fixture, not a quality or efficiency research finding.
-- Native-data negative smoke: two seeded examples from each Phase 11 release,
-  all five methods, scripted abstention/no evidence, no model-quality claims.
-  Configs/scripts/results are under ignored `artifacts/phase12-native-smoke-configs`
-  and `artifacts/{dataset}-parity-native-smoke` for inspection.
-- Tests exercise equal configuration, cold per-case decomposition charges even
-  for repeated questions, no duplicate usage, zero model ceilings for all five
-  methods, closed-book no-search/no-label-leak, premise-targeted follow-ups,
-  structured output validation, common remaining output allowance, failure
-  retention, missing credential preflight, overwrite refusal and CLI integration.
-- `uv sync --locked --extra benchmarks --python 3.12`: passed.
-- `uv run --locked ruff check .` / `ruff format --check .`: passed.
-- `uv run --locked mypy src tests`: passed, 41 files.
-- `uv run --locked pytest`: 172 passed with the benchmark extra installed.
-- `uv build`: wheel/source distribution passed. All 14 YAML configs validated.
-- CI includes the five-method fixture run.
+- Offline five-method fixture: all methods execute, with logical model counts
+  1/1/1/2/4 and search counts 0/1/1/1/1. No quality claims from scripted output.
+- Native benchmark adapters were validated in Phase 11; actual downloads and
+  checksums remain under ignored `artifacts/benchmarks`.
+- Tests include guard parity, label isolation, schema/provenance validation,
+  restart/concurrency/unknown-charge behavior, cap exhaustion, physical versus
+  logical cache use, cache-key replicate separation, local key loading,
+  smoke-audit tampering and partial-output preservation.
+- `uv run --locked ruff check .`, `ruff format --check .`, `mypy src tests`,
+  `pytest -q`, `uv build`, and validation of all 18 YAML configs were run.
+  Current suite: 185 tests passed; mypy: 44 files.
 
-## Concrete real-data pilot configs
+## Real-model observations
 
-- `configs/hotpotqa_parity.yaml`
-- `configs/2wikimultihopqa_parity.yaml`
-- `configs/confrag_parity.yaml`
+The smoke ran one seeded example from each benchmark through all five methods.
+All 42 physical generations settled below their reservations: **$0.016803625**.
+HotpotQA and 2Wiki had no execution errors. ConfRAG full-system extraction
+returned a non-verbatim span, which was rejected; this negative case remains.
+There were no provider errors or incomplete usage records in the smoke.
+[The audit](../experiments/phase12_smoke_audit.json) records why this supports a
+small diagnostic pilot despite that model failure, not a larger benchmark.
 
-Each selects two cases by the existing seed policy and runs the five methods
-with the same provider settings. The existing optional-provider snapshot
-`gpt-4o-mini-2024-07-18` is carried forward as a configurable placeholder, not a
-new model recommendation. Pricing is not guessed. Native dataset acquisition
-has already completed. No test labels were used to choose prompts or cases.
+The pilot uses 10 HotpotQA, 10 2Wiki and 2 ConfRAG cases, five methods each.
+The estimate was reported before execution: planning scenario $0.259875;
+conservative token-ceiling bound $3.17724, with per-run caps $2/$2/$0.50.
+See [research budget strategy](../experiments/research_budget.md).
 
-`compare configs/hotpotqa_parity.yaml` was attempted and failed at credential
-preflight with `Set OPENAI_API_KEY locally before running a real-model comparison`.
-No provider call or real-run artifact directory was created. The environment
-contains no OPENAI_API_KEY. A model/spend clarification is pending with the user.
-Do not report fixture outputs as real experiments to bypass this dependency.
+All 110 pilot method-cases completed, with five retained model/extraction errors
+and seven budget stops. Total smoke + pilot cost: **$0.067952575**, from 278
+physical generations / 556 HTTP calls and 177 local model-cache hits. Full audit
+reconciled costs, confirmed limits/model parity and replayed completed artifacts
+with HTTP disabled and zero new generations. See the
+[negative pilot report](../experiments/phase12_pilot.md) and
+[compact audited results](../results/phase12_luna_pilot.json).
 
-## Remaining acceptance work and next phase
+The full method did not improve EM on either ten-case QA subset. No larger
+benchmark or Sol validation is justified now; no positive hypothesis claim is made.
 
-Configure provider credentials locally, record any requested model/spend changes,
-then run and audit the three concrete parity pilots, retaining failed cases and
-actual usage. Resolve any discovered integration failures, update this report
-and STATUS, and commit/push the completed phase with successful CI.
+## Limitations and next dependency
 
-Current phase remains **Phase 12**. Phase 13 — Abstention metrics — must wait
-until Phase 12's real-model execution dependency is satisfied.
+Matched ceilings do not imply identical realized work. The retriever is lexical
+overlap over per-question supplied context, not a web-scale search engine.
+Cached outputs couple runs; cache-hit latency cannot establish uncached speed.
+The small development subset cannot establish significance or novelty, and
+ConfRAG has no single-answer EM/F1. Formal sufficiency means derivability from
+extracted claims, not proof of real-world truth. Provider alias sampling remains
+stochastic; original outputs and source hashes must be retained.
+
+The matched real-model execution acceptance criterion is met, including failure
+retention and reproducible configs. Commit/push and verify CI, then proceed to
+**Phase 13 — Abstention metrics**, using
+saved results and offline tests without new model calls.

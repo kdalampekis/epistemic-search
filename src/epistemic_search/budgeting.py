@@ -12,6 +12,7 @@ from epistemic_search.providers import (
     ModelProvider,
     ModelRequest,
     ModelResponse,
+    ProviderBudgetExceeded,
     ProviderError,
     SearchProvider,
     SearchResponse,
@@ -96,6 +97,19 @@ class GuardedModel:
     async def complete(self, request: ModelRequest) -> ModelResponse:
         run = self.accounting
         assert run.config.rag is not None
+        input_ceiling = run.config.budget.max_total_llm_input_tokens
+        if input_ceiling is not None:
+            remaining_input = max(0, input_ceiling - run.ledger.total().prompt_tokens)
+            request = request.model_copy(
+                update={
+                    "max_input_tokens": min(
+                        request.max_input_tokens
+                        if request.max_input_tokens is not None
+                        else remaining_input,
+                        remaining_input,
+                    )
+                }
+            )
         ceiling = run.config.budget.max_total_llm_output_tokens
         if ceiling is not None:
             remaining = ceiling - run.ledger.total().completion_tokens
@@ -124,6 +138,8 @@ class GuardedModel:
             )
             raise
         except Exception as exc:
+            if isinstance(exc, ProviderBudgetExceeded):
+                run.stopped_reason = str(exc)
             usage = exc.usage if isinstance(exc, ProviderError) else Usage(model_calls=1)
             run.usage_complete = (
                 run.usage_complete and isinstance(exc, ProviderError) and exc.usage_complete

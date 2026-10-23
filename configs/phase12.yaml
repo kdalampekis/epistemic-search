@@ -1,0 +1,9 @@
+smoke:
+- hotpotqa_parity.yaml
+- 2wikimultihopqa_parity.yaml
+- confrag_parity.yaml
+comparison:
+- hotpotqa_comparison.yaml
+- 2wikimultihopqa_comparison.yaml
+- confrag_comparison.yaml
+smoke_audit: ../docs/experiments/phase12_smoke_audit.json

@@ -1,5 +1,12 @@
 # Experimental Protocol
 
+**Current budget policy (2026-10-23): $50 total across the entire project.**
+Use Luna/medium for matched primary comparisons; reserve a small final Sol
+validation subset, with no Astra or automatic large benchmarks. The staged
+protocol, per-run caps and scaling gate are in
+[Research budget](docs/experiments/research_budget.md). This policy takes
+precedence over aspirational benchmark scale below.
+
 ## 1. Goal
 
 Evaluate whether explicit epistemic state and proof-obligation-guided retrieval improve:

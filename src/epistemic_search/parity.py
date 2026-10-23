@@ -1,7 +1,6 @@
 """Five-method comparison from one immutable experimental configuration."""
 
 import json
-import os
 from pathlib import Path
 
 from epistemic_search.baseline import RunResult
@@ -9,7 +8,7 @@ from epistemic_search.benchmarks import BenchmarkDataset
 from epistemic_search.config import DecompositionConfig, Method, RunConfig
 from epistemic_search.decomposition import digest
 from epistemic_search.evaluation import DatasetAdapter, JsonlDataset, Summary, evaluate, manifest
-from epistemic_search.execution import execute_case
+from epistemic_search.execution import configured_spend, execute_case, local_api_key
 from epistemic_search.models import QueryCase
 
 METHODS: tuple[Method, ...] = (
@@ -50,8 +49,11 @@ def comparison_configs(config: RunConfig, base_dir: Path) -> dict[Method, RunCon
 async def compare(config: RunConfig, base_dir: Path) -> dict[str, Summary]:
     configs = comparison_configs(config, base_dir)
     assert config.evaluation is not None and config.rag is not None
-    if config.rag.backend == "openai" and not os.environ.get("OPENAI_API_KEY"):
+    if config.rag.backend == "openai" and not local_api_key(base_dir):
         raise ValueError("Set OPENAI_API_KEY locally before running a real-model comparison")
+    spend = configured_spend(config.rag, base_dir)
+    if spend and (reason := spend.stop_reason()):
+        raise ValueError(reason)
     dataset: DatasetAdapter = (
         JsonlDataset(base_dir / config.evaluation.dataset_path)
         if config.evaluation.format == "jsonl"
@@ -64,6 +66,7 @@ async def compare(config: RunConfig, base_dir: Path) -> dict[str, Summary]:
     root.mkdir(parents=True, exist_ok=False)
     shared = {
         "protocol": "five-method-parity-v1",
+        "base_config_hash": digest(config.model_dump(mode="json")),
         "budget_protocol": "shared-provider-guard-v2",
         "methods": list(METHODS),
         "seed": config.seed,
@@ -74,11 +77,16 @@ async def compare(config: RunConfig, base_dir: Path) -> dict[str, Summary]:
         "retrieval_scope": manifests["naive_rag"]["retrieval_scope"],
         "model_settings": config.rag.model_dump(mode="json"),
         "budget": config.budget.model_dump(mode="json"),
-        "cache_policy": "cold-per-method-per-case; decomposition calls charged",
+        "cache_policy": (
+            "exact-request model reuse; logical tokens/calls charged; physical spend separate"
+            if spend
+            else "cold-per-method-per-case; decomposition calls charged"
+        ),
         "fixture_only": config.rag.backend == "fixture",
         "limitations": [
             "Matched ceilings, not equal realized usage; closed-book uses zero retrieval.",
-            "Whitespace token preflight is an estimate; retain actual reported overruns.",
+            "Paid runs count exact API input; offline token counts are whitespace estimates.",
+            "Cached outputs couple samples; cache-hit latency is not uncached model latency.",
             "Method-specific prompts/context policies differ; same answer model and graders.",
             "Remote sampling is not guaranteed deterministic; methods run in recorded order.",
         ],
@@ -100,14 +108,20 @@ async def compare(config: RunConfig, base_dir: Path) -> dict[str, Summary]:
             return await execute_case(case, case_config, base_dir, documents)
 
         summaries[method] = await evaluate(
-            dataset, runner, item.evaluation.output_dir, run_manifest
+            dataset,
+            runner,
+            item.evaluation.output_dir,
+            run_manifest,
+            stop_requested=spend.stop_reason if spend else None,
         )
         # Keep completed methods reviewable if a later process is interrupted.
         (root / "comparison.json").write_text(
             json.dumps(
                 {
                     "protocol": shared["protocol"],
-                    "complete": len(summaries) == len(METHODS),
+                    "complete": len(summaries) == len(METHODS)
+                    and all(s.stop_reason is None for s in summaries.values()),
+                    "spending": spend.report() if spend else None,
                     "summaries": {
                         name: value.model_dump(mode="json") for name, value in summaries.items()
                     },
@@ -116,4 +130,6 @@ async def compare(config: RunConfig, base_dir: Path) -> dict[str, Summary]:
             )
             + "\n"
         )
+        if spend and spend.stop_reason():
+            break
     return summaries

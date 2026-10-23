@@ -14,6 +14,7 @@ class ModelRequest(Schema):
     model: Text
     prompt_version: Text
     max_output_tokens: Annotated[int, Field(strict=True, gt=0)]
+    max_input_tokens: Count | None = None
     seed: Count = 0
     output_schema: dict[str, JsonValue] | None = None
 
@@ -50,6 +51,10 @@ class ProviderError(RuntimeError):
         super().__init__(message)
         self.usage = usage
         self.usage_complete = usage_complete
+
+
+class ProviderBudgetExceeded(ProviderError):
+    """Provider preflight rejected a call before generation."""
 
 
 @runtime_checkable

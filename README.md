@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Current: **Phase 12 — Baseline parity**, implemented offline; real-model execution pending.
+are in `tests/test_providers.py`. Current: **Phase 12 — Baseline parity**, with a budgeted Luna real-model pilot.
 
 ## 11. Naive RAG baseline
 
@@ -310,8 +310,10 @@ It tests integration, not answer quality. `run.json` contains the answer, cited
 sources, provenance, requests/responses, accounting, and errors. Existing output
 files are never overwritten. Corpus/script paths are relative to the YAML file.
 
-For a real model, set `OPENAI_API_KEY` and use `configs/naive_openai.yaml` with a
-model snapshot available to your account. Unconfigured prices mean unknown cost.
+For paid research, use the budgeted Luna configs described in
+[Research budget](docs/experiments/research_budget.md). The application refuses
+paid execution without project/per-run spending settings. Legacy
+`configs/naive_openai.yaml` is an adapter example, not a funded experiment.
 Tests need no keys. See [Phase 1](docs/phases/PHASE_1.md) for estimation/budget limits.
 
 ## 12. Evaluation harness
@@ -379,7 +381,17 @@ uv run --locked epistemic-search compare configs/parity_fixture.yaml
 ```
 
 Runs closed-book, naive, iterative, premise-only and full methods with one shared
-configuration and a cold decomposition cache per method/example. It records
+configuration and logically charged decomposition per method/example. Paid runs
+reuse exact model outputs with physical cost tracked separately. It records
 actual use, failures, per-method traces and a comparison manifest. This bundled
 run is scripted. [Phase 12](docs/phases/PHASE_12.md) lists the real-data pilot
-configs and the missing local provider dependency. Phase 13 has not started.
+configs and recorded observations. Phase 13 has not started.
+
+## 18. Current API budget
+
+The total research API allowance is **$50 across all phases**. Primary comparisons
+use `gpt-6-luna` / `medium`; a $5 portion is reserved for a later small
+`gpt-6.1-sol` robustness subset. Tests stay offline. Paid execution uses exact
+input counting, persistent per-run/project caps and exact-output reuse.
+See [the strategy and commands](docs/experiments/research_budget.md). The local
+ignored `.env` is supported; keys must never enter `.env.example` or Git.

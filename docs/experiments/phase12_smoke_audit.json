@@ -1,0 +1,9 @@
+{
+  "informative": true,
+  "rationale": "All 15 method-cases completed with full accounting and no provider errors. One ConfRAG full-system extraction was rejected for a non-verbatim span; it remains an error in results. Exact-span validation, prompts and scoring remain unchanged. This reveals an extraction limitation and justifies only the predeclared 22-case diagnostic pilot, not a full benchmark. No positive quality claim or further scale-up is warranted. All 42 physical generations settled below reservations; total USD 0.016803625.",
+  "comparison_report_hashes": {
+    "hotpotqa-luna-medium-smoke-v1": "ac210c3bd9dd111768e00745dae7646f0d83d6a1ffb6ff409c7c07f72f5b8a18",
+    "2wikimultihopqa-luna-medium-smoke-v1": "02c051509cbdcc4f982e7c0496903dec39c1be01f913e7fd021eba10f896ec16",
+    "confrag-luna-medium-smoke-v1": "388c11d0538521c0574f652e572c6bc1e6e15140413d4242fda49336753d790c"
+  }
+}

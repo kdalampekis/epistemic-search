@@ -1,7 +1,9 @@
 """Configuration validation and reproducible research commands."""
 
 import asyncio
+import json
 from pathlib import Path
+from typing import Literal
 
 import httpx
 import typer
@@ -9,11 +11,12 @@ import yaml
 
 from epistemic_search.baseline import RunResult
 from epistemic_search.benchmarks import BenchmarkDataset
+from epistemic_search.campaign import estimate_campaign, run_campaign
 from epistemic_search.config import load_config
 from epistemic_search.dataset_setup import prepare_datasets
 from epistemic_search.decomposition import DecompositionResult, decompose
 from epistemic_search.evaluation import DatasetAdapter, JsonlDataset, evaluate, manifest
-from epistemic_search.execution import configured_model, execute_case
+from epistemic_search.execution import configured_model, configured_spend, execute_case
 from epistemic_search.models import QueryCase
 from epistemic_search.parity import compare
 from epistemic_search.tracing import configure_logging
@@ -79,6 +82,9 @@ def benchmark(config_path: Path) -> None:
         if config.evaluation is None or config.rag is None:
             raise ValueError("evaluation and rag configuration are required")
         settings = config.evaluation
+        spend = configured_spend(config.rag, config_path.parent)
+        if spend and (reason := spend.stop_reason()):
+            raise ValueError(reason)
         dataset: DatasetAdapter = (
             JsonlDataset(config_path.parent / settings.dataset_path)
             if settings.format == "jsonl"
@@ -97,13 +103,14 @@ def benchmark(config_path: Path) -> None:
                 runner,
                 config_path.parent / settings.output_dir,
                 manifest(config, config_path.parent),
+                stop_requested=spend.stop_reason if spend else None,
             )
         )
     except (OSError, ValueError, yaml.YAMLError) as exc:
         typer.echo(f"Evaluation failed: {exc}", err=True)
         raise typer.Exit(code=1) from exc
     typer.echo(summary.model_dump_json(indent=2))
-    if summary.errors:
+    if summary.errors or summary.stop_reason:
         raise typer.Exit(code=1)
 
 
@@ -117,7 +124,26 @@ def compare_methods(config_path: Path) -> None:
         raise typer.Exit(code=1) from exc
     for method, summary in summaries.items():
         typer.echo(f"{method}: {summary.model_dump_json()}")
-    if any(summary.errors for summary in summaries.values()):
+    if any(summary.errors or summary.stop_reason for summary in summaries.values()):
+        raise typer.Exit(code=1)
+
+
+@app.command("phase12")
+def phase12(plan_path: Path, stage: str = "smoke", estimate_only: bool = False) -> None:
+    """Estimate or run one small stage inside the cumulative project budget."""
+    try:
+        if stage not in {"smoke", "comparison"}:
+            raise ValueError("stage must be smoke or comparison")
+        selected: Literal["smoke", "comparison"] = "smoke" if stage == "smoke" else "comparison"
+        typer.echo(json.dumps(estimate_campaign(plan_path, selected), indent=2))
+        if estimate_only:
+            return
+        result = asyncio.run(run_campaign(plan_path, selected))
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"Phase 12 stopped: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(json.dumps(result, indent=2))
+    if not result["complete"]:
         raise typer.Exit(code=1)
 
 

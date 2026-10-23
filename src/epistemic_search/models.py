@@ -26,6 +26,13 @@ class Usage(Schema):
 
     prompt_tokens: Count = 0
     completion_tokens: Count = 0
+    cached_input_tokens: Count | None = 0
+    cache_write_tokens: Count | None = 0
+    reasoning_tokens: Count | None = 0
+    model_cache_hits: Count = 0
+    reused_cost_usd: Money = Decimal(0)
+    api_calls: Count = 0
+    preflight_calls: Count = 0
     retrieved_tokens: Count = 0
     context_tokens: Count = 0
     search_calls: Count = 0

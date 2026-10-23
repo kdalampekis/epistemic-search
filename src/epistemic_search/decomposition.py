@@ -171,7 +171,14 @@ async def decompose(
         seed=config.seed,
         output_schema=DecompositionDraft.model_json_schema(),
     )
-    key = digest([config.rag.backend, request.model_dump(mode="json")])
+    key = digest(
+        [
+            config.rag.backend,
+            config.rag.reasoning_effort,
+            config.rag.service_tier,
+            request.model_dump(mode="json"),
+        ]
+    )
     cache_file = cache_dir / f"{key}.json"
     if cache_file.exists():
         cached = DecompositionResult.model_validate_json(cache_file.read_text(encoding="utf-8"))

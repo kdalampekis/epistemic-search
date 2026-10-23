@@ -157,6 +157,8 @@ class Summary(Schema):
     incomplete_usage_examples: int
     unknown_cost_examples: int
     wall_seconds: float
+    planned_examples: int | None = None
+    stop_reason: str | None = None
 
 
 def summarize(rows: list[ScoredCase], metric_version: str = METRIC_VERSION) -> Summary:
@@ -242,6 +244,7 @@ async def evaluate(
     runner: Callable[[QueryCase], Awaitable[RunResult]],
     output_dir: Path,
     run_manifest: dict[str, object],
+    stop_requested: Callable[[], str | None] | None = None,
 ) -> Summary:
     # Validate everything before creating artifacts or making provider calls.
     cases = dataset.load()
@@ -259,6 +262,7 @@ async def evaluate(
         for case in cases:
             labels.write(case.model_dump_json() + "\n")
     rows: list[ScoredCase] = []
+    stopped: str | None = None
     with (output_dir / "examples.jsonl").open("w", encoding="utf-8") as examples:
         for index, case in enumerate(cases):
             start = perf_counter()
@@ -287,7 +291,12 @@ async def evaluate(
             rows.append(row)
             examples.write(row.model_dump_json() + "\n")
             examples.flush()
+            stopped = stop_requested() if stop_requested else None
+            if stopped:
+                break
     summary = summarize(rows, metric_version)
+    summary.planned_examples = len(cases)
+    summary.stop_reason = stopped
     (output_dir / "summary.json").write_text(
         summary.model_dump_json(indent=2) + "\n", encoding="utf-8"
     )

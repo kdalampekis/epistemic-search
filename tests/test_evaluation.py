@@ -126,3 +126,33 @@ def test_evaluation_cli_hashes_and_negative_fixture_result(tmp_path: Path) -> No
     manifest = json.loads((tmp_path / "results/manifest.json").read_text())
     assert len(manifest["input_hashes"]["dataset"]) == 64
     assert manifest["fixture_only"] is True
+
+
+def test_budget_stop_retains_partial_artifacts_without_inventing_results(tmp_path: Path) -> None:
+    path = tmp_path / "data.jsonl"
+    path.write_text(
+        "\n".join(QueryCase(id=str(i), question="q").model_dump_json() for i in range(3))
+    )
+    called = []
+
+    async def runner(case: QueryCase) -> RunResult:
+        called.append(case.id)
+        return RunResult(
+            query_id=case.id,
+            status="budget_exhausted",
+            usage=Usage(cost_usd=Decimal(0)),
+            wall_seconds=0,
+            trace=[],
+        )
+
+    output = tmp_path / "partial"
+    summary = asyncio.run(
+        evaluate(
+            JsonlDataset(path), runner, output, {}, stop_requested=lambda: "Project cap reached"
+        )
+    )
+    assert called == ["0"]
+    assert summary.examples == 1 and summary.planned_examples == 3
+    assert summary.stop_reason == "Project cap reached"
+    assert len(list((output / "traces").glob("*.json"))) == 1
+    assert len((output / "labels.jsonl").read_text().splitlines()) == 3

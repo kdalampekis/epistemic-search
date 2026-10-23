@@ -1,6 +1,8 @@
 # ADR 0005 — Five-method parity protocol
 
-Accepted for the Phase 12 implementation. Real-model execution remains pending.
+Accepted for the Phase 12 implementation. Paid budgeting and model-output
+reuse are updated by [ADR 0006](0006-project-budget-and-output-reuse.md).
+The cold artifact-cache discussion below remains the fixture protocol.
 
 The `compare` command derives five runs from one config: closed-book, naive RAG,
 iterative relevance, premise-only and full Epistemic Search. It requires explicit

@@ -402,3 +402,12 @@ Each failed example should receive one primary and optional secondary category.
 - cached immutable retrieval for ablations;
 - fixed seeds where possible;
 - all experiments tied to git commit.
+
+## Current project budget boundary
+
+Paid provider calls are governed by a persistent SQLite ledger shared across
+phases, with separate run caps, exact input-token preflight and conservative
+charge reservations. Domain logic consumes logical usage; exact-request reuse
+records physical spend separately. No API key is serialized. The current
+$50-total Luna-primary policy and its limitations are specified in
+[ADR 0006](docs/decisions/0006-project-budget-and-output-reuse.md).

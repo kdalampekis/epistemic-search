@@ -1,5 +1,14 @@
 # Codex Build Specification
 
+> Execution budget policy, updated 2026-10-23: $50 is the total project API
+> allowance across every phase. Primary experiments use Luna/medium; reserve
+> a small final Sol validation subset and never use Astra. Unit/integration
+> tests remain offline. Phase integration is not authorization for a large
+> benchmark: use small informative pilots, estimate before runs above $1, and
+> enforce persistent per-run/project caps. See
+> [research budget strategy](docs/experiments/research_budget.md).
+
+
 ## Project
 
 `epistemic-search`

@@ -21,9 +21,21 @@ class UsageLedger:
     def total(self, component: str | None = None) -> Usage:
         entries = [e.usage for e in self._events if component is None or e.component == component]
         costs = [u.cost_usd for u in entries]
+
+        def detail(name: str) -> int | None:
+            values = [getattr(u, name) for u in entries]
+            return None if None in values else sum(values)
+
         return Usage(
             prompt_tokens=sum(u.prompt_tokens for u in entries),
             completion_tokens=sum(u.completion_tokens for u in entries),
+            cached_input_tokens=detail("cached_input_tokens"),
+            cache_write_tokens=detail("cache_write_tokens"),
+            reasoning_tokens=detail("reasoning_tokens"),
+            model_cache_hits=sum(u.model_cache_hits for u in entries),
+            reused_cost_usd=sum((u.reused_cost_usd for u in entries), Decimal(0)),
+            api_calls=sum(u.api_calls for u in entries),
+            preflight_calls=sum(u.preflight_calls for u in entries),
             retrieved_tokens=sum(u.retrieved_tokens for u in entries),
             context_tokens=sum(u.context_tokens for u in entries),
             search_calls=sum(u.search_calls for u in entries),

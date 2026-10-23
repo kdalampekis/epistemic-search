@@ -1,0 +1,42 @@
+schema_version: 1
+run_id: 2wikimultihopqa-luna-medium-comparison-v1
+seed: 42
+method: naive_rag
+budget:
+  max_search_calls: 3
+  max_documents: 6
+  max_retrieved_tokens: 50000
+  max_llm_calls: 24
+  max_total_llm_input_tokens: 100000
+  max_total_llm_output_tokens: 32768
+  max_latency_seconds: 600
+rag:
+  backend: openai
+  model: gpt-6-luna
+  k: 2
+  max_output_tokens: 4096
+  max_rounds: 3
+  timeout_seconds: 120
+  reasoning_effort: medium
+  service_tier: default
+  input_usd_per_million: '0.10'
+  cached_input_usd_per_million: '0.01'
+  cache_write_usd_per_million: '0.125'
+  output_usd_per_million: '0.50'
+  experiment_spend:
+    ledger_path: ../artifacts/research/spending.sqlite3
+    run_id: 2wikimultihopqa-luna-medium-comparison-v1
+    total_usd: '50'
+    run_usd: '2'
+    prior_spend_usd: '0'
+    validation_reserve_usd: '5'
+    stage: comparison
+evaluation:
+  dataset_path: ../artifacts/benchmarks/dev.json
+  output_dir: ../artifacts/phase12/luna-medium/comparison/2wikimultihopqa
+  dataset_name: 2wiki-april7-dev
+  format: 2wikimultihopqa
+  split: dev
+  snapshot_at: '2026-10-23T00:00:00Z'
+  limit: 10
+  aliases_path: ../artifacts/benchmarks/id_aliases.json

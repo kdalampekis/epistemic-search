@@ -16,7 +16,7 @@ Updated: 2026-10-23.
 | 9 — Targeted query generator | Complete | [Implementation and checks](PHASE_9.md) |
 | 10 — Full Epistemic Search MVP | Complete | [Implementation and checks](PHASE_10.md) |
 | 11 — Benchmark integrations | Complete | [Implementation and checks](PHASE_11.md) |
-| 12 — Baseline parity | In progress; offline implementation verified, real-model run blocked | [Implementation and remaining dependency](PHASE_12.md) |
+| 12 — Baseline parity | Complete locally; push/CI gate pending | [Implementation and remaining dependency](PHASE_12.md) |
 | 13–25 | Not started | Follow the build specification sequentially |
 
 Phases 0 (`a6bd037`), 1 (`e8c030d`), and 2 (`93565cc`) were pushed; hosted CI passed.
@@ -35,6 +35,8 @@ ConfRAG and benchmark sources were verified in Phase 11; the remaining literatur
 map still requires independent verification before novelty claims.
 
 Phase 11 (`d8baae2`) was pushed with successful hosted CI. Phase 12 has five
-implemented methods and a matched comparison runner. Real-model execution is
-blocked by missing local OPENAI_API_KEY; model/spend preferences were also requested.
-Do not advance to Phase 13 or mark Phase 12 complete using scripted outputs.
+implemented methods and a matched comparison runner. The revised strategy uses
+Luna/medium with a $50 cumulative project cap and a $5 final Sol reserve. Local
+credentials work; all 110 real pilot method-cases ran. The negative result and
+$0.067952575 cumulative cost are audited. No full benchmark or Sol run follows.
+Phase 13 starts only after the Phase 12 commit is pushed and hosted CI passes.
