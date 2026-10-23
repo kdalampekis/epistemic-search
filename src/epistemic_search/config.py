@@ -42,6 +42,10 @@ class DecompositionConfig(Schema):
     cache_dir: Path
 
 
+class BeliefConfig(Schema):
+    threshold: Annotated[float, Field(gt=0, le=1, allow_inf_nan=False)] = 0.5
+
+
 class RunConfig(Schema):
     schema_version: Literal[1] = 1
     run_id: Text
@@ -52,6 +56,7 @@ class RunConfig(Schema):
     rag: RagConfig | None = None
     evaluation: EvaluationConfig | None = None
     decomposition: DecompositionConfig | None = None
+    belief: BeliefConfig = Field(default_factory=BeliefConfig)
 
 
 def load_config(path: Path) -> RunConfig:
