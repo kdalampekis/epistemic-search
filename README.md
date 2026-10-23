@@ -270,12 +270,11 @@ Codex / Claude Code should read, in order:
 5. `LITERATURE_MAP.md`
 6. `CODEX_BUILD_SPEC.md`
 
-Then implement **Phase 0 only**.
+Then follow `docs/phases/STATUS.md`, completing and pushing each phase before the next.
 
 ## 10. Phase 0 quickstart
 
-The foundation is implemented; research methods and experiments are not yet
-implemented. See [phase status](docs/phases/STATUS.md) and the
+The foundation and naive baseline are implemented. See [phase status](docs/phases/STATUS.md) and the
 [Phase 0 report](docs/phases/PHASE_0.md).
 
 Install with Python 3.12 and uv:
@@ -298,5 +297,19 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. No real provider adapter or RAG pipeline exists
-yet. Next: **Phase 1 — Naive RAG baseline**.
+are in `tests/test_providers.py`. Next: **Phase 2 — Evaluation harness v1**.
+
+## 11. Naive RAG baseline
+
+```sh
+uv run epistemic-search run-naive configs/naive_fixture.yaml tests/fixtures/query.json run.json
+```
+
+This offline smoke run uses lexical fixture retrieval and scripted model output.
+It tests integration, not answer quality. `run.json` contains the answer, cited
+sources, provenance, requests/responses, accounting, and errors. Existing output
+files are never overwritten. Corpus/script paths are relative to the YAML file.
+
+For a real model, set `OPENAI_API_KEY` and use `configs/naive_openai.yaml` with a
+model snapshot available to your account. Unconfigured prices mean unknown cost.
+Tests need no keys. See [Phase 1](docs/phases/PHASE_1.md) for estimation/budget limits.

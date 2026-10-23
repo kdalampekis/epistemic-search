@@ -1,0 +1,17 @@
+# Set OPENAI_API_KEY in the environment. No live API call is made by tests.
+# Pin a model snapshot you have access to; prices must be entered explicitly
+# from the applicable pricing schedule or costs remain unknown.
+schema_version: 1
+run_id: naive-openai-local-corpus
+seed: 42
+budget:
+  max_search_calls: 1
+  max_documents: 3
+  max_llm_calls: 1
+  max_total_llm_output_tokens: 512
+rag:
+  k: 2
+  corpus_path: ../tests/fixtures/corpus.json
+  backend: openai
+  model: gpt-4o-mini-2024-07-18
+  max_output_tokens: 512

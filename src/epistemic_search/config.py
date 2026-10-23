@@ -1,12 +1,33 @@
 """Safe YAML loading into explicit, validated run settings."""
 
 from pathlib import Path
-from typing import Literal
+from typing import Annotated, Literal, Self
 
 import yaml
-from pydantic import Field
+from pydantic import Field, model_validator
 
-from epistemic_search.models import BudgetLimits, Count, Schema, Text
+from epistemic_search.models import BudgetLimits, Count, Money, Schema, Text
+
+
+class RagConfig(Schema):
+    k: Annotated[int, Field(strict=True, gt=0)] = 3
+    corpus_path: Path
+    backend: Literal["fixture", "openai"] = "fixture"
+    model: Text = "fixture-script-v1"
+    responses_path: Path | None = None
+    max_output_tokens: Annotated[int, Field(strict=True, gt=0)] = 512
+    timeout_seconds: Annotated[float, Field(gt=0, allow_inf_nan=False)] = 30
+    input_usd_per_million: Money | None = None
+    cached_input_usd_per_million: Money | None = None
+    output_usd_per_million: Money | None = None
+
+    @model_validator(mode="after")
+    def validate_backend(self) -> Self:
+        if self.backend == "fixture" and self.responses_path is None:
+            raise ValueError("fixture backend requires responses_path")
+        if self.backend == "openai" and self.model == "fixture-script-v1":
+            raise ValueError("openai backend requires an explicit model identifier")
+        return self
 
 
 class RunConfig(Schema):
@@ -15,6 +36,7 @@ class RunConfig(Schema):
     seed: Count = 0
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
     budget: BudgetLimits = Field(default_factory=BudgetLimits)
+    rag: RagConfig | None = None
 
 
 def load_config(path: Path) -> RunConfig:

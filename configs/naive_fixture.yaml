@@ -1,0 +1,16 @@
+schema_version: 1
+run_id: naive-fixture-smoke
+seed: 42
+budget:
+  max_search_calls: 1
+  max_documents: 3
+  max_retrieved_tokens: 1000
+  max_llm_calls: 1
+  max_total_llm_input_tokens: 1000
+  max_total_llm_output_tokens: 128
+rag:
+  k: 2
+  corpus_path: ../tests/fixtures/corpus.json
+  backend: fixture
+  responses_path: ../tests/fixtures/responses.json
+  max_output_tokens: 128

@@ -1,0 +1,5 @@
+[
+  {"source": {"id": "s-paris", "uri": "fixture://paris", "title": "Paris", "retrieved_at": "2026-10-23T00:00:00Z", "source_type": "benchmark"}, "text": "Paris is the capital of France."},
+  {"source": {"id": "s-athens", "uri": "fixture://athens", "title": "Athens", "retrieved_at": "2026-10-23T00:00:00Z", "source_type": "benchmark"}, "text": "Athens is the capital of Greece."},
+  {"source": {"id": "s-empty", "uri": "fixture://ocean", "title": "Ocean", "retrieved_at": "2026-10-23T00:00:00Z", "source_type": "benchmark"}, "text": "Oceans contain saltwater."}
+]

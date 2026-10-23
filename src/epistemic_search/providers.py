@@ -22,6 +22,7 @@ class ModelResponse(Schema):
     text: str
     model: Text
     usage: Usage
+    metadata: dict[str, JsonValue] = Field(default_factory=dict)
 
     def parse(self, schema: type[Output]) -> Output:
         """Every structured response must pass validation before domain use."""
@@ -39,6 +40,16 @@ class SearchResult(Schema):
 class SearchResponse(Schema):
     results: list[SearchResult]
     usage: Usage
+    metadata: dict[str, JsonValue] = Field(default_factory=dict)
+
+
+class ProviderError(RuntimeError):
+    """A failed attempt with whatever usage the adapter can establish."""
+
+    def __init__(self, message: str, usage: Usage, *, usage_complete: bool = False) -> None:
+        super().__init__(message)
+        self.usage = usage
+        self.usage_complete = usage_complete
 
 
 @runtime_checkable
