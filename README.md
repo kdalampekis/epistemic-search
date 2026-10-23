@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Next: **Phase 2 — Evaluation harness v1**.
+are in `tests/test_providers.py`. Next: **Phase 3 — Iterative relevance baseline**.
 
 ## 11. Naive RAG baseline
 
@@ -313,3 +313,16 @@ files are never overwritten. Corpus/script paths are relative to the YAML file.
 For a real model, set `OPENAI_API_KEY` and use `configs/naive_openai.yaml` with a
 model snapshot available to your account. Unconfigured prices mean unknown cost.
 Tests need no keys. See [Phase 1](docs/phases/PHASE_1.md) for estimation/budget limits.
+
+## 12. Evaluation harness
+
+```sh
+uv run epistemic-search evaluate configs/evaluation_fixture.yaml
+```
+
+Creates a new `artifacts/evaluation-fixture/` directory containing a manifest,
+per-example traces and JSONL scores, and JSON/CSV summaries. All cases remain in
+the outputs, including failures. EM/F1 use labelled cases; coverage uses all cases.
+Unknown costs remain null. See [the scoring protocol](docs/decisions/0002-evaluation-protocol.md).
+The bundled two-case smoke run deliberately includes a wrong scripted answer;
+it makes no model-quality claim. Change `evaluation.output_dir` for another run.

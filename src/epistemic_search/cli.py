@@ -6,7 +6,9 @@ from pathlib import Path
 import typer
 import yaml
 
+from epistemic_search.baseline import RunResult
 from epistemic_search.config import load_config
+from epistemic_search.evaluation import JsonlDataset, evaluate, manifest
 from epistemic_search.execution import execute_case
 from epistemic_search.models import QueryCase
 from epistemic_search.tracing import configure_logging
@@ -47,4 +49,32 @@ def naive(config_path: Path, query_path: Path, output_path: Path) -> None:
         raise typer.Exit(code=1) from exc
     typer.echo(result.model_dump_json(indent=2))
     if result.status != "completed":
+        raise typer.Exit(code=1)
+
+
+@app.command("evaluate")
+def benchmark(config_path: Path) -> None:
+    """Evaluate all JSONL cases with one shared metric protocol; retain failures."""
+    try:
+        config = load_config(config_path)
+        if config.evaluation is None or config.rag is None:
+            raise ValueError("evaluation and rag configuration are required")
+        settings = config.evaluation
+
+        async def runner(case: QueryCase) -> RunResult:
+            return await execute_case(case, config, config_path.parent)
+
+        summary = asyncio.run(
+            evaluate(
+                JsonlDataset(config_path.parent / settings.dataset_path),
+                runner,
+                config_path.parent / settings.output_dir,
+                manifest(config, config_path.parent),
+            )
+        )
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"Evaluation failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(summary.model_dump_json(indent=2))
+    if summary.errors:
         raise typer.Exit(code=1)

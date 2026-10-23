@@ -30,6 +30,13 @@ class RagConfig(Schema):
         return self
 
 
+class EvaluationConfig(Schema):
+    dataset_path: Path
+    output_dir: Path
+    dataset_name: Text
+    split: Literal["train", "dev", "test"]
+
+
 class RunConfig(Schema):
     schema_version: Literal[1] = 1
     run_id: Text
@@ -37,6 +44,7 @@ class RunConfig(Schema):
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
     budget: BudgetLimits = Field(default_factory=BudgetLimits)
     rag: RagConfig | None = None
+    evaluation: EvaluationConfig | None = None
 
 
 def load_config(path: Path) -> RunConfig:
