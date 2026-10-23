@@ -12,6 +12,7 @@ from epistemic_search.adapters import (
 )
 from epistemic_search.baseline import RunResult, run_baseline
 from epistemic_search.config import RagConfig, RunConfig
+from epistemic_search.engine import run_epistemic
 from epistemic_search.models import QueryCase
 from epistemic_search.providers import ModelProvider
 
@@ -29,4 +30,10 @@ async def execute_case(case: QueryCase, config: RunConfig, base_dir: Path) -> Ru
     search = FixtureSearchProvider.from_path(base_dir / config.rag.corpus_path)
     async with httpx.AsyncClient() as client:
         model = configured_model(config.rag, base_dir, client)
+        if config.method == "epistemic_search":
+            if config.decomposition is None:
+                raise ValueError("epistemic_search requires decomposition cache settings")
+            return await run_epistemic(
+                case, config, search, model, base_dir / config.decomposition.cache_dir
+            )
         return await run_baseline(case, config, search, model)

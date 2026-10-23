@@ -12,7 +12,16 @@ from pydantic import Field, JsonValue, model_validator
 
 from epistemic_search.accounting import UsageLedger
 from epistemic_search.config import RunConfig
-from epistemic_search.models import AgentEvent, QueryCase, Schema, Source, Text, Usage
+from epistemic_search.models import (
+    AgentEvent,
+    Decision,
+    EpistemicState,
+    QueryCase,
+    Schema,
+    Source,
+    Text,
+    Usage,
+)
 from epistemic_search.providers import (
     ModelProvider,
     ModelRequest,
@@ -51,6 +60,8 @@ class RunResult(Schema):
     wall_seconds: float
     trace: list[AgentEvent]
     error: str | None = None
+    decision: Decision | None = None
+    state: EpistemicState | None = None
 
 
 class IterativeStep(Schema):

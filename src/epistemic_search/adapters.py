@@ -1,5 +1,6 @@
 """Fixture providers and an optional OpenAI Responses adapter; no domain policy."""
 
+import json
 import re
 from decimal import Decimal
 from pathlib import Path
@@ -72,17 +73,29 @@ class FixtureSearchProvider:
 class FixtureModelProvider:
     """Scripted smoke-test outputs, never a model-quality baseline."""
 
-    def __init__(self, responses: list[str]) -> None:
-        self.responses = iter(responses)
+    def __init__(self, responses: list[str] | dict[str, list[str]]) -> None:
+        self.responses = iter(responses if isinstance(responses, list) else [])
+        self.by_version = (
+            {key: iter(values) for key, values in responses.items()}
+            if isinstance(responses, dict)
+            else None
+        )
 
     @classmethod
     def from_path(cls, path: Path) -> "FixtureModelProvider":
-        return cls(TypeAdapter(list[str]).validate_json(path.read_text(encoding="utf-8")))
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if isinstance(data, list):
+            return cls(TypeAdapter(list[str]).validate_python(data))
+        return cls(TypeAdapter(dict[str, list[str]]).validate_python(data))
 
     async def complete(self, request: ModelRequest) -> ModelResponse:
         try:
-            text = next(self.responses)
-        except StopIteration as exc:
+            text = next(
+                self.by_version[request.prompt_version]
+                if self.by_version is not None
+                else self.responses
+            )
+        except (StopIteration, KeyError) as exc:
             raise ProviderError(
                 "Fixture response script exhausted",
                 Usage(model_calls=1, cost_usd=Decimal(0)),

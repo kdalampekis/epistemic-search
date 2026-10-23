@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Next: **Phase 10 — Full Epistemic Search MVP**.
+are in `tests/test_providers.py`. Next: **Phase 11 — Benchmark integrations**.
 
 ## 11. Naive RAG baseline
 
@@ -348,3 +348,15 @@ Validates the model's graph, assigns stable IDs, and saves request/model/usage
 metadata. Repeat with a new output filename to inspect a cache hit. Structural
 validity does not establish that the premises are true or complete. Details:
 [Phase 4](docs/phases/PHASE_4.md).
+
+## 15. Epistemic Search MVP
+
+```sh
+uv run epistemic-search run configs/epistemic_fixture.yaml tests/fixtures/decomposition_query.json mvp.json
+uv run epistemic-search evaluate configs/epistemic_fixture.yaml
+```
+
+Runs the full evidence-state loop with scripted providers. The integration tests
+cover initial sufficiency, missing-premise acquisition, persistent insufficiency,
+and conflict-directed search. These are smoke fixtures, not real-model results.
+See [Phase 10](docs/phases/PHASE_10.md) for budget/cache/conflict limitations.

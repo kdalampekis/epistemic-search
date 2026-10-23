@@ -14,8 +14,9 @@ Updated: 2026-10-23.
 | 7 — Structured sufficiency reasoner | Complete | [Implementation and checks](PHASE_7.md) |
 | 8 — Premise-directed controller | Complete | [Implementation and checks](PHASE_8.md) |
 | 9 — Targeted query generator | Complete | [Implementation and checks](PHASE_9.md) |
-| 10 — Full Epistemic Search MVP | Not started; next | `CODEX_BUILD_SPEC.md`, Phase 10 |
-| 11–25 | Not started | Follow the build specification sequentially |
+| 10 — Full Epistemic Search MVP | Complete | [Implementation and checks](PHASE_10.md) |
+| 11 — Benchmark integrations | Not started; next | `CODEX_BUILD_SPEC.md`, Phase 11 |
+| 12–25 | Not started | Follow the build specification sequentially |
 
 Phases 0 (`a6bd037`), 1 (`e8c030d`), and 2 (`93565cc`) were pushed; hosted CI passed.
 Phase 3 (`03724e0`) was pushed with successful hosted CI. Naive/iterative baselines,
@@ -25,6 +26,7 @@ Phase 5 (`018567e`) was pushed with successful hosted CI. Conservative belief
 aggregation, a structured reasoner and a premise-directed policy exist.
 Phase 7 (`c5f852a`) was pushed with successful hosted CI.
 Phase 8 (`ed54560`) was pushed with successful hosted CI. Targeted query templates exist.
+Phase 9 (`e322e4c`) was pushed with successful hosted CI. The MVP is integrated.
 Phase 6 (`a815df2`) was pushed with successful hosted CI.
 No real-model benchmark quality or novelty claims have been established.
 Existing literature was read as design context, not independently verified.
