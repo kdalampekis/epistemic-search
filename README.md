@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Next: **Phase 5 — Evidence ledger**.
+are in `tests/test_providers.py`. Next: **Phase 6 — Belief state v1**.
 
 ## 11. Naive RAG baseline
 
