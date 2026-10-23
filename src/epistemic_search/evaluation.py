@@ -182,7 +182,7 @@ def manifest(config: RunConfig, base_dir: Path) -> dict[str, object]:
         "git_commit": git("rev-parse", "HEAD"),
         "git_dirty": status != "" if status is not None else None,
         "metric_version": METRIC_VERSION,
-        "method": "naive_rag",
+        "method": config.method,
         "packages": {name: version(name) for name in ("epistemic-search", "pydantic", "httpx")},
         "fixture_only": config.rag.backend == "fixture",
     }
@@ -215,6 +215,7 @@ async def evaluate(
                 # Keep every failed example. Unknown partial usage is NOT zero usage.
                 result = RunResult(
                     query_id=case.id,
+                    method=str(run_manifest.get("method", "naive_rag")),
                     status="error",
                     usage=Usage(),
                     usage_complete=False,

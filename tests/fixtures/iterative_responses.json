@@ -1,0 +1,4 @@
+[
+  "{\"action\":\"SEARCH_MORE\",\"query\":\"France Paris capital\",\"answer\":null,\"citation_ids\":[]}",
+  "{\"action\":\"ANSWER\",\"query\":null,\"answer\":\"Paris\",\"citation_ids\":[\"s-paris\"]}"
+]

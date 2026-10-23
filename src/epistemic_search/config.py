@@ -10,6 +10,7 @@ from epistemic_search.models import BudgetLimits, Count, Money, Schema, Text
 
 
 class RagConfig(Schema):
+    max_rounds: Annotated[int, Field(strict=True, gt=0)] = 3
     k: Annotated[int, Field(strict=True, gt=0)] = 3
     corpus_path: Path
     backend: Literal["fixture", "openai"] = "fixture"
@@ -41,6 +42,7 @@ class RunConfig(Schema):
     schema_version: Literal[1] = 1
     run_id: Text
     seed: Count = 0
+    method: Literal["naive_rag", "iterative_rag"] = "naive_rag"
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
     budget: BudgetLimits = Field(default_factory=BudgetLimits)
     rag: RagConfig | None = None

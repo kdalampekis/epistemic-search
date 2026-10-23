@@ -10,7 +10,7 @@ from epistemic_search.adapters import (
     FixtureSearchProvider,
     OpenAIModelProvider,
 )
-from epistemic_search.baseline import RunResult, run_naive
+from epistemic_search.baseline import RunResult, run_baseline
 from epistemic_search.config import RunConfig
 from epistemic_search.models import QueryCase
 from epistemic_search.providers import ModelProvider
@@ -27,4 +27,4 @@ async def execute_case(case: QueryCase, config: RunConfig, base_dir: Path) -> Ru
             model = FixtureModelProvider.from_path(base_dir / config.rag.responses_path)
         else:
             model = OpenAIModelProvider(client, os.environ.get("OPENAI_API_KEY", ""), config.rag)
-        return await run_naive(case, config, search, model)
+        return await run_baseline(case, config, search, model)

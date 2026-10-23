@@ -1,0 +1,23 @@
+schema_version: 1
+run_id: iterative-fixture-smoke
+seed: 42
+method: iterative_rag
+budget:
+  max_search_calls: 3
+  max_documents: 6
+  max_retrieved_tokens: 1000
+  max_llm_calls: 3
+  max_total_llm_input_tokens: 1000
+  max_total_llm_output_tokens: 256
+rag:
+  k: 2
+  max_rounds: 3
+  corpus_path: ../tests/fixtures/corpus.json
+  backend: fixture
+  responses_path: ../tests/fixtures/iterative_responses.json
+  max_output_tokens: 128
+evaluation:
+  dataset_path: ../tests/fixtures/benchmark.jsonl
+  output_dir: ../artifacts/iterative-fixture
+  dataset_name: synthetic-smoke-only
+  split: dev

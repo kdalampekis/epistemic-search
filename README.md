@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Next: **Phase 3 — Iterative relevance baseline**.
+are in `tests/test_providers.py`. Next: **Phase 4 — Premise decomposition**.
 
 ## 11. Naive RAG baseline
 
@@ -326,3 +326,14 @@ the outputs, including failures. EM/F1 use labelled cases; coverage uses all cas
 Unknown costs remain null. See [the scoring protocol](docs/decisions/0002-evaluation-protocol.md).
 The bundled two-case smoke run deliberately includes a wrong scripted answer;
 it makes no model-quality claim. Change `evaluation.output_dir` for another run.
+
+## 13. Iterative relevance baseline
+
+```sh
+uv run epistemic-search run configs/iterative_fixture.yaml tests/fixtures/query.json iterative.json
+uv run epistemic-search evaluate configs/iterative_fixture.yaml
+```
+
+`method: iterative_rag` enables model-directed follow-up searches, bounded by
+`rag.max_rounds` and cumulative budgets. It shares provider/accounting/grading
+code with `naive_rag`. [Phase 3](docs/phases/PHASE_3.md) documents the limits.

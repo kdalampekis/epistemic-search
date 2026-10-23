@@ -34,6 +34,7 @@ def validate_config(path: Path) -> None:
     typer.echo(config.model_dump_json(indent=2))
 
 
+@app.command("run")
 @app.command("run-naive")
 def naive(config_path: Path, query_path: Path, output_path: Path) -> None:
     """Run one QueryCase JSON file; write answer, usage, and trace to a new JSON file."""
