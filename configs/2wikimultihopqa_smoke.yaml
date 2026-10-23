@@ -1,0 +1,23 @@
+schema_version: 1
+run_id: 2wikimultihopqa-ingestion-smoke
+seed: 42
+method: naive_rag
+budget:
+  max_search_calls: 1
+  max_llm_calls: 1
+  max_documents: 2
+rag:
+  backend: fixture
+  model: scripted-abstention-v1
+  responses_path: ../tests/fixtures/abstain_responses.json
+  k: 2
+  max_output_tokens: 128
+evaluation:
+  dataset_path: ../artifacts/benchmarks/dev.json
+  output_dir: ../artifacts/2wikimultihopqa-ingestion-smoke
+  dataset_name: 2wiki-april7-dev
+  format: 2wikimultihopqa
+  split: dev
+  snapshot_at: '2026-10-23T00:00:00Z'
+  limit: 2
+  aliases_path: ../artifacts/benchmarks/id_aliases.json

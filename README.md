@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Next: **Phase 11 — Benchmark integrations**.
+are in `tests/test_providers.py`. Next: **Phase 12 — Baseline parity**.
 
 ## 11. Naive RAG baseline
 
@@ -360,3 +360,14 @@ Runs the full evidence-state loop with scripted providers. The integration tests
 cover initial sufficiency, missing-premise acquisition, persistent insufficiency,
 and conflict-directed search. These are smoke fixtures, not real-model results.
 See [Phase 10](docs/phases/PHASE_10.md) for budget/cache/conflict limitations.
+
+## 16. Native benchmarks
+
+HotpotQA, 2WikiMultiHopQA and ConfRAG now have native adapters with isolated
+per-question document pools and evaluator-only annotations. See
+[benchmark setup](docs/experiments/benchmark_setup.md) for checksum-locked
+downloads, licenses, actual release counts and smoke configs.
+
+Hotpot/2Wiki report versioned answer-only scores. ConfRAG retains its multiple
+viewpoints and reports no single-answer EM/F1; its dedicated experiments remain
+Phase 14. The bundled configs use scripted abstention, not a real model study.

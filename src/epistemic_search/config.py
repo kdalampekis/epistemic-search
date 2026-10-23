@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Annotated, Literal, Self
 
 import yaml
-from pydantic import Field, model_validator
+from pydantic import AwareDatetime, Field, model_validator
 
 from epistemic_search.models import BudgetLimits, Count, Money, Schema, Text
 
@@ -12,7 +12,7 @@ from epistemic_search.models import BudgetLimits, Count, Money, Schema, Text
 class RagConfig(Schema):
     max_rounds: Annotated[int, Field(strict=True, gt=0)] = 3
     k: Annotated[int, Field(strict=True, gt=0)] = 3
-    corpus_path: Path
+    corpus_path: Path | None = None
     backend: Literal["fixture", "openai"] = "fixture"
     model: Text = "fixture-script-v1"
     responses_path: Path | None = None
@@ -36,6 +36,20 @@ class EvaluationConfig(Schema):
     output_dir: Path
     dataset_name: Text
     split: Literal["train", "dev", "test"]
+    format: Literal["jsonl", "hotpotqa", "2wikimultihopqa", "confrag"] = "jsonl"
+    aliases_path: Path | None = None
+    snapshot_at: AwareDatetime | None = None
+    limit: Annotated[int, Field(strict=True, gt=0)] | None = None
+
+    @model_validator(mode="after")
+    def native_requirements(self) -> Self:
+        if self.format != "jsonl" and self.snapshot_at is None:
+            raise ValueError("Native benchmarks require a recorded snapshot_at timestamp")
+        if self.format == "2wikimultihopqa" and self.aliases_path is None:
+            raise ValueError("2Wiki requires the release's id_aliases.json for answer scoring")
+        if self.format == "jsonl" and self.limit is not None:
+            raise ValueError("limit is supported only for native benchmark adapters")
+        return self
 
 
 class DecompositionConfig(Schema):

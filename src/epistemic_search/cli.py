@@ -8,9 +8,11 @@ import typer
 import yaml
 
 from epistemic_search.baseline import RunResult
+from epistemic_search.benchmarks import BenchmarkDataset
 from epistemic_search.config import load_config
+from epistemic_search.dataset_setup import prepare_datasets
 from epistemic_search.decomposition import DecompositionResult, decompose
-from epistemic_search.evaluation import JsonlDataset, evaluate, manifest
+from epistemic_search.evaluation import DatasetAdapter, JsonlDataset, evaluate, manifest
 from epistemic_search.execution import configured_model, execute_case
 from epistemic_search.models import QueryCase
 from epistemic_search.tracing import configure_logging
@@ -21,6 +23,19 @@ app = typer.Typer(no_args_is_help=True)
 @app.callback()
 def main() -> None:
     """Epistemic Search research tools."""
+
+
+@app.command("prepare-datasets")
+def prepare_benchmarks(lock_path: Path, output_dir: Path) -> None:
+    """Download pinned releases and verify checksums in a new directory."""
+    try:
+        with httpx.Client() as client:
+            hashes = prepare_datasets(lock_path, output_dir, client)
+    except (OSError, ValueError, httpx.HTTPError) as exc:
+        typer.echo(f"Dataset setup failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    for name, digest in hashes.items():
+        typer.echo(f"{digest}  {name}")
 
 
 @app.command("validate-config")
@@ -63,13 +78,21 @@ def benchmark(config_path: Path) -> None:
         if config.evaluation is None or config.rag is None:
             raise ValueError("evaluation and rag configuration are required")
         settings = config.evaluation
+        dataset: DatasetAdapter = (
+            JsonlDataset(config_path.parent / settings.dataset_path)
+            if settings.format == "jsonl"
+            else BenchmarkDataset(settings, config_path.parent, config.seed)
+        )
 
         async def runner(case: QueryCase) -> RunResult:
-            return await execute_case(case, config, config_path.parent)
+            documents = (
+                dataset.documents(case.id) if isinstance(dataset, BenchmarkDataset) else None
+            )
+            return await execute_case(case, config, config_path.parent, documents)
 
         summary = asyncio.run(
             evaluate(
-                JsonlDataset(config_path.parent / settings.dataset_path),
+                dataset,
                 runner,
                 config_path.parent / settings.output_dir,
                 manifest(config, config_path.parent),

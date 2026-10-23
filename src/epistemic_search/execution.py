@@ -6,6 +6,7 @@ from pathlib import Path
 import httpx
 
 from epistemic_search.adapters import (
+    CorpusDocument,
     FixtureModelProvider,
     FixtureSearchProvider,
     OpenAIModelProvider,
@@ -24,10 +25,20 @@ def configured_model(config: RagConfig, base_dir: Path, client: httpx.AsyncClien
     return OpenAIModelProvider(client, os.environ.get("OPENAI_API_KEY", ""), config)
 
 
-async def execute_case(case: QueryCase, config: RunConfig, base_dir: Path) -> RunResult:
+async def execute_case(
+    case: QueryCase,
+    config: RunConfig,
+    base_dir: Path,
+    documents: list[CorpusDocument] | None = None,
+) -> RunResult:
     if config.rag is None:
         raise ValueError("rag configuration is required")
-    search = FixtureSearchProvider.from_path(base_dir / config.rag.corpus_path)
+    if documents is not None:
+        search = FixtureSearchProvider(documents)
+    elif config.rag.corpus_path is not None:
+        search = FixtureSearchProvider.from_path(base_dir / config.rag.corpus_path)
+    else:
+        raise ValueError("A corpus_path or explicit benchmark document pool is required")
     async with httpx.AsyncClient() as client:
         model = configured_model(config.rag, base_dir, client)
         if config.method == "epistemic_search":

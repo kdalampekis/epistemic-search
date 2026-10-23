@@ -15,8 +15,9 @@ Updated: 2026-10-23.
 | 8 — Premise-directed controller | Complete | [Implementation and checks](PHASE_8.md) |
 | 9 — Targeted query generator | Complete | [Implementation and checks](PHASE_9.md) |
 | 10 — Full Epistemic Search MVP | Complete | [Implementation and checks](PHASE_10.md) |
-| 11 — Benchmark integrations | Not started; next | `CODEX_BUILD_SPEC.md`, Phase 11 |
-| 12–25 | Not started | Follow the build specification sequentially |
+| 11 — Benchmark integrations | Complete | [Implementation and checks](PHASE_11.md) |
+| 12 — Baseline parity | Not started; next | `CODEX_BUILD_SPEC.md`, Phase 12 |
+| 13–25 | Not started | Follow the build specification sequentially |
 
 Phases 0 (`a6bd037`), 1 (`e8c030d`), and 2 (`93565cc`) were pushed; hosted CI passed.
 Phase 3 (`03724e0`) was pushed with successful hosted CI. Naive/iterative baselines,
@@ -29,4 +30,6 @@ Phase 8 (`ed54560`) was pushed with successful hosted CI. Targeted query templat
 Phase 9 (`e322e4c`) was pushed with successful hosted CI. The MVP is integrated.
 Phase 6 (`a815df2`) was pushed with successful hosted CI.
 No real-model benchmark quality or novelty claims have been established.
-Existing literature was read as design context, not independently verified.
+Phase 10 (`b099c7c`) was pushed with successful hosted CI. Native benchmarks are integrated.
+ConfRAG and benchmark sources were verified in Phase 11; the remaining literature
+map still requires independent verification before novelty claims.

@@ -20,6 +20,12 @@ from epistemic_search.config import RunConfig
 from epistemic_search.models import AgentEvent, QueryCase, Schema, Usage
 
 METRIC_VERSION = "english-em-token-f1-v1"
+BENCHMARK_METRICS = {
+    "jsonl": METRIC_VERSION,
+    "hotpotqa": "hotpotqa-answer-v1",
+    "2wikimultihopqa": "2wiki-answer-aliases-v1.1",
+    "confrag": "confrag-ingestion-only-v1",
+}
 
 
 class DatasetAdapter(Protocol):
@@ -33,7 +39,7 @@ class JsonlDataset:
     def load(self) -> list[QueryCase]:
         cases: list[QueryCase] = []
         seen: set[str] = set()
-        for line_number, line in enumerate(self.path.read_text(encoding="utf-8").splitlines(), 1):
+        for line_number, line in enumerate(self.path.read_text(encoding="utf-8").split("\n"), 1):
             if not line.strip():
                 continue
             try:
@@ -80,14 +86,37 @@ class ScoredCase(Schema):
     wall_seconds: float
 
 
-def score_case(case: QueryCase, result: RunResult, trace_file: str) -> ScoredCase:
+def score_case(
+    case: QueryCase, result: RunResult, trace_file: str, metric_version: str = METRIC_VERSION
+) -> ScoredCase:
     if result.query_id != case.id:
         raise ValueError("Result query ID does not match case")
     prediction = result.output.answer if result.status == "completed" and result.output else None
     labelled = case.gold_answer is not None
     # Abstention/error gets zero on labelled QA even when the gold normalizes to empty.
     em = f1 = None
-    if case.gold_answer is not None:
+    if metric_version not in BENCHMARK_METRICS.values():
+        raise ValueError(f"Unknown metric protocol: {metric_version}")
+    if metric_version == "confrag-ingestion-only-v1":
+        labelled = False  # Opposing viewpoints are not interchangeable QA references.
+    elif case.gold_answer is not None and metric_version != METRIC_VERSION:
+        references = [case.gold_answer]
+        if metric_version == "2wiki-answer-aliases-v1.1":
+            raw = case.metadata.get("answer_references")
+            if not isinstance(raw, list) or not all(isinstance(x, str) for x in raw):
+                raise ValueError("2Wiki scoring requires validated answer references")
+            references = [str(x) for x in raw]
+        em = (
+            max((exact_match(prediction, ref) for ref in references), default=0.0)
+            if prediction is not None
+            else 0.0
+        )
+        f1 = (
+            max((multihop_f1(prediction, ref) for ref in references), default=0.0)
+            if prediction is not None
+            else 0.0
+        )
+    elif case.gold_answer is not None:
         em = exact_match(prediction, case.gold_answer) if prediction is not None else 0.0
         f1 = token_f1(prediction, case.gold_answer) if prediction is not None else 0.0
     return ScoredCase(
@@ -102,6 +131,16 @@ def score_case(case: QueryCase, result: RunResult, trace_file: str) -> ScoredCas
         usage_complete=result.usage_complete,
         wall_seconds=result.wall_seconds,
     )
+
+
+def multihop_f1(prediction: str, reference: str) -> float:
+    """Answer-only Hotpot/2Wiki protocol, including categorical and empty cases."""
+    pred, gold = normalize_answer(prediction), normalize_answer(reference)
+    if not pred or not gold:
+        return 0.0
+    if pred != gold and (pred in {"yes", "no", "noanswer"} or gold in {"yes", "no", "noanswer"}):
+        return 0.0
+    return token_f1(prediction, reference)
 
 
 class Summary(Schema):
@@ -120,7 +159,7 @@ class Summary(Schema):
     wall_seconds: float
 
 
-def summarize(rows: list[ScoredCase]) -> Summary:
+def summarize(rows: list[ScoredCase], metric_version: str = METRIC_VERSION) -> Summary:
     if not rows:
         raise ValueError("Cannot summarize an empty dataset")
     labelled = [r for r in rows if r.labelled]
@@ -138,6 +177,7 @@ def summarize(rows: list[ScoredCase]) -> Summary:
         )
     answered = sum(r.answered for r in rows)
     return Summary(
+        metric_version=metric_version,
         examples=len(rows),
         labelled_examples=len(labelled),
         answered=answered,
@@ -160,7 +200,11 @@ def file_hash(path: Path) -> str:
 def manifest(config: RunConfig, base_dir: Path) -> dict[str, object]:
     assert config.evaluation is not None and config.rag is not None
     cfg = config.model_dump(mode="json")
-    files = {"dataset": config.evaluation.dataset_path, "corpus": config.rag.corpus_path}
+    files = {"dataset": config.evaluation.dataset_path}
+    if config.evaluation.format == "jsonl" and config.rag.corpus_path is not None:
+        files["corpus"] = config.rag.corpus_path
+    if config.evaluation.aliases_path is not None:
+        files["aliases"] = config.evaluation.aliases_path
     if config.rag.responses_path is not None:
         files["fixture_responses"] = config.rag.responses_path
 
@@ -181,7 +225,12 @@ def manifest(config: RunConfig, base_dir: Path) -> dict[str, object]:
         "input_hashes": {name: file_hash(base_dir / path) for name, path in files.items()},
         "git_commit": git("rev-parse", "HEAD"),
         "git_dirty": status != "" if status is not None else None,
-        "metric_version": METRIC_VERSION,
+        "metric_version": BENCHMARK_METRICS[config.evaluation.format],
+        "retrieval_scope": "configured-corpus"
+        if config.evaluation.format == "jsonl"
+        else "provided-context-per-question",
+        "retriever": "lexical-overlap-v1",
+        "subset_policy": "sha256(seed:case_id)-ascending" if config.evaluation.limit else "all",
         "method": config.method,
         "packages": {name: version(name) for name in ("epistemic-search", "pydantic", "httpx")},
         "fixture_only": config.rag.backend == "fixture",
@@ -198,10 +247,17 @@ async def evaluate(
     cases = dataset.load()
     if not cases or len({c.id for c in cases}) != len(cases):
         raise ValueError("Dataset must be nonempty with unique case IDs")
+    metric_version = str(run_manifest.get("metric_version", METRIC_VERSION))
+    if metric_version not in BENCHMARK_METRICS.values():
+        raise ValueError(f"Unknown metric protocol: {metric_version}")
+    run_manifest = {**run_manifest, "selected_case_ids": [c.id for c in cases]}
     encoded_manifest = json.dumps(run_manifest, indent=2, allow_nan=False)
     output_dir.mkdir(parents=True, exist_ok=False)
     (output_dir / "traces").mkdir()
     (output_dir / "manifest.json").write_text(encoded_manifest + "\n", encoding="utf-8")
+    with (output_dir / "labels.jsonl").open("w", encoding="utf-8") as labels:
+        for case in cases:
+            labels.write(case.model_dump_json() + "\n")
     rows: list[ScoredCase] = []
     with (output_dir / "examples.jsonl").open("w", encoding="utf-8") as examples:
         for index, case in enumerate(cases):
@@ -227,11 +283,11 @@ async def evaluate(
             (output_dir / trace_file).write_text(
                 result.model_dump_json(indent=2) + "\n", encoding="utf-8"
             )
-            row = score_case(case, result, trace_file)
+            row = score_case(case, result, trace_file, metric_version)
             rows.append(row)
             examples.write(row.model_dump_json() + "\n")
             examples.flush()
-    summary = summarize(rows)
+    summary = summarize(rows, metric_version)
     (output_dir / "summary.json").write_text(
         summary.model_dump_json(indent=2) + "\n", encoding="utf-8"
     )

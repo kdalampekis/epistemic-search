@@ -169,6 +169,15 @@ Key facts:
 Use:
 - primary contradiction benchmark.
 
+Phase 11 verification (2026-10-23): the ACL Anthology entry confirms the
+original dataset counts above. The authors' dataset card at
+https://huggingface.co/datasets/OracleY/ConfRAG recommends
+`ConfRAGsuggested.jsonl`; revision `529e760a78a58791d0387fe469e0732377a6d94d`
+contains 1,098 records, verified by complete ingestion. These are distinct
+release counts. ConfRAG evaluates clustering, answer coverage and reason
+coverage; its opposing viewpoints must not be treated as interchangeable
+gold answers for ordinary EM/F1. See `docs/experiments/benchmark_setup.md`.
+
 ### Rational Synthesizers or Heuristic Followers?
 Naphade, Findings of ACL 2026  
 https://aclanthology.org/2026.findings-acl.2003/

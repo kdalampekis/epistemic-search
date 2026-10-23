@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "name": "hotpot_dev.parquet",
+      "url": "https://huggingface.co/datasets/hotpotqa/hotpot_qa/resolve/1908d6afbbead072334abe2965f91bd2709910ab/distractor/validation-00000-of-00001.parquet",
+      "sha256": "c20b638ca82b21d04fe12e14ff417ad05153d4d215a65de54497fca4e972f7c6",
+      "license_note": "HotpotQA CC BY-SA 4.0; cite Yang et al. EMNLP 2018. Hugging Face hotpotqa mirror, distractor validation.",
+      "convert": "hotpot-parquet"
+    },
+    {
+      "name": "2wiki.zip",
+      "url": "https://www.dropbox.com/s/ms2m13252h6xubs/data_ids_april7.zip?dl=1",
+      "sha256": "95df2bf56fdabe034e27aebc580e02264232203cf52552f9efe8a919e5529eef",
+      "license_note": "Official April 7 2021 data_ids release linked by Alab-NII/2wikimultihop. Upstream repository LICENSE is Apache-2.0; this is not a separate assertion about third-party Wikipedia content. Cite Ho et al. COLING 2020.",
+      "archive_members": {
+        "dev.json": "79f77ae104088ea8e25b1a65dbece768d45771194663bc5660ec9a98070dadf5",
+        "id_aliases.json": "f08ffcb6c2cefca9bdbe86b4248d6ad7a7743762d3f7264c14ff0bae85726fb6"
+      }
+    },
+    {
+      "name": "ConfRAGsuggested.jsonl",
+      "url": "https://huggingface.co/datasets/OracleY/ConfRAG/resolve/529e760a78a58791d0387fe469e0732377a6d94d/ConfRAGsuggested.jsonl",
+      "sha256": "bfe5fdc8e1e56300e36e7477626e118ba489469d971d9fc3f815ffd3e243bdcf",
+      "license_note": "Dataset card: CC BY 4.0. Cite Yuan et al. ACL 2026. Suggested release: 1098 rows, not original 1814."
+    }
+  ]
+}
