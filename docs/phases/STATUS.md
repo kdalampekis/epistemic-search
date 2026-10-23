@@ -11,14 +11,16 @@ Updated: 2026-10-23.
 | 4 — Premise decomposition | Complete | [Implementation and checks](PHASE_4.md) |
 | 5 — Evidence ledger | Complete | [Implementation and checks](PHASE_5.md) |
 | 6 — Belief state v1 | Complete | [Implementation and checks](PHASE_6.md) |
-| 7 — Structured sufficiency reasoner | Not started; next | `CODEX_BUILD_SPEC.md`, Phase 7 |
-| 8–25 | Not started | Follow the build specification sequentially |
+| 7 — Structured sufficiency reasoner | Complete | [Implementation and checks](PHASE_7.md) |
+| 8 — Premise-directed controller | Not started; next | `CODEX_BUILD_SPEC.md`, Phase 8 |
+| 9–25 | Not started | Follow the build specification sequentially |
 
 Phases 0 (`a6bd037`), 1 (`e8c030d`), and 2 (`93565cc`) were pushed; hosted CI passed.
 Phase 3 (`03724e0`) was pushed with successful hosted CI. Naive/iterative baselines,
 the common evaluation harness, structural premise decomposition and evidence ledger exist.
 Phase 4 (`ee1a0a0`) was pushed with successful hosted CI.
 Phase 5 (`018567e`) was pushed with successful hosted CI. Conservative belief
-aggregation exists; no reasoner or epistemic controller is implemented.
+aggregation and a structured reasoner exist; no epistemic controller is implemented.
+Phase 6 (`a815df2`) was pushed with successful hosted CI.
 No real-model benchmark quality or novelty claims have been established.
 Existing literature was read as design context, not independently verified.
