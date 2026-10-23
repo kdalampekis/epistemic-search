@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Next: **Phase 4 — Premise decomposition**.
+are in `tests/test_providers.py`. Next: **Phase 5 — Evidence ledger**.
 
 ## 11. Naive RAG baseline
 
@@ -337,3 +337,14 @@ uv run epistemic-search evaluate configs/iterative_fixture.yaml
 `method: iterative_rag` enables model-directed follow-up searches, bounded by
 `rag.max_rounds` and cumulative budgets. It shares provider/accounting/grading
 code with `naive_rag`. [Phase 3](docs/phases/PHASE_3.md) documents the limits.
+
+## 14. Premise graph inspection
+
+```sh
+uv run epistemic-search decompose configs/decomposition_fixture.yaml tests/fixtures/decomposition_query.json graph.json
+```
+
+Validates the model's graph, assigns stable IDs, and saves request/model/usage
+metadata. Repeat with a new output filename to inspect a cache hit. Structural
+validity does not establish that the premises are true or complete. Details:
+[Phase 4](docs/phases/PHASE_4.md).

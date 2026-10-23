@@ -1,0 +1,13 @@
+{
+  "claims": [
+    {"id": "a", "text": "Paris is the capital of France.", "polarity": "POSITIVE"},
+    {"id": "b", "text": "France is in Europe.", "polarity": "POSITIVE"}
+  ],
+  "nodes": [
+    {"id": "na", "kind": "CLAIM", "children": [], "claim_id": "a"},
+    {"id": "nb", "kind": "CLAIM", "children": [], "claim_id": "b"},
+    {"id": "both", "kind": "AND", "children": ["na", "nb"], "claim_id": null},
+    {"id": "root", "kind": "CONCLUSION", "children": ["both"], "claim_id": null}
+  ],
+  "conclusion_id": "root"
+}

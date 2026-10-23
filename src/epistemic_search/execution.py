@@ -11,9 +11,16 @@ from epistemic_search.adapters import (
     OpenAIModelProvider,
 )
 from epistemic_search.baseline import RunResult, run_baseline
-from epistemic_search.config import RunConfig
+from epistemic_search.config import RagConfig, RunConfig
 from epistemic_search.models import QueryCase
 from epistemic_search.providers import ModelProvider
+
+
+def configured_model(config: RagConfig, base_dir: Path, client: httpx.AsyncClient) -> ModelProvider:
+    if config.backend == "fixture":
+        assert config.responses_path is not None
+        return FixtureModelProvider.from_path(base_dir / config.responses_path)
+    return OpenAIModelProvider(client, os.environ.get("OPENAI_API_KEY", ""), config)
 
 
 async def execute_case(case: QueryCase, config: RunConfig, base_dir: Path) -> RunResult:
@@ -21,10 +28,5 @@ async def execute_case(case: QueryCase, config: RunConfig, base_dir: Path) -> Ru
         raise ValueError("rag configuration is required")
     search = FixtureSearchProvider.from_path(base_dir / config.rag.corpus_path)
     async with httpx.AsyncClient() as client:
-        model: ModelProvider
-        if config.rag.backend == "fixture":
-            assert config.rag.responses_path is not None
-            model = FixtureModelProvider.from_path(base_dir / config.rag.responses_path)
-        else:
-            model = OpenAIModelProvider(client, os.environ.get("OPENAI_API_KEY", ""), config.rag)
+        model = configured_model(config.rag, base_dir, client)
         return await run_baseline(case, config, search, model)

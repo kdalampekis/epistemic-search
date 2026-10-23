@@ -38,6 +38,10 @@ class EvaluationConfig(Schema):
     split: Literal["train", "dev", "test"]
 
 
+class DecompositionConfig(Schema):
+    cache_dir: Path
+
+
 class RunConfig(Schema):
     schema_version: Literal[1] = 1
     run_id: Text
@@ -47,6 +51,7 @@ class RunConfig(Schema):
     budget: BudgetLimits = Field(default_factory=BudgetLimits)
     rag: RagConfig | None = None
     evaluation: EvaluationConfig | None = None
+    decomposition: DecompositionConfig | None = None
 
 
 def load_config(path: Path) -> RunConfig:

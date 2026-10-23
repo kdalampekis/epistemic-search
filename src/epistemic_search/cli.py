@@ -3,13 +3,15 @@
 import asyncio
 from pathlib import Path
 
+import httpx
 import typer
 import yaml
 
 from epistemic_search.baseline import RunResult
 from epistemic_search.config import load_config
+from epistemic_search.decomposition import DecompositionResult, decompose
 from epistemic_search.evaluation import JsonlDataset, evaluate, manifest
-from epistemic_search.execution import execute_case
+from epistemic_search.execution import configured_model, execute_case
 from epistemic_search.models import QueryCase
 from epistemic_search.tracing import configure_logging
 
@@ -78,4 +80,32 @@ def benchmark(config_path: Path) -> None:
         raise typer.Exit(code=1) from exc
     typer.echo(summary.model_dump_json(indent=2))
     if summary.errors:
+        raise typer.Exit(code=1)
+
+
+@app.command("decompose")
+def inspect_decomposition(config_path: Path, query_path: Path, output_path: Path) -> None:
+    """Generate or inspect a cached, structurally validated premise graph."""
+    try:
+        config = load_config(config_path)
+        if config.rag is None or config.decomposition is None:
+            raise ValueError("rag model and decomposition settings are required")
+        case = QueryCase.model_validate_json(query_path.read_text(encoding="utf-8"))
+
+        async def run() -> DecompositionResult:
+            assert config.rag is not None and config.decomposition is not None
+            async with httpx.AsyncClient() as client:
+                model = configured_model(config.rag, config_path.parent, client)
+                return await decompose(
+                    case, config, model, config_path.parent / config.decomposition.cache_dir
+                )
+
+        with output_path.open("x", encoding="utf-8") as output:
+            result = asyncio.run(run())
+            output.write(result.model_dump_json(indent=2) + "\n")
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"Decomposition failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(result.model_dump_json(indent=2))
+    if result.error is not None:
         raise typer.Exit(code=1)
