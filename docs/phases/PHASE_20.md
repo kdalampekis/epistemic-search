@@ -1,6 +1,6 @@
 # Phase 20 — Statistical analysis
 
-Status: **complete locally**; commit/push and hosted CI gate pending.
+Status: **complete**; commit `ea9b15b`, hosted CI `40115519622` passed.
 Phase 19 commit `3f9ee96` passed CI `40084386967` before work began.
 
 ## Implementation and design

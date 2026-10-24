@@ -21,6 +21,7 @@ from epistemic_search.dataset_setup import prepare_datasets
 from epistemic_search.decomposition import DecompositionResult, decompose
 from epistemic_search.evaluation import evaluate, manifest
 from epistemic_search.execution import configured_model, configured_spend, execute_case
+from epistemic_search.failures import analyze_failures
 from epistemic_search.formal import compare_formal
 from epistemic_search.models import QueryCase
 from epistemic_search.parity import compare
@@ -29,6 +30,17 @@ from epistemic_search.statistics import analyze_comparison
 from epistemic_search.tracing import configure_logging
 
 app = typer.Typer(no_args_is_help=True)
+
+
+@app.command("analyze-failures")
+def failure_analysis(config_path: Path) -> None:
+    """Render saved trace reports and provisional taxonomy classifications offline."""
+    try:
+        report = analyze_failures(config_path)
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"Failure analysis failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"Rendered {report['examples']} saved traces; additional API cost $0")
 
 
 @app.command("analyze-comparison")

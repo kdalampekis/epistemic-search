@@ -1,0 +1,3 @@
+runs:
+  fixture: ../artifacts/evaluation-fixture
+output_dir: ../artifacts/failure-fixture

@@ -1,0 +1,17 @@
+runs:
+  hotpotqa-closed_book: ../artifacts/phase12/luna-medium/comparison/hotpotqa/closed_book
+  hotpotqa-naive_rag: ../artifacts/phase12/luna-medium/comparison/hotpotqa/naive_rag
+  hotpotqa-iterative_rag: ../artifacts/phase12/luna-medium/comparison/hotpotqa/iterative_rag
+  hotpotqa-premise_only: ../artifacts/phase12/luna-medium/comparison/hotpotqa/premise_only
+  hotpotqa-epistemic_search: ../artifacts/phase12/luna-medium/comparison/hotpotqa/epistemic_search
+  2wikimultihopqa-closed_book: ../artifacts/phase12/luna-medium/comparison/2wikimultihopqa/closed_book
+  2wikimultihopqa-naive_rag: ../artifacts/phase12/luna-medium/comparison/2wikimultihopqa/naive_rag
+  2wikimultihopqa-iterative_rag: ../artifacts/phase12/luna-medium/comparison/2wikimultihopqa/iterative_rag
+  2wikimultihopqa-premise_only: ../artifacts/phase12/luna-medium/comparison/2wikimultihopqa/premise_only
+  2wikimultihopqa-epistemic_search: ../artifacts/phase12/luna-medium/comparison/2wikimultihopqa/epistemic_search
+  confrag-closed_book: ../artifacts/phase12/luna-medium/comparison/confrag/closed_book
+  confrag-naive_rag: ../artifacts/phase12/luna-medium/comparison/confrag/naive_rag
+  confrag-iterative_rag: ../artifacts/phase12/luna-medium/comparison/confrag/iterative_rag
+  confrag-premise_only: ../artifacts/phase12/luna-medium/comparison/confrag/premise_only
+  confrag-epistemic_search: ../artifacts/phase12/luna-medium/comparison/confrag/epistemic_search
+output_dir: ../artifacts/failure-pilot

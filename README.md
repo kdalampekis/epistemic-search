@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Current: **Phase 20 — Statistical analysis**, with paired saved-run reports and cost distributions. Real calibration results remain unavailable.
+are in `tests/test_providers.py`. Current: **Phase 21 — Failure analysis**, with offline trace inspection and provisional taxonomy reports. Real calibration results remain unavailable.
 
 ## 11. Naive RAG baseline
 
@@ -499,3 +499,16 @@ Missing outcomes, failed examples, insufficient groups and cached-call caveats
 remain explicit. Saved Luna pilot reports show no adjusted advantage of the
 full method over naive RAG on these small samples. See
 [Phase 20](docs/phases/PHASE_20.md) and [the inference protocol](docs/decisions/0014-paired-statistical-analysis.md).
+
+## 26. Trace and failure inspection
+
+```sh
+uv run --locked epistemic-search analyze-failures configs/failures_fixture.yaml
+```
+
+Open the generated `index.html` for offline per-example reports and expandable
+event timelines. All executed cases remain visible; abstention and budget stops
+are not automatically failures. Automatic categories are provisional symptoms or
+stages, while manual judgments carry assessor/protocol and trace-hash provenance.
+See [Phase 21](docs/phases/PHASE_21.md) and
+[the review protocol](docs/decisions/0015-failure-stage-review.md).
