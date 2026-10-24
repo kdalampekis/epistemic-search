@@ -1,0 +1,12 @@
+runs:
+  closed_book: ../artifacts/phase12/luna-medium/comparison/2wikimultihopqa/closed_book
+  naive_rag: ../artifacts/phase12/luna-medium/comparison/2wikimultihopqa/naive_rag
+  iterative_rag: ../artifacts/phase12/luna-medium/comparison/2wikimultihopqa/iterative_rag
+  premise_only: ../artifacts/phase12/luna-medium/comparison/2wikimultihopqa/premise_only
+  epistemic_search: ../artifacts/phase12/luna-medium/comparison/2wikimultihopqa/epistemic_search
+reference: naive_rag
+output_path: ../docs/results/phase20_2wikimultihopqa_pilot.json
+seed: 42
+confidence: 0.95
+bootstrap_replicates: 5000
+permutation_replicates: 10000

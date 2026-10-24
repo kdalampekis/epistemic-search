@@ -1,0 +1,8 @@
+runs:
+  reference: ../artifacts/ablation-fixture/reference
+  no_compaction: ../artifacts/ablation-fixture/compact_evidence
+reference: reference
+output_path: ../artifacts/statistics-fixture.json
+bootstrap_replicates: 100
+permutation_replicates: 100
+seed: 42

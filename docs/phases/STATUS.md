@@ -23,8 +23,9 @@ Updated: 2026-10-24.
 | 16 — Cost-aware controller | Complete | [Implementation and checks](PHASE_16.md) |
 | 17 — Controlled benchmark transformations | Complete | [Implementation and checks](PHASE_17.md) |
 | 18 — Optional formal backend | Complete | [Implementation and checks](PHASE_18.md) |
-| 19 — Ablation runner | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_19.md) |
-| 20–25 | Not started | Follow the build specification sequentially |
+| 19 — Ablation runner | Complete | [Implementation and checks](PHASE_19.md) |
+| 20 — Statistical analysis | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_20.md) |
+| 21–25 | Not started | Follow the build specification sequentially |
 
 Phases 0 (`a6bd037`), 1 (`e8c030d`), and 2 (`93565cc`) were pushed; hosted CI passed.
 Phase 3 (`03724e0`) was pushed with successful hosted CI. Naive/iterative baselines,
@@ -76,3 +77,7 @@ comparison. Classical and graph semantics remain explicit; validation is offline
 Phase 18 (`581cf0b`) was pushed with successful hosted CI (`40083718154`).
 Phase 19 implements seven bounded ablation paths and matched result tables,
 including explicit dependent-component removal. Only offline fixtures were run.
+
+Phase 19 (`3f9ee96`) was pushed with successful hosted CI (`40084386967`).
+Phase 20 reanalyzes the saved pilot with paired tests, clustered bootstrap and
+cost summaries. Negative results and missing ConfRAG answer metrics are retained.

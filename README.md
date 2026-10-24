@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Current: **Phase 19 — Ablation runner**, with seven explicit interventions and matched result tables. Real calibration results remain unavailable.
+are in `tests/test_providers.py`. Current: **Phase 20 — Statistical analysis**, with paired saved-run reports and cost distributions. Real calibration results remain unavailable.
 
 ## 11. Naive RAG baseline
 
@@ -486,3 +486,16 @@ prerequisites also removes dependent control, explicitly documented in each
 manifest. Hard budgets remain active even in the forced-answer intervention.
 See [Phase 19](docs/phases/PHASE_19.md) and
 [the switch semantics](docs/decisions/0013-ablation-semantics.md).
+
+## 25. Paired statistical analysis
+
+```sh
+uv run --locked epistemic-search analyze-comparison configs/statistics_fixture.yaml
+```
+
+Analyzes existing scored runs without API calls: bootstrap whole question groups,
+paired sign-flip tests, within-report Holm correction and resource distributions.
+Missing outcomes, failed examples, insufficient groups and cached-call caveats
+remain explicit. Saved Luna pilot reports show no adjusted advantage of the
+full method over naive RAG on these small samples. See
+[Phase 20](docs/phases/PHASE_20.md) and [the inference protocol](docs/decisions/0014-paired-statistical-analysis.md).

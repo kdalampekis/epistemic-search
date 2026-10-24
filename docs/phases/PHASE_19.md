@@ -1,6 +1,6 @@
 # Phase 19 — Ablation runner
 
-Status: **complete locally**; commit/push and hosted CI gate pending.
+Status: **complete**; commit `3f9ee96`, hosted CI `40084386967` passed.
 Phase 18 commit `581cf0b` passed CI `40083718154` before work began.
 
 ## Implementation and design

@@ -1,0 +1,1019 @@
+{
+  "protocol": "paired-saved-run-analysis-v1",
+  "config": {
+    "runs": {
+      "closed_book": "../artifacts/phase12/luna-medium/comparison/hotpotqa/closed_book",
+      "naive_rag": "../artifacts/phase12/luna-medium/comparison/hotpotqa/naive_rag",
+      "iterative_rag": "../artifacts/phase12/luna-medium/comparison/hotpotqa/iterative_rag",
+      "premise_only": "../artifacts/phase12/luna-medium/comparison/hotpotqa/premise_only",
+      "epistemic_search": "../artifacts/phase12/luna-medium/comparison/hotpotqa/epistemic_search"
+    },
+    "reference": "naive_rag",
+    "output_path": "../docs/results/phase20_hotpotqa_pilot.json",
+    "seed": 42,
+    "confidence": 0.95,
+    "bootstrap_replicates": 5000,
+    "permutation_replicates": 10000
+  },
+  "config_sha256": "79c3965f43e967d5696ceb64a1a0d3b529ef52653b6abfe1b011787075234dba",
+  "implementation_sha256": "b42dc21b12e6a4fe7f4c9ac13b36bd90efc532738adc91df8d7d5ba6008f7bb7",
+  "matched_protocol": {
+    "metric_version": "hotpotqa-answer-v1",
+    "retriever": "lexical-overlap-v1",
+    "retrieval_scope": "provided-context-per-question",
+    "inputs": {
+      "dataset": "3fdf37cb94bf5d78407572f0c945fb4a98f3e4dfea457d8e3dd315db0c6650df"
+    },
+    "budget": {
+      "max_search_calls": 3,
+      "max_documents": 6,
+      "max_retrieved_tokens": 50000,
+      "max_llm_calls": 24,
+      "max_total_llm_input_tokens": 100000,
+      "max_total_llm_output_tokens": 32768,
+      "max_latency_seconds": 600.0,
+      "max_cost_usd": null
+    },
+    "seed": 42,
+    "model": {
+      "max_rounds": 3,
+      "k": 2,
+      "backend": "openai",
+      "model": "gpt-6-luna",
+      "reasoning_effort": "medium",
+      "service_tier": "default",
+      "max_output_tokens": 4096,
+      "timeout_seconds": 120.0,
+      "input_usd_per_million": "0.10",
+      "cached_input_usd_per_million": "0.01",
+      "cache_write_usd_per_million": "0.125",
+      "output_usd_per_million": "0.50"
+    },
+    "dataset": {
+      "dataset_name": "hotpotqa-distractor-dev",
+      "split": "dev",
+      "format": "hotpotqa",
+      "snapshot_at": "2026-10-23T00:00:00Z",
+      "limit": 10
+    }
+  },
+  "fixture_only": false,
+  "runs": {
+    "closed_book": {
+      "metrics": {
+        "coverage": {
+          "mean": 0.9,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.7,
+          "upper": 1.0,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        },
+        "exact_match": {
+          "mean": 0.3,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.0,
+          "upper": 0.6,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        },
+        "token_f1": {
+          "mean": 0.5366918028208351,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.28528836754643205,
+          "upper": 0.7872294372294373,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        }
+      },
+      "resources": {
+        "cost_usd": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 0.00036884,
+          "median": 8.999999999999999e-05,
+          "p90": 0.0009719199999999996,
+          "total_known": 0.0036884
+        },
+        "prompt_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 111.4,
+          "median": 106.5,
+          "p90": 123.2,
+          "total_known": 1114.0
+        },
+        "cached_input_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "completion_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 733.5,
+          "median": 159.0,
+          "p90": 1922.499999999999,
+          "total_known": 7335.0
+        },
+        "reasoning_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 708.9,
+          "median": 140.5,
+          "p90": 1902.6999999999991,
+          "total_known": 7089.0
+        },
+        "model_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 1.0,
+          "median": 1.0,
+          "p90": 1.0,
+          "total_known": 10.0
+        },
+        "search_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "api_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 1.8,
+          "median": 2.0,
+          "p90": 2.0,
+          "total_known": 18.0
+        },
+        "model_cache_hits": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 0.1,
+          "median": 0.0,
+          "p90": 0.09999999999999964,
+          "total_known": 1.0
+        },
+        "wall_seconds": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 8.953248066693778,
+          "median": 2.9243157079908997,
+          "p90": 21.923613025597287,
+          "total_known": 89.53248066693777
+        }
+      },
+      "source_hashes": {
+        "examples.jsonl": "eb7b273e792a70989ee11afac3e2074e2727317dc76f0c1a36cb3bc1399f861e",
+        "labels.jsonl": "dc5784a4a444d3e9f4ba24a2fd6c53f657e81ffc735abdea7e1624b76677377b",
+        "manifest.json": "4519a8fc0f1d2e9055d53b1a86db7766d02c46066724815146f2f9d8d0ae1044",
+        "summary.json": "93d81ad65dbcd9b6df8f64a0deb0fe8f00e81fb47aab72ef18c4771e6f8d5e7e"
+      },
+      "errors": 1,
+      "budget_exhausted": 0,
+      "incomplete_usage_examples": 0
+    },
+    "naive_rag": {
+      "metrics": {
+        "coverage": {
+          "mean": 0.6,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.3,
+          "upper": 0.9,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        },
+        "exact_match": {
+          "mean": 0.3,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.0,
+          "upper": 0.6,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        },
+        "token_f1": {
+          "mean": 0.4624324324324324,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.1972972972972973,
+          "upper": 0.7324324324324325,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        }
+      },
+      "resources": {
+        "cost_usd": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 8.224e-05,
+          "median": 7.219999999999999e-05,
+          "p90": 0.00012650999999999995,
+          "total_known": 0.0008224
+        },
+        "prompt_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 468.8,
+          "median": 485.0,
+          "p90": 588.0,
+          "total_known": 4688.0
+        },
+        "cached_input_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "completion_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 94.4,
+          "median": 74.0,
+          "p90": 151.89999999999992,
+          "total_known": 944.0
+        },
+        "reasoning_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 59.1,
+          "median": 26.0,
+          "p90": 122.09999999999994,
+          "total_known": 591.0
+        },
+        "model_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 1.0,
+          "median": 1.0,
+          "p90": 1.0,
+          "total_known": 10.0
+        },
+        "search_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 1.0,
+          "median": 1.0,
+          "p90": 1.0,
+          "total_known": 10.0
+        },
+        "api_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 1.8,
+          "median": 2.0,
+          "p90": 2.0,
+          "total_known": 18.0
+        },
+        "model_cache_hits": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 0.1,
+          "median": 0.0,
+          "p90": 0.09999999999999964,
+          "total_known": 1.0
+        },
+        "wall_seconds": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 1.9615852541057393,
+          "median": 1.8227030414855108,
+          "p90": 2.782614237238885,
+          "total_known": 19.615852541057393
+        }
+      },
+      "source_hashes": {
+        "examples.jsonl": "53707977e0161ea4303a180b44a8f235d853e164cc39d210f5d55252bbdaf8d5",
+        "labels.jsonl": "dc5784a4a444d3e9f4ba24a2fd6c53f657e81ffc735abdea7e1624b76677377b",
+        "manifest.json": "b8b597d3178c1b7cc265ff007d23ec0c250f98989381e706c35fec2e69c2a168",
+        "summary.json": "68ad5ac28832d711f5fa8090d795e790d8832d280abdf5b2f4c6433f7150c540"
+      },
+      "errors": 0,
+      "budget_exhausted": 0,
+      "incomplete_usage_examples": 0
+    },
+    "iterative_rag": {
+      "metrics": {
+        "coverage": {
+          "mean": 0.7,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.4,
+          "upper": 1.0,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        },
+        "exact_match": {
+          "mean": 0.1,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.0,
+          "upper": 0.3,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        },
+        "token_f1": {
+          "mean": 0.3187118054793555,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.1396078959671268,
+          "upper": 0.5240877804799707,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        }
+      },
+      "resources": {
+        "cost_usd": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 0.00018159,
+          "median": 0.0001014,
+          "p90": 0.00037958999999999996,
+          "total_known": 0.0018159
+        },
+        "prompt_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 1148.7,
+          "median": 553.0,
+          "p90": 2370.8,
+          "total_known": 11487.0
+        },
+        "cached_input_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "completion_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 308.9,
+          "median": 176.0,
+          "p90": 749.8999999999999,
+          "total_known": 3089.0
+        },
+        "reasoning_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 214.5,
+          "median": 94.5,
+          "p90": 613.0999999999999,
+          "total_known": 2145.0
+        },
+        "model_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 1.7,
+          "median": 1.0,
+          "p90": 3.0,
+          "total_known": 17.0
+        },
+        "search_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 1.7,
+          "median": 1.0,
+          "p90": 3.0,
+          "total_known": 17.0
+        },
+        "api_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 2.4,
+          "median": 2.0,
+          "p90": 4.0,
+          "total_known": 24.0
+        },
+        "model_cache_hits": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 0.5,
+          "median": 0.0,
+          "p90": 1.1999999999999993,
+          "total_known": 5.0
+        },
+        "wall_seconds": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 3.726644645805936,
+          "median": 2.5396153954789042,
+          "p90": 6.443262695812153,
+          "total_known": 37.26644645805936
+        }
+      },
+      "source_hashes": {
+        "examples.jsonl": "313cbe129f3bfb442c9294a6c460f7b45e1d245389ba5baa700341b8bf479964",
+        "labels.jsonl": "dc5784a4a444d3e9f4ba24a2fd6c53f657e81ffc735abdea7e1624b76677377b",
+        "manifest.json": "a02bf9cbe12d9681f064b0d0ff67b1213e0aa21caac6feb74c35e00684406978",
+        "summary.json": "9fb6da184a8d402927010ef4df753f6aa76708548af5239230e5835ea68bcafc"
+      },
+      "errors": 0,
+      "budget_exhausted": 3,
+      "incomplete_usage_examples": 0
+    },
+    "premise_only": {
+      "metrics": {
+        "coverage": {
+          "mean": 0.3,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.0,
+          "upper": 0.6,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        },
+        "exact_match": {
+          "mean": 0.1,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.0,
+          "upper": 0.3,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        },
+        "token_f1": {
+          "mean": 0.20727272727272728,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.0,
+          "upper": 0.44727272727272727,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        }
+      },
+      "resources": {
+        "cost_usd": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 0.00049154,
+          "median": 0.000533,
+          "p90": 0.0006079799999999999,
+          "total_known": 0.0049154
+        },
+        "prompt_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 2164.7,
+          "median": 2410.5,
+          "p90": 3132.6,
+          "total_known": 21647.0
+        },
+        "cached_input_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "completion_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 1127.9,
+          "median": 1190.0,
+          "p90": 1345.8,
+          "total_known": 11279.0
+        },
+        "reasoning_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 808.7,
+          "median": 878.0,
+          "p90": 999.5999999999999,
+          "total_known": 8087.0
+        },
+        "model_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 3.4,
+          "median": 4.0,
+          "p90": 4.0,
+          "total_known": 34.0
+        },
+        "search_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 2.4,
+          "median": 3.0,
+          "p90": 3.0,
+          "total_known": 24.0
+        },
+        "api_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 3.8,
+          "median": 4.0,
+          "p90": 4.199999999999999,
+          "total_known": 38.0
+        },
+        "model_cache_hits": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 1.5,
+          "median": 2.0,
+          "p90": 2.1999999999999993,
+          "total_known": 15.0
+        },
+        "wall_seconds": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 9.6785320372961,
+          "median": 10.812656521011377,
+          "p90": 11.978723991580772,
+          "total_known": 96.785320372961
+        }
+      },
+      "source_hashes": {
+        "examples.jsonl": "0dfa679c5824b4f3b8e7930c9c2b4bdfdae0536db8fc88c6b57c2887d2d71a53",
+        "labels.jsonl": "dc5784a4a444d3e9f4ba24a2fd6c53f657e81ffc735abdea7e1624b76677377b",
+        "manifest.json": "8c2ec46969d044f64724d32b88850371601f971bebe9acb6e80ccf859698ee3f",
+        "summary.json": "306e289e6b28bbfa5c68ae344c5dae658726e90d6afd85fd29172c310c709dc0"
+      },
+      "errors": 0,
+      "budget_exhausted": 0,
+      "incomplete_usage_examples": 0
+    },
+    "epistemic_search": {
+      "metrics": {
+        "coverage": {
+          "mean": 0.2,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.0,
+          "upper": 0.5,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        },
+        "exact_match": {
+          "mean": 0.1,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.0,
+          "upper": 0.3,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        },
+        "token_f1": {
+          "mean": 0.16666666666666666,
+          "examples": 10,
+          "groups": 10,
+          "confidence": 0.95,
+          "lower": 0.0,
+          "upper": 0.4,
+          "replicates": 5000,
+          "degenerate": false,
+          "protocol": "question-cluster-percentile-v1"
+        }
+      },
+      "resources": {
+        "cost_usd": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 0.00055901,
+          "median": 0.0005632,
+          "p90": 0.0008062299999999999,
+          "total_known": 0.0055901
+        },
+        "prompt_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 3534.4,
+          "median": 3537.0,
+          "p90": 4829.099999999999,
+          "total_known": 35344.0
+        },
+        "cached_input_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "completion_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 1973.8,
+          "median": 1812.5,
+          "p90": 2772.4999999999995,
+          "total_known": 19738.0
+        },
+        "reasoning_tokens": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 1373.8,
+          "median": 1337.5,
+          "p90": 2022.2,
+          "total_known": 13738.0
+        },
+        "model_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 9.7,
+          "median": 10.0,
+          "p90": 11.599999999999998,
+          "total_known": 97.0
+        },
+        "search_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 2.3,
+          "median": 3.0,
+          "p90": 3.0,
+          "total_known": 23.0
+        },
+        "api_calls": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 10.4,
+          "median": 12.0,
+          "p90": 14.0,
+          "total_known": 104.0
+        },
+        "model_cache_hits": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 4.5,
+          "median": 4.0,
+          "p90": 6.199999999999996,
+          "total_known": 45.0
+        },
+        "wall_seconds": {
+          "known": 10,
+          "unknown": 0,
+          "mean": 15.701565625105285,
+          "median": 15.190854166517965,
+          "p90": 24.55059578718501,
+          "total_known": 157.01565625105286
+        }
+      },
+      "source_hashes": {
+        "examples.jsonl": "6af2332f72556310f36eaee186263b28af7d509ac2a4691cfa7c785b1d00663a",
+        "labels.jsonl": "dc5784a4a444d3e9f4ba24a2fd6c53f657e81ffc735abdea7e1624b76677377b",
+        "manifest.json": "c8f96c47ba1ad7ac1dfc7b1a9043200a71026255d1429aa3b14ba4d8b7f60498",
+        "summary.json": "301bca103ba1251d5448ff186d8abf9e561f5591c932c78e59912b95c91a60ad"
+      },
+      "errors": 2,
+      "budget_exhausted": 0,
+      "incomplete_usage_examples": 0
+    }
+  },
+  "comparisons": [
+    {
+      "method": "closed_book",
+      "reference": "naive_rag",
+      "metric": "coverage",
+      "difference": {
+        "mean": 0.3,
+        "examples": 10,
+        "groups": 10,
+        "confidence": 0.95,
+        "lower": 0.0,
+        "upper": 0.6,
+        "replicates": 5000,
+        "degenerate": false,
+        "protocol": "question-cluster-percentile-v1"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 10,
+        "mean_difference": 0.3,
+        "p_value": 0.25,
+        "permutations": 1024,
+        "exact": true,
+        "p_holm": 1
+      }
+    },
+    {
+      "method": "closed_book",
+      "reference": "naive_rag",
+      "metric": "exact_match",
+      "difference": {
+        "mean": 0.0,
+        "examples": 10,
+        "groups": 10,
+        "confidence": 0.95,
+        "lower": -0.3,
+        "upper": 0.3,
+        "replicates": 5000,
+        "degenerate": false,
+        "protocol": "question-cluster-percentile-v1"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 10,
+        "mean_difference": 0.0,
+        "p_value": 1.0,
+        "permutations": 1024,
+        "exact": true,
+        "p_holm": 1
+      }
+    },
+    {
+      "method": "closed_book",
+      "reference": "naive_rag",
+      "metric": "token_f1",
+      "difference": {
+        "mean": 0.07425937038840263,
+        "examples": 10,
+        "groups": 10,
+        "confidence": 0.95,
+        "lower": -0.20126039885717306,
+        "upper": 0.3538961038961039,
+        "replicates": 5000,
+        "degenerate": false,
+        "protocol": "question-cluster-percentile-v1"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 10,
+        "mean_difference": 0.07425937038840263,
+        "p_value": 0.59375,
+        "permutations": 1024,
+        "exact": true,
+        "p_holm": 1
+      }
+    },
+    {
+      "method": "iterative_rag",
+      "reference": "naive_rag",
+      "metric": "coverage",
+      "difference": {
+        "mean": 0.1,
+        "examples": 10,
+        "groups": 10,
+        "confidence": 0.95,
+        "lower": 0.0,
+        "upper": 0.3,
+        "replicates": 5000,
+        "degenerate": false,
+        "protocol": "question-cluster-percentile-v1"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 10,
+        "mean_difference": 0.1,
+        "p_value": 1.0,
+        "permutations": 1024,
+        "exact": true,
+        "p_holm": 1
+      }
+    },
+    {
+      "method": "iterative_rag",
+      "reference": "naive_rag",
+      "metric": "exact_match",
+      "difference": {
+        "mean": -0.2,
+        "examples": 10,
+        "groups": 10,
+        "confidence": 0.95,
+        "lower": -0.5,
+        "upper": 0.0,
+        "replicates": 5000,
+        "degenerate": false,
+        "protocol": "question-cluster-percentile-v1"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 10,
+        "mean_difference": -0.2,
+        "p_value": 0.5,
+        "permutations": 1024,
+        "exact": true,
+        "p_holm": 1
+      }
+    },
+    {
+      "method": "iterative_rag",
+      "reference": "naive_rag",
+      "metric": "token_f1",
+      "difference": {
+        "mean": -0.14372062695307694,
+        "examples": 10,
+        "groups": 10,
+        "confidence": 0.95,
+        "lower": -0.33886174060677643,
+        "upper": 0.018279569892473112,
+        "replicates": 5000,
+        "degenerate": false,
+        "protocol": "question-cluster-percentile-v1"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 10,
+        "mean_difference": -0.14372062695307694,
+        "p_value": 0.25,
+        "permutations": 1024,
+        "exact": true,
+        "p_holm": 1
+      }
+    },
+    {
+      "method": "premise_only",
+      "reference": "naive_rag",
+      "metric": "coverage",
+      "difference": {
+        "mean": -0.3,
+        "examples": 10,
+        "groups": 10,
+        "confidence": 0.95,
+        "lower": -0.6,
+        "upper": 0.0,
+        "replicates": 5000,
+        "degenerate": false,
+        "protocol": "question-cluster-percentile-v1"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 10,
+        "mean_difference": -0.3,
+        "p_value": 0.25,
+        "permutations": 1024,
+        "exact": true,
+        "p_holm": 1
+      }
+    },
+    {
+      "method": "premise_only",
+      "reference": "naive_rag",
+      "metric": "exact_match",
+      "difference": {
+        "mean": -0.2,
+        "examples": 10,
+        "groups": 10,
+        "confidence": 0.95,
+        "lower": -0.5,
+        "upper": 0.0,
+        "replicates": 5000,
+        "degenerate": false,
+        "protocol": "question-cluster-percentile-v1"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 10,
+        "mean_difference": -0.2,
+        "p_value": 0.5,
+        "permutations": 1024,
+        "exact": true,
+        "p_holm": 1
+      }
+    },
+    {
+      "method": "premise_only",
+      "reference": "naive_rag",
+      "metric": "token_f1",
+      "difference": {
+        "mean": -0.25515970515970515,
+        "examples": 10,
+        "groups": 10,
+        "confidence": 0.95,
+        "lower": -0.48243243243243245,
+        "upper": -0.05,
+        "replicates": 5000,
+        "degenerate": false,
+        "protocol": "question-cluster-percentile-v1"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 10,
+        "mean_difference": -0.25515970515970515,
+        "p_value": 0.125,
+        "permutations": 1024,
+        "exact": true,
+        "p_holm": 1
+      }
+    },
+    {
+      "method": "epistemic_search",
+      "reference": "naive_rag",
+      "metric": "coverage",
+      "difference": {
+        "mean": -0.4,
+        "examples": 10,
+        "groups": 10,
+        "confidence": 0.95,
+        "lower": -0.7,
+        "upper": -0.1,
+        "replicates": 5000,
+        "degenerate": false,
+        "protocol": "question-cluster-percentile-v1"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 10,
+        "mean_difference": -0.4,
+        "p_value": 0.125,
+        "permutations": 1024,
+        "exact": true,
+        "p_holm": 1
+      }
+    },
+    {
+      "method": "epistemic_search",
+      "reference": "naive_rag",
+      "metric": "exact_match",
+      "difference": {
+        "mean": -0.2,
+        "examples": 10,
+        "groups": 10,
+        "confidence": 0.95,
+        "lower": -0.5,
+        "upper": 0.0,
+        "replicates": 5000,
+        "degenerate": false,
+        "protocol": "question-cluster-percentile-v1"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 10,
+        "mean_difference": -0.2,
+        "p_value": 0.5,
+        "permutations": 1024,
+        "exact": true,
+        "p_holm": 1
+      }
+    },
+    {
+      "method": "epistemic_search",
+      "reference": "naive_rag",
+      "metric": "token_f1",
+      "difference": {
+        "mean": -0.2957657657657658,
+        "examples": 10,
+        "groups": 10,
+        "confidence": 0.95,
+        "lower": -0.5833333333333333,
+        "upper": -0.032432432432432434,
+        "replicates": 5000,
+        "degenerate": false,
+        "protocol": "question-cluster-percentile-v1"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 10,
+        "mean_difference": -0.2957657657657658,
+        "p_value": 0.125,
+        "permutations": 1024,
+        "exact": true,
+        "p_holm": 1
+      }
+    }
+  ],
+  "holm_family_size": 12,
+  "additional_api_calls": 0,
+  "additional_api_cost_usd": "0",
+  "limitations": [
+    "Exploratory saved-run analysis; no new independent model replicates.",
+    "Cluster bootstrap assumes independent question groups; variants stay together.",
+    "Percentile intervals may be degenerate or unstable; not simultaneous intervals.",
+    "Permutation tests assume jointly exchangeable method labels within each group.",
+    "Absolute two-sided test: exact through 16 groups, otherwise plus-one Monte Carlo.",
+    "Holm family is all available reference comparisons and metrics in this report only.",
+    "Unknown resources are counted, never zero-filled; observed totals may be incomplete.",
+    "Cost is recorded physical estimated spend; cache reuse affects cost and latency.",
+    "Dataset metrics are not pooled; failed labelled cases retain zero answer scores."
+  ]
+}

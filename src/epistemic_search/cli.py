@@ -25,9 +25,21 @@ from epistemic_search.formal import compare_formal
 from epistemic_search.models import QueryCase
 from epistemic_search.parity import compare
 from epistemic_search.selective import analyze_saved_run
+from epistemic_search.statistics import analyze_comparison
 from epistemic_search.tracing import configure_logging
 
 app = typer.Typer(no_args_is_help=True)
+
+
+@app.command("analyze-comparison")
+def comparison_statistics(config_path: Path) -> None:
+    """Bootstrap paired saved scores and summarize costs without model calls."""
+    try:
+        report = analyze_comparison(config_path)
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"Statistical analysis failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"Analyzed {len(report['runs'])} matched runs; additional API cost $0")
 
 
 @app.command("ablate")
