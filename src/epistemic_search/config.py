@@ -2,12 +2,26 @@
 
 from decimal import Decimal
 from pathlib import Path
-from typing import Annotated, Literal, Self
+from typing import Annotated, Any, Literal, Self
 
 import yaml
-from pydantic import AwareDatetime, Field, model_validator
+from pydantic import (
+    AwareDatetime,
+    Field,
+    SerializerFunctionWrapHandler,
+    model_serializer,
+    model_validator,
+)
 
-from epistemic_search.models import BudgetLimits, Count, Money, Schema, Text
+from epistemic_search.models import (
+    AcquisitionEstimate,
+    AcquisitionPolicy,
+    BudgetLimits,
+    Count,
+    Money,
+    Schema,
+    Text,
+)
 
 
 class ExperimentSpend(Schema):
@@ -108,6 +122,14 @@ class BeliefConfig(Schema):
 Method = Literal["closed_book", "naive_rag", "iterative_rag", "premise_only", "epistemic_search"]
 
 
+class ControllerConfig(Schema):
+    policy: AcquisitionPolicy = "importance"
+    default_estimate: AcquisitionEstimate = Field(default_factory=AcquisitionEstimate)
+    estimates: dict[Text, AcquisitionEstimate] = Field(default_factory=dict)
+    cost_unit: Literal["relative_work", "usd", "tokens"] = "relative_work"
+    estimate_provenance: Text = "uniform-uninformative-default-v1"
+
+
 class RunConfig(Schema):
     schema_version: Literal[1] = 1
     run_id: Text
@@ -119,6 +141,15 @@ class RunConfig(Schema):
     evaluation: EvaluationConfig | None = None
     decomposition: DecompositionConfig | None = None
     belief: BeliefConfig = Field(default_factory=BeliefConfig)
+    controller: ControllerConfig = Field(default_factory=ControllerConfig)
+
+    @model_serializer(mode="wrap")
+    def serialize_config(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        values: dict[str, Any] = handler(self)
+        # Preserve historical config hashes when the original policy is unchanged.
+        if self.controller == ControllerConfig():
+            values.pop("controller", None)
+        return values
 
 
 def load_config(path: Path) -> RunConfig:

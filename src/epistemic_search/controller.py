@@ -1,7 +1,17 @@
 """Deterministic premise-directed policy with explicit acquisition budgets."""
 
+import random
+
+from epistemic_search.config import ControllerConfig
 from epistemic_search.decomposition import ProofGraph
-from epistemic_search.models import BeliefStatus, BudgetState, ClaimBelief, Decision, Usage
+from epistemic_search.models import (
+    AcquisitionRanking,
+    BeliefStatus,
+    BudgetState,
+    ClaimBelief,
+    Decision,
+    Usage,
+)
 from epistemic_search.reasoning import SufficiencyResult, reason
 
 
@@ -53,7 +63,16 @@ def choose_action(
     *,
     expected_acquisition: Usage | None = None,
     frontier_limit: int = 1024,
+    settings: ControllerConfig | None = None,
+    seed: int = 0,
+    step: int = 0,
+    context_id: str = "",
 ) -> tuple[Decision, SufficiencyResult]:
+    settings = ControllerConfig.model_validate((settings or ControllerConfig()).model_dump())
+    if set(settings.estimates) - {c.id for c in graph.claims}:
+        raise ValueError("Acquisition estimates reference unknown claim IDs")
+    if seed < 0 or step < 0:
+        raise ValueError("Acquisition seed and step must be nonnegative")
     result = reason(graph, beliefs, frontier_limit=frontier_limit)
     if result.sufficient:
         return Decision(
@@ -97,10 +116,51 @@ def choose_action(
             blocking_claims=result.blockers,
             rationale="No unresolved acquisition target",
         ), result
-    target = min(candidates, key=lambda c: (-claims[c].importance, c))
+    candidates = sorted(candidates)
+    belief_by_id = {b.claim_id: b for b in beliefs}
+    uncertainties = {
+        c: belief_by_id[c].uncertainty if c in belief_by_id else 1.0 for c in candidates
+    }
+    criticality = {
+        c: sum(c in frontier for frontier in result.alternative_frontiers)
+        / len(result.alternative_frontiers)
+        for c in candidates
+    }
+    estimates = {c: settings.estimates.get(c, settings.default_estimate) for c in candidates}
+    rng = random.Random(f"{seed}:{context_id}:{step}")
+    scores = {}
+    for c in candidates:
+        if settings.policy == "random":
+            scores[c] = rng.random()
+        elif settings.policy == "uncertainty":
+            scores[c] = uncertainties[c]
+        elif settings.policy == "voi":
+            scores[c] = (
+                claims[c].importance
+                * uncertainties[c]
+                * criticality[c]
+                * estimates[c].retrievability
+                / estimates[c].cost
+            )
+        else:
+            scores[c] = claims[c].importance
+    target = min(candidates, key=lambda c: (-scores[c], c))
+    ranking = AcquisitionRanking(
+        policy=settings.policy,
+        seed=seed,
+        step=step,
+        context_id=context_id,
+        cost_unit=settings.cost_unit,
+        estimate_provenance=settings.estimate_provenance,
+        scores=scores,
+        estimates=estimates,
+        criticality=criticality,
+        uncertainty=uncertainties,
+    )
     return Decision(
         action="RESOLVE_CONFLICT" if conflicting else "SEARCH_MORE",
         target_claim_id=target,
         blocking_claims=result.blockers,
         rationale=f"Resolve {target} toward {result.required_stances[target].value}",
+        acquisition=ranking,
     ), result

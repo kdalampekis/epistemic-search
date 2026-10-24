@@ -138,6 +138,27 @@ class ClaimBelief(Schema):
     evidence_ids: list[Text] = Field(default_factory=list)
 
 
+AcquisitionPolicy = Literal["importance", "random", "uncertainty", "voi"]
+
+
+class AcquisitionEstimate(Schema):
+    retrievability: Score = 1
+    cost: Annotated[float, Field(gt=0, allow_inf_nan=False)] = 1
+
+
+class AcquisitionRanking(Schema):
+    policy: AcquisitionPolicy
+    seed: Count
+    step: Count
+    context_id: str
+    cost_unit: Literal["relative_work", "usd", "tokens"]
+    estimate_provenance: Text
+    scores: dict[str, Nonnegative]
+    estimates: dict[str, AcquisitionEstimate]
+    criticality: dict[str, Score]
+    uncertainty: dict[str, Score]
+
+
 class Decision(Schema):
     action: Literal["ANSWER", "SEARCH_MORE", "RESOLVE_CONFLICT", "ASK", "ABSTAIN"]
     target_claim_id: Text | None = None
@@ -146,6 +167,7 @@ class Decision(Schema):
     confidence: Score | None = Field(
         default=None, description="Uncalibrated score, not probability"
     )
+    acquisition: AcquisitionRanking | None = None
 
 
 class AgentEvent(Schema):

@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Current: **Phase 15 — Calibration**, with offline measurement/fit validation; real calibration results remain unavailable.
+are in `tests/test_providers.py`. Current: **Phase 16 — Cost-aware controller**, with four offline-tested acquisition policies. Real calibration results remain unavailable.
 
 ## 11. Naive RAG baseline
 
@@ -431,3 +431,16 @@ the same fixed candidates. Calibration/evaluation question groups must be
 disjoint. Outputs Brier, ECE and reliability bins with explicit missing-data
 counts. The bundled example is synthetic and makes no model-quality claim.
 See [Phase 15](docs/phases/PHASE_15.md) and [the protocol](docs/decisions/0009-calibration-protocol.md).
+
+## 22. Acquisition policies
+
+Set `controller.policy` to `importance` (default), `random`, `uncertainty` or
+`voi` for the full epistemic method. Policies share the same sufficiency and
+budget guards. VOI uses declared heuristic cost/retrievability estimates;
+its decision trace records all inputs and ranks.
+
+```sh
+uv run --locked epistemic-search evaluate configs/voi_fixture.yaml
+```
+
+See [Phase 16](docs/phases/PHASE_16.md) for tests and limitations.

@@ -19,8 +19,9 @@ Updated: 2026-10-23.
 | 12 — Baseline parity | Complete | [Implementation and audited pilot](PHASE_12.md) |
 | 13 — Abstention metrics | Complete | [Implementation and checks](PHASE_13.md) |
 | 14 — Contradiction experiments | Complete | [Implementation and checks](PHASE_14.md) |
-| 15 — Calibration | Complete locally (offline validation); push/CI gate pending | [Implementation and limits](PHASE_15.md) |
-| 16–25 | Not started | Follow the build specification sequentially |
+| 15 — Calibration | Complete (offline validation) | [Implementation and limits](PHASE_15.md) |
+| 16 — Cost-aware controller | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_16.md) |
+| 17–25 | Not started | Follow the build specification sequentially |
 
 Phases 0 (`a6bd037`), 1 (`e8c030d`), and 2 (`93565cc`) were pushed; hosted CI passed.
 Phase 3 (`03724e0`) was pushed with successful hosted CI. Naive/iterative baselines,
@@ -56,3 +57,7 @@ Phase 14 (`eb9f73f`) was pushed with successful hosted CI (`40063561539`).
 Phase 15 implements paired calibration measurement and fitting, validated only
 on explicit fixtures. Missing aligned real scores/labels preclude empirical
 calibration claims; the controller still uses uncalibrated heuristic beliefs.
+
+Phase 15 (`e6eec78`) was pushed with successful hosted CI (`40064049865`).
+Phase 16 adds four logged acquisition policies under shared constraints; the
+original default and historical config hashes remain intact. Validation is offline.

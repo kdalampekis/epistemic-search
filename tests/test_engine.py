@@ -8,7 +8,7 @@ import pytest
 from epistemic_search.config import RunConfig
 from epistemic_search.conflicts import inspect_conflicts
 from epistemic_search.engine import run_epistemic
-from epistemic_search.models import QueryCase, Source, Usage
+from epistemic_search.models import AcquisitionPolicy, QueryCase, Source, Usage
 from epistemic_search.providers import ModelRequest, ModelResponse, SearchResponse, SearchResult
 from epistemic_search.tokens import count_tokens
 
@@ -115,14 +115,22 @@ class ScenarioModel:
     "scenario,decision,search_calls",
     [("A", "ANSWER", 1), ("B", "ANSWER", 2), ("C", "ABSTAIN", 2), ("D", "ABSTAIN", 2)],
 )
+@pytest.mark.parametrize("policy", ["importance", "random", "uncertainty", "voi"])
 def test_required_mvp_scenarios(
-    tmp_path: Path, source: Source, scenario: str, decision: str, search_calls: int
+    tmp_path: Path,
+    source: Source,
+    scenario: str,
+    decision: str,
+    search_calls: int,
+    policy: AcquisitionPolicy,
 ) -> None:
     search, model = ScenarioSearch(scenario, source), ScenarioModel()
+    settings = config()
+    settings.controller.policy = policy
     result = asyncio.run(
         run_epistemic(
             QueryCase(id="q", question="Are both conditions met?"),
-            config(),
+            settings,
             search,
             model,
             tmp_path / "cache",
@@ -135,6 +143,10 @@ def test_required_mvp_scenarios(
     assert sum(e.usage.model_calls for e in result.trace) == len(model.calls)
     assert sum(e.usage.search_calls for e in result.trace) == search_calls
     assert result.state is not None and result.state.budget.used == result.usage
+    for item in result.trace:
+        if item.type == "DECISION" and item.payload.get("acquisition"):
+            selection = item.payload["acquisition"]
+            assert isinstance(selection, dict) and selection["policy"] == policy
     if scenario != "A":
         assert search.queries[1].startswith("Beta holds.")
     if scenario == "C":

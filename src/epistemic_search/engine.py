@@ -74,7 +74,12 @@ async def run_epistemic(
     state.beliefs = aggregate_beliefs(graph.claims, [], config.belief)
     try:
         _, initial = choose_action(
-            graph, state.beliefs, BudgetState(limits=config.budget, used=run.ledger.total())
+            graph,
+            state.beliefs,
+            BudgetState(limits=config.budget, used=run.ledger.total()),
+            settings=config.controller,
+            seed=config.seed,
+            context_id=case.id,
         )
     except ValueError as exc:
         return abstain(f"Reasoner could not produce an exact result: {exc}", error=True)
@@ -123,6 +128,10 @@ async def run_epistemic(
                 graph,
                 state.beliefs,
                 state.budget,
+                settings=config.controller,
+                seed=config.seed,
+                step=round_index,
+                context_id=case.id,
                 expected_acquisition=Usage(
                     search_calls=1,
                     documents=1,

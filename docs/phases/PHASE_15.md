@@ -1,7 +1,7 @@
 # Phase 15 — Calibration
 
-Status: **complete locally** (implementation and offline validation);
-commit/push and hosted CI gate pending. A real-model calibration comparison
+Status: **complete** (implementation and offline validation). Commit `e6eec78`
+pushed; CI `40064049865` passed. A real-model calibration comparison
 remains unavailable without aligned scores and independent labels.
 Phase 14 commit `eb9f73f` passed CI `40063561539` before work began.
 
