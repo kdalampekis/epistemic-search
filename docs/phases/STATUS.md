@@ -21,8 +21,9 @@ Updated: 2026-10-24.
 | 14 — Contradiction experiments | Complete | [Implementation and checks](PHASE_14.md) |
 | 15 — Calibration | Complete (offline validation) | [Implementation and limits](PHASE_15.md) |
 | 16 — Cost-aware controller | Complete | [Implementation and checks](PHASE_16.md) |
-| 17 — Controlled benchmark transformations | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_17.md) |
-| 18–25 | Not started | Follow the build specification sequentially |
+| 17 — Controlled benchmark transformations | Complete | [Implementation and checks](PHASE_17.md) |
+| 18 — Optional formal backend | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_18.md) |
+| 19–25 | Not started | Follow the build specification sequentially |
 
 Phases 0 (`a6bd037`), 1 (`e8c030d`), and 2 (`93565cc`) were pushed; hosted CI passed.
 Phase 3 (`03724e0`) was pushed with successful hosted CI. Naive/iterative baselines,
@@ -66,3 +67,7 @@ original default and historical config hashes remain intact. Validation is offli
 Phase 16 (`0fc1b65`) was pushed with successful hosted CI (`40064451187`).
 Phase 17 adds deterministic, grouped context interventions, preserved grading and
 explicit provenance. All validation is offline; semantic claims still need review.
+
+Phase 17 (`53e0056`) was pushed with successful hosted CI (`40083318221`).
+Phase 18 adds optional Boolean SMT and an instrumented generative/graph/SMT
+comparison. Classical and graph semantics remain explicit; validation is offline.

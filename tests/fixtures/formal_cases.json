@@ -1,0 +1,513 @@
+{
+  "fragment": "explicit-boolean-graph-v1",
+  "fixture_only": true,
+  "label_protocol": "Manually enumerated logical outcomes, separately for classical entailment and conservative graph propagation.",
+  "cases": [
+    {
+      "id": "and-supported",
+      "group_id": "and-supported",
+      "graph": {
+        "claims": [
+          {
+            "id": "a",
+            "text": "Requirement A holds.",
+            "normalized": null,
+            "importance": 1.0,
+            "required_for": [],
+            "polarity": "POSITIVE"
+          },
+          {
+            "id": "b",
+            "text": "Requirement B holds.",
+            "normalized": null,
+            "importance": 1.0,
+            "required_for": [],
+            "polarity": "POSITIVE"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "a",
+            "kind": "CLAIM",
+            "children": [],
+            "claim_id": "a"
+          },
+          {
+            "id": "b",
+            "kind": "CLAIM",
+            "children": [],
+            "claim_id": "b"
+          },
+          {
+            "id": "op",
+            "kind": "AND",
+            "children": [
+              "a",
+              "b"
+            ],
+            "claim_id": null
+          },
+          {
+            "id": "root",
+            "kind": "CONCLUSION",
+            "children": [
+              "op"
+            ],
+            "claim_id": null
+          }
+        ],
+        "conclusion_id": "root"
+      },
+      "beliefs": [
+        {
+          "claim_id": "a",
+          "status": "SUPPORTED",
+          "support_score": 0.0,
+          "contradiction_score": 0.0,
+          "uncertainty": 1.0,
+          "calibrated": false,
+          "evidence_ids": []
+        },
+        {
+          "claim_id": "b",
+          "status": "SUPPORTED",
+          "support_score": 0.0,
+          "contradiction_score": 0.0,
+          "uncertainty": 1.0,
+          "calibrated": false,
+          "evidence_ids": []
+        }
+      ],
+      "formalization_provenance": "Hand-authored Boolean fixture; no natural-language extraction.",
+      "expected_classical": "entailed",
+      "expected_graph": "SUPPORTED"
+    },
+    {
+      "id": "and-missing",
+      "group_id": "and-missing",
+      "graph": {
+        "claims": [
+          {
+            "id": "a",
+            "text": "Requirement A holds.",
+            "normalized": null,
+            "importance": 1.0,
+            "required_for": [],
+            "polarity": "POSITIVE"
+          },
+          {
+            "id": "b",
+            "text": "Requirement B holds.",
+            "normalized": null,
+            "importance": 1.0,
+            "required_for": [],
+            "polarity": "POSITIVE"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "a",
+            "kind": "CLAIM",
+            "children": [],
+            "claim_id": "a"
+          },
+          {
+            "id": "b",
+            "kind": "CLAIM",
+            "children": [],
+            "claim_id": "b"
+          },
+          {
+            "id": "op",
+            "kind": "AND",
+            "children": [
+              "a",
+              "b"
+            ],
+            "claim_id": null
+          },
+          {
+            "id": "root",
+            "kind": "CONCLUSION",
+            "children": [
+              "op"
+            ],
+            "claim_id": null
+          }
+        ],
+        "conclusion_id": "root"
+      },
+      "beliefs": [
+        {
+          "claim_id": "a",
+          "status": "SUPPORTED",
+          "support_score": 0.0,
+          "contradiction_score": 0.0,
+          "uncertainty": 1.0,
+          "calibrated": false,
+          "evidence_ids": []
+        }
+      ],
+      "formalization_provenance": "Hand-authored Boolean fixture; no natural-language extraction.",
+      "expected_classical": "undetermined",
+      "expected_graph": "UNKNOWN"
+    },
+    {
+      "id": "and-refuted",
+      "group_id": "and-refuted",
+      "graph": {
+        "claims": [
+          {
+            "id": "a",
+            "text": "Requirement A holds.",
+            "normalized": null,
+            "importance": 1.0,
+            "required_for": [],
+            "polarity": "POSITIVE"
+          },
+          {
+            "id": "b",
+            "text": "Requirement B holds.",
+            "normalized": null,
+            "importance": 1.0,
+            "required_for": [],
+            "polarity": "POSITIVE"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "a",
+            "kind": "CLAIM",
+            "children": [],
+            "claim_id": "a"
+          },
+          {
+            "id": "b",
+            "kind": "CLAIM",
+            "children": [],
+            "claim_id": "b"
+          },
+          {
+            "id": "op",
+            "kind": "AND",
+            "children": [
+              "a",
+              "b"
+            ],
+            "claim_id": null
+          },
+          {
+            "id": "root",
+            "kind": "CONCLUSION",
+            "children": [
+              "op"
+            ],
+            "claim_id": null
+          }
+        ],
+        "conclusion_id": "root"
+      },
+      "beliefs": [
+        {
+          "claim_id": "a",
+          "status": "CONTRADICTED",
+          "support_score": 0.0,
+          "contradiction_score": 0.0,
+          "uncertainty": 1.0,
+          "calibrated": false,
+          "evidence_ids": []
+        }
+      ],
+      "formalization_provenance": "Hand-authored Boolean fixture; no natural-language extraction.",
+      "expected_classical": "refuted",
+      "expected_graph": "CONTRADICTED"
+    },
+    {
+      "id": "not-unknown",
+      "group_id": "not-unknown",
+      "graph": {
+        "claims": [
+          {
+            "id": "a",
+            "text": "Requirement A holds.",
+            "normalized": null,
+            "importance": 1.0,
+            "required_for": [],
+            "polarity": "POSITIVE"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "a",
+            "kind": "CLAIM",
+            "children": [],
+            "claim_id": "a"
+          },
+          {
+            "id": "not",
+            "kind": "NOT",
+            "children": [
+              "a"
+            ],
+            "claim_id": null
+          },
+          {
+            "id": "root",
+            "kind": "CONCLUSION",
+            "children": [
+              "not"
+            ],
+            "claim_id": null
+          }
+        ],
+        "conclusion_id": "root"
+      },
+      "beliefs": [],
+      "formalization_provenance": "Hand-authored Boolean fixture; no natural-language extraction.",
+      "expected_classical": "undetermined",
+      "expected_graph": "UNKNOWN"
+    },
+    {
+      "id": "not-refuted",
+      "group_id": "not-refuted",
+      "graph": {
+        "claims": [
+          {
+            "id": "a",
+            "text": "Requirement A holds.",
+            "normalized": null,
+            "importance": 1.0,
+            "required_for": [],
+            "polarity": "POSITIVE"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "a",
+            "kind": "CLAIM",
+            "children": [],
+            "claim_id": "a"
+          },
+          {
+            "id": "not",
+            "kind": "NOT",
+            "children": [
+              "a"
+            ],
+            "claim_id": null
+          },
+          {
+            "id": "root",
+            "kind": "CONCLUSION",
+            "children": [
+              "not"
+            ],
+            "claim_id": null
+          }
+        ],
+        "conclusion_id": "root"
+      },
+      "beliefs": [
+        {
+          "claim_id": "a",
+          "status": "CONTRADICTED",
+          "support_score": 0.0,
+          "contradiction_score": 0.0,
+          "uncertainty": 1.0,
+          "calibrated": false,
+          "evidence_ids": []
+        }
+      ],
+      "formalization_provenance": "Hand-authored Boolean fixture; no natural-language extraction.",
+      "expected_classical": "entailed",
+      "expected_graph": "SUPPORTED"
+    },
+    {
+      "id": "excluded-middle",
+      "group_id": "excluded-middle",
+      "graph": {
+        "claims": [
+          {
+            "id": "a",
+            "text": "Requirement A holds.",
+            "normalized": null,
+            "importance": 1.0,
+            "required_for": [],
+            "polarity": "POSITIVE"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "a",
+            "kind": "CLAIM",
+            "children": [],
+            "claim_id": "a"
+          },
+          {
+            "id": "not",
+            "kind": "NOT",
+            "children": [
+              "a"
+            ],
+            "claim_id": null
+          },
+          {
+            "id": "op",
+            "kind": "OR",
+            "children": [
+              "a",
+              "not"
+            ],
+            "claim_id": null
+          },
+          {
+            "id": "root",
+            "kind": "CONCLUSION",
+            "children": [
+              "op"
+            ],
+            "claim_id": null
+          }
+        ],
+        "conclusion_id": "root"
+      },
+      "beliefs": [],
+      "formalization_provenance": "Hand-authored Boolean fixture; no natural-language extraction.",
+      "expected_classical": "entailed",
+      "expected_graph": "UNKNOWN"
+    },
+    {
+      "id": "impossible-conjunction",
+      "group_id": "impossible-conjunction",
+      "graph": {
+        "claims": [
+          {
+            "id": "a",
+            "text": "Requirement A holds.",
+            "normalized": null,
+            "importance": 1.0,
+            "required_for": [],
+            "polarity": "POSITIVE"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "a",
+            "kind": "CLAIM",
+            "children": [],
+            "claim_id": "a"
+          },
+          {
+            "id": "not",
+            "kind": "NOT",
+            "children": [
+              "a"
+            ],
+            "claim_id": null
+          },
+          {
+            "id": "op",
+            "kind": "AND",
+            "children": [
+              "a",
+              "not"
+            ],
+            "claim_id": null
+          },
+          {
+            "id": "root",
+            "kind": "CONCLUSION",
+            "children": [
+              "op"
+            ],
+            "claim_id": null
+          }
+        ],
+        "conclusion_id": "root"
+      },
+      "beliefs": [],
+      "formalization_provenance": "Hand-authored Boolean fixture; no natural-language extraction.",
+      "expected_classical": "refuted",
+      "expected_graph": "UNKNOWN"
+    },
+    {
+      "id": "irrelevant-conflict",
+      "group_id": "irrelevant-conflict",
+      "graph": {
+        "claims": [
+          {
+            "id": "a",
+            "text": "Requirement A holds.",
+            "normalized": null,
+            "importance": 1.0,
+            "required_for": [],
+            "polarity": "POSITIVE"
+          },
+          {
+            "id": "b",
+            "text": "Requirement B holds.",
+            "normalized": null,
+            "importance": 1.0,
+            "required_for": [],
+            "polarity": "POSITIVE"
+          }
+        ],
+        "nodes": [
+          {
+            "id": "a",
+            "kind": "CLAIM",
+            "children": [],
+            "claim_id": "a"
+          },
+          {
+            "id": "b",
+            "kind": "CLAIM",
+            "children": [],
+            "claim_id": "b"
+          },
+          {
+            "id": "op",
+            "kind": "OR",
+            "children": [
+              "a",
+              "b"
+            ],
+            "claim_id": null
+          },
+          {
+            "id": "root",
+            "kind": "CONCLUSION",
+            "children": [
+              "op"
+            ],
+            "claim_id": null
+          }
+        ],
+        "conclusion_id": "root"
+      },
+      "beliefs": [
+        {
+          "claim_id": "a",
+          "status": "SUPPORTED",
+          "support_score": 0.0,
+          "contradiction_score": 0.0,
+          "uncertainty": 1.0,
+          "calibrated": false,
+          "evidence_ids": []
+        },
+        {
+          "claim_id": "b",
+          "status": "MIXED",
+          "support_score": 0.0,
+          "contradiction_score": 0.0,
+          "uncertainty": 1.0,
+          "calibrated": false,
+          "evidence_ids": []
+        }
+      ],
+      "formalization_provenance": "Hand-authored Boolean fixture; no natural-language extraction.",
+      "expected_classical": "inconsistent",
+      "expected_graph": "SUPPORTED"
+    }
+  ]
+}

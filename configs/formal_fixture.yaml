@@ -1,0 +1,4 @@
+data_path: ../tests/fixtures/formal_cases.json
+run_config_path: formal_judge_fixture.yaml
+output_dir: ../artifacts/formal-fixture
+solver_timeout_ms: 1000

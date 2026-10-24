@@ -1,0 +1,10 @@
+[
+  "{\"verdict\": \"entailed\", \"rationale\": \"Scripted fixture oracle, not a real-model judgment.\"}",
+  "{\"verdict\": \"undetermined\", \"rationale\": \"Scripted fixture oracle, not a real-model judgment.\"}",
+  "{\"verdict\": \"refuted\", \"rationale\": \"Scripted fixture oracle, not a real-model judgment.\"}",
+  "{\"verdict\": \"undetermined\", \"rationale\": \"Scripted fixture oracle, not a real-model judgment.\"}",
+  "{\"verdict\": \"entailed\", \"rationale\": \"Scripted fixture oracle, not a real-model judgment.\"}",
+  "{\"verdict\": \"entailed\", \"rationale\": \"Scripted fixture oracle, not a real-model judgment.\"}",
+  "{\"verdict\": \"refuted\", \"rationale\": \"Scripted fixture oracle, not a real-model judgment.\"}",
+  "{\"verdict\": \"inconsistent\", \"rationale\": \"Scripted fixture oracle, not a real-model judgment.\"}"
+]

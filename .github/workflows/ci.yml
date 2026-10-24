@@ -16,6 +16,8 @@ jobs:
       - run: uv run --locked mypy src tests
       - run: uv run --locked pytest
       - run: uv run --locked --extra benchmarks pytest tests/test_benchmarks.py
+      - run: uv run --locked --extra formal pytest tests/test_formal.py
+      - run: uv run --locked --extra formal epistemic-search compare-formal configs/formal_fixture.yaml
       - run: uv run --locked epistemic-search validate-config configs/foundation.yaml
       - run: uv run --locked epistemic-search run-naive configs/naive_fixture.yaml tests/fixtures/query.json /tmp/naive-run.json
       - run: uv run --locked epistemic-search evaluate configs/evaluation_fixture.yaml

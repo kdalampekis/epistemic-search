@@ -20,12 +20,26 @@ from epistemic_search.dataset_setup import prepare_datasets
 from epistemic_search.decomposition import DecompositionResult, decompose
 from epistemic_search.evaluation import evaluate, manifest
 from epistemic_search.execution import configured_model, configured_spend, execute_case
+from epistemic_search.formal import compare_formal
 from epistemic_search.models import QueryCase
 from epistemic_search.parity import compare
 from epistemic_search.selective import analyze_saved_run
 from epistemic_search.tracing import configure_logging
 
 app = typer.Typer(no_args_is_help=True)
+
+
+@app.command("compare-formal")
+def formal_comparison(config_path: Path) -> None:
+    """Compare supplied Boolean graphs with SMT and a schema-validated model judge."""
+    try:
+        report = asyncio.run(compare_formal(config_path))
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"Formal comparison failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(json.dumps(report, indent=2))
+    if report["stop_reason"] or report["generative_errors"] or report["graph_errors"]:
+        raise typer.Exit(code=1)
 
 
 @app.callback()

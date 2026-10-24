@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Current: **Phase 17 — Controlled benchmark transformations**, with grouped, reproducible context interventions. Real calibration results remain unavailable.
+are in `tests/test_providers.py`. Current: **Phase 18 — Optional formal backend**, with a structured generative/graph/SMT comparison. Real calibration results remain unavailable.
 
 ## 11. Naive RAG baseline
 
@@ -459,3 +459,16 @@ answers and graders are retained. Keep all variants of one `group_id` in the sam
 split. The eight-example fixture uses scripted abstentions and makes no quality
 claim. See [Phase 17](docs/phases/PHASE_17.md) and
 [the intervention protocol](docs/decisions/0011-controlled-interventions.md).
+
+## 23. Optional Boolean SMT comparison
+
+```sh
+uv run --locked --extra formal epistemic-search compare-formal configs/formal_fixture.yaml
+```
+
+Compares a scripted generative judge, conservative proof graph and Z3 on eight
+explicit Boolean fixtures. Unknown atoms remain unconstrained; inconsistent
+assumptions never establish sufficiency. Classical and graph semantics differ
+on some cases, and the report retains those differences. This is an offline
+implementation check, not a model-quality result. See
+[Phase 18](docs/phases/PHASE_18.md) and [the formal protocol](docs/decisions/0012-optional-boolean-smt.md).

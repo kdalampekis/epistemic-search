@@ -1,6 +1,6 @@
 # Phase 17 — Controlled benchmark transformations
 
-Status: **complete locally**; commit/push and hosted CI gate pending.
+Status: **complete**; commit `53e0056`, hosted CI `40083318221` passed.
 Phase 16 commit `0fc1b65` passed CI `40064451187` before work began.
 
 ## Implementation and design
