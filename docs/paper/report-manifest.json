@@ -1,0 +1,33 @@
+{
+  "protocol": "result-bound-technical-report-v1",
+  "sources": {
+    "docs/paper/REPORT.template.md": "b03169d01e4bebbb01dd861a8713225bdd41193af6d1ab6cf5f040a7432960bb",
+    "docs/results/phase12_luna_pilot.json": "df6dfa57a8a5e873b927cf33afe35bf02a1780f60fbdf6a4a7039c340eeea61a",
+    "docs/paper/generated/hotpotqa/statistics.json": "bcc2fde0e4fc2c62209eed0f2902657b1ffa2b348861f11b875220892570ea0c",
+    "docs/paper/generated/2wikimultihopqa/statistics.json": "b59296e6e2c29800598735e0c5edc69a12296416a143193ca2234489669c1e4f",
+    "docs/paper/generated/confrag/statistics.json": "e93166ab42b4dbd8ffd38d9416b8cb1c801b1e2520de425685f32792e3001a32",
+    "docs/paper/generated/hotpotqa/results.md": "b97ca806b9a44ad078b2221db4cc9015285d008a89620a5f5b5fab3d21d9f916",
+    "docs/paper/generated/2wikimultihopqa/results.md": "c969b8b3406cfa57d50fa637b2d271277d403b697fcc264c1896e7ec27ccd8cc",
+    "docs/paper/generated/confrag/results.md": "d7e362cb90bd965a0300b2ed59a4dc98a0c696565b6319e9ed95c4620b6a0d0c",
+    "docs/results/phase14_conflict_pilot.json": "67e01fc84bc6a3143b5f1100f7ee6289e817cba4190d0336cde08aa029eac1dd",
+    "docs/results/phase21_failure_pilot.json": "90f5beb395992113f908013e3639e62d49ed3b7b2fe6a1bb997ce65381431406",
+    "docs/paper/generated/ablation-fixture/ablations.md": "4efb8755b63f03e2060b46db0b45f625ff5535bfd2b8add24850e9c6e07185d0",
+    "LITERATURE_MAP.md": "cf02a5a67aa9a345f0c24f01e6e850a18aeacc46e007cf1ed8fd1ab3ed00f70e",
+    "docs/paper/generated/datasets.md": "e556876e8a4fcd8bae88a625d8d4d78f48ed0477d4c5d9f7f4e1316c5678cb0f",
+    "docs/experiments/benchmark_setup.md": "0e4a6e9210fad8a9da04f518eb1b002d3b13a37aaf1ed2c0f3090987b7644820",
+    "docs/paper/generated/hotpotqa/quality.png": "45c6decfc16984cc7787267509bd8ab52be26a0f6e1dec4d7ec4bd7feda3cdba",
+    "docs/paper/generated/hotpotqa/paired.md": "55deb19f08697c45c6af8b1e3724ac892c82cc72c8fcc9e9d8328cb2eb7addcd",
+    "docs/paper/generated/2wikimultihopqa/paired.md": "d3c3bc502a3140eba89e6a5a231fa277ff4118ddf6b4aa417141a1278a8488e6",
+    "docs/paper/generated/inventory.json": "5e21487b2f632eba4820bc6821ccd25626bde786d3e0d5c5c39035dbeaa4c008",
+    "docs/paper/generated/hotpotqa/resources.md": "f18a67b9835dc43e765ec94eef6c422098cfd1b1eb3636841c43aedd101760d9",
+    "docs/paper/generated/2wikimultihopqa/resources.md": "c0c062a5f7168138f0c6764f21f599467ff563e92ede0f1f6affb816220e5bb3",
+    "docs/paper/generated/confrag/resources.md": "ddc4d21ffb662449c0e626eab8b6d9d6381060402ab9bf4ccd175f69207d6b2c",
+    "docs/paper/generated/ablation-fixture/interventions.json": "69f9e707289b1404543de93242e45f667ada3344bef9dc825a1fc4e0efb7fdd8",
+    "REPRODUCING.md": "77dfb9250b26dc038e5d13ad2930b0a515a4c56805af105b1265fd56ab7a8b9a"
+  },
+  "renderer_sha256": "ac4f9bdb9f33e48845de6362a088850a7fbe826c7175ced17d7cc274d2282c94",
+  "outputs": {
+    "REPORT.md": "262a0e930e52223786d3552c9dfc1811a2a7fa71324fdccd4e61cc441def75a2",
+    "REPORT.html": "ecee355ffd79ae3c524c679722866c2ddccec7355128ea65e0f96aa3c4111ac3"
+  }
+}

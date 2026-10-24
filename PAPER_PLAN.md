@@ -1,5 +1,10 @@
 # Paper Plan
 
+Delivered snapshot: [Phase 25 technical report](docs/paper/REPORT.md). The plan
+below is the original outline. The final title reflects the negative pilot; real
+ablation, calibration, formal-backend and stronger-model claims remain untested.
+This is a technical report, not a submitted superiority/novelty paper.
+
 ## Working title
 
 **Epistemic Search: Premise-Aware Active Retrieval with Belief States, Formal Sufficiency Checks, and Selective Answering**

@@ -1,0 +1,7 @@
+{
+  "renderer": "Chromium via Playwright",
+  "browser_version": "156.0.8078.47",
+  "source_html_sha256": "ecee355ffd79ae3c524c679722866c2ddccec7355128ea65e0f96aa3c4111ac3",
+  "pdf_sha256": "650356d68d6023641e1b703e2a6b1baddd1347c2183a8931db9c1c90b051d134",
+  "note": "Print export; timestamps/platforms can change PDF bytes."
+}

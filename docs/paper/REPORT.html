@@ -1,0 +1,532 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'"><title>Epistemic Search — Technical Report</title><style>body{font:16px/1.5 Georgia,serif;max-width:1000px;margin:3rem auto;padding:0 1.5rem;color:#17212b}h1,h2,h3{font-family:system-ui;line-height:1.2}h1{font-size:2rem}h2{margin-top:2rem}table{border-collapse:collapse;font:12px/1.35 system-ui;width:100%;margin:1rem 0}th,td{padding:6px;border-bottom:1px solid #bbb;text-align:left;overflow-wrap:anywhere}img{max-width:100%;height:auto}code,pre{font-size:12px;overflow-wrap:anywhere;white-space:pre-wrap}a{color:#155d72}thead{display:table-header-group}tr,img{break-inside:avoid}@page{size:A4;margin:16mm}@media print{body{font-size:10pt;margin:0;padding:0;max-width:none}h1{font-size:20pt}h2{font-size:14pt;break-after:avoid}h3{font-size:11pt;break-after:avoid}table{font-size:8pt}a{color:inherit;text-decoration:none}}</style></head><body><h1>Epistemic Search: An Inspectable Premise-Aware Retrieval System and a Small Negative Pilot</h1>
+<p>Technical report · October 2026 · Implementation and exploratory evaluation</p>
+<h2>Abstract</h2>
+<p>We implement retrieval control over an explicit premise graph, a provenance-backed
+evidence ledger and separate supported, contradicted, mixed and unknown states.
+A conservative reasoner identifies unresolved obligations; a bounded controller
+retrieves more evidence, attempts conflict resolution, answers or abstains. We
+compare the system with closed-book, fixed-retrieval, iterative-retrieval and
+premise-only baselines using the same model, reasoning setting, retriever and
+resource ceilings. On small saved HotpotQA and 2WikiMultiHopQA pilots, the full
+system does not establish an adjusted advantage over naive RAG and exhibits low
+answer coverage. ConfRAG diagnostics expose a missed conflict and extraction
+failures. These observations support a reproducible engineering artifact and a
+negative pilot report, not a claim of improved reliability, calibrated uncertainty
+or architectural novelty. All result tables are generated from saved scores;
+failed cases remain visible. Wider evaluation is deferred until semantic
+extraction and the experimental design have independent validation.</p>
+<h2>1. Motivation and contribution boundary</h2>
+<p>Relevance alone does not establish that the evidence needed for an answer has
+been acquired. We investigate an explicit representation of that gap: which
+premise remains unresolved, what evidence bears on it, and whether the next
+retrieval is worth its cost. The intended benefit is a better reliability and
+resource tradeoff. The present experiment does not establish that benefit.</p>
+<p>The delivered contributions are an instrumented implementation with mockable
+provider boundaries, matched baseline execution, transparent failure records and
+an offline reproduction package. We distinguish implemented capabilities from
+empirically validated claims. The local trace dashboard supports inspection; it
+is not the scientific contribution. The original proposal remains a record of
+hypotheses, rather than a description of demonstrated results.</p>
+<h2>2. Related work and overlap</h2>
+<p>Active and adaptive retrieval are established: <a href="https://arxiv.org/abs/2305.06983">FLARE</a>
+uses predicted continuation content to drive retrieval; <a href="https://arxiv.org/abs/2310.11511">Self-RAG</a>
+learns retrieval/reflection behavior; <a href="https://arxiv.org/abs/2403.14403">Adaptive-RAG</a>
+selects retrieval strategies using question complexity. Our simple iterative
+baseline is an internal control, not a faithful reproduction of these systems.</p>
+<p>The closest conceptual neighbors are <a href="https://arxiv.org/abs/2604.23783">S2G-RAG</a>,
+which uses explicit sufficiency/gap judgments and compact evidence, and
+<a href="https://arxiv.org/abs/2609.35773">Socrates-RAG</a>, which selects unresolved premises
+to discriminate competing answers under a finite search budget. Neither gap
+retrieval nor premise-directed inquiry is introduced by this project.</p>
+<p><a href="https://arxiv.org/abs/2602.14189">Abstention-Aware Scientific Reasoning</a> combines
+condition decomposition, evidence auditing and selective decisions.
+<a href="https://www.nature.com/articles/s41586-024-07421-0">Semantic Entropy</a> measures
+uncertainty over meanings; our heuristic evidence scores are not that estimator
+and are not calibrated probabilities. <a href="https://arxiv.org/abs/2305.12295">Logic-LM</a>
+and <a href="https://aclanthology.org/2023.emnlp-main.313/">LINC</a> already combine semantic
+translation with symbolic inference.</p>
+<p>Information-value ideas also overlap: <a href="https://aclanthology.org/2025.emnlp-main.365/">InfoGain-RAG</a>
+ranks and filters documents using information gain; <a href="https://arxiv.org/abs/2603.28444">ECR</a>
+proposes claim acquisition through expected entropy reduction; and
+<a href="https://arxiv.org/abs/2602.01672v3">DeepControl</a> controls evidence acquisition and
+granularity through information utility. The non-peer-reviewed
+<a href="https://www.preprints.org/manuscript/202607.1060">Evidence-Obligation PGR preprint</a>
+also describes an obligation ledger and warrant gate. These overlaps narrow our
+position to an implementation and evaluation snapshot. The targeted primary-source
+audit is documented in <a href="../../LITERATURE_MAP.md">the literature map</a>; it is not an
+exhaustive full-text review or evidence that the combined architecture is novel.</p>
+<h2>3. Method</h2>
+<p>The state contains a validated directed acyclic premise graph, evidence items,
+claim beliefs, a derivation/blocker trace and cumulative resource use. Structured
+model outputs must pass schemas. Extracted spans must occur in their cited source;
+source IDs, queries and evidence identifiers remain attached to the record.
+Duplicate evidence is compacted without discarding provenance.</p>
+<p>Support and contradiction are tracked separately. Missing evidence stays
+<code>UNKNOWN</code>; competing evidence can remain <code>MIXED</code>. Aggregation is heuristic and
+may mishandle source dependence or stance. Graph propagation supports conjunction,
+disjunction and negation, exposing minimal unresolved frontiers. A sufficient
+conclusion means derivability within the extracted model; an incomplete or wrong
+extraction can still produce a wrong real-world answer.</p>
+<p>The default controller prioritizes unresolved claims by importance, with explicit
+conflict-directed acquisition and hard resource checks. A later optional policy
+ranks targets using importance, uncertainty, frontier participation and declared
+retrievability/cost estimates. That score is neither calibrated expected utility
+nor an optimal policy. <strong>The real pilot used the earlier importance policy, not
+the later VOI implementation.</strong> An optional Boolean SMT backend applies only to
+explicit structured inputs. It is not the backend used in the open-domain pilot;
+its classical semantics can differ from conservative graph propagation.</p>
+<p>The answer generator receives compact evidence after the control decision. When
+required information remains unresolved or acquisition is unavailable, the system
+can abstain and expose blockers. The broader design includes asking for user
+information, but this pilot does not evaluate an interactive clarification policy.</p>
+<h2>4. Experimental setup</h2>
+<p>The primary model is <code>gpt-6-luna</code> with
+<code>medium</code> reasoning throughout
+all compared methods. The Responses API adapter records usage and latency and
+validates structured responses. Model aliases are recorded identifiers, not
+immutable weight snapshots. No Astra run or Sol robustness result is included.</p>
+<p>The main populations are
+10
+HotpotQA questions,
+10
+2WikiMultiHopQA questions and
+2
+ConfRAG questions. Seeded selection precedes outcome inspection. Earlier tiny
+smokes overlap the comparison subsets and are not independent replication.
+Dataset revisions, per-question retrieval scope and grader versions appear in
+<a href="generated/datasets.md">the generated population table</a> and
+<a href="../experiments/benchmark_setup.md">dataset acquisition instructions</a>.</p>
+<p>Every method receives the same per-case ceilings and lexical retriever over the
+provided question-specific document pool. For the HotpotQA configuration, these
+include 3
+search calls, 24
+model calls, 100000
+input tokens and 32768
+output tokens. These are matched upper bounds, not matched realized work. Full
+resolved dataset-specific settings are retained in the generated statistics.
+Retrieval uses provided contexts, not open-web search or a production ranker.</p>
+<p>The five methods are closed-book, naive top-k RAG, relevance-oriented iterative
+RAG, premise-directed retrieval without belief/formal control, and full Epistemic
+Search. All use the same answer grader. Gold annotations remain evaluator-only.
+Errors and unanswered labelled examples score zero for answer metrics; coverage
+uses all planned cases. Selective EM risk conditions on answered labelled cases
+and does not assess whether an abstention was justified. ConfRAG has no single
+canonical-answer EM/F1 in our protocol. Its native structured evaluation is not
+reproduced. See <a href="https://aclanthology.org/2026.acl-long.11/">the ConfRAG paper</a>.</p>
+<p>Inference reuses the saved outputs: question-cluster percentile bootstrap
+intervals, paired sign-flip tests and Holm correction across available method/
+metric comparisons <strong>within each dataset report</strong>. Intervals are marginal, not
+simultaneous, and can be unstable or degenerate at these sample sizes. The analysis
+is exploratory; it supplies no new independent model generations.</p>
+<h2>5. Main results</h2>
+<h3>HotpotQA</h3>
+<p>hotpotqa — saved model pilot. NA means unavailable; errors and abstentions retained. No pooled dataset score.</p>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>n</th>
+<th>EM</th>
+<th>F1</th>
+<th>coverage</th>
+<th>selective_EM_risk</th>
+<th>errors</th>
+<th>budget_stops</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>closed_book</td>
+<td>10</td>
+<td>0.3</td>
+<td>0.536692</td>
+<td>0.9</td>
+<td>0.666667</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>naive_rag</td>
+<td>10</td>
+<td>0.3</td>
+<td>0.462432</td>
+<td>0.6</td>
+<td>0.5</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>iterative_rag</td>
+<td>10</td>
+<td>0.1</td>
+<td>0.318712</td>
+<td>0.7</td>
+<td>0.857143</td>
+<td>0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>premise_only</td>
+<td>10</td>
+<td>0.1</td>
+<td>0.207273</td>
+<td>0.3</td>
+<td>0.666667</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>epistemic_search</td>
+<td>10</td>
+<td>0.1</td>
+<td>0.166667</td>
+<td>0.2</td>
+<td>0.5</td>
+<td>2</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><img src="generated/hotpotqa/quality.png" alt="HotpotQA coverage and F1 with marginal cluster intervals" /></p>
+<h3>2WikiMultiHopQA</h3>
+<p>2wikimultihopqa — saved model pilot. NA means unavailable; errors and abstentions retained. No pooled dataset score.</p>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>n</th>
+<th>EM</th>
+<th>F1</th>
+<th>coverage</th>
+<th>selective_EM_risk</th>
+<th>errors</th>
+<th>budget_stops</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>closed_book</td>
+<td>10</td>
+<td>0.5</td>
+<td>0.774742</td>
+<td>1</td>
+<td>0.5</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>naive_rag</td>
+<td>10</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>NA</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>iterative_rag</td>
+<td>10</td>
+<td>0</td>
+<td>0.225861</td>
+<td>0.7</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>premise_only</td>
+<td>10</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>NA</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>epistemic_search</td>
+<td>10</td>
+<td>0</td>
+<td>0.06</td>
+<td>0.1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>The full method does not establish a Holm-adjusted advantage over naive RAG on
+these pilots. Its HotpotQA coverage and F1 are lower in the observed sample;
+2Wiki results are also weak. Closed-book is strongest on the observed 2Wiki sample,
+which cautions against attributing performance to retrieval architecture alone.
+The adjusted closed-book comparison in that dataset is an exploratory observation,
+not evidence of general closed-book superiority. All paired differences, intervals,
+raw and adjusted p-values remain available for
+<a href="generated/hotpotqa/paired.md">HotpotQA</a> and
+<a href="generated/2wikimultihopqa/paired.md">2Wiki</a>. Bootstrap intervals and discrete paired
+tests can disagree on small samples; neither result is selectively hidden.</p>
+<h3>ConfRAG and failure inspection</h3>
+<p>confrag — saved model pilot. NA means unavailable; errors and abstentions retained. No pooled dataset score.</p>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>n</th>
+<th>EM</th>
+<th>F1</th>
+<th>coverage</th>
+<th>selective_EM_risk</th>
+<th>errors</th>
+<th>budget_stops</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>closed_book</td>
+<td>2</td>
+<td>NA</td>
+<td>NA</td>
+<td>1</td>
+<td>NA</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>naive_rag</td>
+<td>2</td>
+<td>NA</td>
+<td>NA</td>
+<td>0.5</td>
+<td>NA</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>iterative_rag</td>
+<td>2</td>
+<td>NA</td>
+<td>NA</td>
+<td>0.5</td>
+<td>NA</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>premise_only</td>
+<td>2</td>
+<td>NA</td>
+<td>NA</td>
+<td>0.5</td>
+<td>NA</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>epistemic_search</td>
+<td>2</td>
+<td>NA</td>
+<td>NA</td>
+<td>0.5</td>
+<td>NA</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>The saved full-system conflict diagnostic records
+1
+false negative and
+1
+unknown detector output. Retrieved context did not expose both opposing source
+clusters in the missed case. That identifies a pipeline limitation, without
+isolating whether acquisition or downstream interpretation is the primary cause.
+There is no independent safety adjudication; the unsafe-answer rate remains
+unavailable. Low coverage alone cannot establish safe abstention.</p>
+<p>Across the main saved pilot, the failure inventory contains
+110 method-cases:
+14 reference matches,
+31 answer mismatches,
+5 execution errors,
+47 abstentions,
+7 budget stops and
+6 ungraded answers.
+Automatic categories locate observable stages or output symptoms, not verified
+root causes. 36
+hypotheses need review; there are
+0 manual judgments.
+Examples are selected by a seeded hash within each observed outcome, not by
+choosing attractive successes. Full populations and selection decisions remain in
+<a href="generated/inventory.json">the inventory</a>.</p>
+<h2>6. Resource accounting, calibration and ablations</h2>
+<p>The cumulative recorded project API estimate is
+$0.067952575, including
+the smokes. The ledger records
+278 physical generation calls,
+556 HTTP API calls including input-count
+preflights, and 177 local output reuses.
+Exact reusable outputs incur logical tokens/calls but no new physical API charge.
+Reported physical spend and latency therefore cannot be treated as uncached
+method-efficiency measurements. Costs use recorded configured rates and observed
+usage, not a provider invoice or a claim about current pricing.</p>
+<p>Per-method input/output/reasoning/cache tokens, model/search/API calls, context/
+retrieved tokens, latency and known/unknown cost distributions are available for
+<a href="generated/hotpotqa/resources.md">HotpotQA</a>,
+<a href="generated/2wikimultihopqa/resources.md">2Wiki</a> and
+<a href="generated/confrag/resources.md">ConfRAG</a>. No Pareto improvement is established.
+The project cap is $50
+total, with $5
+inside that cap reserved for a later stronger-model subset. This report spends
+none of that reserve.</p>
+<p>Calibration measurement and fitting exist and are checked on synthetic fixtures.
+Aligned real confidence/outcome data are absent, so there is no real Brier/ECE
+claim and no valid full risk-coverage curve or AURC for this pilot. Semantic entropy
+was not measured. The absence of those measurements is not filled with heuristic
+probabilities or interpolated answers for abstained cases.</p>
+<p>ablation-fixture — SCRIPTED FIXTURE (not model quality); named switch disabled. NA means unavailable; errors and abstentions retained. No pooled dataset score.</p>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>n</th>
+<th>EM</th>
+<th>F1</th>
+<th>coverage</th>
+<th>selective_EM_risk</th>
+<th>errors</th>
+<th>budget_stops</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reference</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>use_premise_graph</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>use_belief_state</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>use_formal_sufficiency</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>use_conflict_resolution</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>use_cost_aware_controller</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>allow_abstention</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>compact_evidence</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>These are scripted implementation checks on a tiny fixture. They cannot identify
+causal quality effects; some switches are inactive on that case. Removing premise
+graph or belief prerequisites also removes dependent control, explicitly recorded
+in <a href="generated/ablation-fixture/interventions.json">intervention metadata</a>. The
+fixture's raw context can be shorter than its compact evidence representation;
+compaction is not assumed to save tokens universally. Controlled transformations
+and generative/graph/SMT comparisons are also fixture-validated capabilities,
+not evidence of improved real-model robustness. A generic-query versus targeted-
+query real ablation remains untested.</p>
+<h2>7. Limitations and ethical scope</h2>
+<p>Premise extraction can omit or misstate answer-critical conditions. Exact-span
+validation catches some extraction errors but does not establish correct stance.
+Source credibility, freshness and dependence remain unresolved modeling problems;
+multiple matching sources need not be independent evidence. A corpus can omit a
+necessary fact, and a valid graph cannot establish open-world completeness.
+Classical SMT and conservative four-state propagation answer different questions;
+formalization brittleness remains upstream of any exact derivation.</p>
+<p>The small selected samples, one primary model, reuse across nested smokes, provided
+contexts and cache-dependent timing limit generalization. Benchmarks contain
+annotation and alias imperfections; reference matching is not a complete test of
+reasoning or factual truth. No independent answerability/safety judgments support
+a reliability claim, and no real ablation or stronger-model experiment isolates
+the source of the weak results. Future repairs must use a separate development
+split rather than optimize on these inspected evaluation cases.</p>
+<p>The system is a research artifact, not legal or medical advice. Provenance is
+preserved, uncertainty is not fabricated, and abstention is an epistemic decision
+rather than a content-policy refusal. Source-authority bias and exclusion of
+minority evidence require scrutiny. Raw traces contain benchmark excerpts; their
+upstream attribution and licensing conditions still apply. The archive remains
+local; no paper, repository or dataset was publicly submitted by this workflow.</p>
+<h2>8. Reproducibility and next research decision</h2>
+<p>The package contains code, locked dependencies, configs/seeds, prompt construction,
+model metadata, input hashes and complete saved run manifests/traces. A fresh
+checkout executes fixture checks without an API key. A separate extracted archive
+reproduces the saved numerical tables and statistical comparisons exactly. Details
+and commands are in <a href="../../REPRODUCING.md">REPRODUCING.md</a>. This report is rendered
+from a prose template and checked result inclusions; its source/output hashes are
+recorded alongside it. Numbers are never manually transcribed into result tables.</p>
+<p>The appropriate next study is independent semantic review and a preregistered,
+small development-only intervention addressing the observed extraction/acquisition
+failure modes. An informative matched pilot should precede any scaling. Only
+stable findings would justify the reserved Sol subset, with the same settings
+across methods and a reported cost estimate before a run above the project
+threshold. No additional implementation phase or paid benchmark is automatically
+scheduled here.</p>
+<p>This report documents a completed implementation roadmap with unresolved research
+hypotheses. It is suitable for technical inspection and a candid research
+portfolio; a submission claiming algorithmic novelty or benchmark superiority
+would require substantially stronger independent evidence.</p>
+</body></html>

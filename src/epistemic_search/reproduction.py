@@ -24,6 +24,7 @@ SOURCE_SUFFIXES = {
     ".toml",
     ".lock",
     ".css",
+    ".html",
     ".js",
     ".csv",
     ".tex",

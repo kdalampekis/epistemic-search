@@ -1,5 +1,21 @@
 # Perplexity Fellowship Positioning
 
+## Delivered project narrative (Phase 25)
+
+I built and evaluated an inspectable premise-aware retrieval prototype with
+matched baselines, strict cost instrumentation and an offline reproduction
+package. The small real-model pilot did not establish an advantage; I retained
+its extraction failures, low coverage and missed conflict, and narrowed novelty
+claims after checking close prior work. The result is a technical report and
+trace dashboard showing what worked as software and what remains unvalidated
+scientifically. My next research question is how to improve semantic extraction
+and acquisition without tuning on the inspected evaluation cases.
+
+Use the [technical report](docs/paper/REPORT.md) and generated artifacts as the
+current evidence. The demo stories and desired metrics below are original goals,
+not demonstrated real-model wins. No application or public submission has been sent.
+
+
 ## 1. Why this project fits
 
 Perplexity Research publicly identifies **search, reasoning, agents, and systems** as core areas.

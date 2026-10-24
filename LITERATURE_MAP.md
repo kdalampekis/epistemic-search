@@ -1,8 +1,10 @@
 # Literature Map and Novelty Guardrails
 
-**Snapshot date:** 2026-10-23
+**Snapshot date:** 2026-10-24 (Phase 25 targeted verification)
 
 This is a working novelty map, not an exhaustive literature review. Update it before submission.
+The Phase 25 audit at the end supersedes the original differentiation: neither
+component novelty nor priority of the joint architecture is established.
 
 ## 1. Active / adaptive retrieval
 
@@ -133,7 +135,11 @@ Important lesson:
 - semantic extraction can still be wrong.
 
 ### LINC
-Add current canonical citation before submission.
+Olausson et al., EMNLP 2023.
+https://aclanthology.org/2023.emnlp-main.313/
+
+The primary abstract describes semantic parsing to first-order logic followed by
+an external prover. Canonical title and authors verified during Phase 25.
 
 Relation:
 - another language-to-formal-inference line of work.
@@ -276,3 +282,49 @@ Queries:
 - active information gathering LLM
 - formal reasoning RAG
 - evidence sufficiency retrieval
+
+## 12. Phase 25 targeted overlap audit
+
+Primary landing pages/abstracts checked on 2026-10-24 for FLARE, Self-RAG,
+Adaptive-RAG, S2G-RAG, Socrates-RAG, Abstention-Aware Scientific Reasoning,
+Logic-LM, LINC, Semantic Entropy, InfoGain-RAG and ConfRAG. This verifies the
+bibliographic entries and high-level overlap used in the report, not every claim
+in every paper. No exhaustive systematic review or prior-art absence is claimed.
+Searches additionally covered epistemic-policy/belief-state RAG, evidence
+obligations and value-of-information retrieval on primary research sources.
+
+### Entropic Claim Resolution (ECR)
+
+Di Gioia, 2026, preprint: https://arxiv.org/abs/2603.28444.
+The abstract describes claim selection through expected entropy reduction over
+answer hypotheses and an epistemic-sufficiency stopping rule. This directly
+narrows any claim that uncertainty-driven, discriminative evidence acquisition or
+value-of-information stopping is new. We do not reproduce its empirical claims.
+
+### DeepControl
+
+Xiong et al., 2026, current v3 title: *Adaptive Information Control for
+Search-Augmented LLM Reasoning*: https://arxiv.org/abs/2602.01672v3.
+The abstract describes state-dependent marginal evidence utility and control of
+retrieval continuation and evidence granularity. It overlaps with the acquisition
+cost/context-efficiency motivation; our current controller is a hand-coded
+heuristic and has no learned-policy superiority result.
+
+### Evidence-Obligation Pool-Gated Retrieval
+
+Kim, 2026, explicitly non-peer-reviewed preprint:
+https://www.preprints.org/manuscript/202607.1060.
+The abstract describes a warrant judge and a turn-scoped evidence-obligation
+ledger with explicit lifecycle states. Evidence obligations, ledgers and stopping
+conditions cannot be presented as uniquely introduced here.
+
+### Revised contribution boundary
+
+The delivered work is an inspectable implementation, matched small pilot,
+negative findings and reproducibility tooling. Component novelty, architectural
+priority and a superior reliability/efficiency frontier are **not established**.
+Even the joint architecture should be treated as an integration under evaluation,
+not a first-of-its-kind claim. Calibrated beliefs, real formal-backend gains,
+real ablation effects and stronger-model transfer remain unvalidated. A further
+submission would require both independent experiments and a full-text comparison
+against the closest systems. This narrows the original working differentiation.

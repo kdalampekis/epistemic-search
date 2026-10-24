@@ -1,6 +1,6 @@
 # Phase 24 — Reproduction package
 
-Status: **complete locally**; commit/push and hosted CI gate pending.
+Status: **complete**, pushed as `949dad1`; hosted CI `40128999926` passed.
 Phase 23 commit `3a82b3a` passed CI `40128622872` before work began.
 
 ## Implementation and decisions
@@ -39,3 +39,8 @@ creation is not publication or an independent scientific replication.
 Additional API spend **$0**; cumulative remains **$0.067952575**.
 
 After push and successful CI: **Phase 25 — Final technical report / paper**.
+
+Clean archive: `artifacts/epistemic-search-reproduction-phase24.zip`, SHA-256
+`a35b1de5cbf280ed2954ea694942697facff9a69acc1a8fdf673ef521fd8719e`.
+Verified source commit `949dad17b084ded5a2f0f71d21f0cf1ac7b3a01d`, 477 files, 23 runs,
+working tree clean. A later archive may include the Phase 25 report as well.

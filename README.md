@@ -4,8 +4,9 @@
 
 **Repository name:** `epistemic-search`
 
-**Working paper title:**  
-**Epistemic Search: Premise-Aware Active Retrieval with Belief States, Formal Sufficiency Checks, and Selective Answering**
+**Technical report:**
+
+**Epistemic Search: An Inspectable Premise-Aware Retrieval System and a Small Negative Pilot**
 
 ## 1. Research thesis
 
@@ -75,7 +76,7 @@ Evidence ledger
   ├── UNKNOWN
   └── IRRELEVANT
   ↓
-Probabilistic / calibrated belief state
+Heuristic belief state (uncalibrated)
   ↓
 Formal sufficiency checker
   ↓
@@ -297,7 +298,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Current: **Phase 24 — Reproduction package**, with offline replay and a checksummed source/results archive. Real calibration results remain unavailable.
+are in `tests/test_providers.py`. Current: **Phase 25 — Final technical report**, with the implementation roadmap delivered and research claims explicitly bounded. Real calibration results remain unavailable.
 
 ## 11. Naive RAG baseline
 
@@ -549,3 +550,18 @@ separate paid-experiment boundary. The local `reproduction-bundle` and
 `verify-reproduction` commands export and verify source plus saved runs without
 credentials, caches or spending databases. Source-only clones can reproduce the
 fixtures; the local archive supplies raw pilot traces for exact table reanalysis.
+
+## 30. Technical report and evidence boundary
+
+Read the [technical report](docs/paper/REPORT.md), [printable HTML](docs/paper/REPORT.html)
+or [PDF](docs/paper/REPORT.pdf). It follows the paper plan, embeds generated result
+tables and records the negative pilot. No improvement in reliability/efficiency,
+real calibration, stronger-model transfer or architectural novelty is established.
+The literature audit adds close overlap with ECR, DeepControl and obligation-ledger
+work. The next research step is independent semantic review and a small separately
+specified development study; no larger benchmark is automatically scheduled.
+
+```sh
+uv run --locked --extra paper python scripts/render_report.py
+uv run --locked --extra paper python scripts/render_report.py --check
+```

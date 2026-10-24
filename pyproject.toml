@@ -19,7 +19,7 @@ dependencies = [
 epistemic-search = "epistemic_search.cli:app"
 
 [project.optional-dependencies]
-paper = ["matplotlib>=3.10,<4"]
+paper = ["matplotlib>=3.10,<4", "markdown-it-py>=4,<5"]
 benchmarks = [
     "pyarrow>=26.0.0",
 ]

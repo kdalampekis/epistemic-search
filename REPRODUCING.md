@@ -96,3 +96,17 @@ See [budget policy](docs/experiments/research_budget.md).
 Saved-output reproduction confirms arithmetic and provenance; it does not supply
 independent model replications, semantic annotation, calibrated scores or evidence
 of scientific superiority.
+
+## 6. Regenerate the technical report
+
+```sh
+uv run --locked --extra paper python scripts/render_report.py
+uv run --locked --extra paper python scripts/render_report.py --check
+```
+
+The prose template includes result tables and scalar values directly from checked
+artifacts. The renderer verifies local links and records source/output hashes.
+Open `docs/paper/REPORT.html` and print to PDF with CSS page size enabled to
+recreate a print copy. The committed PDF was exported with installed Chromium;
+`pdf-manifest.json` binds that PDF to the rendered HTML and browser version. PDF
+timestamps can vary, so numeric/HTML checks are the portable reproduction target.

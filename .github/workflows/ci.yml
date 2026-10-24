@@ -36,6 +36,7 @@ jobs:
       - run: uv run --locked epistemic-search analyze-comparison configs/statistics_fixture.yaml
       - run: uv run --locked --extra paper pytest tests/test_paper_artifacts.py
       - run: uv run --locked --extra paper epistemic-search paper-artifacts configs/paper_fixture.yaml
+      - run: uv run --locked --extra paper python scripts/render_report.py --check
       - run: uv build
   offline-reproduction:
     runs-on: ubuntu-latest
