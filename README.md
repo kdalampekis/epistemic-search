@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Current: **Phase 18 — Optional formal backend**, with a structured generative/graph/SMT comparison. Real calibration results remain unavailable.
+are in `tests/test_providers.py`. Current: **Phase 19 — Ablation runner**, with seven explicit interventions and matched result tables. Real calibration results remain unavailable.
 
 ## 11. Naive RAG baseline
 
@@ -472,3 +472,17 @@ assumptions never establish sufficiency. Classical and graph semantics differ
 on some cases, and the report retains those differences. This is an offline
 implementation check, not a model-quality result. See
 [Phase 18](docs/phases/PHASE_18.md) and [the formal protocol](docs/decisions/0012-optional-boolean-smt.md).
+
+## 24. Ablation comparisons
+
+```sh
+uv run --locked epistemic-search ablate configs/ablation_fixture.yaml
+```
+
+Runs a VOI-enabled reference and seven single-switch variants, with matched
+model/effort, dataset, grader, retriever and ceilings. Generates JSON summaries
+and CSV/Markdown tables; all fixture calls are offline. Removing graph or belief
+prerequisites also removes dependent control, explicitly documented in each
+manifest. Hard budgets remain active even in the forced-answer intervention.
+See [Phase 19](docs/phases/PHASE_19.md) and
+[the switch semantics](docs/decisions/0013-ablation-semantics.md).

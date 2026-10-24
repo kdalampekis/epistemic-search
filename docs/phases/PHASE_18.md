@@ -1,6 +1,6 @@
 # Phase 18 — Optional formal backend
 
-Status: **complete locally**; commit/push and hosted CI gate pending.
+Status: **complete**; commit `581cf0b`, hosted CI `40083718154` passed.
 Phase 17 commit `53e0056` passed CI `40083318221` before work began.
 
 ## Implementation and design

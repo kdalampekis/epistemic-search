@@ -1,0 +1,10 @@
+run_config_path: ablation_run_fixture.yaml
+output_dir: ../artifacts/ablation-fixture
+switches:
+- use_premise_graph
+- use_belief_state
+- use_formal_sufficiency
+- use_conflict_resolution
+- use_cost_aware_controller
+- allow_abstention
+- compact_evidence

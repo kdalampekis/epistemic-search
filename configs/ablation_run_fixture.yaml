@@ -1,0 +1,28 @@
+schema_version: 1
+run_id: ablation-fixture-smoke
+method: epistemic_search
+seed: 42
+budget:
+  max_search_calls: 3
+  max_documents: 6
+  max_retrieved_tokens: 50000
+  max_llm_calls: 16
+  max_total_llm_input_tokens: 100000
+  max_total_llm_output_tokens: 16000
+  max_latency_seconds: 180
+rag:
+  k: 1
+  max_rounds: 3
+  corpus_path: ../tests/fixtures/epistemic_corpus.json
+  backend: fixture
+  responses_path: ../tests/fixtures/ablation_responses.json
+  max_output_tokens: 1024
+decomposition:
+  cache_dir: ../artifacts/epistemic-cache
+evaluation:
+  dataset_path: ../tests/fixtures/epistemic_benchmark.jsonl
+  output_dir: ../artifacts/parity-fixture
+  dataset_name: epistemic-synthetic-smoke-only
+  split: dev
+controller:
+  policy: voi

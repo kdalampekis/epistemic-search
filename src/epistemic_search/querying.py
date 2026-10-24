@@ -30,9 +30,14 @@ class TargetedQuery(Schema):
     event: AgentEvent
 
 
-def generate_query(context: QueryContext, *, timestamp: datetime | None = None) -> TargetedQuery:
+def generate_query(
+    context: QueryContext, *, timestamp: datetime | None = None, resolve_conflicts: bool = True
+) -> TargetedQuery:
     relevant = [item for item in context.evidence if item.claim_id == context.target.id]
-    conflict = context.conflict or {e.stance for e in relevant} >= {"SUPPORT", "CONTRADICT"}
+    conflict = resolve_conflicts and (
+        context.conflict or {e.stance for e in relevant} >= {"SUPPORT", "CONTRADICT"}
+    )
+    version = QUERY_VERSION if resolve_conflicts else "targeted-query-no-conflict-v1"
     parts = [context.target.text, context.original_question, *context.entities]
     if context.temporal_scope is not None:
         parts.append(context.temporal_scope)
@@ -51,7 +56,7 @@ def generate_query(context: QueryContext, *, timestamp: datetime | None = None) 
         "temporal_scope": context.temporal_scope,
         "evidence_ids": sorted(e.id for e in relevant),
         "conflict": conflict,
-        "query_version": QUERY_VERSION,
+        "query_version": version,
     }
     event = AgentEvent.model_validate(
         {
@@ -64,4 +69,4 @@ def generate_query(context: QueryContext, *, timestamp: datetime | None = None) 
             "payload": payload,
         }
     )
-    return TargetedQuery(text=text, target_claim_id=context.target.id, event=event)
+    return TargetedQuery(text=text, target_claim_id=context.target.id, version=version, event=event)

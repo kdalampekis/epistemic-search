@@ -14,7 +14,7 @@ from epistemic_search.adapters import (
 )
 from epistemic_search.baseline import RunResult
 from epistemic_search.comparators import run_comparator, run_guarded_baseline
-from epistemic_search.config import RagConfig, RunConfig
+from epistemic_search.config import AblationConfig, RagConfig, RunConfig
 from epistemic_search.engine import run_epistemic
 from epistemic_search.models import QueryCase
 from epistemic_search.providers import ModelProvider
@@ -76,6 +76,8 @@ async def execute_case(
 ) -> RunResult:
     if config.rag is None:
         raise ValueError("rag configuration is required")
+    if config.method != "epistemic_search" and config.ablation != AblationConfig():
+        raise ValueError("Ablation switches apply only to the epistemic_search method")
     if config.method == "closed_book":
         search = FixtureSearchProvider([])
     elif documents is not None:

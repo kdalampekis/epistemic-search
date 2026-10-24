@@ -9,6 +9,7 @@ import httpx
 import typer
 import yaml
 
+from epistemic_search.ablations import run_ablations
 from epistemic_search.baseline import RunResult
 from epistemic_search.benchmarks import BenchmarkDataset, configured_dataset
 from epistemic_search.calibration import run_calibration
@@ -27,6 +28,21 @@ from epistemic_search.selective import analyze_saved_run
 from epistemic_search.tracing import configure_logging
 
 app = typer.Typer(no_args_is_help=True)
+
+
+@app.command("ablate")
+def ablate(plan_path: Path) -> None:
+    """Run matched one-switch ablations and generate CSV/Markdown tables."""
+    try:
+        summaries = asyncio.run(run_ablations(plan_path))
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"Ablation failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(
+        json.dumps(
+            {name: value.model_dump(mode="json") for name, value in summaries.items()}, indent=2
+        )
+    )
 
 
 @app.command("compare-formal")

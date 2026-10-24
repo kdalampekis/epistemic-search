@@ -22,8 +22,9 @@ Updated: 2026-10-24.
 | 15 — Calibration | Complete (offline validation) | [Implementation and limits](PHASE_15.md) |
 | 16 — Cost-aware controller | Complete | [Implementation and checks](PHASE_16.md) |
 | 17 — Controlled benchmark transformations | Complete | [Implementation and checks](PHASE_17.md) |
-| 18 — Optional formal backend | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_18.md) |
-| 19–25 | Not started | Follow the build specification sequentially |
+| 18 — Optional formal backend | Complete | [Implementation and checks](PHASE_18.md) |
+| 19 — Ablation runner | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_19.md) |
+| 20–25 | Not started | Follow the build specification sequentially |
 
 Phases 0 (`a6bd037`), 1 (`e8c030d`), and 2 (`93565cc`) were pushed; hosted CI passed.
 Phase 3 (`03724e0`) was pushed with successful hosted CI. Naive/iterative baselines,
@@ -71,3 +72,7 @@ explicit provenance. All validation is offline; semantic claims still need revie
 Phase 17 (`53e0056`) was pushed with successful hosted CI (`40083318221`).
 Phase 18 adds optional Boolean SMT and an instrumented generative/graph/SMT
 comparison. Classical and graph semantics remain explicit; validation is offline.
+
+Phase 18 (`581cf0b`) was pushed with successful hosted CI (`40083718154`).
+Phase 19 implements seven bounded ablation paths and matched result tables,
+including explicit dependent-component removal. Only offline fixtures were run.

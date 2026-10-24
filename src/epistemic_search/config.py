@@ -9,6 +9,7 @@ from pydantic import (
     AwareDatetime,
     Field,
     SerializerFunctionWrapHandler,
+    StrictBool,
     model_serializer,
     model_validator,
 )
@@ -130,6 +131,22 @@ class ControllerConfig(Schema):
     estimate_provenance: Text = "uniform-uninformative-default-v1"
 
 
+class AblationConfig(Schema):
+    use_premise_graph: StrictBool = True
+    use_belief_state: StrictBool = True
+    use_formal_sufficiency: StrictBool = True
+    use_conflict_resolution: StrictBool = True
+    use_cost_aware_controller: StrictBool = True
+    allow_abstention: StrictBool = True
+    compact_evidence: StrictBool = True
+
+    @model_validator(mode="after")
+    def single_intervention(self) -> Self:
+        if sum(value is False for value in self.model_dump().values()) > 1:
+            raise ValueError("Phase 19 supports one disabled component per ablation")
+        return self
+
+
 class RunConfig(Schema):
     schema_version: Literal[1] = 1
     run_id: Text
@@ -142,6 +159,7 @@ class RunConfig(Schema):
     decomposition: DecompositionConfig | None = None
     belief: BeliefConfig = Field(default_factory=BeliefConfig)
     controller: ControllerConfig = Field(default_factory=ControllerConfig)
+    ablation: AblationConfig = Field(default_factory=AblationConfig)
 
     @model_serializer(mode="wrap")
     def serialize_config(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
@@ -149,6 +167,8 @@ class RunConfig(Schema):
         # Preserve historical config hashes when the original policy is unchanged.
         if self.controller == ControllerConfig():
             values.pop("controller", None)
+        if self.ablation == AblationConfig():
+            values.pop("ablation", None)
         return values
 
 
