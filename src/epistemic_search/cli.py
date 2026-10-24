@@ -11,6 +11,7 @@ import yaml
 
 from epistemic_search.baseline import RunResult
 from epistemic_search.benchmarks import BenchmarkDataset
+from epistemic_search.calibration import run_calibration
 from epistemic_search.campaign import estimate_campaign, run_campaign
 from epistemic_search.config import load_config
 from epistemic_search.conflicts import analyze_conflicts
@@ -199,5 +200,16 @@ def conflicts(run_dir: Path, output_path: Path, judgments_path: Path | None = No
             output.write(report.model_dump_json(indent=2) + "\n")
     except (OSError, ValueError, KeyError) as exc:
         typer.echo(f"Conflict analysis failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(report.model_dump_json(indent=2))
+
+
+@app.command("calibrate")
+def calibrate(config_path: Path) -> None:
+    """Compare score families offline with disjoint calibration/evaluation groups."""
+    try:
+        report = run_calibration(config_path)
+    except (OSError, ValueError) as exc:
+        typer.echo(f"Calibration failed: {exc}", err=True)
         raise typer.Exit(code=1) from exc
     typer.echo(report.model_dump_json(indent=2))

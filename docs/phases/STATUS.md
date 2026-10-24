@@ -18,8 +18,9 @@ Updated: 2026-10-23.
 | 11 — Benchmark integrations | Complete | [Implementation and checks](PHASE_11.md) |
 | 12 — Baseline parity | Complete | [Implementation and audited pilot](PHASE_12.md) |
 | 13 — Abstention metrics | Complete | [Implementation and checks](PHASE_13.md) |
-| 14 — Contradiction experiments | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_14.md) |
-| 15–25 | Not started | Follow the build specification sequentially |
+| 14 — Contradiction experiments | Complete | [Implementation and checks](PHASE_14.md) |
+| 15 — Calibration | Complete locally (offline validation); push/CI gate pending | [Implementation and limits](PHASE_15.md) |
+| 16–25 | Not started | Follow the build specification sequentially |
 
 Phases 0 (`a6bd037`), 1 (`e8c030d`), and 2 (`93565cc`) were pushed; hosted CI passed.
 Phase 3 (`03724e0`) was pushed with successful hosted CI. Naive/iterative baselines,
@@ -50,3 +51,8 @@ Phase 13 (`dfa9dba`) was pushed with successful hosted CI (`40063077390`).
 Phase 14 evaluates the saved ConfRAG pilot without API calls, records a detection
 miss and source-cluster coverage, and separates independent safety judgments
 from internal conflict states. No quality claim or benchmark scaling follows.
+
+Phase 14 (`eb9f73f`) was pushed with successful hosted CI (`40063561539`).
+Phase 15 implements paired calibration measurement and fitting, validated only
+on explicit fixtures. Missing aligned real scores/labels preclude empirical
+calibration claims; the controller still uses uncalibrated heuristic beliefs.

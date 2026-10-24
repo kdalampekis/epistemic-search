@@ -1,0 +1,4 @@
+data_path: ../tests/fixtures/calibration.json
+output_path: ../artifacts/calibration-fixture.json
+metric_bins: 5
+calibration_bins: 4

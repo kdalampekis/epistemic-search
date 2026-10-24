@@ -1,0 +1,243 @@
+{
+  "protocol": "paired-binary-calibration-v1",
+  "additional_api_calls": 0,
+  "additional_api_cost_usd": "0",
+  "fixture_only": true,
+  "event_definition": "Correctness of the fixed synthetic candidate; not real model predictions",
+  "label_protocol": "synthetic-boolean-v1",
+  "score_protocols": {
+    "raw_confidence": "hand-authored-fixture-v1",
+    "nli_score": "hand-authored-fixture-v1",
+    "evidence_aggregation": "hand-authored-fixture-v1"
+  },
+  "calibration_examples": 4,
+  "evaluation_examples": 7,
+  "evaluated_ids": [
+    "eval-0",
+    "eval-1",
+    "eval-2",
+    "eval-3"
+  ],
+  "excluded": {
+    "unknown": [
+      "unknown_correctness"
+    ],
+    "failed": [
+      "error",
+      "no_candidate",
+      "unknown_correctness",
+      "missing_raw_confidence",
+      "missing_nli_score",
+      "missing_evidence_aggregation"
+    ],
+    "missing": [
+      "missing_nli_score"
+    ]
+  },
+  "unavailable_reason": null,
+  "calibrator": {
+    "protocol": "equal-width-laplace-v1",
+    "bins": 4,
+    "counts": [
+      2,
+      0,
+      1,
+      1
+    ],
+    "positives": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "estimates": [
+      0.25,
+      0.5,
+      0.6666666666666666,
+      0.6666666666666666
+    ],
+    "empty_bin_fallback": 0.5,
+    "fit_ids": [
+      "fit-0",
+      "fit-1",
+      "fit-2",
+      "fit-3"
+    ]
+  },
+  "metrics": {
+    "raw_confidence": {
+      "examples": 4,
+      "brier": 0.3575,
+      "ece": 0.275,
+      "reliability": [
+        {
+          "lower": 0.0,
+          "upper": 0.2,
+          "count": 0,
+          "mean_score": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.4,
+          "count": 0,
+          "mean_score": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.6,
+          "count": 0,
+          "mean_score": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.8,
+          "count": 2,
+          "mean_score": 0.7,
+          "accuracy": 0.5
+        },
+        {
+          "lower": 0.8,
+          "upper": 1.0,
+          "count": 2,
+          "mean_score": 0.8500000000000001,
+          "accuracy": 0.5
+        }
+      ]
+    },
+    "nli_score": {
+      "examples": 4,
+      "brier": 0.105,
+      "ece": 0.24999999999999994,
+      "reliability": [
+        {
+          "lower": 0.0,
+          "upper": 0.2,
+          "count": 1,
+          "mean_score": 0.1,
+          "accuracy": 0.0
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.4,
+          "count": 0,
+          "mean_score": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.6,
+          "count": 0,
+          "mean_score": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.8,
+          "count": 1,
+          "mean_score": 0.6,
+          "accuracy": 0.0
+        },
+        {
+          "lower": 0.8,
+          "upper": 1.0,
+          "count": 2,
+          "mean_score": 0.8500000000000001,
+          "accuracy": 1.0
+        }
+      ]
+    },
+    "evidence_aggregation": {
+      "examples": 4,
+      "brier": 0.395,
+      "ece": 0.45,
+      "reliability": [
+        {
+          "lower": 0.0,
+          "upper": 0.2,
+          "count": 0,
+          "mean_score": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.4,
+          "count": 0,
+          "mean_score": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.6,
+          "count": 0,
+          "mean_score": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.8,
+          "count": 1,
+          "mean_score": 0.7,
+          "accuracy": 1.0
+        },
+        {
+          "lower": 0.8,
+          "upper": 1.0,
+          "count": 3,
+          "mean_score": 0.8333333333333334,
+          "accuracy": 0.3333333333333333
+        }
+      ]
+    },
+    "calibrated_nli": {
+      "examples": 4,
+      "brier": 0.18229166666666669,
+      "ece": 0.0625,
+      "reliability": [
+        {
+          "lower": 0.0,
+          "upper": 0.2,
+          "count": 0,
+          "mean_score": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.4,
+          "count": 1,
+          "mean_score": 0.25,
+          "accuracy": 0.0
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.6,
+          "count": 0,
+          "mean_score": null,
+          "accuracy": null
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.8,
+          "count": 3,
+          "mean_score": 0.6666666666666666,
+          "accuracy": 0.6666666666666666
+        },
+        {
+          "lower": 0.8,
+          "upper": 1.0,
+          "count": 0,
+          "mean_score": null,
+          "accuracy": null
+        }
+      ]
+    }
+  },
+  "metric_bins": 5,
+  "source_hashes": {
+    "config": "a92d25d5affcf8516bb4292941a5ba277ddfc139ec8eec6ea99270b22a640acc",
+    "data": "801d9bbbe21e3671f06cf5e7425da0bee92bae3d09ab1e20c1b089d5e1d88530",
+    "evaluator": "563194e8443d3c91041061384abdfc87e8bfc57c520a7f5be4903f5fe1809c32"
+  }
+}

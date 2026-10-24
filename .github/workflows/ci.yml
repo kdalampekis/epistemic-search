@@ -20,6 +20,7 @@ jobs:
       - run: uv run --locked epistemic-search run-naive configs/naive_fixture.yaml tests/fixtures/query.json /tmp/naive-run.json
       - run: uv run --locked epistemic-search evaluate configs/evaluation_fixture.yaml
       - run: uv run --locked epistemic-search selective artifacts/evaluation-fixture /tmp/selective.json
+      - run: uv run --locked epistemic-search calibrate configs/calibration_fixture.yaml
       - run: uv run --locked epistemic-search evaluate configs/iterative_fixture.yaml
       - run: uv run --locked epistemic-search decompose configs/decomposition_fixture.yaml tests/fixtures/decomposition_query.json /tmp/decomposition.json
       - run: uv run --locked epistemic-search evaluate configs/epistemic_fixture.yaml

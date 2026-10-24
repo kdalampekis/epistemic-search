@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Current: **Phase 14 — Contradiction experiments**, with offline analysis of the completed Luna pilot.
+are in `tests/test_providers.py`. Current: **Phase 15 — Calibration**, with offline measurement/fit validation; real calibration results remain unavailable.
 
 ## 11. Naive RAG baseline
 
@@ -419,3 +419,15 @@ Uses native corpus conflict labels and saved detector/retrieval traces. Reports
 source-cluster coverage and missing detector outputs explicitly. Optional
 `--judgments-path` supplies independent, trace-bound safety annotations; absence
 means unknown unsafe-answer rate. See [the protocol](docs/decisions/0008-conflict-evaluation.md).
+
+## 21. Calibration measurement
+
+```sh
+uv run --locked epistemic-search calibrate configs/calibration_fixture.yaml
+```
+
+Compares raw confidence, NLI scores, calibrated NLI and evidence aggregation on
+the same fixed candidates. Calibration/evaluation question groups must be
+disjoint. Outputs Brier, ECE and reliability bins with explicit missing-data
+counts. The bundled example is synthetic and makes no model-quality claim.
+See [Phase 15](docs/phases/PHASE_15.md) and [the protocol](docs/decisions/0009-calibration-protocol.md).

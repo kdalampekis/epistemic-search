@@ -1,0 +1,130 @@
+{
+  "event_definition": "Correctness of the fixed synthetic candidate; not real model predictions",
+  "label_protocol": "synthetic-boolean-v1",
+  "score_protocols": {
+    "raw_confidence": "hand-authored-fixture-v1",
+    "nli_score": "hand-authored-fixture-v1",
+    "evidence_aggregation": "hand-authored-fixture-v1"
+  },
+  "fixture_only": true,
+  "cases": [
+    {
+      "id": "fit-0",
+      "group_id": "fit-question-0",
+      "split": "calibration",
+      "correct": false,
+      "scores": {
+        "raw_confidence": 0.1,
+        "nli_score": 0.1,
+        "evidence_aggregation": 0.1
+      }
+    },
+    {
+      "id": "fit-1",
+      "group_id": "fit-question-1",
+      "split": "calibration",
+      "correct": false,
+      "scores": {
+        "raw_confidence": 0.2,
+        "nli_score": 0.2,
+        "evidence_aggregation": 0.2
+      }
+    },
+    {
+      "id": "fit-2",
+      "group_id": "fit-question-2",
+      "split": "calibration",
+      "correct": true,
+      "scores": {
+        "raw_confidence": 0.7,
+        "nli_score": 0.7,
+        "evidence_aggregation": 0.7
+      }
+    },
+    {
+      "id": "fit-3",
+      "group_id": "fit-question-3",
+      "split": "calibration",
+      "correct": true,
+      "scores": {
+        "raw_confidence": 0.9,
+        "nli_score": 0.9,
+        "evidence_aggregation": 0.9
+      }
+    },
+    {
+      "id": "eval-0",
+      "group_id": "eval-question-0",
+      "split": "evaluation",
+      "correct": false,
+      "scores": {
+        "raw_confidence": 0.9,
+        "nli_score": 0.1,
+        "evidence_aggregation": 0.8
+      }
+    },
+    {
+      "id": "eval-1",
+      "group_id": "eval-question-1",
+      "split": "evaluation",
+      "correct": true,
+      "scores": {
+        "raw_confidence": 0.8,
+        "nli_score": 0.8,
+        "evidence_aggregation": 0.7
+      }
+    },
+    {
+      "id": "eval-2",
+      "group_id": "eval-question-2",
+      "split": "evaluation",
+      "correct": false,
+      "scores": {
+        "raw_confidence": 0.7,
+        "nli_score": 0.6,
+        "evidence_aggregation": 0.9
+      }
+    },
+    {
+      "id": "eval-3",
+      "group_id": "eval-question-3",
+      "split": "evaluation",
+      "correct": true,
+      "scores": {
+        "raw_confidence": 0.7,
+        "nli_score": 0.9,
+        "evidence_aggregation": 0.8
+      }
+    },
+    {
+      "id": "unknown",
+      "group_id": "unknown",
+      "split": "evaluation",
+      "correct": null,
+      "scores": {
+        "raw_confidence": 0.5,
+        "nli_score": 0.5,
+        "evidence_aggregation": 0.5
+      }
+    },
+    {
+      "id": "failed",
+      "group_id": "failed",
+      "split": "evaluation",
+      "status": "error",
+      "candidate_available": false,
+      "correct": null,
+      "scores": {}
+    },
+    {
+      "id": "missing",
+      "group_id": "missing",
+      "split": "evaluation",
+      "correct": true,
+      "scores": {
+        "raw_confidence": 0.5,
+        "evidence_aggregation": 0.5
+      }
+    }
+  ]
+}

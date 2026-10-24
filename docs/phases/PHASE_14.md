@@ -1,6 +1,6 @@
 # Phase 14 — Contradiction experiments
 
-Status: **complete locally**; commit/push and hosted CI gate pending.
+Status: **complete**. Commit `eb9f73f` pushed; hosted CI `40063561539` passed.
 Phase 13 commit `dfa9dba` passed CI run `40063077390` before this phase began.
 
 ## Implementation and acceptance
