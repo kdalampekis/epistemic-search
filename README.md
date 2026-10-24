@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Current: **Phase 22 — Demo dashboard**, with standalone local playback of saved traces. Real calibration results remain unavailable.
+are in `tests/test_providers.py`. Current: **Phase 23 — Paper artifact generation**, with reproducible tables, figures and selected traces. Real calibration results remain unavailable.
 
 ## 11. Naive RAG baseline
 
@@ -526,3 +526,17 @@ premise graph, evidence/provenance, beliefs, blockers, planned queries and resou
 use. The recorded final outcome is separately labelled. This dashboard makes no
 model/search calls; it requires complete saved runs and creates a new directory.
 See [Phase 22](docs/phases/PHASE_22.md).
+
+## 28. Generated paper artifacts
+
+```sh
+uv run --locked --extra paper epistemic-search paper-artifacts configs/paper_fixture.yaml
+# With the saved pilot and ablation fixtures available:
+uv run --locked --extra paper epistemic-search paper-artifacts configs/paper_pilot.yaml
+```
+
+Creates new CSV/Markdown/LaTeX tables, SVG/PDF/PNG plots, dataset summaries and
+seeded outcome-stratified trace excerpts. Existing outputs are never overwritten.
+[Committed generated artifacts](docs/paper/generated/README.md) retain all cases
+and source hashes, distinguish fixtures from real-model results, and reproduce
+the Phase 20 analysis without API calls. See [Phase 23](docs/phases/PHASE_23.md).

@@ -1,0 +1,6 @@
+groups:
+  ablation-fixture:
+    statistics_config: statistics_ablation_fixture.yaml
+    kind: ablation
+output_dir: ../artifacts/paper-fixture
+selection_seed: 42

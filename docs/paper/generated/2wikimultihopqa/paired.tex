@@ -1,0 +1,18 @@
+% 2wikimultihopqa — saved model pilot. Holm correction within this dataset/report only; marginal CIs.
+\begin{tabular}{llllllll}
+\hline
+method & reference & metric & difference & CI\_lower & CI\_upper & p & p\_Holm \\
+closed\_book & naive\_rag & coverage & 1 & 1 & 1 & 0.00195312 & 0.0234375 \\
+closed\_book & naive\_rag & exact\_match & 0.5 & 0.2 & 0.8 & 0.0625 & 0.5 \\
+closed\_book & naive\_rag & token\_f1 & 0.774742 & 0.6018 & 0.926667 & 0.00195312 & 0.0234375 \\
+iterative\_rag & naive\_rag & coverage & 0.7 & 0.4 & 1 & 0.015625 & 0.15625 \\
+iterative\_rag & naive\_rag & exact\_match & 0 & 0 & 0 & 1 & 1 \\
+iterative\_rag & naive\_rag & token\_f1 & 0.225861 & 0.103574 & 0.362424 & 0.015625 & 0.15625 \\
+premise\_only & naive\_rag & coverage & 0 & 0 & 0 & 1 & 1 \\
+premise\_only & naive\_rag & exact\_match & 0 & 0 & 0 & 1 & 1 \\
+premise\_only & naive\_rag & token\_f1 & 0 & 0 & 0 & 1 & 1 \\
+epistemic\_search & naive\_rag & coverage & 0.1 & 0 & 0.3 & 1 & 1 \\
+epistemic\_search & naive\_rag & exact\_match & 0 & 0 & 0 & 1 & 1 \\
+epistemic\_search & naive\_rag & token\_f1 & 0.06 & 0 & 0.18 & 1 & 1 \\
+\hline
+\end{tabular}

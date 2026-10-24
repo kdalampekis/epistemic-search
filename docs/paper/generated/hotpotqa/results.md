@@ -1,0 +1,9 @@
+hotpotqa — saved model pilot. NA means unavailable; errors and abstentions retained. No pooled dataset score.
+
+| method | n | EM | F1 | coverage | selective_EM_risk | errors | budget_stops |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| closed_book | 10 | 0.3 | 0.536692 | 0.9 | 0.666667 | 1 | 0 |
+| naive_rag | 10 | 0.3 | 0.462432 | 0.6 | 0.5 | 0 | 0 |
+| iterative_rag | 10 | 0.1 | 0.318712 | 0.7 | 0.857143 | 0 | 3 |
+| premise_only | 10 | 0.1 | 0.207273 | 0.3 | 0.666667 | 0 | 0 |
+| epistemic_search | 10 | 0.1 | 0.166667 | 0.2 | 0.5 | 2 | 0 |

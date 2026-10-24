@@ -25,12 +25,26 @@ from epistemic_search.execution import configured_model, configured_spend, execu
 from epistemic_search.failures import analyze_failures
 from epistemic_search.formal import compare_formal
 from epistemic_search.models import QueryCase
+from epistemic_search.paper_artifacts import generate_paper_artifacts
 from epistemic_search.parity import compare
 from epistemic_search.selective import analyze_saved_run
 from epistemic_search.statistics import analyze_comparison
 from epistemic_search.tracing import configure_logging
 
 app = typer.Typer(no_args_is_help=True)
+
+
+@app.command("paper-artifacts")
+def paper_artifacts(config_path: Path) -> None:
+    """Generate tables, figures and selected traces without model calls."""
+    try:
+        report = generate_paper_artifacts(config_path)
+    except (OSError, ValueError) as exc:
+        typer.echo(f"Paper artifact generation failed: {exc}", err=True)
+        raise typer.Exit(1) from exc
+    typer.echo(
+        f"Generated paper artifacts for {report['method_cases']} saved method-cases; API cost $0"
+    )
 
 
 @app.command("dashboard")

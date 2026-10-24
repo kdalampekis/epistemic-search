@@ -1,0 +1,45 @@
+{
+  "protocol": "one-switch-ablation-v1",
+  "plan_sha256": "ed9983b45fc14173dd263fab52fe22a1691b697a542361e82221ffa8c0a78055",
+  "run_config_sha256": "fa5e1778d3b396412bf2551ef21e70ae209792c2e76c93c59588acbc1a869561",
+  "variants": [
+    "reference",
+    "use_premise_graph",
+    "use_belief_state",
+    "use_formal_sufficiency",
+    "use_conflict_resolution",
+    "use_cost_aware_controller",
+    "allow_abstention",
+    "compact_evidence"
+  ],
+  "selected_case_ids": [
+    "europe-capital"
+  ],
+  "effects": {
+    "reference": "Unablated epistemic engine with configured VOI acquisition.",
+    "use_premise_graph": "Use iterative relevance baseline: removes decomposition and downstream evidence-state/formal/VOI control; raw context.",
+    "use_belief_state": "Use premise-only baseline: retains decomposition, replaces belief/formal/conflict/VOI control with a model judge; raw context.",
+    "use_formal_sufficiency": "Retain evidence/beliefs; replace proof sufficiency and frontier/VOI target selection with a generative controller.",
+    "use_conflict_resolution": "Retain MIXED and conservative sufficiency; replace conflict-resolution actions/queries with ordinary targeted search.",
+    "use_cost_aware_controller": "Replace VOI ranking with importance; preserve frontier, conflict priority and hard budgets.",
+    "allow_abstention": "Attempt a cited best answer at policy abstention or round limit; hard budget/errors still stop, null outputs remain failures.",
+    "compact_evidence": "Supply full retrieved document text to the final answer model; retain extracted ledger and control policy."
+  },
+  "fixture_only": true,
+  "matched": [
+    "model",
+    "reasoning_effort",
+    "seed",
+    "dataset",
+    "grader",
+    "retriever",
+    "budget_caps"
+  ],
+  "limitations": [
+    "Matched ceilings, not equal realized resource usage.",
+    "Removing prerequisite components also removes dependent control; see effects.",
+    "Interventions may be inactive on easy cases; inspect traces before attributing effects.",
+    "Variant order is recorded; exact-request cache reuse couples results and latency.",
+    "Incomplete runs and model failures stay in reports; no automatic benchmark scaling."
+  ]
+}

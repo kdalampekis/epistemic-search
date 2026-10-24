@@ -267,7 +267,7 @@ def metric_groups(run: SavedRun, metric: str) -> Groups:
     return groups
 
 
-def analyze_comparison(config_path: Path) -> dict[str, Any]:
+def analyze_comparison(config_path: Path, *, output_path: Path | None = None) -> dict[str, Any]:
     config = StatisticsConfig.model_validate(yaml.safe_load(config_path.read_text()))
     runs = {name: read_run(config_path.parent / path) for name, path in config.runs.items()}
     reference = runs[config.reference]
@@ -372,6 +372,6 @@ def analyze_comparison(config_path: Path) -> dict[str, Any]:
             "Dataset metrics are not pooled; failed labelled cases retain zero answer scores.",
         ],
     }
-    with (config_path.parent / config.output_path).open("x") as stream:
+    with (output_path or config_path.parent / config.output_path).open("x") as stream:
         stream.write(json.dumps(report, indent=2) + "\n")
     return report

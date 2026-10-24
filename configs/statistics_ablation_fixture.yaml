@@ -1,0 +1,14 @@
+runs:
+  reference: ../artifacts/ablation-fixture/reference
+  use_premise_graph: ../artifacts/ablation-fixture/use_premise_graph
+  use_belief_state: ../artifacts/ablation-fixture/use_belief_state
+  use_formal_sufficiency: ../artifacts/ablation-fixture/use_formal_sufficiency
+  use_conflict_resolution: ../artifacts/ablation-fixture/use_conflict_resolution
+  use_cost_aware_controller: ../artifacts/ablation-fixture/use_cost_aware_controller
+  allow_abstention: ../artifacts/ablation-fixture/allow_abstention
+  compact_evidence: ../artifacts/ablation-fixture/compact_evidence
+reference: reference
+output_path: ../artifacts/statistics-ablation-fixture.json
+bootstrap_replicates: 100
+permutation_replicates: 100
+seed: 42

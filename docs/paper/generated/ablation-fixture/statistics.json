@@ -1,0 +1,1699 @@
+{
+  "protocol": "paired-saved-run-analysis-v1",
+  "config": {
+    "runs": {
+      "reference": "../artifacts/ablation-fixture/reference",
+      "use_premise_graph": "../artifacts/ablation-fixture/use_premise_graph",
+      "use_belief_state": "../artifacts/ablation-fixture/use_belief_state",
+      "use_formal_sufficiency": "../artifacts/ablation-fixture/use_formal_sufficiency",
+      "use_conflict_resolution": "../artifacts/ablation-fixture/use_conflict_resolution",
+      "use_cost_aware_controller": "../artifacts/ablation-fixture/use_cost_aware_controller",
+      "allow_abstention": "../artifacts/ablation-fixture/allow_abstention",
+      "compact_evidence": "../artifacts/ablation-fixture/compact_evidence"
+    },
+    "reference": "reference",
+    "output_path": "../artifacts/statistics-ablation-fixture.json",
+    "seed": 42,
+    "confidence": 0.95,
+    "bootstrap_replicates": 100,
+    "permutation_replicates": 100
+  },
+  "config_sha256": "4fa030a34660ebc9c936955e1ede226c178ed14bd78ac6b67f03a362817e6bb9",
+  "implementation_sha256": "b330473f8aa7f65f070873ac78b0b059551677ef599c54ea11bc8f8e5a6e66dc",
+  "matched_protocol": {
+    "metric_version": "english-em-token-f1-v1",
+    "retriever": "lexical-overlap-v1",
+    "retrieval_scope": "configured-corpus",
+    "inputs": {
+      "dataset": "9925c19347fc2672f9c191bb8938b1f7b940764f6abbaedafed8b5aa51c02bf1",
+      "corpus": "ae57ba7d1a9b593abe94fc30f873faed1c7a82cb26a55181bb33c73e3d1ffe6f",
+      "fixture_responses": "dc398ff644b087c8e8dfd1908af486a3a26235b0c8902aa80252efb579757477"
+    },
+    "budget": {
+      "max_search_calls": 3,
+      "max_documents": 6,
+      "max_retrieved_tokens": 50000,
+      "max_llm_calls": 16,
+      "max_total_llm_input_tokens": 100000,
+      "max_total_llm_output_tokens": 16000,
+      "max_latency_seconds": 180.0,
+      "max_cost_usd": null
+    },
+    "seed": 42,
+    "model": {
+      "max_rounds": 3,
+      "k": 1,
+      "backend": "fixture",
+      "model": "fixture-script-v1",
+      "reasoning_effort": null,
+      "service_tier": "default",
+      "max_output_tokens": 1024,
+      "timeout_seconds": 30.0,
+      "input_usd_per_million": null,
+      "cached_input_usd_per_million": null,
+      "cache_write_usd_per_million": null,
+      "output_usd_per_million": null
+    },
+    "dataset": {
+      "dataset_name": "epistemic-synthetic-smoke-only",
+      "split": "dev",
+      "format": "jsonl",
+      "snapshot_at": null,
+      "limit": null
+    }
+  },
+  "fixture_only": true,
+  "runs": {
+    "reference": {
+      "metrics": {
+        "coverage": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "exact_match": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "token_f1": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        }
+      },
+      "resources": {
+        "cost_usd": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "prompt_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 264.0,
+          "median": 264.0,
+          "p90": 264.0,
+          "total_known": 264.0
+        },
+        "cached_input_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "completion_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 90.0,
+          "median": 90.0,
+          "p90": 90.0,
+          "total_known": 90.0
+        },
+        "reasoning_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 4.0,
+          "median": 4.0,
+          "p90": 4.0,
+          "total_known": 4.0
+        },
+        "search_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 1.0,
+          "median": 1.0,
+          "p90": 1.0,
+          "total_known": 1.0
+        },
+        "api_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_cache_hits": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "wall_seconds": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.006111417023930699,
+          "median": 0.006111417023930699,
+          "p90": 0.006111417023930699,
+          "total_known": 0.006111417023930699
+        }
+      },
+      "source_hashes": {
+        "examples.jsonl": "3d32202b390e44b9f8faca82ee85576a9e18640e49ae501b0cf57253f1566944",
+        "labels.jsonl": "db60071b9412ad432674493d86148fe94ffd6898dab371f49806fdafae9fe512",
+        "manifest.json": "19b5b7b1974d5075214cbf7813fe7745a77f01a47b43c8ce6032361cc350a6ef",
+        "summary.json": "ea8f0c0710710a381696a4210c5fef894a6d7e1fcffd321179dea94b4ceb389d"
+      },
+      "errors": 0,
+      "budget_exhausted": 0,
+      "incomplete_usage_examples": 0
+    },
+    "use_premise_graph": {
+      "metrics": {
+        "coverage": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "exact_match": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "token_f1": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        }
+      },
+      "resources": {
+        "cost_usd": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "prompt_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 71.0,
+          "median": 71.0,
+          "p90": 71.0,
+          "total_known": 71.0
+        },
+        "cached_input_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "completion_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 9.0,
+          "median": 9.0,
+          "p90": 9.0,
+          "total_known": 9.0
+        },
+        "reasoning_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 1.0,
+          "median": 1.0,
+          "p90": 1.0,
+          "total_known": 1.0
+        },
+        "search_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 1.0,
+          "median": 1.0,
+          "p90": 1.0,
+          "total_known": 1.0
+        },
+        "api_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_cache_hits": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "wall_seconds": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0008648749790154397,
+          "median": 0.0008648749790154397,
+          "p90": 0.0008648749790154397,
+          "total_known": 0.0008648749790154397
+        }
+      },
+      "source_hashes": {
+        "examples.jsonl": "4ea52664830815697c51e318b09cbbf605942875ec11324bd7f7b0c0238025fc",
+        "labels.jsonl": "db60071b9412ad432674493d86148fe94ffd6898dab371f49806fdafae9fe512",
+        "manifest.json": "ca4268ea2a137af77ae7fa49ab23717d930060e9cd4c12d38cde0cdd03d95cae",
+        "summary.json": "84d093bbb83a8926ffa8fe061b5ebc88d0c29efba5260e95d7ad2c9f5328b178"
+      },
+      "errors": 0,
+      "budget_exhausted": 0,
+      "incomplete_usage_examples": 0
+    },
+    "use_belief_state": {
+      "metrics": {
+        "coverage": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "exact_match": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "token_f1": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        }
+      },
+      "resources": {
+        "cost_usd": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "prompt_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 160.0,
+          "median": 160.0,
+          "p90": 160.0,
+          "total_known": 160.0
+        },
+        "cached_input_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "completion_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 72.0,
+          "median": 72.0,
+          "p90": 72.0,
+          "total_known": 72.0
+        },
+        "reasoning_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 2.0,
+          "median": 2.0,
+          "p90": 2.0,
+          "total_known": 2.0
+        },
+        "search_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 1.0,
+          "median": 1.0,
+          "p90": 1.0,
+          "total_known": 1.0
+        },
+        "api_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_cache_hits": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "wall_seconds": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0025853750412352383,
+          "median": 0.0025853750412352383,
+          "p90": 0.0025853750412352383,
+          "total_known": 0.0025853750412352383
+        }
+      },
+      "source_hashes": {
+        "examples.jsonl": "3ba6b065001b15a0c3fc95b6f114705c84fd8924ccc41aef41075f83a4d3da0f",
+        "labels.jsonl": "db60071b9412ad432674493d86148fe94ffd6898dab371f49806fdafae9fe512",
+        "manifest.json": "108be5441ef1010020a212c50a04558fc2732c4922d19c368de4c8d65bcb7d9e",
+        "summary.json": "27287a6bcbf7a55292a456e87c9c2c2505424fb29f103a1f582ab209c1358098"
+      },
+      "errors": 0,
+      "budget_exhausted": 0,
+      "incomplete_usage_examples": 0
+    },
+    "use_formal_sufficiency": {
+      "metrics": {
+        "coverage": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "exact_match": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "token_f1": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        }
+      },
+      "resources": {
+        "cost_usd": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "prompt_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 470.0,
+          "median": 470.0,
+          "p90": 470.0,
+          "total_known": 470.0
+        },
+        "cached_input_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "completion_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 100.0,
+          "median": 100.0,
+          "p90": 100.0,
+          "total_known": 100.0
+        },
+        "reasoning_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 5.0,
+          "median": 5.0,
+          "p90": 5.0,
+          "total_known": 5.0
+        },
+        "search_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 1.0,
+          "median": 1.0,
+          "p90": 1.0,
+          "total_known": 1.0
+        },
+        "api_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_cache_hits": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "wall_seconds": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.003857709001749754,
+          "median": 0.003857709001749754,
+          "p90": 0.003857709001749754,
+          "total_known": 0.003857709001749754
+        }
+      },
+      "source_hashes": {
+        "examples.jsonl": "a0fe54bdbd51ca5678e7850f209c588b3dd92cdcccb8178da31f4757fcfc4f33",
+        "labels.jsonl": "db60071b9412ad432674493d86148fe94ffd6898dab371f49806fdafae9fe512",
+        "manifest.json": "8697f006e7820d317f604884f0fc04f7230a53226e64c94f851a114004713b13",
+        "summary.json": "fea6f3ff87f986c7c0114b3eb409ed9951f4d8d1eb4fd35b5e5b3b5a1e2d4934"
+      },
+      "errors": 0,
+      "budget_exhausted": 0,
+      "incomplete_usage_examples": 0
+    },
+    "use_conflict_resolution": {
+      "metrics": {
+        "coverage": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "exact_match": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "token_f1": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        }
+      },
+      "resources": {
+        "cost_usd": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "prompt_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 264.0,
+          "median": 264.0,
+          "p90": 264.0,
+          "total_known": 264.0
+        },
+        "cached_input_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "completion_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 90.0,
+          "median": 90.0,
+          "p90": 90.0,
+          "total_known": 90.0
+        },
+        "reasoning_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 4.0,
+          "median": 4.0,
+          "p90": 4.0,
+          "total_known": 4.0
+        },
+        "search_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 1.0,
+          "median": 1.0,
+          "p90": 1.0,
+          "total_known": 1.0
+        },
+        "api_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_cache_hits": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "wall_seconds": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0035213330411352217,
+          "median": 0.0035213330411352217,
+          "p90": 0.0035213330411352217,
+          "total_known": 0.0035213330411352217
+        }
+      },
+      "source_hashes": {
+        "examples.jsonl": "547e336b7318e6485228aea648b8dd171346b2c40e65522e587ad119c78f12f6",
+        "labels.jsonl": "db60071b9412ad432674493d86148fe94ffd6898dab371f49806fdafae9fe512",
+        "manifest.json": "2051933e1f11beb5f8e9c35aaa8b359986906e426f4661ed31c73650c852c118",
+        "summary.json": "a75865378d5b1c6a8cdf7635e84f6f9c10fbbda364b370dcd6ddd7b8098239fe"
+      },
+      "errors": 0,
+      "budget_exhausted": 0,
+      "incomplete_usage_examples": 0
+    },
+    "use_cost_aware_controller": {
+      "metrics": {
+        "coverage": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "exact_match": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "token_f1": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        }
+      },
+      "resources": {
+        "cost_usd": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "prompt_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 264.0,
+          "median": 264.0,
+          "p90": 264.0,
+          "total_known": 264.0
+        },
+        "cached_input_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "completion_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 90.0,
+          "median": 90.0,
+          "p90": 90.0,
+          "total_known": 90.0
+        },
+        "reasoning_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 4.0,
+          "median": 4.0,
+          "p90": 4.0,
+          "total_known": 4.0
+        },
+        "search_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 1.0,
+          "median": 1.0,
+          "p90": 1.0,
+          "total_known": 1.0
+        },
+        "api_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_cache_hits": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "wall_seconds": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.003514665993861854,
+          "median": 0.003514665993861854,
+          "p90": 0.003514665993861854,
+          "total_known": 0.003514665993861854
+        }
+      },
+      "source_hashes": {
+        "examples.jsonl": "ca19ec1fda46ae309f80bb3ab0d4d9848b39fe206e766138bbb1b9b6acafd3b3",
+        "labels.jsonl": "db60071b9412ad432674493d86148fe94ffd6898dab371f49806fdafae9fe512",
+        "manifest.json": "c59de65dc339f9104192bb79b07efc987a3fe670fb7cb3a4bcba943f88b15e6f",
+        "summary.json": "d5e5ba63a0fb1a4f63701a6be155dbb9a448c4c5b228049f41a8d79a07765395"
+      },
+      "errors": 0,
+      "budget_exhausted": 0,
+      "incomplete_usage_examples": 0
+    },
+    "allow_abstention": {
+      "metrics": {
+        "coverage": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "exact_match": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "token_f1": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        }
+      },
+      "resources": {
+        "cost_usd": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "prompt_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 269.0,
+          "median": 269.0,
+          "p90": 269.0,
+          "total_known": 269.0
+        },
+        "cached_input_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "completion_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 90.0,
+          "median": 90.0,
+          "p90": 90.0,
+          "total_known": 90.0
+        },
+        "reasoning_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 4.0,
+          "median": 4.0,
+          "p90": 4.0,
+          "total_known": 4.0
+        },
+        "search_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 1.0,
+          "median": 1.0,
+          "p90": 1.0,
+          "total_known": 1.0
+        },
+        "api_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_cache_hits": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "wall_seconds": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0033793330076150596,
+          "median": 0.0033793330076150596,
+          "p90": 0.0033793330076150596,
+          "total_known": 0.0033793330076150596
+        }
+      },
+      "source_hashes": {
+        "examples.jsonl": "c130f8b0a9703d70bb8c1b589c26ac15d27675c42a6b32627dfef754a2282e46",
+        "labels.jsonl": "db60071b9412ad432674493d86148fe94ffd6898dab371f49806fdafae9fe512",
+        "manifest.json": "766131e57dbc0cecd279fee550b857203b2d5ac18bd8e5d96001dbc1a4600212",
+        "summary.json": "dbde94d73994ab52fb4b9811b4da64da1abc87e191ae908f01eeec436a835f95"
+      },
+      "errors": 0,
+      "budget_exhausted": 0,
+      "incomplete_usage_examples": 0
+    },
+    "compact_evidence": {
+      "metrics": {
+        "coverage": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "exact_match": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        },
+        "token_f1": {
+          "mean": 1.0,
+          "examples": 1,
+          "groups": 1,
+          "confidence": 0.95,
+          "lower": null,
+          "upper": null,
+          "replicates": 0,
+          "degenerate": null,
+          "protocol": "question-cluster-percentile-v1",
+          "unavailable_reason": "At least two independent question groups required"
+        }
+      },
+      "resources": {
+        "cost_usd": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "prompt_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 249.0,
+          "median": 249.0,
+          "p90": 249.0,
+          "total_known": 249.0
+        },
+        "cached_input_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "completion_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 90.0,
+          "median": 90.0,
+          "p90": 90.0,
+          "total_known": 90.0
+        },
+        "reasoning_tokens": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 4.0,
+          "median": 4.0,
+          "p90": 4.0,
+          "total_known": 4.0
+        },
+        "search_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 1.0,
+          "median": 1.0,
+          "p90": 1.0,
+          "total_known": 1.0
+        },
+        "api_calls": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "model_cache_hits": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0,
+          "median": 0.0,
+          "p90": 0.0,
+          "total_known": 0.0
+        },
+        "wall_seconds": {
+          "known": 1,
+          "unknown": 0,
+          "mean": 0.0033483750303275883,
+          "median": 0.0033483750303275883,
+          "p90": 0.0033483750303275883,
+          "total_known": 0.0033483750303275883
+        }
+      },
+      "source_hashes": {
+        "examples.jsonl": "bdf5ae91a25833988841efafc7cb1682b1e50cfbc81b8c4a734e6525647b723b",
+        "labels.jsonl": "db60071b9412ad432674493d86148fe94ffd6898dab371f49806fdafae9fe512",
+        "manifest.json": "69ecb3e45eec3868bda9b721e7a502b5849497a03c698d4b9049d4455990005f",
+        "summary.json": "f47cec9dc9d1f6a3148898515412693414ab008bfcbf63397c459b04d060b443"
+      },
+      "errors": 0,
+      "budget_exhausted": 0,
+      "incomplete_usage_examples": 0
+    }
+  },
+  "comparisons": [
+    {
+      "method": "use_premise_graph",
+      "reference": "reference",
+      "metric": "coverage",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "use_premise_graph",
+      "reference": "reference",
+      "metric": "exact_match",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "use_premise_graph",
+      "reference": "reference",
+      "metric": "token_f1",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "use_belief_state",
+      "reference": "reference",
+      "metric": "coverage",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "use_belief_state",
+      "reference": "reference",
+      "metric": "exact_match",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "use_belief_state",
+      "reference": "reference",
+      "metric": "token_f1",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "use_formal_sufficiency",
+      "reference": "reference",
+      "metric": "coverage",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "use_formal_sufficiency",
+      "reference": "reference",
+      "metric": "exact_match",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "use_formal_sufficiency",
+      "reference": "reference",
+      "metric": "token_f1",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "use_conflict_resolution",
+      "reference": "reference",
+      "metric": "coverage",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "use_conflict_resolution",
+      "reference": "reference",
+      "metric": "exact_match",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "use_conflict_resolution",
+      "reference": "reference",
+      "metric": "token_f1",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "use_cost_aware_controller",
+      "reference": "reference",
+      "metric": "coverage",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "use_cost_aware_controller",
+      "reference": "reference",
+      "metric": "exact_match",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "use_cost_aware_controller",
+      "reference": "reference",
+      "metric": "token_f1",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "allow_abstention",
+      "reference": "reference",
+      "metric": "coverage",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "allow_abstention",
+      "reference": "reference",
+      "metric": "exact_match",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "allow_abstention",
+      "reference": "reference",
+      "metric": "token_f1",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "compact_evidence",
+      "reference": "reference",
+      "metric": "coverage",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "compact_evidence",
+      "reference": "reference",
+      "metric": "exact_match",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    },
+    {
+      "method": "compact_evidence",
+      "reference": "reference",
+      "metric": "token_f1",
+      "difference": {
+        "mean": 0.0,
+        "examples": 1,
+        "groups": 1,
+        "confidence": 0.95,
+        "lower": null,
+        "upper": null,
+        "replicates": 0,
+        "degenerate": null,
+        "protocol": "question-cluster-percentile-v1",
+        "unavailable_reason": "At least two independent question groups required"
+      },
+      "test": {
+        "protocol": "paired-cluster-sign-flip-absolute-v1",
+        "groups": 1,
+        "mean_difference": 0.0,
+        "p_value": null,
+        "permutations": 0,
+        "exact": null,
+        "unavailable_reason": "At least two independent question groups required",
+        "p_holm": null
+      }
+    }
+  ],
+  "holm_family_size": 0,
+  "additional_api_calls": 0,
+  "additional_api_cost_usd": "0",
+  "limitations": [
+    "Exploratory saved-run analysis; no new independent model replicates.",
+    "Cluster bootstrap assumes independent question groups; variants stay together.",
+    "Percentile intervals may be degenerate or unstable; not simultaneous intervals.",
+    "Permutation tests assume jointly exchangeable method labels within each group.",
+    "Absolute two-sided test: exact through 16 groups, otherwise plus-one Monte Carlo.",
+    "Holm family is all available reference comparisons and metrics in this report only.",
+    "Unknown resources are counted, never zero-filled; observed totals may be incomplete.",
+    "Cost is recorded physical estimated spend; cache reuse affects cost and latency.",
+    "Dataset metrics are not pooled; failed labelled cases retain zero answer scores."
+  ]
+}

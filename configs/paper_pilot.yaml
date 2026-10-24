@@ -1,0 +1,12 @@
+groups:
+  hotpotqa:
+    statistics_config: statistics_hotpotqa.yaml
+  2wikimultihopqa:
+    statistics_config: statistics_2wikimultihopqa.yaml
+  confrag:
+    statistics_config: statistics_confrag.yaml
+  ablation-fixture:
+    statistics_config: statistics_ablation_fixture.yaml
+    kind: ablation
+output_dir: ../docs/paper/generated
+selection_seed: 42

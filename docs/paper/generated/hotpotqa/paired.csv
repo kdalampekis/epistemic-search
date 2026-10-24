@@ -1,0 +1,13 @@
+method,reference,metric,difference,CI_lower,CI_upper,p,p_Holm
+closed_book,naive_rag,coverage,0.3,0.0,0.6,0.25,1
+closed_book,naive_rag,exact_match,0.0,-0.3,0.3,1.0,1
+closed_book,naive_rag,token_f1,0.07425937038840263,-0.20126039885717306,0.3538961038961039,0.59375,1
+iterative_rag,naive_rag,coverage,0.1,0.0,0.3,1.0,1
+iterative_rag,naive_rag,exact_match,-0.2,-0.5,0.0,0.5,1
+iterative_rag,naive_rag,token_f1,-0.14372062695307694,-0.33886174060677643,0.018279569892473112,0.25,1
+premise_only,naive_rag,coverage,-0.3,-0.6,0.0,0.25,1
+premise_only,naive_rag,exact_match,-0.2,-0.5,0.0,0.5,1
+premise_only,naive_rag,token_f1,-0.25515970515970515,-0.48243243243243245,-0.05,0.125,1
+epistemic_search,naive_rag,coverage,-0.4,-0.7,-0.1,0.125,1
+epistemic_search,naive_rag,exact_match,-0.2,-0.5,0.0,0.5,1
+epistemic_search,naive_rag,token_f1,-0.2957657657657658,-0.5833333333333333,-0.032432432432432434,0.125,1

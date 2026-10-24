@@ -1,6 +1,6 @@
 # Phase 22 — Demo dashboard
 
-Status: **complete locally**; commit/push and hosted CI gate pending.
+Status: **complete**, pushed as `f074144`; hosted CI `40117208034` passed.
 Phase 21 commit `fe5b3b4` passed CI `40116134085` before work began.
 
 ## Implementation and design

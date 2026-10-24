@@ -1,0 +1,13 @@
+method,reference,metric,difference,CI_lower,CI_upper,p,p_Holm
+closed_book,naive_rag,coverage,0.5,0.0,1.0,1.0,1
+closed_book,naive_rag,exact_match,,,,,
+closed_book,naive_rag,token_f1,,,,,
+iterative_rag,naive_rag,coverage,0.0,0.0,0.0,1.0,1
+iterative_rag,naive_rag,exact_match,,,,,
+iterative_rag,naive_rag,token_f1,,,,,
+premise_only,naive_rag,coverage,0.0,0.0,0.0,1.0,1
+premise_only,naive_rag,exact_match,,,,,
+premise_only,naive_rag,token_f1,,,,,
+epistemic_search,naive_rag,coverage,0.0,0.0,0.0,1.0,1
+epistemic_search,naive_rag,exact_match,,,,,
+epistemic_search,naive_rag,token_f1,,,,,

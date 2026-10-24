@@ -1,0 +1,25 @@
+ablation-fixture — SCRIPTED FIXTURE (not model quality); named switch disabled. Holm correction within this dataset/report only; marginal CIs.
+
+| method | reference | metric | difference | CI_lower | CI_upper | p | p_Holm |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| use_premise_graph | reference | coverage | 0 | NA | NA | NA | NA |
+| use_premise_graph | reference | exact_match | 0 | NA | NA | NA | NA |
+| use_premise_graph | reference | token_f1 | 0 | NA | NA | NA | NA |
+| use_belief_state | reference | coverage | 0 | NA | NA | NA | NA |
+| use_belief_state | reference | exact_match | 0 | NA | NA | NA | NA |
+| use_belief_state | reference | token_f1 | 0 | NA | NA | NA | NA |
+| use_formal_sufficiency | reference | coverage | 0 | NA | NA | NA | NA |
+| use_formal_sufficiency | reference | exact_match | 0 | NA | NA | NA | NA |
+| use_formal_sufficiency | reference | token_f1 | 0 | NA | NA | NA | NA |
+| use_conflict_resolution | reference | coverage | 0 | NA | NA | NA | NA |
+| use_conflict_resolution | reference | exact_match | 0 | NA | NA | NA | NA |
+| use_conflict_resolution | reference | token_f1 | 0 | NA | NA | NA | NA |
+| use_cost_aware_controller | reference | coverage | 0 | NA | NA | NA | NA |
+| use_cost_aware_controller | reference | exact_match | 0 | NA | NA | NA | NA |
+| use_cost_aware_controller | reference | token_f1 | 0 | NA | NA | NA | NA |
+| allow_abstention | reference | coverage | 0 | NA | NA | NA | NA |
+| allow_abstention | reference | exact_match | 0 | NA | NA | NA | NA |
+| allow_abstention | reference | token_f1 | 0 | NA | NA | NA | NA |
+| compact_evidence | reference | coverage | 0 | NA | NA | NA | NA |
+| compact_evidence | reference | exact_match | 0 | NA | NA | NA | NA |
+| compact_evidence | reference | token_f1 | 0 | NA | NA | NA | NA |

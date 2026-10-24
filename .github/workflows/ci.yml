@@ -34,4 +34,6 @@ jobs:
       - run: uv run --locked epistemic-search compare configs/parity_fixture.yaml
       - run: uv run --locked epistemic-search ablate configs/ablation_fixture.yaml
       - run: uv run --locked epistemic-search analyze-comparison configs/statistics_fixture.yaml
+      - run: uv run --locked --extra paper pytest tests/test_paper_artifacts.py
+      - run: uv run --locked --extra paper epistemic-search paper-artifacts configs/paper_fixture.yaml
       - run: uv build
