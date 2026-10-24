@@ -27,11 +27,34 @@ from epistemic_search.formal import compare_formal
 from epistemic_search.models import QueryCase
 from epistemic_search.paper_artifacts import generate_paper_artifacts
 from epistemic_search.parity import compare
+from epistemic_search.reproduction import bundle_reproduction, verify_reproduction
 from epistemic_search.selective import analyze_saved_run
 from epistemic_search.statistics import analyze_comparison
 from epistemic_search.tracing import configure_logging
 
 app = typer.Typer(no_args_is_help=True)
+
+
+@app.command("reproduction-bundle")
+def reproduction_bundle(paper_config: Path, output: Path, root: Path = Path(".")) -> None:
+    """Archive allowlisted source and saved results without keys or caches."""
+    try:
+        report = bundle_reproduction(root, paper_config, output)
+    except (OSError, ValueError) as exc:
+        typer.echo(f"Reproduction bundle failed: {exc}", err=True)
+        raise typer.Exit(1) from exc
+    typer.echo(json.dumps(report, indent=2))
+
+
+@app.command("verify-reproduction")
+def reproduction_verify(archive_path: Path) -> None:
+    """Verify archive inventory and every member hash without extracting."""
+    try:
+        report = verify_reproduction(archive_path)
+    except (OSError, ValueError) as exc:
+        typer.echo(f"Reproduction verification failed: {exc}", err=True)
+        raise typer.Exit(1) from exc
+    typer.echo(json.dumps(report, indent=2))
 
 
 @app.command("paper-artifacts")

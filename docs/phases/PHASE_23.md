@@ -1,6 +1,6 @@
 # Phase 23 — Paper artifact generation
 
-Status: **complete locally**; commit/push and hosted CI gate pending.
+Status: **complete**, pushed as `3a82b3a`; hosted CI `40128622872` passed.
 Phase 22 commit `f074144` passed CI `40117208034` before work began.
 
 ## Implementation and decisions

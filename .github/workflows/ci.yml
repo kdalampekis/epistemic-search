@@ -37,3 +37,14 @@ jobs:
       - run: uv run --locked --extra paper pytest tests/test_paper_artifacts.py
       - run: uv run --locked --extra paper epistemic-search paper-artifacts configs/paper_fixture.yaml
       - run: uv build
+  offline-reproduction:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.9.28"
+      - run: uv sync --locked --all-extras --python 3.12
+      - run: uv run --locked --all-extras python scripts/reproduce_offline.py fixtures
+      - run: uv run --locked epistemic-search reproduction-bundle configs/paper_fixture.yaml /tmp/reproduction.zip
+      - run: uv run --locked epistemic-search verify-reproduction /tmp/reproduction.zip

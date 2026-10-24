@@ -27,8 +27,9 @@ Updated: 2026-10-24.
 | 20 — Statistical analysis | Complete | [Implementation and checks](PHASE_20.md) |
 | 21 — Failure analysis | Complete | [Implementation and checks](PHASE_21.md) |
 | 22 — Demo dashboard | Complete | [Implementation and checks](PHASE_22.md) |
-| 23 — Paper artifact generation | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_23.md) |
-| 24–25 | Not started | Follow the build specification sequentially |
+| 23 — Paper artifact generation | Complete | [Implementation and checks](PHASE_23.md) |
+| 24 — Reproduction package | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_24.md) |
+| 25 — Final technical report / paper | Not started | Follow the build specification sequentially |
 
 Phases 0 (`a6bd037`), 1 (`e8c030d`), and 2 (`93565cc`) were pushed; hosted CI passed.
 Phase 3 (`03724e0`) was pushed with successful hosted CI. Naive/iterative baselines,
@@ -96,3 +97,7 @@ state, decision and resource playback. All validation is offline.
 Phase 22 (`f074144`) was pushed with successful hosted CI (`40117208034`).
 Phase 23 generates paper tables, figures, dataset inventories and outcome-stratified
 trace excerpts from validated saved runs, keeping scripted ablations separate.
+
+Phase 23 (`3a82b3a`) was pushed with successful hosted CI (`40128622872`).
+Phase 24 adds a credential-free, checksummed local reproduction archive and
+clean-checkout fixture/saved-result reproduction commands.
