@@ -4,10 +4,11 @@ import json
 from pathlib import Path
 
 from epistemic_search.baseline import RunResult
-from epistemic_search.benchmarks import BenchmarkDataset
+from epistemic_search.benchmarks import BenchmarkDataset, configured_dataset
 from epistemic_search.config import DecompositionConfig, Method, RunConfig
+from epistemic_search.controlled import ControlledDataset
 from epistemic_search.decomposition import digest
-from epistemic_search.evaluation import DatasetAdapter, JsonlDataset, Summary, evaluate, manifest
+from epistemic_search.evaluation import Summary, evaluate, manifest
 from epistemic_search.execution import configured_spend, execute_case, local_api_key
 from epistemic_search.models import QueryCase
 
@@ -54,11 +55,7 @@ async def compare(config: RunConfig, base_dir: Path) -> dict[str, Summary]:
     spend = configured_spend(config.rag, base_dir)
     if spend and (reason := spend.stop_reason()):
         raise ValueError(reason)
-    dataset: DatasetAdapter = (
-        JsonlDataset(base_dir / config.evaluation.dataset_path)
-        if config.evaluation.format == "jsonl"
-        else BenchmarkDataset(config.evaluation, base_dir, config.seed)
-    )
+    dataset = configured_dataset(config.evaluation, base_dir, config.seed)
     cases = dataset.load()
     root = (base_dir / config.evaluation.output_dir).resolve()
     # Validate all input hashes before reserving outputs or calling any model.
@@ -73,7 +70,7 @@ async def compare(config: RunConfig, base_dir: Path) -> dict[str, Summary]:
         "selected_case_ids": [c.id for c in cases],
         "dataset_hashes": manifests["naive_rag"]["input_hashes"],
         "metric_version": manifests["naive_rag"]["metric_version"],
-        "retriever": "lexical-overlap-v1",
+        "retriever": manifests["naive_rag"]["retriever"],
         "retrieval_scope": manifests["naive_rag"]["retrieval_scope"],
         "model_settings": config.rag.model_dump(mode="json"),
         "budget": config.budget.model_dump(mode="json"),
@@ -103,9 +100,17 @@ async def compare(config: RunConfig, base_dir: Path) -> dict[str, Summary]:
             # Never reuse an earlier method's or another example's decomposition.
             case_config.decomposition.cache_dir /= digest(case.id)
             documents = (
-                dataset.documents(case.id) if isinstance(dataset, BenchmarkDataset) else None
+                dataset.documents(case.id)
+                if isinstance(dataset, (BenchmarkDataset, ControlledDataset))
+                else None
             )
-            return await execute_case(case, case_config, base_dir, documents)
+            return await execute_case(
+                case,
+                case_config,
+                base_dir,
+                documents,
+                preserve_document_order=isinstance(dataset, ControlledDataset),
+            )
 
         summaries[method] = await evaluate(
             dataset,

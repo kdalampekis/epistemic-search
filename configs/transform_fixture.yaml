@@ -1,0 +1,69 @@
+input_path: ../tests/fixtures/controlled_base.jsonl
+output_dir: ../artifacts/controlled-fixture
+seed: 42
+transformations:
+- name: remove-location-link
+  kind: missing_premise
+  targets:
+  - district
+- name: opposed-location
+  kind: contradiction
+  targets:
+  - district
+  additions:
+  - source:
+      id: opposite
+      uri: fixture://opposite
+      title: opposite
+      retrieved_at: '2026-10-01T00:00:00Z'
+      source_type: benchmark
+    text: The Rava district is not in the city of Merin; it is in the city of Solen.
+- name: distractor
+  kind: irrelevant
+  additions:
+  - source:
+      id: distractor
+      uri: fixture://distractor
+      title: distractor
+      retrieved_at: '2026-10-01T00:00:00Z'
+      source_type: benchmark
+    text: The Luma institute cafeteria serves lentil soup.
+- name: paraphrase
+  kind: redundant
+  targets:
+  - district
+  additions:
+  - source:
+      id: paraphrase
+      uri: fixture://paraphrase
+      title: paraphrase
+      retrieved_at: '2026-10-01T00:00:00Z'
+      source_type: benchmark
+    text: The city of Merin contains the Rava district.
+- name: repeat-location
+  kind: repetition
+  targets:
+  - district
+  copies: 2
+- name: context-order
+  kind: order
+- name: dated-location
+  kind: freshness
+  additions:
+  - source:
+      id: old
+      uri: fixture://old
+      title: old
+      retrieved_at: '2026-10-01T00:00:00Z'
+      source_type: benchmark
+    text: As of 2020-01-01 the Luma institute headquarters is in Merin.
+  - source:
+      id: new
+      uri: fixture://new
+      title: new
+      retrieved_at: '2026-10-01T00:00:00Z'
+      source_type: benchmark
+    text: As of 2026-01-01 the Luma institute headquarters is in Solen.
+  evidence_dates:
+    old: '2020-01-01'
+    new: '2026-01-01'

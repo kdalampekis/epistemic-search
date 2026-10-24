@@ -10,6 +10,8 @@ from pydantic import BaseModel, ConfigDict, Field, JsonValue, TypeAdapter
 
 from epistemic_search.adapters import CorpusDocument
 from epistemic_search.config import EvaluationConfig
+from epistemic_search.controlled import ControlledDataset
+from epistemic_search.evaluation import DatasetAdapter, JsonlDataset
 from epistemic_search.models import QueryCase, Source, Text
 
 
@@ -18,6 +20,14 @@ def benchmark_source_id(benchmark: str, split: str, case_id: str, index: str) ->
         "b_"
         + hashlib.sha256(json.dumps([benchmark, split, case_id, index]).encode()).hexdigest()[:24]
     )
+
+
+def configured_dataset(settings: EvaluationConfig, base_dir: Path, seed: int) -> DatasetAdapter:
+    if settings.format == "jsonl":
+        return JsonlDataset(base_dir / settings.dataset_path)
+    if settings.format == "controlled":
+        return ControlledDataset(base_dir / settings.dataset_path)
+    return BenchmarkDataset(settings, base_dir, seed)
 
 
 class NativeRow(BaseModel):
@@ -70,7 +80,7 @@ class BenchmarkDataset:
     """
 
     def __init__(self, settings: EvaluationConfig, base_dir: Path, seed: int = 0) -> None:
-        if settings.format == "jsonl" or settings.snapshot_at is None:
+        if settings.format in {"jsonl", "controlled"} or settings.snapshot_at is None:
             raise ValueError("Native dataset format and snapshot_at required")
         self.settings, self.base_dir, self.seed = settings, base_dir, seed
         self._cases: list[QueryCase] | None = None

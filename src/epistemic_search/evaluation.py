@@ -219,6 +219,12 @@ def manifest(config: RunConfig, base_dir: Path) -> dict[str, object]:
             return None
 
     status = git("status", "--porcelain")
+    if config.evaluation.format == "controlled":
+        from epistemic_search.controlled import ControlledDataset
+
+        metric_version = ControlledDataset(base_dir / config.evaluation.dataset_path).metric_version
+    else:
+        metric_version = BENCHMARK_METRICS[config.evaluation.format]
     return {
         "config": cfg,
         "config_hash": hashlib.sha256(
@@ -227,11 +233,13 @@ def manifest(config: RunConfig, base_dir: Path) -> dict[str, object]:
         "input_hashes": {name: file_hash(base_dir / path) for name, path in files.items()},
         "git_commit": git("rev-parse", "HEAD"),
         "git_dirty": status != "" if status is not None else None,
-        "metric_version": BENCHMARK_METRICS[config.evaluation.format],
+        "metric_version": metric_version,
         "retrieval_scope": "configured-corpus"
         if config.evaluation.format == "jsonl"
         else "provided-context-per-question",
-        "retriever": "lexical-overlap-v1",
+        "retriever": "lexical-overlap-v1-provided-presentation"
+        if config.evaluation.format == "controlled"
+        else "lexical-overlap-v1",
         "subset_policy": "sha256(seed:case_id)-ascending" if config.evaluation.limit else "all",
         "method": config.method,
         "packages": {name: version(name) for name in ("epistemic-search", "pydantic", "httpx")},

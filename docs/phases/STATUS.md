@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-10-23.
+Updated: 2026-10-24.
 
 | Phase | Status | Evidence |
 | --- | --- | --- |
@@ -20,8 +20,9 @@ Updated: 2026-10-23.
 | 13 — Abstention metrics | Complete | [Implementation and checks](PHASE_13.md) |
 | 14 — Contradiction experiments | Complete | [Implementation and checks](PHASE_14.md) |
 | 15 — Calibration | Complete (offline validation) | [Implementation and limits](PHASE_15.md) |
-| 16 — Cost-aware controller | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_16.md) |
-| 17–25 | Not started | Follow the build specification sequentially |
+| 16 — Cost-aware controller | Complete | [Implementation and checks](PHASE_16.md) |
+| 17 — Controlled benchmark transformations | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_17.md) |
+| 18–25 | Not started | Follow the build specification sequentially |
 
 Phases 0 (`a6bd037`), 1 (`e8c030d`), and 2 (`93565cc`) were pushed; hosted CI passed.
 Phase 3 (`03724e0`) was pushed with successful hosted CI. Naive/iterative baselines,
@@ -61,3 +62,7 @@ calibration claims; the controller still uses uncalibrated heuristic beliefs.
 Phase 15 (`e6eec78`) was pushed with successful hosted CI (`40064049865`).
 Phase 16 adds four logged acquisition policies under shared constraints; the
 original default and historical config hashes remain intact. Validation is offline.
+
+Phase 16 (`0fc1b65`) was pushed with successful hosted CI (`40064451187`).
+Phase 17 adds deterministic, grouped context interventions, preserved grading and
+explicit provenance. All validation is offline; semantic claims still need review.

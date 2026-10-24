@@ -10,14 +10,15 @@ import typer
 import yaml
 
 from epistemic_search.baseline import RunResult
-from epistemic_search.benchmarks import BenchmarkDataset
+from epistemic_search.benchmarks import BenchmarkDataset, configured_dataset
 from epistemic_search.calibration import run_calibration
 from epistemic_search.campaign import estimate_campaign, run_campaign
 from epistemic_search.config import load_config
 from epistemic_search.conflicts import analyze_conflicts
+from epistemic_search.controlled import ControlledDataset, generate_transformations
 from epistemic_search.dataset_setup import prepare_datasets
 from epistemic_search.decomposition import DecompositionResult, decompose
-from epistemic_search.evaluation import DatasetAdapter, JsonlDataset, evaluate, manifest
+from epistemic_search.evaluation import evaluate, manifest
 from epistemic_search.execution import configured_model, configured_spend, execute_case
 from epistemic_search.models import QueryCase
 from epistemic_search.parity import compare
@@ -88,17 +89,21 @@ def benchmark(config_path: Path) -> None:
         spend = configured_spend(config.rag, config_path.parent)
         if spend and (reason := spend.stop_reason()):
             raise ValueError(reason)
-        dataset: DatasetAdapter = (
-            JsonlDataset(config_path.parent / settings.dataset_path)
-            if settings.format == "jsonl"
-            else BenchmarkDataset(settings, config_path.parent, config.seed)
-        )
+        dataset = configured_dataset(settings, config_path.parent, config.seed)
 
         async def runner(case: QueryCase) -> RunResult:
             documents = (
-                dataset.documents(case.id) if isinstance(dataset, BenchmarkDataset) else None
+                dataset.documents(case.id)
+                if isinstance(dataset, (BenchmarkDataset, ControlledDataset))
+                else None
             )
-            return await execute_case(case, config, config_path.parent, documents)
+            return await execute_case(
+                case,
+                config,
+                config_path.parent,
+                documents,
+                preserve_document_order=isinstance(dataset, ControlledDataset),
+            )
 
         summary = asyncio.run(
             evaluate(
@@ -213,3 +218,14 @@ def calibrate(config_path: Path) -> None:
         typer.echo(f"Calibration failed: {exc}", err=True)
         raise typer.Exit(code=1) from exc
     typer.echo(report.model_dump_json(indent=2))
+
+
+@app.command("transform")
+def transform_benchmark(config_path: Path) -> None:
+    """Generate declared evidence interventions offline, retaining base groups."""
+    try:
+        report = generate_transformations(config_path)
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"Transformation failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(json.dumps(report, indent=2))

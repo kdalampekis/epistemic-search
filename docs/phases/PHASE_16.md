@@ -1,6 +1,6 @@
 # Phase 16 — Cost-aware controller
 
-Status: **complete locally**; commit/push and hosted CI gate pending.
+Status: **complete**; commit `0fc1b65`, hosted CI `40064451187` passed.
 Phase 15 commit `e6eec78` passed CI `40064049865` before work began.
 
 ## Implementation

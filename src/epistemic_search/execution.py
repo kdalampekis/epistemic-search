@@ -71,13 +71,15 @@ async def execute_case(
     config: RunConfig,
     base_dir: Path,
     documents: list[CorpusDocument] | None = None,
+    *,
+    preserve_document_order: bool = False,
 ) -> RunResult:
     if config.rag is None:
         raise ValueError("rag configuration is required")
     if config.method == "closed_book":
         search = FixtureSearchProvider([])
     elif documents is not None:
-        search = FixtureSearchProvider(documents)
+        search = FixtureSearchProvider(documents, preserve_document_order=preserve_document_order)
     elif config.rag.corpus_path is not None:
         search = FixtureSearchProvider.from_path(base_dir / config.rag.corpus_path)
     else:

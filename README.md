@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Current: **Phase 16 — Cost-aware controller**, with four offline-tested acquisition policies. Real calibration results remain unavailable.
+are in `tests/test_providers.py`. Current: **Phase 17 — Controlled benchmark transformations**, with grouped, reproducible context interventions. Real calibration results remain unavailable.
 
 ## 11. Naive RAG baseline
 
@@ -444,3 +444,18 @@ uv run --locked epistemic-search evaluate configs/voi_fixture.yaml
 ```
 
 See [Phase 16](docs/phases/PHASE_16.md) for tests and limitations.
+
+## 22. Controlled context interventions
+
+```sh
+uv run --locked epistemic-search transform configs/transform_fixture.yaml
+uv run --locked epistemic-search evaluate configs/controlled_fixture.yaml
+```
+
+Generates a base plus seven independent variants with provenance and hashes.
+Supplied contradictions and dated conflicts require semantic review; deleting a
+document does not automatically label a question unanswerable. Original reference
+answers and graders are retained. Keep all variants of one `group_id` in the same
+split. The eight-example fixture uses scripted abstentions and makes no quality
+claim. See [Phase 17](docs/phases/PHASE_17.md) and
+[the intervention protocol](docs/decisions/0011-controlled-interventions.md).

@@ -10,7 +10,7 @@ from time import perf_counter
 from typing import Any
 
 import httpx
-from pydantic import TypeAdapter
+from pydantic import JsonValue, TypeAdapter
 
 from epistemic_search.config import RagConfig
 from epistemic_search.models import Schema, Source, Usage
@@ -32,10 +32,13 @@ class CorpusDocument(Schema):
 
 
 class FixtureSearchProvider:
-    def __init__(self, documents: list[CorpusDocument]) -> None:
+    def __init__(
+        self, documents: list[CorpusDocument], *, preserve_document_order: bool = False
+    ) -> None:
         if len({d.source.id for d in documents}) != len(documents):
             raise ValueError("Corpus source IDs must be unique")
         self.documents = documents
+        self.preserve_document_order = preserve_document_order
         self._cache: dict[tuple[str, int], SearchResponse] = {}
 
     @classmethod
@@ -58,6 +61,12 @@ class FixtureSearchProvider:
         ]
         ranked = sorted(scored, key=lambda pair: (-pair[0], pair[1].source.id))
         selected = [(score, doc) for score, doc in ranked if score > 0][:k]
+        original_ranks: dict[str, JsonValue] = {
+            doc.source.id: i for i, (_, doc) in enumerate(selected, 1)
+        }
+        if self.preserve_document_order:
+            positions = {doc.source.id: i for i, doc in enumerate(self.documents)}
+            selected.sort(key=lambda pair: positions[pair[1].source.id])
         results = [
             SearchResult(
                 source=doc.source,
@@ -79,6 +88,9 @@ class FixtureSearchProvider:
             metadata={"token_measurement": "whitespace-v1-estimate", "latency": "synthetic-zero"},
         )
 
+        if self.preserve_document_order:
+            response.metadata["presentation_order"] = "provided"
+            response.metadata["lexical_ranks"] = original_ranks
         self._cache[key] = response.model_copy(deep=True)
         return response
 
