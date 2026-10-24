@@ -1,6 +1,6 @@
 # Phase 25 — Final technical report / paper
 
-Status: **complete locally**; commit/push and hosted CI gate pending.
+Status: **complete**, pushed as `052a498`; hosted CI `40129599742` passed.
 Phase 24 commit `949dad1` passed CI `40128999926` before work began.
 
 ## Deliverables and decisions

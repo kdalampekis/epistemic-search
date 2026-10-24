@@ -29,7 +29,7 @@ Updated: 2026-10-24.
 | 22 — Demo dashboard | Complete | [Implementation and checks](PHASE_22.md) |
 | 23 — Paper artifact generation | Complete | [Implementation and checks](PHASE_23.md) |
 | 24 — Reproduction package | Complete | [Implementation and checks](PHASE_24.md) |
-| 25 — Final technical report / paper | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_25.md) |
+| 25 — Final technical report / paper | Complete | [Implementation and checks](PHASE_25.md) |
 
 Phases 0 (`a6bd037`), 1 (`e8c030d`), and 2 (`93565cc`) were pushed; hosted CI passed.
 Phase 3 (`03724e0`) was pushed with successful hosted CI. Naive/iterative baselines,
@@ -106,3 +106,11 @@ Phase 24 (`949dad1`) was pushed with successful hosted CI (`40128999926`).
 The clean local reproduction archive was built and verified. Phase 25 delivers a
 six-page report, result-bound rendering and a narrowed literature/claim audit.
 No further implementation phase is specified; scientific validation remains open.
+
+Phase 25 (`052a498`) was pushed with successful hosted CI (`40129599742`),
+including the independent offline reproduction job. **All specified implementation
+phases 0–25 are complete.** This is not a claim that the research hypotheses were
+confirmed: real calibration, causal ablations, independent semantic review and
+stronger-model transfer remain unvalidated. No Phase 26 or benchmark scaling is
+authorized by the roadmap itself. See the technical report for the next research
+decision and the unchanged $50 cumulative API boundary.
