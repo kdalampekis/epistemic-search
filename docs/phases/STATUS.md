@@ -16,8 +16,9 @@ Updated: 2026-10-23.
 | 9 — Targeted query generator | Complete | [Implementation and checks](PHASE_9.md) |
 | 10 — Full Epistemic Search MVP | Complete | [Implementation and checks](PHASE_10.md) |
 | 11 — Benchmark integrations | Complete | [Implementation and checks](PHASE_11.md) |
-| 12 — Baseline parity | Complete locally; push/CI gate pending | [Implementation and remaining dependency](PHASE_12.md) |
-| 13–25 | Not started | Follow the build specification sequentially |
+| 12 — Baseline parity | Complete | [Implementation and audited pilot](PHASE_12.md) |
+| 13 — Abstention metrics | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_13.md) |
+| 14–25 | Not started | Follow the build specification sequentially |
 
 Phases 0 (`a6bd037`), 1 (`e8c030d`), and 2 (`93565cc`) were pushed; hosted CI passed.
 Phase 3 (`03724e0`) was pushed with successful hosted CI. Naive/iterative baselines,
@@ -39,4 +40,7 @@ implemented methods and a matched comparison runner. The revised strategy uses
 Luna/medium with a $50 cumulative project cap and a $5 final Sol reserve. Local
 credentials work; all 110 real pilot method-cases ran. The negative result and
 $0.067952575 cumulative cost are audited. No full benchmark or Sol run follows.
-Phase 13 starts only after the Phase 12 commit is pushed and hosted CI passes.
+Phase 12 (`196de1f`) was pushed with successful hosted CI (`40040967731`).
+Phase 13 adds offline selective metrics and reanalyzes saved results at zero API
+cost. Missing ranking/answerability data remain explicitly unknown; no full
+benchmark or fresh model calls are needed for this phase.

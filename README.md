@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Current: **Phase 12 — Baseline parity**, with a budgeted Luna real-model pilot.
+are in `tests/test_providers.py`. Current: **Phase 13 — Abstention metrics**, with offline analysis of the completed Luna pilot.
 
 ## 11. Naive RAG baseline
 
@@ -385,7 +385,8 @@ configuration and logically charged decomposition per method/example. Paid runs
 reuse exact model outputs with physical cost tracked separately. It records
 actual use, failures, per-method traces and a comparison manifest. This bundled
 run is scripted. [Phase 12](docs/phases/PHASE_12.md) lists the real-data pilot
-configs and recorded observations. Phase 13 has not started.
+configs and recorded observations. [Phase 13](docs/phases/PHASE_13.md) adds
+offline selective metrics with explicit missing-data handling.
 
 ## 18. Current API budget
 
@@ -395,3 +396,15 @@ use `gpt-6-luna` / `medium`; a $5 portion is reserved for a later small
 input counting, persistent per-run/project caps and exact-output reuse.
 See [the strategy and commands](docs/experiments/research_budget.md). The local
 ignored `.env` is supported; keys must never enter `.env.example` or Git.
+
+## 19. Offline abstention analysis
+
+```sh
+uv run --locked epistemic-search selective artifacts/evaluation-fixture selective.json
+```
+
+Computes coverage, selective EM risk and label-supported abstention metrics from
+saved outputs. Optional `--scores-path` accepts a JSON `source` and `scores` map.
+Full risk-coverage/AURC requires ranked candidate answers for every example;
+missing predictions or labels remain null. No API calls or new grading occur.
+See [the metric protocol](docs/decisions/0007-selective-metrics.md).

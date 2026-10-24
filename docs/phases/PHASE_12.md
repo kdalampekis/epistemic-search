@@ -1,6 +1,6 @@
 # Phase 12 — Baseline parity
 
-Status: **complete locally**; final commit/push and hosted CI gate pending.
+Status: **complete**, committed/pushed as `196de1f`; hosted CI `40040967731` passed.
 Phase 11 commit `d8baae2` and the offline checkpoint `1e44d3b` passed hosted CI.
 
 ## Implementation
@@ -85,6 +85,6 @@ extracted claims, not proof of real-world truth. Provider alias sampling remains
 stochastic; original outputs and source hashes must be retained.
 
 The matched real-model execution acceptance criterion is met, including failure
-retention and reproducible configs. Commit/push and verify CI, then proceed to
+retention and reproducible configs. The commit/push and CI gate passed; proceed to
 **Phase 13 — Abstention metrics**, using
 saved results and offline tests without new model calls.

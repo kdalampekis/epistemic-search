@@ -18,6 +18,7 @@ from epistemic_search.evaluation import (
     token_f1,
 )
 from epistemic_search.models import QueryCase, Usage
+from epistemic_search.selective import analyze_saved_run
 
 
 @pytest.mark.parametrize(
@@ -148,7 +149,11 @@ def test_budget_stop_retains_partial_artifacts_without_inventing_results(tmp_pat
     output = tmp_path / "partial"
     summary = asyncio.run(
         evaluate(
-            JsonlDataset(path), runner, output, {}, stop_requested=lambda: "Project cap reached"
+            JsonlDataset(path),
+            runner,
+            output,
+            {"metric_version": "english-em-token-f1-v1"},
+            stop_requested=lambda: "Project cap reached",
         )
     )
     assert called == ["0"]
@@ -156,3 +161,7 @@ def test_budget_stop_retains_partial_artifacts_without_inventing_results(tmp_pat
     assert summary.stop_reason == "Project cap reached"
     assert len(list((output / "traces").glob("*.json"))) == 1
     assert len((output / "labels.jsonl").read_text().splitlines()) == 3
+
+    partial_report = analyze_saved_run(output)
+    assert partial_report.examples == 1 and partial_report.planned_examples == 3
+    assert partial_report.source_stop_reason == "Project cap reached"

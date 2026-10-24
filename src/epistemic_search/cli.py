@@ -19,6 +19,7 @@ from epistemic_search.evaluation import DatasetAdapter, JsonlDataset, evaluate, 
 from epistemic_search.execution import configured_model, configured_spend, execute_case
 from epistemic_search.models import QueryCase
 from epistemic_search.parity import compare
+from epistemic_search.selective import analyze_saved_run
 from epistemic_search.tracing import configure_logging
 
 app = typer.Typer(no_args_is_help=True)
@@ -173,3 +174,16 @@ def inspect_decomposition(config_path: Path, query_path: Path, output_path: Path
     typer.echo(result.model_dump_json(indent=2))
     if result.error is not None:
         raise typer.Exit(code=1)
+
+
+@app.command("selective")
+def selective(run_dir: Path, output_path: Path, scores_path: Path | None = None) -> None:
+    """Analyze saved evaluation outputs without model calls or new grading."""
+    try:
+        report = analyze_saved_run(run_dir, scores_path)
+        with output_path.open("x", encoding="utf-8") as output:
+            output.write(report.model_dump_json(indent=2) + "\n")
+    except (OSError, ValueError) as exc:
+        typer.echo(f"Selective analysis failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(report.model_dump_json(indent=2))
