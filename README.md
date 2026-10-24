@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Current: **Phase 21 — Failure analysis**, with offline trace inspection and provisional taxonomy reports. Real calibration results remain unavailable.
+are in `tests/test_providers.py`. Current: **Phase 22 — Demo dashboard**, with standalone local playback of saved traces. Real calibration results remain unavailable.
 
 ## 11. Naive RAG baseline
 
@@ -512,3 +512,17 @@ are not automatically failures. Automatic categories are provisional symptoms or
 stages, while manual judgments carry assessor/protocol and trace-hash provenance.
 See [Phase 21](docs/phases/PHASE_21.md) and
 [the review protocol](docs/decisions/0015-failure-stage-review.md).
+
+## 27. Local research dashboard
+
+```sh
+uv run --locked epistemic-search dashboard configs/dashboard_fixture.yaml
+# Existing Luna pilot artifacts:
+uv run --locked epistemic-search dashboard configs/dashboard_pilot.yaml
+```
+
+Open the generated `index.html` locally. Search saved cases and step through the
+premise graph, evidence/provenance, beliefs, blockers, planned queries and resource
+use. The recorded final outcome is separately labelled. This dashboard makes no
+model/search calls; it requires complete saved runs and creates a new directory.
+See [Phase 22](docs/phases/PHASE_22.md).

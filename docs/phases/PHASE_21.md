@@ -1,6 +1,6 @@
 # Phase 21 — Failure analysis
 
-Status: **complete locally**; commit/push and hosted CI gate pending.
+Status: **complete**, pushed as `fe5b3b4`; hosted CI `40116134085` passed.
 Phase 20 commit `ea9b15b` passed CI `40115519622` before work began.
 
 ## Implementation and design

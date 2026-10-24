@@ -1,0 +1,5 @@
+runs:
+  targeted-acquisition: ../artifacts/voi-fixture
+  full-fixture: ../artifacts/epistemic-fixture
+output_dir: ../artifacts/dashboard-fixture
+title: "Epistemic Search \xB7 fixture replay"

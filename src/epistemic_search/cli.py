@@ -17,6 +17,7 @@ from epistemic_search.campaign import estimate_campaign, run_campaign
 from epistemic_search.config import load_config
 from epistemic_search.conflicts import analyze_conflicts
 from epistemic_search.controlled import ControlledDataset, generate_transformations
+from epistemic_search.dashboard import build_dashboard
 from epistemic_search.dataset_setup import prepare_datasets
 from epistemic_search.decomposition import DecompositionResult, decompose
 from epistemic_search.evaluation import evaluate, manifest
@@ -30,6 +31,17 @@ from epistemic_search.statistics import analyze_comparison
 from epistemic_search.tracing import configure_logging
 
 app = typer.Typer(no_args_is_help=True)
+
+
+@app.command("dashboard")
+def dashboard(config_path: Path) -> None:
+    """Build a standalone local dashboard from saved traces; make no API calls."""
+    try:
+        report = build_dashboard(config_path)
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"Dashboard build failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"Built local playback for {report['cases']} saved cases; additional API cost $0")
 
 
 @app.command("analyze-failures")

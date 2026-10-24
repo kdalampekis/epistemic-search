@@ -30,6 +30,7 @@ jobs:
       - run: uv run --locked epistemic-search decompose configs/decomposition_fixture.yaml tests/fixtures/decomposition_query.json /tmp/decomposition.json
       - run: uv run --locked epistemic-search evaluate configs/epistemic_fixture.yaml
       - run: uv run --locked epistemic-search evaluate configs/voi_fixture.yaml
+      - run: uv run --locked epistemic-search dashboard configs/dashboard_fixture.yaml
       - run: uv run --locked epistemic-search compare configs/parity_fixture.yaml
       - run: uv run --locked epistemic-search ablate configs/ablation_fixture.yaml
       - run: uv run --locked epistemic-search analyze-comparison configs/statistics_fixture.yaml

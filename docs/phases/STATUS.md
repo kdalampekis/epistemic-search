@@ -25,8 +25,9 @@ Updated: 2026-10-24.
 | 18 — Optional formal backend | Complete | [Implementation and checks](PHASE_18.md) |
 | 19 — Ablation runner | Complete | [Implementation and checks](PHASE_19.md) |
 | 20 — Statistical analysis | Complete | [Implementation and checks](PHASE_20.md) |
-| 21 — Failure analysis | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_21.md) |
-| 22–25 | Not started | Follow the build specification sequentially |
+| 21 — Failure analysis | Complete | [Implementation and checks](PHASE_21.md) |
+| 22 — Demo dashboard | Complete locally; push/CI gate pending | [Implementation and checks](PHASE_22.md) |
+| 23–25 | Not started | Follow the build specification sequentially |
 
 Phases 0 (`a6bd037`), 1 (`e8c030d`), and 2 (`93565cc`) were pushed; hosted CI passed.
 Phase 3 (`03724e0`) was pushed with successful hosted CI. Naive/iterative baselines,
@@ -86,3 +87,7 @@ cost summaries. Negative results and missing ConfRAG answer metrics are retained
 Phase 20 (`ea9b15b`) was pushed with successful hosted CI (`40115519622`).
 Phase 21 renders all 110 saved pilot traces and records provisional failure-stage
 categories, with manual trace-bound annotation support and no new API calls.
+
+Phase 21 (`fe5b3b4`) was pushed with successful hosted CI (`40116134085`).
+Phase 22 adds a standalone local dashboard with event-by-event graph, evidence,
+state, decision and resource playback. All validation is offline.
