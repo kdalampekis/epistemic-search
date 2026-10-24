@@ -297,7 +297,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Current: **Phase 13 — Abstention metrics**, with offline analysis of the completed Luna pilot.
+are in `tests/test_providers.py`. Current: **Phase 14 — Contradiction experiments**, with offline analysis of the completed Luna pilot.
 
 ## 11. Naive RAG baseline
 
@@ -371,8 +371,8 @@ per-question document pools and evaluator-only annotations. See
 downloads, licenses, actual release counts and smoke configs.
 
 Hotpot/2Wiki report versioned answer-only scores. ConfRAG retains its multiple
-viewpoints and reports no single-answer EM/F1; its dedicated experiments remain
-Phase 14. The bundled configs use scripted abstention, not a real model study.
+viewpoints and reports no single-answer EM/F1; its dedicated conflict diagnostics are documented in
+[Phase 14](docs/phases/PHASE_14.md). The bundled configs use scripted abstention, not a real model study.
 
 ## 17. Matched baseline comparison
 
@@ -408,3 +408,14 @@ saved outputs. Optional `--scores-path` accepts a JSON `source` and `scores` map
 Full risk-coverage/AURC requires ranked candidate answers for every example;
 missing predictions or labels remain null. No API calls or new grading occur.
 See [the metric protocol](docs/decisions/0007-selective-metrics.md).
+
+## 20. Offline conflict analysis
+
+```sh
+uv run --locked epistemic-search conflicts artifacts/phase12/luna-medium/comparison/confrag/epistemic_search conflicts.json
+```
+
+Uses native corpus conflict labels and saved detector/retrieval traces. Reports
+source-cluster coverage and missing detector outputs explicitly. Optional
+`--judgments-path` supplies independent, trace-bound safety annotations; absence
+means unknown unsafe-answer rate. See [the protocol](docs/decisions/0008-conflict-evaluation.md).

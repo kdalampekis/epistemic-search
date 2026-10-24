@@ -13,6 +13,7 @@ from epistemic_search.baseline import RunResult
 from epistemic_search.benchmarks import BenchmarkDataset
 from epistemic_search.campaign import estimate_campaign, run_campaign
 from epistemic_search.config import load_config
+from epistemic_search.conflicts import analyze_conflicts
 from epistemic_search.dataset_setup import prepare_datasets
 from epistemic_search.decomposition import DecompositionResult, decompose
 from epistemic_search.evaluation import DatasetAdapter, JsonlDataset, evaluate, manifest
@@ -185,5 +186,18 @@ def selective(run_dir: Path, output_path: Path, scores_path: Path | None = None)
             output.write(report.model_dump_json(indent=2) + "\n")
     except (OSError, ValueError) as exc:
         typer.echo(f"Selective analysis failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(report.model_dump_json(indent=2))
+
+
+@app.command("conflicts")
+def conflicts(run_dir: Path, output_path: Path, judgments_path: Path | None = None) -> None:
+    """Audit saved ConfRAG detection/retrieval and optional independent safety labels."""
+    try:
+        report = analyze_conflicts(run_dir, judgments_path)
+        with output_path.open("x", encoding="utf-8") as output:
+            output.write(report.model_dump_json(indent=2) + "\n")
+    except (OSError, ValueError, KeyError) as exc:
+        typer.echo(f"Conflict analysis failed: {exc}", err=True)
         raise typer.Exit(code=1) from exc
     typer.echo(report.model_dump_json(indent=2))

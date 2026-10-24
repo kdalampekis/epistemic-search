@@ -13,6 +13,13 @@ from epistemic_search.config import EvaluationConfig
 from epistemic_search.models import QueryCase, Source, Text
 
 
+def benchmark_source_id(benchmark: str, split: str, case_id: str, index: str) -> str:
+    return (
+        "b_"
+        + hashlib.sha256(json.dumps([benchmark, split, case_id, index]).encode()).hexdigest()[:24]
+    )
+
+
 class NativeRow(BaseModel):
     # Retain release annotations for audits, including fields not used for scoring.
     model_config = ConfigDict(extra="allow")
@@ -146,10 +153,7 @@ class BenchmarkDataset:
             documents[case_id] = [
                 CorpusDocument(
                     source=Source(
-                        id="b_"
-                        + hashlib.sha256(
-                            json.dumps([cfg.format, cfg.split, case_id, index]).encode()
-                        ).hexdigest()[:24],
+                        id=benchmark_source_id(cfg.format, cfg.split, case_id, index),
                         uri=uri,
                         title=title,
                         retrieved_at=cfg.snapshot_at,

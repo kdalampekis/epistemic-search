@@ -6,7 +6,7 @@ from pathlib import Path
 from time import perf_counter
 
 from epistemic_search.baseline import Answer, RunResult
-from epistemic_search.belief import aggregate_beliefs
+from epistemic_search.belief import aggregate_beliefs, conflicts_for
 from epistemic_search.budgeting import GuardedModel, GuardedSearch, RunAccounting
 from epistemic_search.config import RunConfig
 from epistemic_search.controller import choose_action
@@ -115,6 +115,9 @@ async def run_epistemic(
         state.budget = BudgetState(limits=config.budget, used=run.ledger.total())
         run.component = "control"
         run.add("BELIEF_UPDATE", {"beliefs": [b.model_dump(mode="json") for b in state.beliefs]})
+        conflicts = conflicts_for(state.beliefs, ledger.items)
+        if conflicts:
+            run.add("CONFLICT", {"conflicts": [c.model_dump(mode="json") for c in conflicts]})
         try:
             decision, sufficiency = choose_action(
                 graph,

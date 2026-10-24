@@ -2,7 +2,7 @@
 
 from epistemic_search.config import BeliefConfig
 from epistemic_search.evidence import EvidenceLedger
-from epistemic_search.models import BeliefStatus, Claim, ClaimBelief, EvidenceItem
+from epistemic_search.models import BeliefStatus, Claim, ClaimBelief, EvidenceItem, Schema, Text
 
 
 def aggregate_beliefs(
@@ -45,3 +45,36 @@ def aggregate_beliefs(
             )
         )
     return beliefs
+
+
+class Conflict(Schema):
+    claim_id: Text
+    support_evidence_ids: list[Text]
+    contradiction_evidence_ids: list[Text]
+    source_ids: list[Text]
+
+
+def conflicts_for(beliefs: list[ClaimBelief], evidence: list[EvidenceItem]) -> list[Conflict]:
+    """MIXED is the existing thresholded detector, not any negative stance."""
+    conflicts = []
+    for belief in beliefs:
+        if belief.status != "MIXED":
+            continue
+        items = [e for e in evidence if e.id in belief.evidence_ids]
+        if {e.id for e in items} != set(belief.evidence_ids):
+            raise ValueError("Conflict references missing evidence")
+        if any(e.claim_id != belief.claim_id for e in items):
+            raise ValueError("Conflict evidence belongs to a different claim")
+        support = sorted(e.id for e in items if e.stance == "SUPPORT")
+        contradiction = sorted(e.id for e in items if e.stance == "CONTRADICT")
+        if not support or not contradiction:
+            raise ValueError("MIXED conflict requires both evidence stances with provenance")
+        conflicts.append(
+            Conflict(
+                claim_id=belief.claim_id,
+                support_evidence_ids=support,
+                contradiction_evidence_ids=contradiction,
+                source_ids=sorted({e.source.id for e in items if e.stance != "NEUTRAL"}),
+            )
+        )
+    return conflicts

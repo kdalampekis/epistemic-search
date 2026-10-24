@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from epistemic_search.config import RunConfig
+from epistemic_search.conflicts import inspect_conflicts
 from epistemic_search.engine import run_epistemic
 from epistemic_search.models import QueryCase, Source, Usage
 from epistemic_search.providers import ModelRequest, ModelResponse, SearchResponse, SearchResult
@@ -139,6 +140,12 @@ def test_required_mvp_scenarios(
     if scenario == "C":
         assert result.decision.blocking_claims
     if scenario == "D":
+        snapshots, blocking = inspect_conflicts(result)
+        assert blocking is True and all(s.conflicts for s in snapshots)
+        assert len([e for e in result.trace if e.type == "CONFLICT"]) == 2
+        conflict = snapshots[0].conflicts[0]
+        assert conflict.support_evidence_ids and conflict.contradiction_evidence_ids
+        assert conflict.source_ids == ["source-1"]
         assert any(
             e.type == "DECISION" and e.payload.get("action") == "RESOLVE_CONFLICT"
             for e in result.trace

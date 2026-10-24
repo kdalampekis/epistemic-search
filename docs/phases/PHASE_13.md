@@ -1,6 +1,6 @@
 # Phase 13 — Abstention metrics
 
-Status: **complete locally**; commit/push and hosted CI gate pending.
+Status: **complete**. Commit `dfa9dba` pushed; hosted CI `40063077390` passed.
 Phase 12 commit `196de1f` passed hosted CI run `40040967731` before work began.
 
 ## Implementation and decisions

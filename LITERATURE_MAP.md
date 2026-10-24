@@ -177,6 +177,11 @@ contains 1,098 records, verified by complete ingestion. These are distinct
 release counts. ConfRAG evaluates clustering, answer coverage and reason
 coverage; its opposing viewpoints must not be treated as interchangeable
 gold answers for ordinary EM/F1. See `docs/experiments/benchmark_setup.md`.
+Phase 14 rechecked the dataset card and paper: native `contradicts` labels the
+provided corpus, not an arbitrary retrieved subset. Our conflict diagnostics
+are a separate protocol, not a reproduction of their structured metrics.
+Contradiction detection and multi-viewpoint reasoning are established prior
+work; any contribution must concern the controlled joint architecture.
 
 ### Rational Synthesizers or Heuristic Followers?
 Naphade, Findings of ACL 2026  
