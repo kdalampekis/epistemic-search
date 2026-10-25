@@ -15,9 +15,9 @@ case_id: 2wiki:f7ccb422088311ebbd6dac1f6bf848b6
 order: 14
 dataset: 2wiki-april7-dev
 query_id: f7ccb422088311ebbd6dac1f6bf848b6
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: e529c80a91dec78fffd1d415e3c15720285e784bb8eb4b1a9984389ec44c894c
 question: Which film has the director born later, Kaalapani or Strictly Modern?
 gold:
@@ -60,12 +60,23 @@ gold:
   benchmark: 2wikimultihopqa
   split: dev
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: NO
+  required_claims:
+  - id: o1
+    assertion: Kaalapani was directed by Priyadarshan.
+  - id: o2
+    assertion: Strictly Modern was directed by William A. Seiter.
+  - id: o3
+    assertion: Priyadarshan was born on 30 January 1957.
+  - id: o4
+    assertion: William A. Seiter was born on June 10, 1890.
+  - id: o5
+    assertion: Priyadarshan was born later, so Kaalapani is the answer.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: AND
+    description: All listed oracle claims are jointly required.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth. Generated 
+    decomposition was visible before this oracle was authored, so authored_before_viewing_generated is NO.
 decomposition:
   context:
     formula: OR(AND(P3, P4, P1), AND(P3, P2, P1))
@@ -74,12 +85,13 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: NO
+    complete: NO
+    has_unnecessary_premises: YES
+    has_missing_required_premises: YES
+    dependency_structure_matches: NO
+    notes: Omits director identities and concrete dates; “is established” is an epistemic placeholder, while P2/P4 are 
+      mutually exclusive answer alternatives.
 premises:
 - id: c_1d1201cf90898423
   context:
@@ -88,13 +100,14 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Truth is not directly assessable because the premise is an epistemic/variable placeholder rather than a 
+      concrete gold fact.
 - id: c_37ff3d0db775d133
   context:
     label: P2
@@ -102,13 +115,14 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: NO
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NO
+    notes: Relevant but not required for the gold answer under the oracle decomposition. Contradicted by the benchmark 
+      gold relation/comparison.
 - id: c_5608d812122bd3b0
   context:
     label: P3
@@ -116,13 +130,14 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Truth is not directly assessable because the premise is an epistemic/variable placeholder rather than a 
+      concrete gold fact.
 - id: c_99af4caa40abe8c4
   context:
     label: P4
@@ -130,13 +145,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Semantically aligned with the benchmark gold facts.
 methods:
   epistemic_search:
     run: 2wikimultihopqa-epistemic_search
@@ -153,9 +168,9 @@ methods:
         final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: f7ccb422088311ebbd6dac1f6bf848b6:3
       context:
@@ -176,19 +191,20 @@ methods:
         - kaalapani
         - priyadarshan
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:24
       context:
         round: 2
         kind: TARGETED
-        query: The birth date of Strictly Modern's director is established. Which film has the director
-          born later, Kaalapani or Strictly Modern? independent verification primary source
+        query: The birth date of Strictly Modern's director is established. Which film has the director born later, 
+          Kaalapani or Strictly Modern? independent verification primary source
         target_premise: P1
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -203,19 +219,19 @@ methods:
         - kaalapani
         - priyadarshan
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: NO
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:33
       context:
         round: 3
         kind: TARGETED
-        query: The birth date of Strictly Modern's director is established. Which film has the director
-          born later, Kaalapani or Strictly Modern? independent verification primary source
+        query: The birth date of Strictly Modern's director is established. Which film has the director born later, 
+          Kaalapani or Strictly Modern? independent verification primary source
         target_premise: P1
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -230,13 +246,13 @@ methods:
         - kaalapani
         - priyadarshan
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: NO
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches:
     - id: f7ccb422088311ebbd6dac1f6bf848b6:4
       context:
@@ -252,9 +268,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: f7ccb422088311ebbd6dac1f6bf848b6:6
       context:
@@ -270,9 +286,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: f7ccb422088311ebbd6dac1f6bf848b6:6#0
         context:
@@ -282,11 +298,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:8
       context:
         premise: P2
@@ -301,9 +317,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: f7ccb422088311ebbd6dac1f6bf848b6:8#0
         context:
@@ -313,11 +329,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:10
       context:
         premise: P2
@@ -332,9 +348,9 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: f7ccb422088311ebbd6dac1f6bf848b6:10#0
         context:
@@ -344,26 +360,26 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: f7ccb422088311ebbd6dac1f6bf848b6:10#1
         context:
-          span: His collaborations with Mohanlal were highly popular in Malayalam cinema during the 1980s
-            and 1990s, with most notable films being "Poochakkoru MookkuthiMazha Peyyunnu Maddalam KottunnuThalavattamVellanakalude
+          span: His collaborations with Mohanlal were highly popular in Malayalam cinema during the 1980s and 1990s, 
+            with most notable films being "Poochakkoru MookkuthiMazha Peyyunnu Maddalam KottunnuThalavattamVellanakalude
             NaduChithramVandanamKilukkamAbhimanyuMithunamThenmavin KombathKala Pani", and "Chandralekha".
           system_stance: NEUTRAL
           system_stance_score: 0.99
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:12
       context:
         premise: P3
@@ -378,9 +394,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: f7ccb422088311ebbd6dac1f6bf848b6:12#0
         context:
@@ -390,11 +406,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:14
       context:
         premise: P3
@@ -409,39 +425,39 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: f7ccb422088311ebbd6dac1f6bf848b6:14#0
         context:
-          span: Priyadarshan (born Priyadarshan Soman Nair; 30 January 1957) is an Indian film director,
-            producer, and screenwriter.
+          span: Priyadarshan (born Priyadarshan Soman Nair; 30 January 1957) is an Indian film director, producer, and 
+            screenwriter.
           system_stance: SUPPORT
           system_stance_score: 0.91
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
       - id: f7ccb422088311ebbd6dac1f6bf848b6:14#1
         context:
-          span: His collaborations with Mohanlal were highly popular in Malayalam cinema during the 1980s
-            and 1990s, with most notable films being "Poochakkoru MookkuthiMazha Peyyunnu Maddalam KottunnuThalavattamVellanakalude
+          span: His collaborations with Mohanlal were highly popular in Malayalam cinema during the 1980s and 1990s, 
+            with most notable films being "Poochakkoru MookkuthiMazha Peyyunnu Maddalam KottunnuThalavattamVellanakalude
             NaduChithramVandanamKilukkamAbhimanyuMithunamThenmavin KombathKala Pani", and "Chandralekha".
           system_stance: SUPPORT
           system_stance_score: 0.77
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:16
       context:
         premise: P4
@@ -456,9 +472,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: f7ccb422088311ebbd6dac1f6bf848b6:16#0
         context:
@@ -468,11 +484,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:18
       context:
         premise: P4
@@ -487,9 +503,9 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: f7ccb422088311ebbd6dac1f6bf848b6:18#0
         context:
@@ -499,25 +515,25 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: f7ccb422088311ebbd6dac1f6bf848b6:18#1
         context:
-          span: most notable films being "Poochakkoru MookkuthiMazha Peyyunnu Maddalam KottunnuThalavattamVellanakalude
+          span: most notable films being "Poochakkoru MookkuthiMazha Peyyunnu Maddalam KottunnuThalavattamVellanakalude 
             NaduChithramVandanamKilukkamAbhimanyuMithunamThenmavin KombathKala Pani", and "Chandralekha"
           system_stance: NEUTRAL
           system_stance_score: 0.9
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:25
       context:
         premise: P1
@@ -532,9 +548,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: f7ccb422088311ebbd6dac1f6bf848b6:27
       context:
@@ -550,9 +566,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: f7ccb422088311ebbd6dac1f6bf848b6:27#0
         context:
@@ -562,11 +578,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:34
       context:
         premise: P1
@@ -581,9 +597,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: f7ccb422088311ebbd6dac1f6bf848b6:36
       context:
@@ -599,9 +615,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: f7ccb422088311ebbd6dac1f6bf848b6:36#0
         context:
@@ -611,11 +627,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     belief_states:
     - id: f7ccb422088311ebbd6dac1f6bf848b6:20
       context:
@@ -659,13 +675,15 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: YES
+        missing_blockers_description: Concrete Strictly Modern director identity/date facts are missing from the 
+          generated proof state.
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:29
       context:
         update: 2
@@ -708,13 +726,15 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: YES
+        missing_blockers_description: Concrete Strictly Modern director identity/date facts are missing from the 
+          generated proof state.
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:38
       context:
         update: 3
@@ -757,13 +777,15 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: YES
+        missing_blockers_description: Concrete Strictly Modern director identity/date facts are missing from the 
+          generated proof state.
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     controller_decisions:
     - id: f7ccb422088311ebbd6dac1f6bf848b6:22
       context:
@@ -775,15 +797,15 @@ methods:
         - P2
         - P4
         rationale: Resolve c_1d1201cf90898423 toward SUPPORTED
-        next_query: The birth date of Strictly Modern's director is established. Which film has the director
-          born later, Kaalapani or Strictly Modern? independent verification primary source
+        next_query: The birth date of Strictly Modern's director is established. Which film has the director born later,
+          Kaalapani or Strictly Modern? independent verification primary source
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:31
       context:
         decision: 2
@@ -794,15 +816,15 @@ methods:
         - P2
         - P4
         rationale: Resolve c_1d1201cf90898423 toward SUPPORTED
-        next_query: The birth date of Strictly Modern's director is established. Which film has the director
-          born later, Kaalapani or Strictly Modern? independent verification primary source
+        next_query: The birth date of Strictly Modern's director is established. Which film has the director born later,
+          Kaalapani or Strictly Modern? independent verification primary source
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:40
       context:
         decision: 3
@@ -816,16 +838,19 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: RETRIEVAL_ERROR
+      secondary:
+      - DECOMPOSITION_ERROR
+      rationale: The system retrieves only Kaalapani/Priyadarshan and never reaches Strictly Modern/William A. Seiter; 
+        the decomposition also uses epistemic placeholders rather than concrete dates.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: 2wikimultihopqa-premise_only
     trace_sha256: a504cc38a11bd762168979edbbfc23ca60f7ab99c16b69cd8f6ebc48c4aec0f0
@@ -841,9 +866,9 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: f7ccb422088311ebbd6dac1f6bf848b6:3
       context:
@@ -864,19 +889,20 @@ methods:
         - kaalapani
         - priyadarshan
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:8
       context:
         round: 2
         kind: TARGETED
-        query: The birth date of Strictly Modern's director is established. Which film has the director
-          born later, Kaalapani or Strictly Modern?
+        query: The birth date of Strictly Modern's director is established. Which film has the director born later, 
+          Kaalapani or Strictly Modern?
         target_premise: P1
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -891,19 +917,19 @@ methods:
         - kaalapani
         - priyadarshan
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: NO
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:13
       context:
         round: 3
         kind: TARGETED
-        query: The birth date of Strictly Modern's director is established. Which film has the director
-          born later, Kaalapani or Strictly Modern?
+        query: The birth date of Strictly Modern's director is established. Which film has the director born later, 
+          Kaalapani or Strictly Modern?
         target_premise: P1
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -918,13 +944,13 @@ methods:
         - kaalapani
         - priyadarshan
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: NO
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -935,15 +961,15 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: The birth date of Strictly Modern's director is established. Which film has the director
-          born later, Kaalapani or Strictly Modern?
+        next_query: The birth date of Strictly Modern's director is established. Which film has the director born later,
+          Kaalapani or Strictly Modern?
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:11
       context:
         decision: 2
@@ -951,15 +977,15 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: The birth date of Strictly Modern's director is established. Which film has the director
-          born later, Kaalapani or Strictly Modern?
+        next_query: The birth date of Strictly Modern's director is established. Which film has the director born later,
+          Kaalapani or Strictly Modern?
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: f7ccb422088311ebbd6dac1f6bf848b6:16
       context:
         decision: 3
@@ -970,13 +996,16 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ABSTAIN
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: RETRIEVAL_ERROR
+      secondary:
+      - DECOMPOSITION_ERROR
+      rationale: The missing Strictly Modern side is never retrieved, while the target query is phrased as an 
+        already-established proposition.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

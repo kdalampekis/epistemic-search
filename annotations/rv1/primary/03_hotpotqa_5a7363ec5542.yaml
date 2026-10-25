@@ -15,12 +15,12 @@ case_id: hotpotqa:5a7363ec5542991f29ee2dd7
 order: 3
 dataset: hotpotqa-distractor-dev
 query_id: 5a7363ec5542991f29ee2dd7
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: c29163f317f25f373faeb1b0d71de8f59c06ac29942f827ad93840e509584585
-question: The USS Tortuga was named after the Dry Tortugas, a group of desert coral islets 60 miles west
-  of which city with the motto "One Human Family"?
+question: The USS Tortuga was named after the Dry Tortugas, a group of desert coral islets 60 miles west of which city 
+  with the motto "One Human Family"?
 gold:
   reference_answer: Key West
   answerable: null
@@ -29,8 +29,8 @@ gold:
     answer: Key West
     answer_id: null
     level: hard
-    question: The USS Tortuga was named after the Dry Tortugas, a group of desert coral islets 60 miles
-      west of which city with the motto "One Human Family"?
+    question: The USS Tortuga was named after the Dry Tortugas, a group of desert coral islets 60 miles west of which 
+      city with the motto "One Human Family"?
     supporting_facts:
     - - USS Tortuga (LSD-46)
       - 0
@@ -44,12 +44,18 @@ gold:
   benchmark: hotpotqa
   split: dev
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: YES
+  required_claims:
+  - id: o1
+    assertion: USS Tortuga was named after the Dry Tortugas.
+  - id: o2
+    assertion: The Dry Tortugas are about 60 miles west of Key West.
+  - id: o3
+    assertion: Key West has the motto "One Human Family".
   logic:
-    type: null
-    description: null
-  notes: null
+    type: AND
+    description: All listed oracle claims are jointly required.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth.
 decomposition:
   context:
     formula: AND(P4, P1, P2, P3, P5)
@@ -58,12 +64,13 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: NO
+    complete: NO
+    has_unnecessary_premises: YES
+    has_missing_required_premises: YES
+    dependency_structure_matches: NO
+    notes: Restates clues without asserting the answer-bearing Dry Tortugas→Key West relation; several premises are 
+      descriptive/meta rather than sufficient facts.
 premises:
 - id: c_18f76e618e903fb7
   context:
@@ -72,13 +79,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Semantically aligned with the benchmark gold facts.
 - id: c_1baa24266b7d5df6
   context:
     label: P2
@@ -86,13 +93,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: NO
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Relevant but not required for the gold answer under the oracle decomposition.
 - id: c_22dc6ddad352f9e9
   context:
     label: P3
@@ -100,13 +107,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: NO
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Relevant but not required for the gold answer under the oracle decomposition.
 - id: c_2b8104a44d597627
   context:
     label: P4
@@ -114,13 +121,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Semantically aligned with the benchmark gold facts.
 - id: c_447c2f8e57114dee
   context:
     label: P5
@@ -128,13 +135,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: NO
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Relevant but not required for the gold answer under the oracle decomposition.
 methods:
   epistemic_search:
     run: hotpotqa-epistemic_search
@@ -151,16 +158,17 @@ methods:
         final_decision_rationale: Extracted span is absent from the exact source text
         error: Extracted span is absent from the exact source text
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: NO
+        notes: The system should have continued acquisition or answered from already available evidence rather than 
+          terminating without an answer.
     retrieval_rounds:
     - id: 5a7363ec5542991f29ee2dd7:3
       context:
         round: 1
         kind: ORIGINAL_QUESTION
-        query: The USS Tortuga was named after the Dry Tortugas, a group of desert coral islets 60 miles
-          west of which city with the motto "One Human Family"?
+        query: The USS Tortuga was named after the Dry Tortugas, a group of desert coral islets 60 miles west of which 
+          city with the motto "One Human Family"?
         target_premise: null
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: false
@@ -174,13 +182,14 @@ methods:
         benchmark_gold_titles_in_this_round:
         - uss tortuga (lsd-46)
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     extraction_batches:
     - id: 5a7363ec5542991f29ee2dd7:4
       context:
@@ -194,9 +203,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5a7363ec5542991f29ee2dd7:6
       context:
@@ -210,9 +219,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5a7363ec5542991f29ee2dd7:6#0
         context:
@@ -222,11 +231,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5a7363ec5542991f29ee2dd7:8
       context:
         premise: P2
@@ -239,9 +248,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a7363ec5542991f29ee2dd7:8#0
         context:
@@ -251,11 +260,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a7363ec5542991f29ee2dd7:10
       context:
         premise: P2
@@ -268,9 +277,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a7363ec5542991f29ee2dd7:10#0
         context:
@@ -280,11 +289,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a7363ec5542991f29ee2dd7:12
       context:
         premise: P3
@@ -297,9 +306,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a7363ec5542991f29ee2dd7:12#0
         context:
@@ -309,11 +318,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a7363ec5542991f29ee2dd7:14
       context:
         premise: P3
@@ -326,9 +335,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a7363ec5542991f29ee2dd7:14#0
         context:
@@ -338,11 +347,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a7363ec5542991f29ee2dd7:16
       context:
         premise: P4
@@ -355,9 +364,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a7363ec5542991f29ee2dd7:16#0
         context:
@@ -367,11 +376,11 @@ methods:
           mechanical_span_class: NORMALIZATION_EQUIVALENT
           accepted_into_ledger: false
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: YES
+          notes: Independent semantic reading supports this stance label.
     belief_states: []
     controller_decisions:
     - id: 5a7363ec5542991f29ee2dd7:18
@@ -389,16 +398,17 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ANSWER
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
+      primary: EVIDENCE_EXTRACTION_ERROR
       secondary: []
-      rationale: null
-      notes: null
+      rationale: Strict span validation aborted despite the first-round USS Tortuga evidence already naming Key West.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: hotpotqa-premise_only
     trace_sha256: 454281636beb32a90adffa3c14f10c3dcf546607ce55fd160e3cd90c29f20bc9
@@ -414,16 +424,17 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: NO
+        notes: The system should have continued acquisition or answered from already available evidence rather than 
+          terminating without an answer.
     retrieval_rounds:
     - id: 5a7363ec5542991f29ee2dd7:3
       context:
         round: 1
         kind: ORIGINAL_QUESTION
-        query: The USS Tortuga was named after the Dry Tortugas, a group of desert coral islets 60 miles
-          west of which city with the motto "One Human Family"?
+        query: The USS Tortuga was named after the Dry Tortugas, a group of desert coral islets 60 miles west of which 
+          city with the motto "One Human Family"?
         target_premise: null
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: false
@@ -437,20 +448,20 @@ methods:
         benchmark_gold_titles_in_this_round:
         - uss tortuga (lsd-46)
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 5a7363ec5542991f29ee2dd7:8
       context:
         round: 2
         kind: TARGETED
-        query: The city is identified by the motto "One Human Family." The USS Tortuga was named after
-          the Dry Tortugas, a group of desert coral islets 60 miles west of which city with the motto
-          "One Human Family"?
+        query: The city is identified by the motto "One Human Family." The USS Tortuga was named after the Dry Tortugas,
+          a group of desert coral islets 60 miles west of which city with the motto "One Human Family"?
         target_premise: P1
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -464,20 +475,19 @@ methods:
         benchmark_gold_titles_in_this_round:
         - uss tortuga (lsd-46)
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 5a7363ec5542991f29ee2dd7:13
       context:
         round: 3
         kind: TARGETED
-        query: The city is identified by the motto "One Human Family." The USS Tortuga was named after
-          the Dry Tortugas, a group of desert coral islets 60 miles west of which city with the motto
-          "One Human Family"?
+        query: The city is identified by the motto "One Human Family." The USS Tortuga was named after the Dry Tortugas,
+          a group of desert coral islets 60 miles west of which city with the motto "One Human Family"?
         target_premise: P1
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -491,13 +501,13 @@ methods:
         benchmark_gold_titles_in_this_round:
         - uss tortuga (lsd-46)
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -508,16 +518,16 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: The city is identified by the motto "One Human Family." The USS Tortuga was named
-          after the Dry Tortugas, a group of desert coral islets 60 miles west of which city with the
-          motto "One Human Family"?
+        next_query: The city is identified by the motto "One Human Family." The USS Tortuga was named after the Dry 
+          Tortugas, a group of desert coral islets 60 miles west of which city with the motto "One Human Family"?
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ANSWER
+        notes: The first-round USS Tortuga text already identifies Key West as the city 60 miles east of the Dry 
+          Tortugas; the generated proof requirement caused unnecessary acquisition.
     - id: 5a7363ec5542991f29ee2dd7:11
       context:
         decision: 2
@@ -525,16 +535,16 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: The city is identified by the motto "One Human Family." The USS Tortuga was named
-          after the Dry Tortugas, a group of desert coral islets 60 miles west of which city with the
-          motto "One Human Family"?
+        next_query: The city is identified by the motto "One Human Family." The USS Tortuga was named after the Dry 
+          Tortugas, a group of desert coral islets 60 miles west of which city with the motto "One Human Family"?
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NO
+        better_action: ANSWER
+        notes: The first-round USS Tortuga text already identifies Key West as the city 60 miles east of the Dry 
+          Tortugas; the generated proof requirement caused unnecessary acquisition.
     - id: 5a7363ec5542991f29ee2dd7:16
       context:
         decision: 3
@@ -545,13 +555,17 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ANSWER
+        notes: The first-round USS Tortuga text already identifies Key West as the city 60 miles east of the Dry 
+          Tortugas; the generated proof requirement caused unnecessary acquisition.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: DECOMPOSITION_ERROR
+      secondary:
+      - CONTROLLER_ERROR
+      rationale: The generated proof requires a separate motto premise even though the retrieved Dry Tortugas relation 
+        already identifies Key West, causing unnecessary repeated search and abstention.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

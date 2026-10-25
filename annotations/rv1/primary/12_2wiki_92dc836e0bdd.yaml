@@ -15,9 +15,9 @@ case_id: 2wiki:92dc836e0bdd11eba7f7acde48001122
 order: 12
 dataset: 2wiki-april7-dev
 query_id: 92dc836e0bdd11eba7f7acde48001122
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: 43d776995977a98b571c87095e563dda0c197c39e666e0dc49c89e1f19f02e3c
 question: What is the place of birth of the director of film Time Out Of Mind (2014 Film)?
 gold:
@@ -62,12 +62,18 @@ gold:
   benchmark: 2wikimultihopqa
   split: dev
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: YES
+  required_claims:
+  - id: o1
+    assertion: Time Out of Mind (2014 film) was directed by Oren Moverman.
+  - id: o2
+    assertion: The benchmark records Oren Moverman's requested place-of-birth value as 'Israeli'.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: OTHER
+    description: The supplied benchmark answer “Israeli” does not establish a place of birth; no reliable birthplace 
+      proof graph can be authored from the supplied gold.
+  notes: 'Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth. The benchmark appears
+    semantically inconsistent: “Israeli” is not a birthplace and the retrieved gold-titled source only says Israeli-American.'
 decomposition:
   context:
     formula: AND(P2, P1, P3)
@@ -76,12 +82,13 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: NO
+    complete: NO
+    has_unnecessary_premises: NO
+    has_missing_required_premises: YES
+    dependency_structure_matches: YES
+    notes: Represents process states (“is identified”) rather than the actual director and birthplace values, so the 
+      answer-bearing facts are missing.
 premises:
 - id: c_382bbe4fa313e277
   context:
@@ -90,13 +97,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Semantically aligned with the benchmark gold facts.
 - id: c_62d258d1427a2272
   context:
     label: P2
@@ -104,13 +111,14 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Truth is not directly assessable because the premise is an epistemic/variable placeholder rather than a 
+      concrete gold fact.
 - id: c_aa34e1291198f1f3
   context:
     label: P3
@@ -118,13 +126,14 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Truth is not directly assessable because the premise is an epistemic/variable placeholder rather than a 
+      concrete gold fact.
 methods:
   epistemic_search:
     run: 2wikimultihopqa-epistemic_search
@@ -141,9 +150,9 @@ methods:
         final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: 92dc836e0bdd11eba7f7acde48001122:3
       context:
@@ -164,19 +173,20 @@ methods:
         - oren moverman
         - time out of mind (2014 film)
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: UNSURE
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 92dc836e0bdd11eba7f7acde48001122:20
       context:
         round: 2
         kind: TARGETED
-        query: The place of birth of that director is identified. What is the place of birth of the director
-          of film Time Out Of Mind (2014 Film)? independent verification primary source
+        query: The place of birth of that director is identified. What is the place of birth of the director of film 
+          Time Out Of Mind (2014 Film)? independent verification primary source
         target_premise: P3
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -191,19 +201,19 @@ methods:
         - oren moverman
         - time out of mind (2014 film)
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: UNSURE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 92dc836e0bdd11eba7f7acde48001122:29
       context:
         round: 3
         kind: TARGETED
-        query: The place of birth of that director is identified. What is the place of birth of the director
-          of film Time Out Of Mind (2014 Film)? independent verification primary source
+        query: The place of birth of that director is identified. What is the place of birth of the director of film 
+          Time Out Of Mind (2014 Film)? independent verification primary source
         target_premise: P3
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -218,13 +228,13 @@ methods:
         - oren moverman
         - time out of mind (2014 film)
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: UNSURE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches:
     - id: 92dc836e0bdd11eba7f7acde48001122:4
       context:
@@ -240,9 +250,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 92dc836e0bdd11eba7f7acde48001122:4#0
         context:
@@ -252,11 +262,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 92dc836e0bdd11eba7f7acde48001122:6
       context:
         premise: P1
@@ -271,9 +281,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 92dc836e0bdd11eba7f7acde48001122:8
       context:
@@ -289,9 +299,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 92dc836e0bdd11eba7f7acde48001122:8#0
         context:
@@ -301,11 +311,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 92dc836e0bdd11eba7f7acde48001122:10
       context:
         premise: P2
@@ -320,24 +330,24 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 92dc836e0bdd11eba7f7acde48001122:10#0
         context:
-          span: Moverman most recently wrote and directed "The Dinner" starring Richard Gere, Laura Linney,
-            Steve Coogan, Chloe Sevigny and Rebecca Hall.
+          span: Moverman most recently wrote and directed "The Dinner" starring Richard Gere, Laura Linney, Steve 
+            Coogan, Chloe Sevigny and Rebecca Hall.
           system_stance: SUPPORT
           system_stance_score: 0.99
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 92dc836e0bdd11eba7f7acde48001122:12
       context:
         premise: P3
@@ -352,9 +362,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 92dc836e0bdd11eba7f7acde48001122:12#0
         context:
@@ -364,11 +374,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 92dc836e0bdd11eba7f7acde48001122:14
       context:
         premise: P3
@@ -383,9 +393,10 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: The retrieved text says Israeli-American and based in New York City but does not state a birthplace; the 
+          benchmark gold itself appears semantically problematic.
       items:
       - id: 92dc836e0bdd11eba7f7acde48001122:14#0
         context:
@@ -395,11 +406,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 92dc836e0bdd11eba7f7acde48001122:21
       context:
         premise: P3
@@ -414,9 +425,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 92dc836e0bdd11eba7f7acde48001122:21#0
         context:
@@ -426,11 +437,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 92dc836e0bdd11eba7f7acde48001122:23
       context:
         premise: P3
@@ -445,9 +456,10 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: The retrieved text says Israeli-American and based in New York City but does not state a birthplace; the 
+          benchmark gold itself appears semantically problematic.
       items:
       - id: 92dc836e0bdd11eba7f7acde48001122:23#0
         context:
@@ -457,11 +469,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 92dc836e0bdd11eba7f7acde48001122:30
       context:
         premise: P3
@@ -476,9 +488,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 92dc836e0bdd11eba7f7acde48001122:30#0
         context:
@@ -488,11 +500,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 92dc836e0bdd11eba7f7acde48001122:32
       context:
         premise: P3
@@ -507,9 +519,10 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: The retrieved text says Israeli-American and based in New York City but does not state a birthplace; the 
+          benchmark gold itself appears semantically problematic.
       items:
       - id: 92dc836e0bdd11eba7f7acde48001122:32#0
         context:
@@ -519,11 +532,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     belief_states:
     - id: 92dc836e0bdd11eba7f7acde48001122:16
       context:
@@ -558,13 +571,14 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: YES
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: 92dc836e0bdd11eba7f7acde48001122:25
       context:
         update: 2
@@ -598,13 +612,14 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: YES
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: 92dc836e0bdd11eba7f7acde48001122:34
       context:
         update: 3
@@ -638,13 +653,14 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: YES
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     controller_decisions:
     - id: 92dc836e0bdd11eba7f7acde48001122:18
       context:
@@ -654,15 +670,15 @@ methods:
         blocking_premises:
         - P3
         rationale: Resolve c_aa34e1291198f1f3 toward SUPPORTED
-        next_query: The place of birth of that director is identified. What is the place of birth of the
-          director of film Time Out Of Mind (2014 Film)? independent verification primary source
+        next_query: The place of birth of that director is identified. What is the place of birth of the director of 
+          film Time Out Of Mind (2014 Film)? independent verification primary source
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     - id: 92dc836e0bdd11eba7f7acde48001122:27
       context:
         decision: 2
@@ -671,15 +687,15 @@ methods:
         blocking_premises:
         - P3
         rationale: Resolve c_aa34e1291198f1f3 toward SUPPORTED
-        next_query: The place of birth of that director is identified. What is the place of birth of the
-          director of film Time Out Of Mind (2014 Film)? independent verification primary source
+        next_query: The place of birth of that director is identified. What is the place of birth of the director of 
+          film Time Out Of Mind (2014 Film)? independent verification primary source
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 92dc836e0bdd11eba7f7acde48001122:36
       context:
         decision: 3
@@ -691,16 +707,19 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     root_cause:
-      primary: null
+      primary: UNCERTAIN
       secondary: []
-      rationale: null
-      notes: null
+      rationale: The benchmark asks for place of birth but the retrieved/gold page states only that Oren Moverman is 
+        Israeli-American and based in New York; the reference answer “Israeli” appears semantically mismatched to the 
+        question.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: 2wikimultihopqa-premise_only
     trace_sha256: ce4d829485106f2a028f3cdba92a3214b5d3b7d3646844b2c1373cb5809d1a5c
@@ -716,9 +735,9 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: 92dc836e0bdd11eba7f7acde48001122:3
       context:
@@ -739,19 +758,20 @@ methods:
         - oren moverman
         - time out of mind (2014 film)
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: UNSURE
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 92dc836e0bdd11eba7f7acde48001122:8
       context:
         round: 2
         kind: TARGETED
-        query: The place of birth of that director is identified. What is the place of birth of the director
-          of film Time Out Of Mind (2014 Film)?
+        query: The place of birth of that director is identified. What is the place of birth of the director of film 
+          Time Out Of Mind (2014 Film)?
         target_premise: P3
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -766,19 +786,19 @@ methods:
         - oren moverman
         - time out of mind (2014 film)
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: UNSURE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 92dc836e0bdd11eba7f7acde48001122:13
       context:
         round: 3
         kind: TARGETED
-        query: The place of birth of that director is identified. What is the place of birth of the director
-          of film Time Out Of Mind (2014 Film)?
+        query: The place of birth of that director is identified. What is the place of birth of the director of film 
+          Time Out Of Mind (2014 Film)?
         target_premise: P3
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -793,13 +813,13 @@ methods:
         - oren moverman
         - time out of mind (2014 film)
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: UNSURE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -810,15 +830,15 @@ methods:
         target_premise: P3
         blocking_premises: []
         rationale: null
-        next_query: The place of birth of that director is identified. What is the place of birth of the
-          director of film Time Out Of Mind (2014 Film)?
+        next_query: The place of birth of that director is identified. What is the place of birth of the director of 
+          film Time Out Of Mind (2014 Film)?
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     - id: 92dc836e0bdd11eba7f7acde48001122:11
       context:
         decision: 2
@@ -826,15 +846,15 @@ methods:
         target_premise: P3
         blocking_premises: []
         rationale: null
-        next_query: The place of birth of that director is identified. What is the place of birth of the
-          director of film Time Out Of Mind (2014 Film)?
+        next_query: The place of birth of that director is identified. What is the place of birth of the director of 
+          film Time Out Of Mind (2014 Film)?
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 92dc836e0bdd11eba7f7acde48001122:16
       context:
         decision: 3
@@ -845,13 +865,14 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ABSTAIN
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
+      primary: UNCERTAIN
       secondary: []
-      rationale: null
-      notes: null
+      rationale: The same benchmark ambiguity prevents a clean attribution of the abstention to the method.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

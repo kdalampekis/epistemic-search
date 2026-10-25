@@ -15,9 +15,9 @@ case_id: hotpotqa:5ae6050f55429929b0807a5e
 order: 16
 dataset: hotpotqa-distractor-dev
 query_id: 5ae6050f55429929b0807a5e
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: 787acbe012de3f1f255717d2dd8e9c2596d5e1134a381328d40cb4e24c232b0a
 question: This singer of A Rather Blustery Day also voiced what hedgehog?
 gold:
@@ -40,12 +40,19 @@ gold:
   benchmark: hotpotqa
   split: dev
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: YES
+  required_claims:
+  - id: o1
+    assertion: The benchmark supporting facts identify Jim Cummings as the singer/performer relevant to “A Rather 
+      Blustery Day”.
+  - id: o2
+    assertion: The benchmark relation associates that performer with the hedgehog answer Sonic.
+  - id: o3
+    assertion: Therefore the benchmark answer is Sonic.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: AND
+    description: All listed benchmark-derived claims are jointly required.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth.
 decomposition:
   context:
     formula: AND(P2, P1)
@@ -54,12 +61,12 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: YES
+    complete: YES
+    has_unnecessary_premises: NO
+    has_missing_required_premises: NO
+    dependency_structure_matches: YES
+    notes: 'Correct two-hop task: identify the singer, then the hedgehog voiced by that singer. Premises are tasks.'
 premises:
 - id: c_4aa671bd186b459a
   context:
@@ -68,13 +75,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_98cce6293e475fef
   context:
     label: P2
@@ -82,13 +89,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 methods:
   epistemic_search:
     run: hotpotqa-epistemic_search
@@ -105,9 +112,9 @@ methods:
         final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: 5ae6050f55429929b0807a5e:3
       context:
@@ -126,19 +133,20 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 5ae6050f55429929b0807a5e:16
       context:
         round: 2
         kind: TARGETED
-        query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also
-          voiced what hedgehog? independent verification primary source
+        query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also voiced what 
+          hedgehog? independent verification primary source
         target_premise: P1
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -151,19 +159,19 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 5ae6050f55429929b0807a5e:25
       context:
         round: 3
         kind: TARGETED
-        query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also
-          voiced what hedgehog? independent verification primary source
+        query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also voiced what 
+          hedgehog? independent verification primary source
         target_premise: P1
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -176,13 +184,13 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches:
     - id: 5ae6050f55429929b0807a5e:4
       context:
@@ -198,9 +206,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5ae6050f55429929b0807a5e:6
       context:
@@ -216,9 +224,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5ae6050f55429929b0807a5e:6#0
         context:
@@ -228,11 +236,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5ae6050f55429929b0807a5e:8
       context:
         premise: P2
@@ -247,9 +255,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5ae6050f55429929b0807a5e:8#0
         context:
@@ -259,11 +267,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5ae6050f55429929b0807a5e:10
       context:
         premise: P2
@@ -278,9 +286,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5ae6050f55429929b0807a5e:17
       context:
@@ -296,9 +304,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5ae6050f55429929b0807a5e:19
       context:
@@ -314,9 +322,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5ae6050f55429929b0807a5e:19#0
         context:
@@ -326,11 +334,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5ae6050f55429929b0807a5e:26
       context:
         premise: P1
@@ -345,9 +353,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5ae6050f55429929b0807a5e:28
       context:
@@ -363,9 +371,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5ae6050f55429929b0807a5e:28#0
         context:
@@ -375,11 +383,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     belief_states:
     - id: 5ae6050f55429929b0807a5e:12
       context:
@@ -410,13 +418,14 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: YES
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: 5ae6050f55429929b0807a5e:21
       context:
         update: 2
@@ -446,13 +455,14 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: YES
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: 5ae6050f55429929b0807a5e:30
       context:
         update: 3
@@ -482,13 +492,14 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: YES
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     controller_decisions:
     - id: 5ae6050f55429929b0807a5e:14
       context:
@@ -499,15 +510,15 @@ methods:
         - P1
         - P2
         rationale: Resolve c_4aa671bd186b459a toward SUPPORTED
-        next_query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day
-          also voiced what hedgehog? independent verification primary source
+        next_query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also voiced 
+          what hedgehog? independent verification primary source
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     - id: 5ae6050f55429929b0807a5e:23
       context:
         decision: 2
@@ -517,15 +528,15 @@ methods:
         - P1
         - P2
         rationale: Resolve c_4aa671bd186b459a toward SUPPORTED
-        next_query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day
-          also voiced what hedgehog? independent verification primary source
+        next_query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also voiced 
+          what hedgehog? independent verification primary source
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 5ae6050f55429929b0807a5e:32
       context:
         decision: 3
@@ -538,16 +549,18 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     root_cause:
-      primary: null
+      primary: RETRIEVAL_ERROR
       secondary: []
-      rationale: null
-      notes: null
+      rationale: The retrieved Tigger/House That Jack Built documents do not identify the singer of A Rather Blustery 
+        Day or the hedgehog relation.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: hotpotqa-premise_only
     trace_sha256: ff201515a2fcfba6c512a94ca554838eaf200d511e3a166e344f1ed2fe427a9b
@@ -563,9 +576,9 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: 5ae6050f55429929b0807a5e:3
       context:
@@ -584,19 +597,20 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 5ae6050f55429929b0807a5e:8
       context:
         round: 2
         kind: TARGETED
-        query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also
-          voiced what hedgehog?
+        query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also voiced what 
+          hedgehog?
         target_premise: P1
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -609,19 +623,19 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 5ae6050f55429929b0807a5e:13
       context:
         round: 3
         kind: TARGETED
-        query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also
-          voiced what hedgehog?
+        query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also voiced what 
+          hedgehog?
         target_premise: P1
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -634,13 +648,13 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -651,15 +665,15 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day
-          also voiced what hedgehog?
+        next_query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also voiced 
+          what hedgehog?
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     - id: 5ae6050f55429929b0807a5e:11
       context:
         decision: 2
@@ -667,15 +681,15 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day
-          also voiced what hedgehog?
+        next_query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also voiced 
+          what hedgehog?
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 5ae6050f55429929b0807a5e:16
       context:
         decision: 3
@@ -686,13 +700,15 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ABSTAIN
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: RETRIEVAL_ERROR
+      secondary:
+      - CONTROLLER_ERROR
+      rationale: The same irrelevant documents are repeatedly returned for the singer-identification query.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

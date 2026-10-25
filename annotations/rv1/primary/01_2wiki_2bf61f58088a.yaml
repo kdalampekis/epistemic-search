@@ -15,9 +15,9 @@ case_id: 2wiki:2bf61f58088a11ebbd6eac1f6bf848b6
 order: 1
 dataset: 2wiki-april7-dev
 query_id: 2bf61f58088a11ebbd6eac1f6bf848b6
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: 0cff569a1922ff1eb960946917443b5be42945ae9d3da2c322c4f5ddafede39c
 question: Which film whose director was born first, Great West End Theatres or My Own True Love?
 gold:
@@ -58,12 +58,23 @@ gold:
   benchmark: 2wikimultihopqa
   split: dev
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: NO
+  required_claims:
+  - id: o1
+    assertion: Great West End Theatres was directed by Marc Sinden.
+  - id: o2
+    assertion: My Own True Love was directed by Compton Bennett.
+  - id: o3
+    assertion: Marc Sinden was born on 9 May 1954.
+  - id: o4
+    assertion: Compton Bennett was born on 15 January 1900.
+  - id: o5
+    assertion: 15 January 1900 is earlier than 9 May 1954, so My Own True Love has the director born first.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: AND
+    description: All listed oracle claims are jointly required.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth. Generated 
+    decomposition was visible before this oracle was authored, so authored_before_viewing_generated is NO.
 decomposition:
   context:
     formula: OR(AND(P2, P5, P1, P3, P6), AND(P2, P1, P3, P6, P4), AND(P2, P1, P3, P7, P6))
@@ -72,12 +83,13 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: YES
+    complete: YES
+    has_unnecessary_premises: YES
+    has_missing_required_premises: NO
+    dependency_structure_matches: NO
+    notes: Covers both films and birth-date comparison, but encodes mutually exclusive alternative comparison claims in 
+      OR branches rather than a single answer-conditioned proof.
 premises:
 - id: c_2c3a38bd0ef7369d
   context:
@@ -86,13 +98,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_40c085f08b9f9e44
   context:
     label: P2
@@ -100,13 +112,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_511034a99b4d8ab5
   context:
     label: P3
@@ -114,13 +126,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_615042161d8ed02e
   context:
     label: P4
@@ -128,13 +140,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Semantically aligned with the benchmark gold facts.
 - id: c_79bc0a1515b5dabb
   context:
     label: P5
@@ -142,13 +154,14 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: NO
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NO
+    notes: Relevant but not required for the gold answer under the oracle decomposition. Contradicted by the benchmark 
+      gold relation/comparison.
 - id: c_d3ee5ae8fab18154
   context:
     label: P6
@@ -156,13 +169,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_d9b6bcc3d8e6b30b
   context:
     label: P7
@@ -170,13 +183,14 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: NO
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NO
+    notes: Relevant but not required for the gold answer under the oracle decomposition. Contradicted by the benchmark 
+      gold relation/comparison.
 methods:
   epistemic_search:
     run: 2wikimultihopqa-epistemic_search
@@ -193,9 +207,10 @@ methods:
         final_decision_rationale: Extracted span is absent from the exact source text
         error: Extracted span is absent from the exact source text
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: NO
+        notes: The system should have continued acquisition or answered from already available evidence rather than 
+          terminating without an answer.
     retrieval_rounds:
     - id: 2bf61f58088a11ebbd6eac1f6bf848b6:3
       context:
@@ -216,13 +231,14 @@ methods:
         - great west end theatres
         - marc sinden
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     extraction_batches:
     - id: 2bf61f58088a11ebbd6eac1f6bf848b6:4
       context:
@@ -236,26 +252,25 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 2bf61f58088a11ebbd6eac1f6bf848b6:4#0
         context:
-          span: Marc Sinden( born 9 May 1954) is an English film director, actor and theatre producer.Sinden
-            has worked in film and theatre( mainly in London's West End) as both actor and producer and
-            directed the documentary series" Great West End Theatres", detailing the history of the 40
-            major playhouses in London.
+          span: Marc Sinden( born 9 May 1954) is an English film director, actor and theatre producer.Sinden has worked 
+            in film and theatre( mainly in London's West End) as both actor and producer and directed the documentary 
+            series" Great West End Theatres", detailing the history of the 40 major playhouses in London.
           system_stance: SUPPORT
           system_stance_score: 1.0
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 2bf61f58088a11ebbd6eac1f6bf848b6:6
       context:
         premise: P1
@@ -268,9 +283,9 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 2bf61f58088a11ebbd6eac1f6bf848b6:6#0
         context:
@@ -280,11 +295,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: false
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 2bf61f58088a11ebbd6eac1f6bf848b6:6#1
         context:
           span: the lovely documentary series is made by the director Marc Sinden
@@ -293,11 +308,11 @@ methods:
           mechanical_span_class: NON_VERBATIM
           accepted_into_ledger: false
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: YES
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     belief_states: []
     controller_decisions:
     - id: 2bf61f58088a11ebbd6eac1f6bf848b6:8
@@ -317,16 +332,18 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: SEARCH_MORE
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
+      primary: EVIDENCE_EXTRACTION_ERROR
       secondary: []
-      rationale: null
-      notes: null
+      rationale: A non-verbatim extracted span triggered strict span validation and terminated the run before further 
+        acquisition.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: 2wikimultihopqa-premise_only
     trace_sha256: c99b45ced5b45a2b4e026c9744e527b60d9a11346c9d1d716f545692d6da5465
@@ -342,9 +359,9 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: 2bf61f58088a11ebbd6eac1f6bf848b6:3
       context:
@@ -365,19 +382,20 @@ methods:
         - great west end theatres
         - marc sinden
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 2bf61f58088a11ebbd6eac1f6bf848b6:8
       context:
         round: 2
         kind: TARGETED
-        query: Identify the director of My Own True Love. Which film whose director was born first, Great
-          West End Theatres or My Own True Love?
+        query: Identify the director of My Own True Love. Which film whose director was born first, Great West End 
+          Theatres or My Own True Love?
         target_premise: P6
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -392,19 +410,19 @@ methods:
         - great west end theatres
         - marc sinden
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 2bf61f58088a11ebbd6eac1f6bf848b6:13
       context:
         round: 3
         kind: TARGETED
-        query: Identify the director of My Own True Love. Which film whose director was born first, Great
-          West End Theatres or My Own True Love?
+        query: Identify the director of My Own True Love. Which film whose director was born first, Great West End 
+          Theatres or My Own True Love?
         target_premise: P6
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -419,13 +437,13 @@ methods:
         - great west end theatres
         - marc sinden
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -436,15 +454,15 @@ methods:
         target_premise: P6
         blocking_premises: []
         rationale: null
-        next_query: Identify the director of My Own True Love. Which film whose director was born first,
-          Great West End Theatres or My Own True Love?
+        next_query: Identify the director of My Own True Love. Which film whose director was born first, Great West End 
+          Theatres or My Own True Love?
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     - id: 2bf61f58088a11ebbd6eac1f6bf848b6:11
       context:
         decision: 2
@@ -452,15 +470,15 @@ methods:
         target_premise: P6
         blocking_premises: []
         rationale: null
-        next_query: Identify the director of My Own True Love. Which film whose director was born first,
-          Great West End Theatres or My Own True Love?
+        next_query: Identify the director of My Own True Love. Which film whose director was born first, Great West End 
+          Theatres or My Own True Love?
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 2bf61f58088a11ebbd6eac1f6bf848b6:16
       context:
         decision: 3
@@ -471,13 +489,16 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ABSTAIN
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: RETRIEVAL_ERROR
+      secondary:
+      - CONTROLLER_ERROR
+      rationale: The targeted My Own True Love director query repeatedly returned the same Great West End documents, and
+        the controller repeated the failed acquisition.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

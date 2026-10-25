@@ -298,7 +298,7 @@ recorded for future methods; it does not guarantee determinism of remote models.
 Current code lives in small modules under `src/epistemic_search/`: `models`,
 `providers`, `config`, `accounting`, `tracing`, and `cli`. The larger repository
 map above is the planned layout as later phases add functionality. Provider mocks
-are in `tests/test_providers.py`. Current: **Phase 25 — Final technical report**, with the implementation roadmap delivered and research claims explicitly bounded. Real calibration results remain unavailable. Post-roadmap scientific validation follows [RESEARCH_VALIDATION_PLAN.md](RESEARCH_VALIDATION_PLAN.md); RV0 (offline pilot audit) is done; RV1 (human annotation) tooling is ready and awaits a human assessor.
+are in `tests/test_providers.py`. Current: **Phase 25 — Final technical report**, with the implementation roadmap delivered and research claims explicitly bounded. Real calibration results remain unavailable. Post-roadmap scientific validation follows [RESEARCH_VALIDATION_PLAN.md](RESEARCH_VALIDATION_PLAN.md); RV0 (offline pilot audit) is done; RV1 (semantic annotation, primary assessor GPT-5.6 Sol, model-assisted and not independent human ground truth) is complete and summarized in [docs/experiments/RV1_SUMMARY.md](docs/experiments/RV1_SUMMARY.md); RV2 has not started.
 
 ## 11. Naive RAG baseline
 

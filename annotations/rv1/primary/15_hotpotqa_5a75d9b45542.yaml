@@ -15,9 +15,9 @@ case_id: hotpotqa:5a75d9b4554299109176e5a7
 order: 15
 dataset: hotpotqa-distractor-dev
 query_id: 5a75d9b4554299109176e5a7
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: 9b27bc8b3e947e2a5379596656149af3b03935760950641fdc12a3cd9989e3cc
 question: What type of crab can be grown in a fishery and is known for its sweet and tender flesh?
 gold:
@@ -44,12 +44,22 @@ gold:
   benchmark: hotpotqa
   split: dev
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: NO
+  required_claims:
+  - id: o1
+    assertion: Dungeness crab is a crab type represented in crab fisheries / can be commercially grown or harvested in a
+      fishery context.
+  - id: o2
+    assertion: Dungeness crab is known for sweet flesh.
+  - id: o3
+    assertion: Dungeness crab is known for tender flesh.
+  - id: o4
+    assertion: Therefore the requested crab is the Dungeness crab.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: AND
+    description: All listed oracle claims are jointly required.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth. Generated 
+    decomposition was visible before this oracle was authored, so authored_before_viewing_generated is NO.
 decomposition:
   context:
     formula: AND(P3, P1, P2)
@@ -58,12 +68,13 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: YES
+    complete: NO
+    has_unnecessary_premises: NO
+    has_missing_required_premises: YES
+    dependency_structure_matches: YES
+    notes: Correctly states the three desired properties but leaves “the crab type” unbound, so no candidate identity 
+      connects the properties to Dungeness crab.
 premises:
 - id: c_1f692eff383328dd
   context:
@@ -72,13 +83,15 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: NO
+    correct: NOT_APPLICABLE
+    notes: Truth is not directly assessable because the premise is an epistemic/variable placeholder rather than a 
+      concrete gold fact. The entity variable is not bound to a concrete candidate, so the proposition is not 
+      self-contained.
 - id: c_625268a26498e5d9
   context:
     label: P2
@@ -86,13 +99,15 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: NO
+    correct: NOT_APPLICABLE
+    notes: Truth is not directly assessable because the premise is an epistemic/variable placeholder rather than a 
+      concrete gold fact. The entity variable is not bound to a concrete candidate, so the proposition is not 
+      self-contained.
 - id: c_bfbc00cd53cff774
   context:
     label: P3
@@ -100,13 +115,15 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: NO
+    correct: NOT_APPLICABLE
+    notes: Truth is not directly assessable because the premise is an epistemic/variable placeholder rather than a 
+      concrete gold fact. The entity variable is not bound to a concrete candidate, so the proposition is not 
+      self-contained.
 methods:
   epistemic_search:
     run: hotpotqa-epistemic_search
@@ -123,9 +140,9 @@ methods:
         final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: 5a75d9b4554299109176e5a7:3
       context:
@@ -144,19 +161,20 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 5a75d9b4554299109176e5a7:20
       context:
         round: 2
         kind: TARGETED
-        query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and
-          is known for its sweet and tender flesh?
+        query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and is known for its
+          sweet and tender flesh?
         target_premise: P1
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -169,19 +187,19 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NO
+        query_appropriate_for_target: NO
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 5a75d9b4554299109176e5a7:29
       context:
         round: 3
         kind: TARGETED
-        query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and
-          is known for its sweet and tender flesh?
+        query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and is known for its
+          sweet and tender flesh?
         target_premise: P1
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -194,13 +212,13 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NO
+        query_appropriate_for_target: NO
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches:
     - id: 5a75d9b4554299109176e5a7:4
       context:
@@ -216,9 +234,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5a75d9b4554299109176e5a7:6
       context:
@@ -234,9 +252,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5a75d9b4554299109176e5a7:8
       context:
@@ -252,9 +270,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5a75d9b4554299109176e5a7:10
       context:
@@ -270,9 +288,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5a75d9b4554299109176e5a7:12
       context:
@@ -288,9 +306,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5a75d9b4554299109176e5a7:14
       context:
@@ -306,9 +324,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5a75d9b4554299109176e5a7:14#0
         context:
@@ -318,11 +336,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5a75d9b4554299109176e5a7:21
       context:
         premise: P1
@@ -337,9 +355,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5a75d9b4554299109176e5a7:23
       context:
@@ -355,9 +373,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5a75d9b4554299109176e5a7:30
       context:
@@ -373,9 +391,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5a75d9b4554299109176e5a7:32
       context:
@@ -391,9 +409,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     belief_states:
     - id: 5a75d9b4554299109176e5a7:16
@@ -433,13 +451,15 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: YES
+        more_important_blockers_missing: YES
+        missing_blockers_description: The identity of the candidate crab is not represented as a premise, so the 
+          criteria remain unbound.
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: 5a75d9b4554299109176e5a7:25
       context:
         update: 2
@@ -477,13 +497,15 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: YES
+        more_important_blockers_missing: YES
+        missing_blockers_description: The identity of the candidate crab is not represented as a premise, so the 
+          criteria remain unbound.
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: 5a75d9b4554299109176e5a7:34
       context:
         update: 3
@@ -521,13 +543,15 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: YES
+        more_important_blockers_missing: YES
+        missing_blockers_description: The identity of the candidate crab is not represented as a premise, so the 
+          criteria remain unbound.
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     controller_decisions:
     - id: 5a75d9b4554299109176e5a7:18
       context:
@@ -539,15 +563,15 @@ methods:
         - P2
         - P3
         rationale: Resolve c_1f692eff383328dd toward SUPPORTED
-        next_query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery
-          and is known for its sweet and tender flesh?
+        next_query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and is known 
+          for its sweet and tender flesh?
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: SEARCH_MORE
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     - id: 5a75d9b4554299109176e5a7:27
       context:
         decision: 2
@@ -558,15 +582,15 @@ methods:
         - P2
         - P3
         rationale: Resolve c_1f692eff383328dd toward SUPPORTED
-        next_query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery
-          and is known for its sweet and tender flesh?
+        next_query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and is known 
+          for its sweet and tender flesh?
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 5a75d9b4554299109176e5a7:36
       context:
         decision: 3
@@ -580,16 +604,19 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: RETRIEVAL_ERROR
+      secondary:
+      - DECOMPOSITION_ERROR
+      rationale: Retrieval returns squash and ginger rather than crab sources; the generated criteria also leave the 
+        candidate “crab type” unbound.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: hotpotqa-premise_only
     trace_sha256: 66b3666a8289f0094f9639e6c25c1daa46470156464dedcb9c0a6c2d28ea6fb1
@@ -605,9 +632,9 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: 5a75d9b4554299109176e5a7:3
       context:
@@ -626,19 +653,20 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 5a75d9b4554299109176e5a7:8
       context:
         round: 2
         kind: TARGETED
-        query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and
-          is known for its sweet and tender flesh?
+        query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and is known for its
+          sweet and tender flesh?
         target_premise: P1
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -651,19 +679,19 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NO
+        query_appropriate_for_target: NO
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 5a75d9b4554299109176e5a7:13
       context:
         round: 3
         kind: TARGETED
-        query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and
-          is known for its sweet and tender flesh?
+        query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and is known for its
+          sweet and tender flesh?
         target_premise: P1
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -676,13 +704,13 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NO
+        query_appropriate_for_target: NO
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -693,15 +721,15 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery
-          and is known for its sweet and tender flesh?
+        next_query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and is known 
+          for its sweet and tender flesh?
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: SEARCH_MORE
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     - id: 5a75d9b4554299109176e5a7:11
       context:
         decision: 2
@@ -709,15 +737,15 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery
-          and is known for its sweet and tender flesh?
+        next_query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and is known 
+          for its sweet and tender flesh?
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 5a75d9b4554299109176e5a7:16
       context:
         decision: 3
@@ -728,13 +756,15 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ABSTAIN
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: RETRIEVAL_ERROR
+      secondary:
+      - DECOMPOSITION_ERROR
+      rationale: The same irrelevant documents recur and no Dungeness/crab-fishery evidence is acquired.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

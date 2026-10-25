@@ -15,12 +15,11 @@ case_id: hotpotqa:5a8a5c0d554299515336137b
 order: 4
 dataset: hotpotqa-distractor-dev
 query_id: 5a8a5c0d554299515336137b
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: 75de7c101c7f12859e530d36418e7f38e5c07def0216458e62b7d553da62ed6d
-question: What professional dancers twice turned on a lights festival taking place on the Fylde Coast
-  in Lancashire?
+question: What professional dancers twice turned on a lights festival taking place on the Fylde Coast in Lancashire?
 gold:
   reference_answer: Audrey Mossom
   answerable: null
@@ -29,8 +28,7 @@ gold:
     answer: Audrey Mossom
     answer_id: null
     level: hard
-    question: What professional dancers twice turned on a lights festival taking place on the Fylde Coast
-      in Lancashire?
+    question: What professional dancers twice turned on a lights festival taking place on the Fylde Coast in Lancashire?
     supporting_facts:
     - - Audrey Mossom
       - 0
@@ -46,12 +44,18 @@ gold:
   benchmark: hotpotqa
   split: dev
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: YES
+  required_claims:
+  - id: o1
+    assertion: The Blackpool Illuminations are a lights festival on the Fylde Coast in Lancashire.
+  - id: o2
+    assertion: Audrey Mossom was a professional dancer.
+  - id: o3
+    assertion: Audrey Mossom switched on the Blackpool Illuminations twice.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: AND
+    description: All listed oracle claims are jointly required.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth.
 decomposition:
   context:
     formula: AND(P2, P1, P3)
@@ -60,12 +64,13 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: YES
+    complete: YES
+    has_unnecessary_premises: NO
+    has_missing_required_premises: NO
+    dependency_structure_matches: YES
+    notes: The three subtasks correspond to festival identification, dancer identification, and the twice-switched-on 
+      condition, though they are imperatives rather than assertions.
 premises:
 - id: c_131044c976c25a55
   context:
@@ -74,13 +79,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_9b86e647d2867f7d
   context:
     label: P2
@@ -88,13 +93,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_dfd5642f150d0c33
   context:
     label: P3
@@ -102,13 +107,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 methods:
   epistemic_search:
     run: hotpotqa-epistemic_search
@@ -125,16 +130,17 @@ methods:
         final_decision_rationale: Extracted span is absent from the exact source text
         error: Extracted span is absent from the exact source text
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: NO
+        notes: The system should have continued acquisition or answered from already available evidence rather than 
+          terminating without an answer.
     retrieval_rounds:
     - id: 5a8a5c0d554299515336137b:3
       context:
         round: 1
         kind: ORIGINAL_QUESTION
-        query: What professional dancers twice turned on a lights festival taking place on the Fylde Coast
-          in Lancashire?
+        query: What professional dancers twice turned on a lights festival taking place on the Fylde Coast in 
+          Lancashire?
         target_premise: null
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: false
@@ -149,13 +155,14 @@ methods:
         - audrey mossom
         - blackpool illuminations
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     extraction_batches:
     - id: 5a8a5c0d554299515336137b:4
       context:
@@ -169,25 +176,24 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a8a5c0d554299515336137b:4#0
         context:
-          span: Blackpool Illuminations is an annual lights festival, founded in 1879 and first switched
-            on 19 September that year, held each autumn in the British seaside resort of Blackpool on
-            the Fylde Coast in Lancashire.
+          span: Blackpool Illuminations is an annual lights festival, founded in 1879 and first switched on 19 September
+            that year, held each autumn in the British seaside resort of Blackpool on the Fylde Coast in Lancashire.
           system_stance: SUPPORT
           system_stance_score: 1.0
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a8a5c0d554299515336137b:6
       context:
         premise: P1
@@ -200,9 +206,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a8a5c0d554299515336137b:6#0
         context:
@@ -212,16 +218,15 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a8a5c0d554299515336137b:8
       context:
         premise: P2
-        premise_text: Identify the professional dancer or dancers associated with turning on that festival’s
-          lights.
+        premise_text: Identify the professional dancer or dancers associated with turning on that festival’s lights.
         document:
           doc: a337e60920dd
           title: Blackpool Illuminations
@@ -230,15 +235,14 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5a8a5c0d554299515336137b:10
       context:
         premise: P2
-        premise_text: Identify the professional dancer or dancers associated with turning on that festival’s
-          lights.
+        premise_text: Identify the professional dancer or dancers associated with turning on that festival’s lights.
         document:
           doc: 7ccd700cdb0a
           title: Audrey Mossom
@@ -247,25 +251,25 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a8a5c0d554299515336137b:10#0
         context:
-          span: Elsie Audrey Mossom (3 September 1920, Preston – 1 September 2009, Hastings) was an English
-            teen celebrity and later a professional dancer. Later in 1935, she turned on the Blackpool
-            Illuminations, an annual lights festival in Blackpool.
+          span: Elsie Audrey Mossom (3 September 1920, Preston – 1 September 2009, Hastings) was an English teen 
+            celebrity and later a professional dancer. Later in 1935, she turned on the Blackpool Illuminations, an 
+            annual lights festival in Blackpool.
           system_stance: SUPPORT
           system_stance_score: 0.99
           mechanical_span_class: NON_VERBATIM
           accepted_into_ledger: false
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: YES
+          notes: Independent semantic reading supports this stance label.
     belief_states: []
     controller_decisions:
     - id: 5a8a5c0d554299515336137b:12
@@ -281,16 +285,18 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ANSWER
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
+      primary: EVIDENCE_EXTRACTION_ERROR
       secondary: []
-      rationale: null
-      notes: null
+      rationale: A faithful but non-verbatim Audrey Mossom span was rejected, terminating a run whose documents 
+        contained the answer.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: hotpotqa-premise_only
     trace_sha256: e4381e85521a55dbf794edf18f297522bcb89d3375524a05064721f4800e53c5
@@ -306,16 +312,16 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: YES
+        abstention_appropriate: NOT_APPLICABLE
+        notes: Final answer is semantically correct even if benchmark exact-match formatting differs.
     retrieval_rounds:
     - id: 5a8a5c0d554299515336137b:3
       context:
         round: 1
         kind: ORIGINAL_QUESTION
-        query: What professional dancers twice turned on a lights festival taking place on the Fylde Coast
-          in Lancashire?
+        query: What professional dancers twice turned on a lights festival taking place on the Fylde Coast in 
+          Lancashire?
         target_premise: null
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: false
@@ -330,13 +336,14 @@ methods:
         - audrey mossom
         - blackpool illuminations
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -350,13 +357,15 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     root_cause:
-      primary: null
+      primary: NO_IDENTIFIED_FAILURE
       secondary: []
-      rationale: null
-      notes: null
+      rationale: The answer “Elsie Audrey Mossom” is semantically the same person as the benchmark answer Audrey Mossom;
+        exact-match mismatch is not a semantic failure.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

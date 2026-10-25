@@ -15,9 +15,9 @@ case_id: 2wiki:7aa50b6a08a711ebbd7fac1f6bf848b6
 order: 11
 dataset: 2wiki-april7-dev
 query_id: 7aa50b6a08a711ebbd7fac1f6bf848b6
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: 38139a3e5d4d953be0bf0fee5594f8f23a12679e222c738036e0f04a2190d0e6
 question: Which film has the director born earlier, The Mexican Spitfire'S Baby or Chhalia?
 gold:
@@ -60,12 +60,22 @@ gold:
   benchmark: 2wikimultihopqa
   split: dev
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: YES
+  required_claims:
+  - id: o1
+    assertion: The Mexican Spitfire's Baby was directed by Leslie Goodwins.
+  - id: o2
+    assertion: Chhalia was directed by Manmohan Desai.
+  - id: o3
+    assertion: Leslie Goodwins was born on 17 September 1899.
+  - id: o4
+    assertion: Manmohan Desai was born on 26 February 1937.
+  - id: o5
+    assertion: Leslie Goodwins was born earlier, so The Mexican Spitfire's Baby is the answer.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: AND
+    description: All listed oracle claims are jointly required.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth.
 decomposition:
   context:
     formula: AND(P4, OR(P5, P3), P6, P2, P1)
@@ -74,12 +84,13 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: YES
+    complete: YES
+    has_unnecessary_premises: YES
+    has_missing_required_premises: NO
+    dependency_structure_matches: NO
+    notes: Captures directors, dates, and comparison with variables, but OR over opposite comparison outcomes proves 
+      only that some ordering holds and does not encode which film is the answer.
 premises:
 - id: c_11f404284c185f78
   context:
@@ -88,13 +99,14 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Truth is not directly assessable because the premise is an epistemic/variable placeholder rather than a 
+      concrete gold fact.
 - id: c_346323112de3ed0b
   context:
     label: P2
@@ -102,13 +114,14 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Truth is not directly assessable because the premise is an epistemic/variable placeholder rather than a 
+      concrete gold fact.
 - id: c_52f267df868c9277
   context:
     label: P3
@@ -116,13 +129,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Semantically aligned with the benchmark gold facts.
 - id: c_561bbb50299171fc
   context:
     label: P4
@@ -130,13 +143,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Semantically aligned with the benchmark gold facts.
 - id: c_9143567c85432804
   context:
     label: P5
@@ -144,13 +157,14 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: NO
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NO
+    notes: Relevant but not required for the gold answer under the oracle decomposition. Contradicted by the benchmark 
+      gold relation/comparison.
 - id: c_cab3013734da58e0
   context:
     label: P6
@@ -158,13 +172,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Semantically aligned with the benchmark gold facts.
 methods:
   epistemic_search:
     run: 2wikimultihopqa-epistemic_search
@@ -181,9 +195,9 @@ methods:
         final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:3
       context:
@@ -203,19 +217,20 @@ methods:
         benchmark_gold_titles_in_this_round:
         - the mexican spitfire's baby
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:32
       context:
         round: 2
         kind: TARGETED
-        query: The director of The Mexican Spitfire's Baby is D_A. Which film has the director born earlier,
-          The Mexican Spitfire'S Baby or Chhalia? independent primary sources evidence for and against
+        query: The director of The Mexican Spitfire's Baby is D_A. Which film has the director born earlier, The Mexican
+          Spitfire'S Baby or Chhalia? independent primary sources evidence for and against
         target_premise: P4
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -229,19 +244,19 @@ methods:
         benchmark_gold_titles_in_this_round:
         - the mexican spitfire's baby
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:41
       context:
         round: 3
         kind: TARGETED
-        query: The director of The Mexican Spitfire's Baby is D_A. Which film has the director born earlier,
-          The Mexican Spitfire'S Baby or Chhalia? independent primary sources evidence for and against
+        query: The director of The Mexican Spitfire's Baby is D_A. Which film has the director born earlier, The Mexican
+          Spitfire'S Baby or Chhalia? independent primary sources evidence for and against
         target_premise: P4
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -255,13 +270,13 @@ methods:
         benchmark_gold_titles_in_this_round:
         - the mexican spitfire's baby
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches:
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:4
       context:
@@ -277,9 +292,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:6
       context:
@@ -295,9 +310,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:8
       context:
@@ -313,9 +328,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:10
       context:
@@ -331,9 +346,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:12
       context:
@@ -349,9 +364,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:14
       context:
@@ -367,9 +382,9 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:14#0
         context:
@@ -379,11 +394,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:14#1
         context:
           span: released on March 13, 1942
@@ -392,11 +407,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:16
       context:
         premise: P4
@@ -411,9 +426,10 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: The film source directly states it was directed by Leslie Goodwins; system CONTRADICT is semantically 
+          reversed because of the placeholder formulation.
       items:
       - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:16#0
         context:
@@ -423,11 +439,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:18
       context:
         premise: P4
@@ -442,9 +458,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:18#0
         context:
@@ -454,11 +470,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:20
       context:
         premise: P5
@@ -473,9 +489,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:20#0
         context:
@@ -485,11 +501,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:22
       context:
         premise: P5
@@ -504,9 +520,9 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:22#0
         context:
@@ -516,11 +532,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:22#1
         context:
           span: The film was released on March 13, 1942, by RKO Pictures.
@@ -529,11 +545,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:24
       context:
         premise: P6
@@ -548,9 +564,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:26
       context:
@@ -566,9 +582,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:33
       context:
@@ -584,9 +600,10 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: The film source directly states it was directed by Leslie Goodwins; system CONTRADICT is semantically 
+          reversed because of the placeholder formulation.
       items:
       - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:33#0
         context:
@@ -596,11 +613,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:35
       context:
         premise: P4
@@ -615,9 +632,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:35#0
         context:
@@ -627,11 +644,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:42
       context:
         premise: P4
@@ -646,9 +663,10 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: The film source directly states it was directed by Leslie Goodwins; system CONTRADICT is semantically 
+          reversed because of the placeholder formulation.
       items:
       - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:42#0
         context:
@@ -658,11 +676,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:44
       context:
         premise: P4
@@ -677,9 +695,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:44#0
         context:
@@ -689,11 +707,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     belief_states:
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:28
       context:
@@ -752,13 +770,17 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
-        unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        claim_status_justified: NO
+        unjustified_premise_labels:
+        - P3
+        - P4
+        - P5
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:37
       context:
         update: 2
@@ -816,13 +838,17 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
-        unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        claim_status_justified: NO
+        unjustified_premise_labels:
+        - P3
+        - P4
+        - P5
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:46
       context:
         update: 3
@@ -880,13 +906,17 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
-        unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        claim_status_justified: NO
+        unjustified_premise_labels:
+        - P3
+        - P4
+        - P5
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     controller_decisions:
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:30
       context:
@@ -899,16 +929,15 @@ methods:
         - P4
         - P6
         rationale: Resolve c_561bbb50299171fc toward SUPPORTED
-        next_query: The director of The Mexican Spitfire's Baby is D_A. Which film has the director born
-          earlier, The Mexican Spitfire'S Baby or Chhalia? independent primary sources evidence for and
-          against
+        next_query: The director of The Mexican Spitfire's Baby is D_A. Which film has the director born earlier, The 
+          Mexican Spitfire'S Baby or Chhalia? independent primary sources evidence for and against
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: SEARCH_MORE
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:39
       context:
         decision: 2
@@ -920,16 +949,15 @@ methods:
         - P4
         - P6
         rationale: Resolve c_561bbb50299171fc toward SUPPORTED
-        next_query: The director of The Mexican Spitfire's Baby is D_A. Which film has the director born
-          earlier, The Mexican Spitfire'S Baby or Chhalia? independent primary sources evidence for and
-          against
+        next_query: The director of The Mexican Spitfire's Baby is D_A. Which film has the director born earlier, The 
+          Mexican Spitfire'S Baby or Chhalia? independent primary sources evidence for and against
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:48
       context:
         decision: 3
@@ -944,16 +972,19 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: STANCE_ERROR
+      secondary:
+      - FORMALIZATION_ERROR
+      rationale: “directed by Leslie Goodwins” is classified as contradiction to the placeholder P4 while unrelated 
+        release-year facts are marked as comparison support.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: 2wikimultihopqa-premise_only
     trace_sha256: 38129f000a3fbcfc13dca2520480527de1a8c49e0beb3ea89d1ca3a0c7785567
@@ -969,9 +1000,9 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:3
       context:
@@ -991,19 +1022,20 @@ methods:
         benchmark_gold_titles_in_this_round:
         - the mexican spitfire's baby
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:8
       context:
         round: 2
         kind: TARGETED
-        query: The director of Chhalia is D_B. Which film has the director born earlier, The Mexican Spitfire'S
-          Baby or Chhalia?
+        query: The director of Chhalia is D_B. Which film has the director born earlier, The Mexican Spitfire'S Baby or 
+          Chhalia?
         target_premise: P6
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -1017,19 +1049,19 @@ methods:
         benchmark_gold_titles_in_this_round:
         - the mexican spitfire's baby
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:13
       context:
         round: 3
         kind: TARGETED
-        query: The director of Chhalia is D_B. Which film has the director born earlier, The Mexican Spitfire'S
-          Baby or Chhalia?
+        query: The director of Chhalia is D_B. Which film has the director born earlier, The Mexican Spitfire'S Baby or 
+          Chhalia?
         target_premise: P6
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -1043,13 +1075,13 @@ methods:
         benchmark_gold_titles_in_this_round:
         - the mexican spitfire's baby
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -1060,15 +1092,15 @@ methods:
         target_premise: P6
         blocking_premises: []
         rationale: null
-        next_query: The director of Chhalia is D_B. Which film has the director born earlier, The Mexican
-          Spitfire'S Baby or Chhalia?
+        next_query: The director of Chhalia is D_B. Which film has the director born earlier, The Mexican Spitfire'S 
+          Baby or Chhalia?
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:11
       context:
         decision: 2
@@ -1076,15 +1108,15 @@ methods:
         target_premise: P6
         blocking_premises: []
         rationale: null
-        next_query: The director of Chhalia is D_B. Which film has the director born earlier, The Mexican
-          Spitfire'S Baby or Chhalia?
+        next_query: The director of Chhalia is D_B. Which film has the director born earlier, The Mexican Spitfire'S 
+          Baby or Chhalia?
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:16
       context:
         decision: 3
@@ -1095,13 +1127,15 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ABSTAIN
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: RETRIEVAL_ERROR
+      secondary:
+      - CONTROLLER_ERROR
+      rationale: The Chhalia/Manmohan Desai side is never retrieved despite repeated targeting.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

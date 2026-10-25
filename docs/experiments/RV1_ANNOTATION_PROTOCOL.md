@@ -1,7 +1,17 @@
-# RV1 — Human semantic annotation protocol
+# RV1 — Semantic annotation protocol
 
-Status: infrastructure complete; **no annotations exist yet**. No API calls, no LLM
-judge, no failure distribution. Part of the
+> **Disclosure.** The primary annotation set in this repository
+> (`annotations/rv1/primary/`, assessor `openai-gpt-5.6-sol-primary`) was produced by GPT-5.6 Sol
+> from the frozen RV0 traces, benchmark gold fields and the generated sheets. It is
+> **model-assisted annotation, not independent human ground truth** and must not be described
+> as human or expert annotation. The protocol below is written for any assessor; a human
+> assessor can still be added with `rv1-add-assessor` for validation. A model assessor sees
+> the whole file, so its `authored_before_viewing_generated` attestation is self-reported and
+> not verifiable.
+
+Status: 22 of 22 files complete (assessor above); validated and aggregated. Annotation
+used no repository API calls and no LLM judge inside the tooling. Results:
+[RV1 summary](RV1_SUMMARY.md). Part of the
 [research validation plan](../../RESEARCH_VALIDATION_PLAN.md); builds on the frozen
 [RV0 audit](RV0_PILOT_AUDIT.md) (commit `919e86d`), which is not modified.
 

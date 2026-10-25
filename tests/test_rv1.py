@@ -219,6 +219,13 @@ def test_unquoted_yes_no_stay_strings_not_booleans(tmp_path: Path) -> None:
     assert "answered: false" in path.read_text() or "answered: true" in path.read_text()
 
 
+def test_exponent_like_document_ids_are_quoted_for_other_yaml_tools() -> None:
+    from epistemic_search.rv1_schema import _Dumper
+
+    text = yaml.dump({"doc": "4326252e2819", "other": "9c57dad0cb8b"}, Dumper=_Dumper)
+    assert "doc: '4326252e2819'" in text and "other: 9c57dad0cb8b" in text
+
+
 def test_invalid_answers_are_rejected(tmp_path: Path) -> None:
     config = setup_rv1(tmp_path)
     init_rv1(config)

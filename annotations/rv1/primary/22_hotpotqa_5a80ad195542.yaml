@@ -15,12 +15,12 @@ case_id: hotpotqa:5a80ad19554299485f5986a8
 order: 22
 dataset: hotpotqa-distractor-dev
 query_id: 5a80ad19554299485f5986a8
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: d1fa9321ba85de30c617eb4b64b5d86a3214c3230255d4d45b8b83b156dc78c6
-question: In addition to his role in The Fattest Man in Britain, Bobby Ball is best known for his half
-  of the doublt act Cannon and Ball with which other comedian?
+question: In addition to his role in The Fattest Man in Britain, Bobby Ball is best known for his half of the doublt act
+  Cannon and Ball with which other comedian?
 gold:
   reference_answer: Tommy Cannon
   answerable: null
@@ -29,8 +29,8 @@ gold:
     answer: Tommy Cannon
     answer_id: null
     level: hard
-    question: In addition to his role in The Fattest Man in Britain, Bobby Ball is best known for his
-      half of the doublt act Cannon and Ball with which other comedian?
+    question: In addition to his role in The Fattest Man in Britain, Bobby Ball is best known for his half of the doublt
+      act Cannon and Ball with which other comedian?
     supporting_facts:
     - - The Fattest Man in Britain
       - 0
@@ -46,12 +46,18 @@ gold:
   benchmark: hotpotqa
   split: dev
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: YES
+  required_claims:
+  - id: o1
+    assertion: Bobby Ball was one half of the comedy double act Cannon and Ball.
+  - id: o2
+    assertion: The other comedian in Cannon and Ball was Tommy Cannon.
+  - id: o3
+    assertion: Therefore the requested comedian is Tommy Cannon.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: AND
+    description: All listed oracle claims are jointly required.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth.
 decomposition:
   context:
     formula: AND(P2, P1)
@@ -60,12 +66,12 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: YES
+    complete: YES
+    has_unnecessary_premises: YES
+    has_missing_required_premises: NO
+    dependency_structure_matches: NO
+    notes: P2 alone answers the question; P1 merely restates context, so the AND adds a redundant requirement.
 premises:
 - id: c_bf1f07f355939d8e
   context:
@@ -74,13 +80,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: NO
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Relevant but not required for the gold answer under the oracle decomposition.
 - id: c_ed4e3896226f85f2
   context:
     label: P2
@@ -88,13 +94,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Semantically aligned with the benchmark gold facts.
 methods:
   epistemic_search:
     run: hotpotqa-epistemic_search
@@ -111,16 +117,16 @@ methods:
         final_decision_rationale: Supported by the extracted evidence model
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: YES
+        abstention_appropriate: NOT_APPLICABLE
+        notes: Final answer is semantically correct even if benchmark exact-match formatting differs.
     retrieval_rounds:
     - id: 5a80ad19554299485f5986a8:3
       context:
         round: 1
         kind: ORIGINAL_QUESTION
-        query: In addition to his role in The Fattest Man in Britain, Bobby Ball is best known for his
-          half of the doublt act Cannon and Ball with which other comedian?
+        query: In addition to his role in The Fattest Man in Britain, Bobby Ball is best known for his half of the 
+          doublt act Cannon and Ball with which other comedian?
         target_premise: null
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: false
@@ -134,13 +140,14 @@ methods:
         benchmark_gold_titles_in_this_round:
         - bobby ball
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     extraction_batches:
     - id: 5a80ad19554299485f5986a8:4
       context:
@@ -154,9 +161,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a80ad19554299485f5986a8:4#0
         context:
@@ -166,11 +173,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a80ad19554299485f5986a8:6
       context:
         premise: P1
@@ -183,9 +190,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5a80ad19554299485f5986a8:6#0
         context:
@@ -195,11 +202,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5a80ad19554299485f5986a8:8
       context:
         premise: P2
@@ -212,9 +219,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a80ad19554299485f5986a8:8#0
         context:
@@ -224,11 +231,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a80ad19554299485f5986a8:10
       context:
         premise: P2
@@ -241,9 +248,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     belief_states:
     - id: 5a80ad19554299485f5986a8:12
@@ -271,13 +278,14 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: NOT_APPLICABLE
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     controller_decisions:
     - id: 5a80ad19554299485f5986a8:16
       context:
@@ -289,16 +297,18 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     root_cause:
-      primary: null
+      primary: NO_IDENTIFIED_FAILURE
       secondary: []
-      rationale: null
-      notes: null
+      rationale: The first-round Bobby Ball source directly supports Tommy Cannon and the final answer matches the 
+        reference.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: hotpotqa-premise_only
     trace_sha256: 583e31a41244ec5a57be6ce84ad9a4c9a0c86143b08f0a69c6745e0374a16f28
@@ -314,16 +324,16 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: YES
+        abstention_appropriate: NOT_APPLICABLE
+        notes: Final answer is semantically correct even if benchmark exact-match formatting differs.
     retrieval_rounds:
     - id: 5a80ad19554299485f5986a8:3
       context:
         round: 1
         kind: ORIGINAL_QUESTION
-        query: In addition to his role in The Fattest Man in Britain, Bobby Ball is best known for his
-          half of the doublt act Cannon and Ball with which other comedian?
+        query: In addition to his role in The Fattest Man in Britain, Bobby Ball is best known for his half of the 
+          doublt act Cannon and Ball with which other comedian?
         target_premise: null
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: false
@@ -337,13 +347,14 @@ methods:
         benchmark_gold_titles_in_this_round:
         - bobby ball
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -357,13 +368,14 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     root_cause:
-      primary: null
+      primary: NO_IDENTIFIED_FAILURE
       secondary: []
-      rationale: null
-      notes: null
+      rationale: The premise-only method also gives the correct supported answer.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

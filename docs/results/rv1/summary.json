@@ -3,19 +3,434 @@
   "api_calls": 0,
   "assessors": {
     "primary": {
-      "all_complete": false,
-      "blank_fields_total": 3166,
+      "all_complete": true,
+      "blank_fields_total": 0,
       "cases_expected": 22,
-      "complete": 0,
-      "failure_distribution": null,
+      "complete": 22,
+      "failure_distribution": {
+        "cases": 22,
+        "epistemic_search": {
+          "n": 22,
+          "primary": {
+            "CONTROLLER_ERROR": 1,
+            "DECOMPOSITION_ERROR": 1,
+            "EVIDENCE_EXTRACTION_ERROR": 4,
+            "NO_IDENTIFIED_FAILURE": 3,
+            "RETRIEVAL_ERROR": 7,
+            "STANCE_ERROR": 5,
+            "UNCERTAIN": 1
+          },
+          "primary_by_dataset": {
+            "2wiki-april7-dev": {
+              "CONTROLLER_ERROR": 1,
+              "EVIDENCE_EXTRACTION_ERROR": 1,
+              "RETRIEVAL_ERROR": 5,
+              "STANCE_ERROR": 2,
+              "UNCERTAIN": 1
+            },
+            "confrag-suggested": {
+              "EVIDENCE_EXTRACTION_ERROR": 1,
+              "NO_IDENTIFIED_FAILURE": 1
+            },
+            "hotpotqa-distractor-dev": {
+              "DECOMPOSITION_ERROR": 1,
+              "EVIDENCE_EXTRACTION_ERROR": 2,
+              "NO_IDENTIFIED_FAILURE": 2,
+              "RETRIEVAL_ERROR": 2,
+              "STANCE_ERROR": 3
+            }
+          },
+          "secondary": {
+            "ANSWER_GENERATION_ERROR": 1,
+            "CONTROLLER_ERROR": 4,
+            "DECOMPOSITION_ERROR": 2,
+            "FORMALIZATION_ERROR": 1,
+            "QUERY_GENERATION_ERROR": 1,
+            "RETRIEVAL_ERROR": 2,
+            "STANCE_ERROR": 1
+          }
+        },
+        "premise_only": {
+          "n": 22,
+          "primary": {
+            "CONTROLLER_ERROR": 1,
+            "DECOMPOSITION_ERROR": 4,
+            "NO_IDENTIFIED_FAILURE": 4,
+            "RETRIEVAL_ERROR": 12,
+            "UNCERTAIN": 1
+          },
+          "primary_by_dataset": {
+            "2wiki-april7-dev": {
+              "RETRIEVAL_ERROR": 9,
+              "UNCERTAIN": 1
+            },
+            "confrag-suggested": {
+              "DECOMPOSITION_ERROR": 1,
+              "NO_IDENTIFIED_FAILURE": 1
+            },
+            "hotpotqa-distractor-dev": {
+              "CONTROLLER_ERROR": 1,
+              "DECOMPOSITION_ERROR": 3,
+              "NO_IDENTIFIED_FAILURE": 3,
+              "RETRIEVAL_ERROR": 3
+            }
+          },
+          "secondary": {
+            "CONTROLLER_ERROR": 10,
+            "DECOMPOSITION_ERROR": 2,
+            "QUERY_GENERATION_ERROR": 1,
+            "RETRIEVAL_ERROR": 2
+          }
+        }
+      },
       "in_progress": 0,
-      "not_started": 22,
-      "sections": null
+      "not_started": 0,
+      "sections": {
+        "field_counts": {
+          "belief_state": {
+            "blockers_genuinely_blocking": {
+              "NO": 21,
+              "NOT_APPLICABLE": 4,
+              "YES": 22
+            },
+            "claim_status_justified": {
+              "NO": 20,
+              "YES": 27
+            },
+            "formal_conclusion_appropriate": {
+              "NO": 10,
+              "YES": 37
+            },
+            "more_important_blockers_missing": {
+              "NO": 34,
+              "YES": 13
+            },
+            "unjustified_premise_labels": {
+              "P1": 8,
+              "P2": 9,
+              "P3": 6,
+              "P4": 6,
+              "P5": 3,
+              "P7": 3
+            }
+          },
+          "controller_decision": {
+            "action_appropriate": {
+              "NO": 52,
+              "YES": 58
+            },
+            "better_action": {
+              "ABSTAIN": 15,
+              "ANSWER": 16,
+              "NONE": 40,
+              "SEARCH_MORE": 39
+            },
+            "repeat_justified": {
+              "NO": 31,
+              "NOT_APPLICABLE": 79
+            },
+            "target_premise_appropriate": {
+              "NO": 22,
+              "NOT_APPLICABLE": 26,
+              "YES": 62
+            }
+          },
+          "decomposition": {
+            "complete": {
+              "NO": 5,
+              "YES": 17
+            },
+            "dependency_structure_matches": {
+              "NO": 9,
+              "YES": 13
+            },
+            "has_missing_required_premises": {
+              "NO": 17,
+              "YES": 5
+            },
+            "has_unnecessary_premises": {
+              "NO": 13,
+              "YES": 9
+            },
+            "semantically_correct": {
+              "NO": 5,
+              "YES": 17
+            }
+          },
+          "evidence_item": {
+            "addresses_assigned_premise": {
+              "NO": 110,
+              "YES": 54
+            },
+            "gold_stance": {
+              "NEUTRAL": 102,
+              "SUPPORT": 45,
+              "UNSURE": 17
+            },
+            "span_meaning_faithful": {
+              "NOT_APPLICABLE": 158,
+              "YES": 6
+            },
+            "span_sufficient_alone": {
+              "NO": 122,
+              "YES": 42
+            }
+          },
+          "extraction_batch": {
+            "decisive_evidence_missed_by_extraction": {
+              "NO": 45,
+              "NOT_APPLICABLE": 150
+            },
+            "decisive_evidence_present_in_document": {
+              "NO": 150,
+              "YES": 45
+            }
+          },
+          "outcome": {
+            "abstention_appropriate": {
+              "NO": 9,
+              "NOT_APPLICABLE": 8,
+              "YES": 27
+            },
+            "answer_correct": {
+              "NO": 1,
+              "NOT_APPLICABLE": 36,
+              "YES": 7
+            }
+          },
+          "premise": {
+            "atomic": {
+              "NO": 3,
+              "YES": 77
+            },
+            "correct": {
+              "NO": 7,
+              "NOT_APPLICABLE": 50,
+              "YES": 23
+            },
+            "is_assertion": {
+              "NO": 41,
+              "YES": 39
+            },
+            "necessary": {
+              "NO": 15,
+              "YES": 65
+            },
+            "relevant": {
+              "YES": 80
+            },
+            "well_formed": {
+              "NO": 3,
+              "YES": 77
+            }
+          },
+          "retrieval_round": {
+            "missing_info_retrievable_from_corpus": {
+              "NOT_APPLICABLE": 34,
+              "UNSURE": 6,
+              "YES": 70
+            },
+            "query_appropriate_for_target": {
+              "NO": 12,
+              "YES": 98
+            },
+            "query_materially_different_from_previous": {
+              "NO": 31,
+              "NOT_APPLICABLE": 44,
+              "YES": 35
+            },
+            "retrieved_docs_contained_needed_info": {
+              "NO": 80,
+              "YES": 30
+            },
+            "retrieved_set_contained_gold_supporting_evidence": {
+              "NO": 32,
+              "NOT_APPLICABLE": 7,
+              "YES": 71
+            },
+            "target_premise_appropriate": {
+              "NO": 18,
+              "NOT_APPLICABLE": 44,
+              "YES": 48
+            }
+          },
+          "root_cause": {
+            "primary": {
+              "CONTROLLER_ERROR": 2,
+              "DECOMPOSITION_ERROR": 5,
+              "EVIDENCE_EXTRACTION_ERROR": 4,
+              "NO_IDENTIFIED_FAILURE": 7,
+              "RETRIEVAL_ERROR": 19,
+              "STANCE_ERROR": 5,
+              "UNCERTAIN": 2
+            },
+            "secondary": {
+              "ANSWER_GENERATION_ERROR": 1,
+              "CONTROLLER_ERROR": 14,
+              "DECOMPOSITION_ERROR": 4,
+              "FORMALIZATION_ERROR": 1,
+              "QUERY_GENERATION_ERROR": 2,
+              "RETRIEVAL_ERROR": 4,
+              "STANCE_ERROR": 1
+            }
+          }
+        },
+        "is_assertion_by_lexical_flag": {
+          "OTHER": {
+            "YES": 39
+          },
+          "QUESTION_MARK": {
+            "NO": 7
+          },
+          "TASK_VERB_PREFIX": {
+            "NO": 28
+          },
+          "WHETHER_CLAUSE": {
+            "NO": 6
+          }
+        },
+        "oracle": {
+          "generated_vs_oracle_premise_counts": [
+            [
+              "2wiki:2bf61f58088a11ebbd6eac1f6bf848b6",
+              7,
+              5
+            ],
+            [
+              "confrag:1105",
+              6,
+              3
+            ],
+            [
+              "hotpotqa:5a7363ec5542991f29ee2dd7",
+              5,
+              3
+            ],
+            [
+              "hotpotqa:5a8a5c0d554299515336137b",
+              3,
+              3
+            ],
+            [
+              "hotpotqa:5ae63b2255429908198fa526",
+              6,
+              2
+            ],
+            [
+              "hotpotqa:5a7fb1765542992e7d278d20",
+              3,
+              3
+            ],
+            [
+              "hotpotqa:5a86eee85542994775f60787",
+              3,
+              2
+            ],
+            [
+              "hotpotqa:5a7b3ec95542995eb53be8d3",
+              3,
+              3
+            ],
+            [
+              "2wiki:1118315c0bdd11eba7f7acde48001122",
+              3,
+              3
+            ],
+            [
+              "2wiki:28b6cbf808d511ebbd98ac1f6bf848b6",
+              7,
+              5
+            ],
+            [
+              "2wiki:7aa50b6a08a711ebbd7fac1f6bf848b6",
+              6,
+              5
+            ],
+            [
+              "2wiki:92dc836e0bdd11eba7f7acde48001122",
+              3,
+              2
+            ],
+            [
+              "2wiki:a0b2a4ce0baf11ebab90acde48001122",
+              3,
+              3
+            ],
+            [
+              "2wiki:f7ccb422088311ebbd6dac1f6bf848b6",
+              4,
+              5
+            ],
+            [
+              "hotpotqa:5a75d9b4554299109176e5a7",
+              3,
+              4
+            ],
+            [
+              "hotpotqa:5ae6050f55429929b0807a5e",
+              2,
+              3
+            ],
+            [
+              "2wiki:5352c0240baf11ebab90acde48001122",
+              2,
+              3
+            ],
+            [
+              "2wiki:80774c5508f911ebbdaaac1f6bf848b6",
+              2,
+              3
+            ],
+            [
+              "2wiki:a3b95abe0bdc11eba7f7acde48001122",
+              3,
+              3
+            ],
+            [
+              "hotpotqa:5abc089b5542993f40c73c57",
+              2,
+              2
+            ],
+            [
+              "confrag:88",
+              2,
+              3
+            ],
+            [
+              "hotpotqa:5a80ad19554299485f5986a8",
+              2,
+              3
+            ]
+          ],
+          "graph_convertible": 19,
+          "logic_types": {
+            "AND": 19,
+            "OTHER": 3
+          }
+        },
+        "system_stance_vs_gold_stance": {
+          "CONTRADICT": {
+            "NEUTRAL": 13,
+            "SUPPORT": 3,
+            "UNSURE": 4
+          },
+          "NEUTRAL": {
+            "NEUTRAL": 62,
+            "SUPPORT": 4,
+            "UNSURE": 11
+          },
+          "SUPPORT": {
+            "NEUTRAL": 27,
+            "SUPPORT": 38,
+            "UNSURE": 2
+          }
+        }
+      }
     }
   },
   "context_manifest_sha256": "4b171eac46569d4c1bb6c12216359bce08b68d66ac7bf4ab5b86f482758a3b5f",
   "disagreements": 0,
   "note": "Distributions appear only when an assessor has completed every case.",
-  "oracle_decompositions_exported": 0,
+  "oracle_decompositions_exported": 22,
   "protocol": "rv1-human-annotation-v1"
 }

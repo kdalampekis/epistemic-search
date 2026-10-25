@@ -15,19 +15,18 @@ case_id: confrag:1105
 order: 2
 dataset: confrag-suggested
 query_id: '1105'
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: 877043d811f71eacf248b20f79511c77db62d819fbbdfce55e3c186ef9e458bc
-question: Why does the law never go after rappers who constantly talk about the illegal drugs they do
-  in their songs?
+question: Why does the law never go after rappers who constantly talk about the illegal drugs they do in their songs?
 gold:
   reference_answer: null
   answerable: null
   annotations:
     answers:
-    - answer: The law does not go after rappers for discussing illegal drugs in their songs because their
-        lyrics are considered a form of artistic expression and are protected under free speech laws.
+    - answer: The law does not go after rappers for discussing illegal drugs in their songs because their lyrics are 
+        considered a form of artistic expression and are protected under free speech laws.
       answer_judge_keyword:
       - artistic expression
       - free speech
@@ -40,8 +39,8 @@ gold:
       - 26
       - 27
       reason:
-      - explain: Lyrics are seen as artistic expression rather than direct admissions of illegal activity,
-          providing protection under free speech rights.
+      - explain: Lyrics are seen as artistic expression rather than direct admissions of illegal activity, providing 
+          protection under free speech rights.
         index:
         - 15
         - 22
@@ -52,8 +51,8 @@ gold:
         - artistic expression
         - free speech
         - not direct admissions
-      - explain: Prosecuting based on song lyrics requires concrete evidence linking the lyrics to actual
-          crimes, which is often not available.
+      - explain: Prosecuting based on song lyrics requires concrete evidence linking the lyrics to actual crimes, which 
+          is often not available.
         index:
         - 22
         - 23
@@ -61,9 +60,9 @@ gold:
         - concrete evidence
         - actual crimes
         - not available
-    - answer: The law does not typically go after rappers for discussing illegal drugs in their songs
-        because the glamorization of drugs in rap music is seen as a cultural expression rather than a
-        direct incitement to illegal activity.
+    - answer: The law does not typically go after rappers for discussing illegal drugs in their songs because the 
+        glamorization of drugs in rap music is seen as a cultural expression rather than a direct incitement to illegal 
+        activity.
       answer_judge_keyword:
       - glamorization
       - cultural expression
@@ -73,31 +72,31 @@ gold:
       - 10
       - 11
       reason:
-      - explain: Rap music portrays drug use in the context of wealth and glamour, which is part of its
-          cultural expression and commercial strategy.
+      - explain: Rap music portrays drug use in the context of wealth and glamour, which is part of its cultural 
+          expression and commercial strategy.
         index:
         - 10
         reason_judge_keyword:
         - wealth
         - glamour
         - cultural expression
-      - explain: Drug references in rap music are part of broader cultural and historical movements, not
-          direct endorsements of illegal activity.
+      - explain: Drug references in rap music are part of broader cultural and historical movements, not direct 
+          endorsements of illegal activity.
         index:
         - 7
         reason_judge_keyword:
         - cultural movements
         - not direct endorsements
-    - answer: The law does not typically go after rappers for drug references in their songs because drug
-        mentions are common across many music genres, not just rap.
+    - answer: The law does not typically go after rappers for drug references in their songs because drug mentions are 
+        common across many music genres, not just rap.
       answer_judge_keyword:
       - common across genres
       - not just rap
       index:
       - 21
       reason:
-      - explain: Drug use references are prevalent in many music genres, including Country, Jazz, Pop,
-          Electronic, Rock, and Folk.
+      - explain: Drug use references are prevalent in many music genres, including Country, Jazz, Pop, Electronic, Rock,
+          and Folk.
         index:
         - 21
         reason_judge_keyword:
@@ -112,149 +111,155 @@ gold:
     contradicts: false
     from: Eli5
     id: 1105
-    question: Why does the law never go after rappers who constantly talk about the illegal drugs they
-      do in their songs?
+    question: Why does the law never go after rappers who constantly talk about the illegal drugs they do in their 
+      songs?
     websites:
-    - answer: The law does not go after rappers for discussing illegal drugs in their songs because musical
-        preference is related to substance misuse and other risky behaviors, but the causal relationship
-        is debated.
+    - answer: The law does not go after rappers for discussing illegal drugs in their songs because musical preference 
+        is related to substance misuse and other risky behaviors, but the causal relationship is debated.
       index: 7
       reason:
-      - The study indicates that while musical preference is related to substance misuse, the causal relationship
-        between music and drug use is debated, suggesting that lyrics alone are not sufficient evidence
-        for legal action.
-      - Rap music is a leading genre, and a significant portion of songs contain references to drug use,
-        but this is seen as a cultural expression rather than a direct promotion of illegal activity.
-      - There is a lack of studies examining the direct impact of rap music on drug misuse, which makes
-        it difficult to establish a legal basis for prosecuting artists based on their lyrics.
+      - The study indicates that while musical preference is related to substance misuse, the causal relationship 
+        between music and drug use is debated, suggesting that lyrics alone are not sufficient evidence for legal 
+        action.
+      - Rap music is a leading genre, and a significant portion of songs contain references to drug use, but this is 
+        seen as a cultural expression rather than a direct promotion of illegal activity.
+      - There is a lack of studies examining the direct impact of rap music on drug misuse, which makes it difficult to 
+        establish a legal basis for prosecuting artists based on their lyrics.
       trust_score: 8
       website: https://pubmed.ncbi.nlm.nih.gov/34121603/
-    - answer: The law does not typically go after rappers for discussing illegal drugs in their songs
-        because the glamorization of drugs in rap music is seen as a cultural expression rather than a
-        direct incitement to illegal activity.
+    - answer: The law does not typically go after rappers for discussing illegal drugs in their songs because the 
+        glamorization of drugs in rap music is seen as a cultural expression rather than a direct incitement to illegal 
+        activity.
       index: 10
       reason:
-      - Rap music often portrays drug use in the context of wealth, glamour, and social standing, which
-        is a shift from earlier depictions of the dangers of drug abuse.
-      - The increase in drug references in rap music is linked to its commercialization and the success
-        of albums that celebrate drug use, suggesting that these references are part of the music's appeal
-        and commercial strategy.
-      - Rap music serves as a cultural expression and a form of social commentary, which complicates legal
-        actions against artists for their lyrical content.
+      - Rap music often portrays drug use in the context of wealth, glamour, and social standing, which is a shift from 
+        earlier depictions of the dangers of drug abuse.
+      - The increase in drug references in rap music is linked to its commercialization and the success of albums that 
+        celebrate drug use, suggesting that these references are part of the music's appeal and commercial strategy.
+      - Rap music serves as a cultural expression and a form of social commentary, which complicates legal actions 
+        against artists for their lyrical content.
       trust_score: 8
       website: https://newsarchive.berkeley.edu/news/media/releases/2008/04/01_rapmusic.shtml
-    - answer: The law does not go after rappers for talking about illegal drugs in their songs because
-        their lyrics often blur the lines between reality and fiction, making it difficult to prove actual
-        criminal activity.
+    - answer: The law does not go after rappers for talking about illegal drugs in their songs because their lyrics 
+        often blur the lines between reality and fiction, making it difficult to prove actual criminal activity.
       index: 11
       reason:
-      - Rappers often present their lyrics as artistic expressions or fictional storytelling rather than
-        direct confessions of criminal behavior.
-      - The content of rap songs is protected under free speech, allowing artists to explore controversial
-        or illegal themes without legal repercussions.
-      - Prosecuting someone based on song lyrics would require concrete evidence linking the lyrics to
-        actual crimes, which is often not available or feasible.
+      - Rappers often present their lyrics as artistic expressions or fictional storytelling rather than direct 
+        confessions of criminal behavior.
+      - The content of rap songs is protected under free speech, allowing artists to explore controversial or illegal 
+        themes without legal repercussions.
+      - Prosecuting someone based on song lyrics would require concrete evidence linking the lyrics to actual crimes, 
+        which is often not available or feasible.
       trust_score: 7
       website: https://www.complex.com/music/a/ernest-baker/the-25-best-songs-about-selling-drugs
-    - answer: The law does not go after rappers for discussing illegal drugs in their songs because the
-        lyrics are often seen as artistic expression rather than direct admissions of illegal activity.
+    - answer: The law does not go after rappers for discussing illegal drugs in their songs because the lyrics are often
+        seen as artistic expression rather than direct admissions of illegal activity.
       index: 15
       reason:
-      - Rap music is considered a form of artistic expression, and lyrics are often metaphorical or fictional,
-        which provides a level of protection under free speech rights.
-      - The content of rap lyrics is often coded or uses slang that may not be directly understood as
-        promoting illegal activity, making it difficult to prosecute based on lyrics alone.
-      - There is a societal recognition that music, including rap, plays a role in reflecting cultural
-        issues, and targeting artists for their lyrics could be seen as censorship.
+      - Rap music is considered a form of artistic expression, and lyrics are often metaphorical or fictional, which 
+        provides a level of protection under free speech rights.
+      - The content of rap lyrics is often coded or uses slang that may not be directly understood as promoting illegal 
+        activity, making it difficult to prosecute based on lyrics alone.
+      - There is a societal recognition that music, including rap, plays a role in reflecting cultural issues, and 
+        targeting artists for their lyrics could be seen as censorship.
       trust_score: 8
       website: https://forum.psychlinks.ca/threads/rap-music-glamorizes-drug-use.8994/
-    - answer: The law does not typically go after rappers for drug references in their songs because drug
-        mentions are common across many music genres, not just rap.
+    - answer: The law does not typically go after rappers for drug references in their songs because drug mentions are 
+        common across many music genres, not just rap.
       index: 21
       reason:
-      - Drug use references are prevalent in many music genres, including Country, Jazz, Pop, Electronic,
-        Rock, and Folk, not just Rap.
-      - A study found that Rap music actually mentions drug use less frequently than other genres, although
-        it mentions a wider variety of drugs.
-      - The focus on Rap may be due to its cultural visibility and critique, but legally, it is not treated
-        differently from other genres in terms of lyrical content.
+      - Drug use references are prevalent in many music genres, including Country, Jazz, Pop, Electronic, Rock, and 
+        Folk, not just Rap.
+      - A study found that Rap music actually mentions drug use less frequently than other genres, although it mentions 
+        a wider variety of drugs.
+      - The focus on Rap may be due to its cultural visibility and critique, but legally, it is not treated differently 
+        from other genres in terms of lyrical content.
       trust_score: 8
       website: https://ambrosiaforheads.com/2017/04/rap-lyrics-drug-references-study/
-    - answer: The law typically does not go after rappers for discussing illegal drug use in their songs
-        because artistic expression is protected under free speech rights.
+    - answer: The law typically does not go after rappers for discussing illegal drug use in their songs because 
+        artistic expression is protected under free speech rights.
       index: 22
       reason:
-      - Artistic expression, including music and lyrics, is generally protected under the First Amendment
-        in the United States, which allows artists to discuss a wide range of topics, including illegal
-        activities, without legal repercussions.
-      - The content of songs is often seen as fictional or exaggerated storytelling rather than literal
-        confessions of illegal activity, making it difficult to prosecute based on lyrics alone.
-      - Law enforcement focuses on actual criminal activity rather than artistic expression unless there
-        is concrete evidence linking the lyrics to real crimes.
+      - Artistic expression, including music and lyrics, is generally protected under the First Amendment in the United 
+        States, which allows artists to discuss a wide range of topics, including illegal activities, without legal 
+        repercussions.
+      - The content of songs is often seen as fictional or exaggerated storytelling rather than literal confessions of 
+        illegal activity, making it difficult to prosecute based on lyrics alone.
+      - Law enforcement focuses on actual criminal activity rather than artistic expression unless there is concrete 
+        evidence linking the lyrics to real crimes.
       trust_score: 8
       website: https://ecosoberhouse.com/article/rappers-that-struggle-with-addiction/
-    - answer: The law does not go after rappers for discussing illegal drugs in their songs because their
-        lyrics are considered a form of artistic expression and are protected under free speech laws.
+    - answer: The law does not go after rappers for discussing illegal drugs in their songs because their lyrics are 
+        considered a form of artistic expression and are protected under free speech laws.
       index: 23
       reason:
-      - Lyrics in songs, including those that reference illegal drug use, are generally viewed as a form
-        of artistic expression rather than direct confessions or endorsements of illegal activity.
-      - Free speech protections in many countries, such as the First Amendment in the United States, safeguard
-        artistic works, including music, from legal repercussions unless they directly incite illegal
-        actions.
-      - The article highlights the historical and cultural context of drug references in music, suggesting
-        that such themes are part of broader artistic and cultural movements rather than explicit criminal
-        behavior.
+      - Lyrics in songs, including those that reference illegal drug use, are generally viewed as a form of artistic 
+        expression rather than direct confessions or endorsements of illegal activity.
+      - Free speech protections in many countries, such as the First Amendment in the United States, safeguard artistic 
+        works, including music, from legal repercussions unless they directly incite illegal actions.
+      - The article highlights the historical and cultural context of drug references in music, suggesting that such 
+        themes are part of broader artistic and cultural movements rather than explicit criminal behavior.
       trust_score: 7
       website: https://northernstar.info/25646/lifestyle/entertainment/rappers-glorify-drugs-in-their-music/
-    - answer: The law does not typically go after rappers for discussing illegal drug use in their songs
-        because the lyrics are often seen as artistic expression rather than direct admissions of illegal
-        activity.
+    - answer: The law does not typically go after rappers for discussing illegal drug use in their songs because the 
+        lyrics are often seen as artistic expression rather than direct admissions of illegal activity.
       index: 25
       reason:
-      - Rap music, like other forms of popular music, often reflects societal trends and experiences,
-        including drug use, which is considered a form of artistic expression.
-      - The depiction of drug use in rap lyrics is not unique to the genre and is part of a broader cultural
-        narrative that includes other music genres.
-      - The legal system generally distinguishes between artistic expression and actual criminal activity,
-        focusing on actions rather than words unless there is clear evidence of criminal conduct.
+      - Rap music, like other forms of popular music, often reflects societal trends and experiences, including drug 
+        use, which is considered a form of artistic expression.
+      - The depiction of drug use in rap lyrics is not unique to the genre and is part of a broader cultural narrative 
+        that includes other music genres.
+      - The legal system generally distinguishes between artistic expression and actual criminal activity, focusing on 
+        actions rather than words unless there is clear evidence of criminal conduct.
       trust_score: 8
       website: https://www.surfpointrecovery.com/blog/rappers-with-drug-addiction
-    - answer: The law does not typically go after rappers for drug references in their songs because these
-        references are often seen as artistic expression and reflections of personal experiences.
+    - answer: The law does not typically go after rappers for drug references in their songs because these references 
+        are often seen as artistic expression and reflections of personal experiences.
       index: 26
       reason:
-      - Rappers often use music as an outlet to express their personal experiences, including struggles
-        with addiction, which is considered a form of artistic expression.
-      - The glamorization of drugs in rap is part of the culture and industry, and while it influences
-        listeners, it is not directly illegal to reference drugs in music.
-      - The prevalence of drug references in rap has historical roots and is tied to the personal lives
-        and experiences of the artists, making it a complex issue beyond simple legal action.
+      - Rappers often use music as an outlet to express their personal experiences, including struggles with addiction, 
+        which is considered a form of artistic expression.
+      - The glamorization of drugs in rap is part of the culture and industry, and while it influences listeners, it is 
+        not directly illegal to reference drugs in music.
+      - The prevalence of drug references in rap has historical roots and is tied to the personal lives and experiences 
+        of the artists, making it a complex issue beyond simple legal action.
       trust_score: 7
       website: https://cmagazine.org/2020/02/07/enough-is-enough/
-    - answer: The law does not go after rappers for discussing illegal drug use in their songs because
-        their lyrics are considered a form of artistic expression and are protected under free speech
-        laws.
+    - answer: The law does not go after rappers for discussing illegal drug use in their songs because their lyrics are 
+        considered a form of artistic expression and are protected under free speech laws.
       index: 27
       reason:
-      - Rap music often includes references to drug use as part of its cultural and artistic expression,
-        which is protected under the First Amendment in the United States.
-      - The lyrics in rap songs are generally not treated as direct evidence of criminal activity unless
-        they are explicitly tied to specific illegal acts or cases.
-      - The glamorization of drug use in rap music is seen as a reflection of the culture and lifestyle
-        rather than an admission of personal illegal behavior.
+      - Rap music often includes references to drug use as part of its cultural and artistic expression, which is 
+        protected under the First Amendment in the United States.
+      - The lyrics in rap songs are generally not treated as direct evidence of criminal activity unless they are 
+        explicitly tied to specific illegal acts or cases.
+      - The glamorization of drug use in rap music is seen as a reflection of the culture and lifestyle rather than an 
+        admission of personal illegal behavior.
       trust_score: 7
       website: https://evokewellnessfl.com/blog/why-rappers-promote-drug-use/
   answer_references: []
   benchmark: confrag
   split: train
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: NO
+  required_claims:
+  - id: o1
+    assertion: Drug-related statements in song lyrics do not by themselves establish that the performer committed a 
+      specific prosecutable drug offense.
+  - id: o2
+    assertion: Whether lyrics can support investigation or prosecution depends on context such as corroboration, 
+      attribution, jurisdiction, and prosecutorial discretion.
+  - id: o3
+    assertion: The premise that authorities never take legal action against rappers over lyrics is not established by 
+      the question itself.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: OTHER
+    description: No benchmark reference answer is supplied; these are explanatory requirements for a defensible answer, 
+      not a gold factual proof graph.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth. Generated 
+    decomposition was visible before this oracle was authored, so authored_before_viewing_generated is NO. ConfRAG 
+    supplies no reference answer, so this oracle is assessor-authored structure rather than benchmark ground truth and 
+    should not be used as a converted gold proof graph.
 decomposition:
   context:
     formula: AND(P5, OR(P3, P4, P6, P1, P2))
@@ -263,103 +268,103 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: NO
+    complete: YES
+    has_unnecessary_premises: NO
+    has_missing_required_premises: NO
+    dependency_structure_matches: NO
+    notes: Captures relevant explanatory considerations, but all premises are unresolved “whether” questions and the 
+      AND/OR formula does not represent a justified causal explanation.
 premises:
 - id: c_32230d2b002d4681
   context:
     label: P1
-    text: Whether the lyrics alone establish the elements of a specific offense, such as actual drug possession
-      or use.
+    text: Whether the lyrics alone establish the elements of a specific offense, such as actual drug possession or use.
     polarity: POSITIVE
     lexical_surface_form_flag: WHETHER_CLAUSE
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_4d387556eaf5ea03
   context:
     label: P2
-    text: Whether decisions to investigate or prosecute depend on case-specific priorities, resources,
-      or discretion.
+    text: Whether decisions to investigate or prosecute depend on case-specific priorities, resources, or discretion.
     polarity: POSITIVE
     lexical_surface_form_flag: WHETHER_CLAUSE
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: NO
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise. Combines multiple separable 
+      conditions in one premise.
 - id: c_771ce47d06e6f37e
   context:
     label: P3
-    text: Whether the lyrics can reliably be attributed to the rapper and connected to a particular time,
-      place, and jurisdiction.
+    text: Whether the lyrics can reliably be attributed to the rapper and connected to a particular time, place, and 
+      jurisdiction.
     polarity: POSITIVE
     lexical_surface_form_flag: WHETHER_CLAUSE
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: NO
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise. Combines multiple separable 
+      conditions in one premise.
 - id: c_9c37709b96bd6fe0
   context:
     label: P4
-    text: Whether the lyrics describe the rapper's own real-world illegal drug use, rather than fiction,
-      persona, exaggeration, or someone else's conduct.
+    text: Whether the lyrics describe the rapper's own real-world illegal drug use, rather than fiction, persona, 
+      exaggeration, or someone else's conduct.
     polarity: POSITIVE
     lexical_surface_form_flag: WHETHER_CLAUSE
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_d843cadc22e31e57
   context:
     label: P5
-    text: Whether authorities in the relevant jurisdictions in fact never initiate legal action against
-      rappers based on drug-related lyrics.
+    text: Whether authorities in the relevant jurisdictions in fact never initiate legal action against rappers based on
+      drug-related lyrics.
     polarity: POSITIVE
     lexical_surface_form_flag: WHETHER_CLAUSE
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_ea48d59d9e1db8f6
   context:
     label: P6
-    text: Whether the contemplated legal action concerns punishable conduct or the expression of that
-      conduct in a song.
+    text: Whether the contemplated legal action concerns punishable conduct or the expression of that conduct in a song.
     polarity: POSITIVE
     lexical_surface_form_flag: WHETHER_CLAUSE
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 methods:
   epistemic_search:
     run: confrag-epistemic_search
@@ -376,16 +381,17 @@ methods:
         final_decision_rationale: Extracted span is absent from the exact source text
         error: Extracted span is absent from the exact source text
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: NO
+        notes: The system should have continued acquisition or answered from already available evidence rather than 
+          terminating without an answer.
     retrieval_rounds:
     - id: '1105:3'
       context:
         round: 1
         kind: ORIGINAL_QUESTION
-        query: Why does the law never go after rappers who constantly talk about the illegal drugs they
-          do in their songs?
+        query: Why does the law never go after rappers who constantly talk about the illegal drugs they do in their 
+          songs?
         target_premise: null
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: false
@@ -398,19 +404,20 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: null
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NOT_APPLICABLE
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     extraction_batches:
     - id: '1105:4'
       context:
         premise: P1
-        premise_text: Whether the lyrics alone establish the elements of a specific offense, such as actual
-          drug possession or use.
+        premise_text: Whether the lyrics alone establish the elements of a specific offense, such as actual drug 
+          possession or use.
         document:
           doc: 8e2656afb80b
           title: https://forum.psychlinks.ca/threads/rap-music-glamorizes-drug-use.8994/
@@ -419,39 +426,40 @@ methods:
         schema_valid: true
         items_returned: 3
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 1105:4#0
         context:
-          span: After sampling 341 lyrics from rap music's most popular hits between 1979 and 1997, the
-            researchers found references to drugs had increased six times over that period.
+          span: After sampling 341 lyrics from rap music's most popular hits between 1979 and 1997, the researchers 
+            found references to drugs had increased six times over that period.
           system_stance: NEUTRAL
           system_stance_score: 0.96
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
       - id: 1105:4#1
         context:
-          span: Of the 38 most popular songs between 1979 and 1984, only four contained drug references.
-            But by the late 1980s it had increased to 19 percent and after 1993 nearly 70 percent of rap
-            songs mentioned drug use.
+          span: Of the 38 most popular songs between 1979 and 1984, only four contained drug references. But by the late
+            1980s it had increased to 19 percent and after 1993 nearly 70 percent of rap songs mentioned drug use.
           system_stance: NEUTRAL
           system_stance_score: 0.95
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
       - id: 1105:4#2
         context:
           span: She added that much of what is discussed in rap is in code.
@@ -460,16 +468,17 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
     - id: '1105:6'
       context:
         premise: P1
-        premise_text: Whether the lyrics alone establish the elements of a specific offense, such as actual
-          drug possession or use.
+        premise_text: Whether the lyrics alone establish the elements of a specific offense, such as actual drug 
+          possession or use.
         document:
           doc: 627d3a0776c5
           title: https://www.complex.com/music/a/ernest-baker/the-25-best-songs-about-selling-drugs
@@ -478,59 +487,60 @@ methods:
         schema_valid: true
         items_returned: 3
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 1105:6#0
         context:
-          span: Hustling is a mentality that's been present in the genre since its inception, and the
-            attitude it inspires has further permeated the culture thanks in part to the tendency for
-            MCs to blur the lines between reality and fiction.
+          span: Hustling is a mentality that's been present in the genre since its inception, and the attitude it 
+            inspires has further permeated the culture thanks in part to the tendency for MCs to blur the lines between 
+            reality and fiction.
           system_stance: NEUTRAL
           system_stance_score: 0.94
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
       - id: 1105:6#1
         context:
-          span: Some of these records border on fantasy, some are alarmingly real, but they all sound
-            great.
+          span: Some of these records border on fantasy, some are alarmingly real, but they all sound great.
           system_stance: NEUTRAL
           system_stance_score: 0.95
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
       - id: 1105:6#2
         context:
-          span: Ironically, the verses were delivered by Ice Cube, who wasn't particularly known for his
-            experience in the trade, unlike group member Eazy-E, who was still bagging weed even after
-            he was famous.
+          span: Ironically, the verses were delivered by Ice Cube, who wasn't particularly known for his experience in 
+            the trade, unlike group member Eazy-E, who was still bagging weed even after he was famous.
           system_stance: NEUTRAL
           system_stance_score: 0.89
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
     - id: '1105:8'
       context:
         premise: P2
-        premise_text: Whether decisions to investigate or prosecute depend on case-specific priorities,
-          resources, or discretion.
+        premise_text: Whether decisions to investigate or prosecute depend on case-specific priorities, resources, or 
+          discretion.
         document:
           doc: 8e2656afb80b
           title: https://forum.psychlinks.ca/threads/rap-music-glamorizes-drug-use.8994/
@@ -539,15 +549,15 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: '1105:10'
       context:
         premise: P2
-        premise_text: Whether decisions to investigate or prosecute depend on case-specific priorities,
-          resources, or discretion.
+        premise_text: Whether decisions to investigate or prosecute depend on case-specific priorities, resources, or 
+          discretion.
         document:
           doc: 627d3a0776c5
           title: https://www.complex.com/music/a/ernest-baker/the-25-best-songs-about-selling-drugs
@@ -556,45 +566,46 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 1105:10#0
         context:
-          span: The Giuliani era crackdown, the narcotics task force patrolling on mountain bikes, the
-            use of out-of-state license plates to throw the cops off the trail, the fact that the DA already
-            has a file open on 50 and his crew.
+          span: The Giuliani era crackdown, the narcotics task force patrolling on mountain bikes, the use of 
+            out-of-state license plates to throw the cops off the trail, the fact that the DA already has a file open on
+            50 and his crew.
           system_stance: NEUTRAL
           system_stance_score: 0.94
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
       - id: 1105:10#1
         context:
-          span: “On Tuesdays and Thursdays, you better watch for the sweep,” warns Juvenile, referring
-            to the two days of the week that the N.O.P.D. task force hits the streets in search of illegal
-            drug activity.
+          span: “On Tuesdays and Thursdays, you better watch for the sweep,” warns Juvenile, referring to the two days 
+            of the week that the N.O.P.D. task force hits the streets in search of illegal drug activity.
           system_stance: NEUTRAL
           system_stance_score: 0.92
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
     - id: '1105:12'
       context:
         premise: P3
-        premise_text: Whether the lyrics can reliably be attributed to the rapper and connected to a particular
-          time, place, and jurisdiction.
+        premise_text: Whether the lyrics can reliably be attributed to the rapper and connected to a particular time, 
+          place, and jurisdiction.
         document:
           doc: 8e2656afb80b
           title: https://forum.psychlinks.ca/threads/rap-music-glamorizes-drug-use.8994/
@@ -603,39 +614,41 @@ methods:
         schema_valid: true
         items_returned: 3
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 1105:12#0
         context:
-          span: After sampling 341 lyrics from rap music's most popular hits between 1979 and 1997, the
-            researchers found references to drugs had increased six times over that period.
+          span: After sampling 341 lyrics from rap music's most popular hits between 1979 and 1997, the researchers 
+            found references to drugs had increased six times over that period.
           system_stance: NEUTRAL
           system_stance_score: 0.96
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
       - id: 1105:12#1
         context:
-          span: Earlier songs such as Grandmaster Flash "White Lines," recorded in 1983, warns cocaine
-            does nothing except "killin' your brain" but more recent tunes by popular rappers such as
-            50 Cent's "As the World Turns" refers to cocaine and heroin as nice things.
+          span: Earlier songs such as Grandmaster Flash "White Lines," recorded in 1983, warns cocaine does nothing 
+            except "killin' your brain" but more recent tunes by popular rappers such as 50 Cent's "As the World Turns" 
+            refers to cocaine and heroin as nice things.
           system_stance: NEUTRAL
           system_stance_score: 0.95
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
       - id: 1105:12#2
         context:
           span: NEW YORK (Reuters Life!)
@@ -644,16 +657,17 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
     - id: '1105:14'
       context:
         premise: P3
-        premise_text: Whether the lyrics can reliably be attributed to the rapper and connected to a particular
-          time, place, and jurisdiction.
+        premise_text: Whether the lyrics can reliably be attributed to the rapper and connected to a particular time, 
+          place, and jurisdiction.
         document:
           doc: 627d3a0776c5
           title: https://www.complex.com/music/a/ernest-baker/the-25-best-songs-about-selling-drugs
@@ -662,9 +676,9 @@ methods:
         schema_valid: true
         items_returned: 6
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 1105:14#0
         context:
@@ -674,85 +688,87 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: false
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
       - id: 1105:14#1
         context:
-          span: Some of these records border on fantasy, some are alarmingly real, but they all sound
-            great.
+          span: Some of these records border on fantasy, some are alarmingly real, but they all sound great.
           system_stance: CONTRADICT
           system_stance_score: 0.92
           mechanical_span_class: EXACT
           accepted_into_ledger: false
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
       - id: 1105:14#2
         context:
-          span: N.W.A's seminal classic was one of the first records to explore all the angles and intricacies
-            of the trade, and was unfairly lambasted by scared music critics and the moral majority for
-            glorifying the business when, in fact, it was simply another account of what actually happened
-            in Compton in the late 80s (and, for what it's worth, what happens in Compton to this very
-            day).
+          span: N.W.A's seminal classic was one of the first records to explore all the angles and intricacies of the 
+            trade, and was unfairly lambasted by scared music critics and the moral majority for glorifying the business
+            when, in fact, it was simply another account of what actually happened in Compton in the late 80s (and, for 
+            what it's worth, what happens in Compton to this very day).
           system_stance: SUPPORT
           system_stance_score: 0.88
           mechanical_span_class: NORMALIZATION_EQUIVALENT
           accepted_into_ledger: false
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: YES
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
       - id: 1105:14#3
         context:
-          span: Ironically, the verses were delivered by Ice Cube, who wasn't particularly known for his
-            experience in the trade, unlike group member Eazy-E, who was still bagging weed even after
-            he was famous.
+          span: Ironically, the verses were delivered by Ice Cube, who wasn't particularly known for his experience in 
+            the trade, unlike group member Eazy-E, who was still bagging weed even after he was famous.
           system_stance: CONTRADICT
           system_stance_score: 0.91
           mechanical_span_class: EXACT
           accepted_into_ledger: false
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
       - id: 1105:14#4
         context:
-          span: The fascination surrounding this track stems from the fact that 50 Cent mentions notorious
-            Queens drug dealers Kenneth "Supreme" McGriff and his nephew, Gerald "Prince" Miller.
+          span: The fascination surrounding this track stems from the fact that 50 Cent mentions notorious Queens drug 
+            dealers Kenneth "Supreme" McGriff and his nephew, Gerald "Prince" Miller.
           system_stance: SUPPORT
           system_stance_score: 0.84
           mechanical_span_class: NORMALIZATION_EQUIVALENT
           accepted_into_ledger: false
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: YES
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
       - id: 1105:14#5
         context:
-          span: The rumor is that this record provoked the shootings of both Jam Master Jay and 50 Cent
-            himself.
+          span: The rumor is that this record provoked the shootings of both Jam Master Jay and 50 Cent himself.
           system_stance: CONTRADICT
           system_stance_score: 0.78
           mechanical_span_class: NORMALIZATION_EQUIVALENT
           accepted_into_ledger: false
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: UNSURE
+          span_sufficient_alone: NO
+          span_meaning_faithful: YES
+          notes: Premise is not truth-apt enough for a reliable support/contradict label; topicality is judged 
+            separately.
     belief_states: []
     controller_decisions:
     - id: '1105:16'
@@ -771,16 +787,18 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: SEARCH_MORE
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
+      primary: EVIDENCE_EXTRACTION_ERROR
       secondary: []
-      rationale: null
-      notes: null
+      rationale: A normalization/non-verbatim extraction was rejected and terminated the run before the system could 
+        acquire legal/evidentiary sources.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: confrag-premise_only
     trace_sha256: 33ba7b1ad03c52d6a63c3faf10c429833a8c0595b40afdbd20ec1c09f30f51c3
@@ -796,16 +814,16 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: '1105:3'
       context:
         round: 1
         kind: ORIGINAL_QUESTION
-        query: Why does the law never go after rappers who constantly talk about the illegal drugs they
-          do in their songs?
+        query: Why does the law never go after rappers who constantly talk about the illegal drugs they do in their 
+          songs?
         target_premise: null
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: false
@@ -818,20 +836,21 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: null
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NOT_APPLICABLE
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: '1105:8'
       context:
         round: 2
         kind: TARGETED
-        query: Whether authorities in the relevant jurisdictions in fact never initiate legal action against
-          rappers based on drug-related lyrics. Why does the law never go after rappers who constantly
-          talk about the illegal drugs they do in their songs?
+        query: Whether authorities in the relevant jurisdictions in fact never initiate legal action against rappers 
+          based on drug-related lyrics. Why does the law never go after rappers who constantly talk about the illegal 
+          drugs they do in their songs?
         target_premise: P5
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -844,20 +863,20 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: null
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NOT_APPLICABLE
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: '1105:13'
       context:
         round: 3
         kind: TARGETED
-        query: Whether authorities in the relevant jurisdictions in fact never initiate legal action against
-          rappers based on drug-related lyrics. Why does the law never go after rappers who constantly
-          talk about the illegal drugs they do in their songs?
+        query: Whether authorities in the relevant jurisdictions in fact never initiate legal action against rappers 
+          based on drug-related lyrics. Why does the law never go after rappers who constantly talk about the illegal 
+          drugs they do in their songs?
         target_premise: P5
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -870,13 +889,13 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: null
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NOT_APPLICABLE
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -887,16 +906,16 @@ methods:
         target_premise: P5
         blocking_premises: []
         rationale: null
-        next_query: Whether authorities in the relevant jurisdictions in fact never initiate legal action
-          against rappers based on drug-related lyrics. Why does the law never go after rappers who constantly
-          talk about the illegal drugs they do in their songs?
+        next_query: Whether authorities in the relevant jurisdictions in fact never initiate legal action against 
+          rappers based on drug-related lyrics. Why does the law never go after rappers who constantly talk about the 
+          illegal drugs they do in their songs?
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     - id: '1105:11'
       context:
         decision: 2
@@ -904,16 +923,16 @@ methods:
         target_premise: P5
         blocking_premises: []
         rationale: null
-        next_query: Whether authorities in the relevant jurisdictions in fact never initiate legal action
-          against rappers based on drug-related lyrics. Why does the law never go after rappers who constantly
-          talk about the illegal drugs they do in their songs?
+        next_query: Whether authorities in the relevant jurisdictions in fact never initiate legal action against 
+          rappers based on drug-related lyrics. Why does the law never go after rappers who constantly talk about the 
+          illegal drugs they do in their songs?
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: '1105:16'
       context:
         decision: 3
@@ -924,13 +943,16 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ABSTAIN
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: DECOMPOSITION_ERROR
+      secondary:
+      - RETRIEVAL_ERROR
+      rationale: The decomposition is built from non-truth-apt “whether” clauses and the retrieved music commentary 
+        cannot establish the legal propositions needed for an answer.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

@@ -260,6 +260,15 @@ for _cls in (_Loader, _Dumper):
     _cls.add_implicit_resolver(_BOOL, re.compile(r"^(?:true|false)$"), list("tf"))
 
 
+def _quote_exponent_like(dumper: yaml.SafeDumper, data: str) -> yaml.ScalarNode:
+    """Ids such as 4326252e2819 are floats (inf) to YAML 1.2 tools; always quote them."""
+    style = "'" if re.fullmatch(r"[0-9]+[eE][0-9]+", data) else None
+    return dumper.represent_scalar("tag:yaml.org,2002:str", data, style=style)
+
+
+_Dumper.add_representer(str, _quote_exponent_like)
+
+
 def load_case(path: Path) -> CaseFile:
     try:
         raw = yaml.load(path.read_text(encoding="utf-8"), Loader=_Loader)  # noqa: S506

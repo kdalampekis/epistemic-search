@@ -15,9 +15,9 @@ case_id: 2wiki:5352c0240baf11ebab90acde48001122
 order: 17
 dataset: 2wiki-april7-dev
 query_id: 5352c0240baf11ebab90acde48001122
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: 74f99313379e3b4af438b4fd763b0d878644459a2cfdb073bcd8815d9c7dff5c
 question: Who is George Ii, Landgrave Of Hesse-Darmstadt's father?
 gold:
@@ -55,12 +55,18 @@ gold:
   benchmark: 2wikimultihopqa
   split: dev
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: YES
+  required_claims:
+  - id: o1
+    assertion: George II, Landgrave of Hesse-Darmstadt was the son of Magdalene of Brandenburg.
+  - id: o2
+    assertion: Magdalene of Brandenburg was married to Louis V, Landgrave of Hesse-Darmstadt.
+  - id: o3
+    assertion: The benchmark relation identifies Louis V, Landgrave of Hesse-Darmstadt as George II’s father.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: AND
+    description: All listed oracle claims are jointly required.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth.
 decomposition:
   context:
     formula: AND(P2, P1)
@@ -69,12 +75,12 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: YES
+    complete: YES
+    has_unnecessary_premises: NO
+    has_missing_required_premises: NO
+    dependency_structure_matches: YES
+    notes: 'Correct task decomposition: resolve the named historical person and identify that person’s father.'
 premises:
 - id: c_e349611fd4f1c62d
   context:
@@ -83,13 +89,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_ee0fc90a2e8339ea
   context:
     label: P2
@@ -97,13 +103,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 methods:
   epistemic_search:
     run: 2wikimultihopqa-epistemic_search
@@ -120,9 +126,9 @@ methods:
         final_decision_rationale: Supported by the extracted evidence model
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NO
+        abstention_appropriate: NOT_APPLICABLE
+        notes: Final answer is semantically incorrect relative to the benchmark/question.
     retrieval_rounds:
     - id: 5352c0240baf11ebab90acde48001122:3
       context:
@@ -141,13 +147,14 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     extraction_batches:
     - id: 5352c0240baf11ebab90acde48001122:4
       context:
@@ -161,9 +168,10 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: This source states Louis V was the son of George I and that George II succeeded Louis V; it does not say 
+          George I was George II’s father.
       items:
       - id: 5352c0240baf11ebab90acde48001122:4#0
         context:
@@ -173,11 +181,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5352c0240baf11ebab90acde48001122:6
       context:
         premise: P1
@@ -190,9 +198,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5352c0240baf11ebab90acde48001122:6#0
         context:
@@ -202,11 +210,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5352c0240baf11ebab90acde48001122:8
       context:
         premise: P2
@@ -219,9 +227,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5352c0240baf11ebab90acde48001122:8#0
         context:
@@ -231,11 +239,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5352c0240baf11ebab90acde48001122:10
       context:
         premise: P2
@@ -248,9 +256,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5352c0240baf11ebab90acde48001122:10#0
         context:
@@ -260,11 +268,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     belief_states:
     - id: 5352c0240baf11ebab90acde48001122:12
       context:
@@ -291,13 +299,16 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
-        unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        claim_status_justified: NO
+        unjustified_premise_labels:
+        - P1
+        blockers_genuinely_blocking: NOT_APPLICABLE
+        more_important_blockers_missing: YES
+        missing_blockers_description: P1 should be an unresolved blocker; its SUPPORT state comes from evidence about 
+          the wrong parent-child relation.
+        formal_conclusion_appropriate: NO
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     controller_decisions:
     - id: 5352c0240baf11ebab90acde48001122:16
       context:
@@ -309,16 +320,19 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: SEARCH_MORE
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: STANCE_ERROR
+      secondary:
+      - ANSWER_GENERATION_ERROR
+      rationale: Evidence about Louis V being the son of George I is incorrectly treated as support for George II’s 
+        father, and the answer generator then outputs George I.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: 2wikimultihopqa-premise_only
     trace_sha256: db8c84384d4863d560cf337510985a9c26433ab23d41e22d5ddfe76243ba3214
@@ -334,9 +348,9 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: 5352c0240baf11ebab90acde48001122:3
       context:
@@ -355,19 +369,19 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 5352c0240baf11ebab90acde48001122:8
       context:
         round: 2
         kind: TARGETED
-        query: Determine the father of the resolved person. Who is George Ii, Landgrave Of Hesse-Darmstadt's
-          father?
+        query: Determine the father of the resolved person. Who is George Ii, Landgrave Of Hesse-Darmstadt's father?
         target_premise: P1
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -380,19 +394,18 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 5352c0240baf11ebab90acde48001122:13
       context:
         round: 3
         kind: TARGETED
-        query: Determine the father of the resolved person. Who is George Ii, Landgrave Of Hesse-Darmstadt's
-          father?
+        query: Determine the father of the resolved person. Who is George Ii, Landgrave Of Hesse-Darmstadt's father?
         target_premise: P1
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -405,13 +418,13 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -422,15 +435,15 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: Determine the father of the resolved person. Who is George Ii, Landgrave Of Hesse-Darmstadt's
+        next_query: Determine the father of the resolved person. Who is George Ii, Landgrave Of Hesse-Darmstadt's 
           father?
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     - id: 5352c0240baf11ebab90acde48001122:11
       context:
         decision: 2
@@ -438,15 +451,15 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: Determine the father of the resolved person. Who is George Ii, Landgrave Of Hesse-Darmstadt's
+        next_query: Determine the father of the resolved person. Who is George Ii, Landgrave Of Hesse-Darmstadt's 
           father?
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 5352c0240baf11ebab90acde48001122:16
       context:
         decision: 3
@@ -457,13 +470,16 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ABSTAIN
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: RETRIEVAL_ERROR
+      secondary:
+      - CONTROLLER_ERROR
+      rationale: The retrieved pages do not directly establish George II’s father and repeated search fails to reach the
+        benchmark bridge evidence.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

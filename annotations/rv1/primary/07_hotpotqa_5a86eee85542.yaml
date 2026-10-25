@@ -15,9 +15,9 @@ case_id: hotpotqa:5a86eee85542994775f60787
 order: 7
 dataset: hotpotqa-distractor-dev
 query_id: 5a86eee85542994775f60787
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: c0d394771f1044c4e44c7e94560767364ab303097db0539b7e4a6462730e9154
 question: During what years did the railroad that had a station stop in Ringling, Montana operate?
 gold:
@@ -40,12 +40,16 @@ gold:
   benchmark: hotpotqa
   split: dev
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: YES
+  required_claims:
+  - id: o1
+    assertion: Ringling, Montana had a station stop on the Chicago, Milwaukee, St. Paul and Pacific Railroad.
+  - id: o2
+    assertion: The Chicago, Milwaukee, St. Paul and Pacific Railroad operated from 1847 until 1980.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: AND
+    description: All listed oracle claims are jointly required.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth.
 decomposition:
   context:
     formula: AND(P3, P2, P1)
@@ -54,12 +58,13 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: YES
+    complete: YES
+    has_unnecessary_premises: NO
+    has_missing_required_premises: NO
+    dependency_structure_matches: YES
+    notes: 'Correct high-level chain: identify the railroad, then establish its start and end years. Premises are tasks, not
+      declarative facts.'
 premises:
 - id: c_85e8c7a0ecaf2058
   context:
@@ -68,13 +73,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_898e19da99a4dbe8
   context:
     label: P2
@@ -82,13 +87,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_b6ced12d340c2fb5
   context:
     label: P3
@@ -96,13 +101,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 methods:
   epistemic_search:
     run: hotpotqa-epistemic_search
@@ -119,9 +124,9 @@ methods:
         final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: 5a86eee85542994775f60787:3
       context:
@@ -140,20 +145,21 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 5a86eee85542994775f60787:20
       context:
         round: 2
         kind: TARGETED
-        query: Establish the year that railroad ceased operating, if it ceased operating. During what
-          years did the railroad that had a station stop in Ringling, Montana operate? independent primary
-          sources evidence for and against
+        query: Establish the year that railroad ceased operating, if it ceased operating. During what years did the 
+          railroad that had a station stop in Ringling, Montana operate? independent primary sources evidence for and 
+          against
         target_premise: P2
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: false
@@ -167,20 +173,20 @@ methods:
         benchmark_gold_titles_in_this_round:
         - ringling, montana
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 5a86eee85542994775f60787:29
       context:
         round: 3
         kind: TARGETED
-        query: Establish the year that railroad ceased operating, if it ceased operating. During what
-          years did the railroad that had a station stop in Ringling, Montana operate? independent primary
-          sources evidence for and against
+        query: Establish the year that railroad ceased operating, if it ceased operating. During what years did the 
+          railroad that had a station stop in Ringling, Montana operate? independent primary sources evidence for and 
+          against
         target_premise: P2
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -194,13 +200,13 @@ methods:
         benchmark_gold_titles_in_this_round:
         - ringling, montana
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches:
     - id: 5a86eee85542994775f60787:4
       context:
@@ -216,9 +222,9 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5a86eee85542994775f60787:4#0
         context:
@@ -228,11 +234,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 5a86eee85542994775f60787:4#1
         context:
           span: the station stop itself continued to operate until March 16, 1998
@@ -241,11 +247,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5a86eee85542994775f60787:6
       context:
         premise: P1
@@ -258,24 +264,23 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5a86eee85542994775f60787:6#0
         context:
-          span: The station opened as a pair of sheltered sheds on June 28, 1916 and a ticket office at
-            street level.
+          span: The station opened as a pair of sheltered sheds on June 28, 1916 and a ticket office at street level.
           system_stance: NEUTRAL
           system_stance_score: 0.98
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5a86eee85542994775f60787:8
       context:
         premise: P2
@@ -290,9 +295,9 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5a86eee85542994775f60787:8#0
         context:
@@ -302,11 +307,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 5a86eee85542994775f60787:8#1
         context:
           span: This station, along with nine others around that time were closed due to low ridership
@@ -315,11 +320,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5a86eee85542994775f60787:10
       context:
         premise: P2
@@ -332,9 +337,9 @@ methods:
         schema_valid: true
         items_returned: 3
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5a86eee85542994775f60787:10#0
         context:
@@ -344,11 +349,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 5a86eee85542994775f60787:10#1
         context:
           span: Westbridge used to operate as a freight station after its closing.
@@ -357,11 +362,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 5a86eee85542994775f60787:10#2
         context:
           span: quite to the contrary that freight is no longer used here.
@@ -370,11 +375,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5a86eee85542994775f60787:12
       context:
         premise: P3
@@ -389,9 +394,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5a86eee85542994775f60787:14
       context:
@@ -405,9 +410,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5a86eee85542994775f60787:21
       context:
@@ -423,9 +428,9 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5a86eee85542994775f60787:21#0
         context:
@@ -435,11 +440,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 5a86eee85542994775f60787:21#1
         context:
           span: This station, along with nine others around that time were closed due to low ridership
@@ -448,11 +453,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5a86eee85542994775f60787:23
       context:
         premise: P2
@@ -466,9 +471,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a86eee85542994775f60787:23#0
         context:
@@ -478,11 +483,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a86eee85542994775f60787:30
       context:
         premise: P2
@@ -497,9 +502,9 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5a86eee85542994775f60787:30#0
         context:
@@ -509,11 +514,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 5a86eee85542994775f60787:30#1
         context:
           span: This station, along with nine others around that time were closed due to low ridership
@@ -522,11 +527,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5a86eee85542994775f60787:32
       context:
         premise: P2
@@ -540,9 +545,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a86eee85542994775f60787:32#0
         context:
@@ -552,11 +557,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     belief_states:
     - id: 5a86eee85542994775f60787:16
       context:
@@ -596,13 +601,15 @@ methods:
         - P2
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
-        unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        claim_status_justified: NO
+        unjustified_premise_labels:
+        - P2
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: 5a86eee85542994775f60787:25
       context:
         update: 2
@@ -641,13 +648,15 @@ methods:
         - P2
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
-        unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        claim_status_justified: NO
+        unjustified_premise_labels:
+        - P2
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: 5a86eee85542994775f60787:34
       context:
         update: 3
@@ -686,13 +695,15 @@ methods:
         - P2
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
-        unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        claim_status_justified: NO
+        unjustified_premise_labels:
+        - P2
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     controller_decisions:
     - id: 5a86eee85542994775f60787:18
       context:
@@ -704,16 +715,16 @@ methods:
         - P2
         - P3
         rationale: Resolve c_898e19da99a4dbe8 toward SUPPORTED
-        next_query: Establish the year that railroad ceased operating, if it ceased operating. During
-          what years did the railroad that had a station stop in Ringling, Montana operate? independent
-          primary sources evidence for and against
+        next_query: Establish the year that railroad ceased operating, if it ceased operating. During what years did the
+          railroad that had a station stop in Ringling, Montana operate? independent primary sources evidence for and 
+          against
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: SEARCH_MORE
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     - id: 5a86eee85542994775f60787:27
       context:
         decision: 2
@@ -724,16 +735,16 @@ methods:
         - P2
         - P3
         rationale: Resolve c_898e19da99a4dbe8 toward SUPPORTED
-        next_query: Establish the year that railroad ceased operating, if it ceased operating. During
-          what years did the railroad that had a station stop in Ringling, Montana operate? independent
-          primary sources evidence for and against
+        next_query: Establish the year that railroad ceased operating, if it ceased operating. During what years did the
+          railroad that had a station stop in Ringling, Montana operate? independent primary sources evidence for and 
+          against
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 5a86eee85542994775f60787:36
       context:
         decision: 3
@@ -747,16 +758,19 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: STANCE_ERROR
+      secondary:
+      - RETRIEVAL_ERROR
+      rationale: Closures of unrelated Long Island stations were treated as evidence about the Ringling railroad, 
+        creating a false conflict and misdirecting acquisition.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: hotpotqa-premise_only
     trace_sha256: 4bd0a210f7fe42f5f56fa698768ec135fb3a99585c1e162715f8fd6488472c4a
@@ -772,9 +786,9 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: 5a86eee85542994775f60787:3
       context:
@@ -793,19 +807,20 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 5a86eee85542994775f60787:8
       context:
         round: 2
         kind: TARGETED
-        query: Identify the railroad that had a station stop in Ringling, Montana. During what years did
-          the railroad that had a station stop in Ringling, Montana operate?
+        query: Identify the railroad that had a station stop in Ringling, Montana. During what years did the railroad 
+          that had a station stop in Ringling, Montana operate?
         target_premise: P3
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -818,19 +833,19 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 5a86eee85542994775f60787:13
       context:
         round: 3
         kind: TARGETED
-        query: Identify the railroad that had a station stop in Ringling, Montana. During what years did
-          the railroad that had a station stop in Ringling, Montana operate?
+        query: Identify the railroad that had a station stop in Ringling, Montana. During what years did the railroad 
+          that had a station stop in Ringling, Montana operate?
         target_premise: P3
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -843,13 +858,13 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: []
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: NO
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -860,15 +875,15 @@ methods:
         target_premise: P3
         blocking_premises: []
         rationale: null
-        next_query: Identify the railroad that had a station stop in Ringling, Montana. During what years
-          did the railroad that had a station stop in Ringling, Montana operate?
+        next_query: Identify the railroad that had a station stop in Ringling, Montana. During what years did the 
+          railroad that had a station stop in Ringling, Montana operate?
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     - id: 5a86eee85542994775f60787:11
       context:
         decision: 2
@@ -876,15 +891,15 @@ methods:
         target_premise: P3
         blocking_premises: []
         rationale: null
-        next_query: Identify the railroad that had a station stop in Ringling, Montana. During what years
-          did the railroad that had a station stop in Ringling, Montana operate?
+        next_query: Identify the railroad that had a station stop in Ringling, Montana. During what years did the 
+          railroad that had a station stop in Ringling, Montana operate?
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 5a86eee85542994775f60787:16
       context:
         decision: 3
@@ -895,13 +910,16 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ABSTAIN
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: RETRIEVAL_ERROR
+      secondary:
+      - CONTROLLER_ERROR
+      rationale: The system fails to retrieve the railroad identity and operating-start evidence and repeats essentially
+        the same unsuccessful acquisition.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

@@ -15,9 +15,9 @@ case_id: confrag:88
 order: 21
 dataset: confrag-suggested
 query_id: '88'
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: 2095442e3b3e116b7d4f88d3cc866a1e3c5fcb2aa66ddcedbef5c54a967ad64e
 question: where is the hotel used in the movie the shining
 gold:
@@ -25,8 +25,7 @@ gold:
   answerable: null
   annotations:
     answers:
-    - answer: The hotel used for the exterior shots in the movie 'The Shining' is the Timberline Lodge
-        in Oregon.
+    - answer: The hotel used for the exterior shots in the movie 'The Shining' is the Timberline Lodge in Oregon.
       answer_judge_keyword:
       - Timberline Lodge
       - exterior shots
@@ -93,8 +92,8 @@ gold:
         reason_judge_keyword:
         - haunted history
         - connection
-      - explain: The Stanley Hotel was used as a filming location for the 1997 TV miniseries adaptation
-          of 'The Shining'.
+      - explain: The Stanley Hotel was used as a filming location for the 1997 TV miniseries adaptation of 'The 
+          Shining'.
         index:
         - 2
         reason_judge_keyword:
@@ -108,111 +107,106 @@ gold:
     - answer: The hotel used in the movie 'The Shining' is the Stanley Hotel located in Estes Park, Colorado.
       index: 1
       reason:
-      - The Stanley Hotel is mentioned as having a connection to 'The Shining' in the context of tours
-        offered at the hotel.
-      - The webpage describes the Stanley Hotel as an iconic landmark with a rich history, which aligns
-        with its use as a setting in the movie.
-      - The Stanley Hotel offers tours specifically related to 'The Shining,' indicating its significance
-        in relation to the movie.
+      - The Stanley Hotel is mentioned as having a connection to 'The Shining' in the context of tours offered at the 
+        hotel.
+      - The webpage describes the Stanley Hotel as an iconic landmark with a rich history, which aligns with its use as 
+        a setting in the movie.
+      - The Stanley Hotel offers tours specifically related to 'The Shining,' indicating its significance in relation to
+        the movie.
       trust_score: 8
       website: https://www.stanleyhotel.com/
-    - answer: The Stanley Hotel in Estes Park, Colorado, served as the inspiration for the Overlook Hotel
-        in Stephen King's novel 'The Shining' and its 1980 film adaptation.
+    - answer: The Stanley Hotel in Estes Park, Colorado, served as the inspiration for the Overlook Hotel in Stephen 
+        King's novel 'The Shining' and its 1980 film adaptation.
       index: 2
       reason:
       - The Stanley Hotel inspired Stephen King to write 'The Shining' after he stayed there in 1974.
       - The hotel was used as a filming location for the 1997 TV miniseries adaptation of 'The Shining'.
-      - The Stanley Hotel's remote location, grand size, and eerie desolation contributed to its selection
-        as the inspiration for the fictional Overlook Hotel.
+      - The Stanley Hotel's remote location, grand size, and eerie desolation contributed to its selection as the 
+        inspiration for the fictional Overlook Hotel.
       trust_score: 9
       website: https://en.wikipedia.org/wiki/The_Stanley_Hotel
-    - answer: The exterior shots of the hotel in the movie 'The Shining' were filmed at the Timberline
-        Lodge in Oregon.
+    - answer: The exterior shots of the hotel in the movie 'The Shining' were filmed at the Timberline Lodge in Oregon.
       index: 3
       reason:
-      - The webpage specifies that the exterior hotel shots in the movie were filmed at the Timberline
-        Lodge in Oregon.
-      - It clarifies that the Stanley Hotel in Estes Park, Colorado, was the inspiration for Stephen King's
-        book, not the filming location for the movie.
-      - Interior shots for the movie were filmed in a studio in England, further confirming that the Timberline
-        Lodge was used for exterior scenes.
+      - The webpage specifies that the exterior hotel shots in the movie were filmed at the Timberline Lodge in Oregon.
+      - It clarifies that the Stanley Hotel in Estes Park, Colorado, was the inspiration for Stephen King's book, not 
+        the filming location for the movie.
+      - Interior shots for the movie were filmed in a studio in England, further confirming that the Timberline Lodge 
+        was used for exterior scenes.
       trust_score: 8
-      website: https://www.reddit.com/r/OldPhotosInRealLife/comments/jjejw6/stanley_hotel_in_estes_park_co_the_hotel_from_the/
-    - answer: The exterior shots of the Overlook Hotel in the movie 'The Shining' were filmed at the Timberline
-        Lodge in Oregon.
+      website: 
+        https://www.reddit.com/r/OldPhotosInRealLife/comments/jjejw6/stanley_hotel_in_estes_park_co_the_hotel_from_the/
+    - answer: The exterior shots of the Overlook Hotel in the movie 'The Shining' were filmed at the Timberline Lodge in
+        Oregon.
       index: 4
       reason:
-      - Stanley Kubrick used different locations for filming 'The Shining' to create a disorienting effect
-        for the audience.
+      - Stanley Kubrick used different locations for filming 'The Shining' to create a disorienting effect for the 
+        audience.
       - The Timberline Lodge in Oregon was specifically used for the exterior shots of the Overlook Hotel.
-      - The interiors were filmed at Elstree Studios in England, indicating that the Timberline Lodge
-        was chosen for its exterior appearance.
+      - The interiors were filmed at Elstree Studios in England, indicating that the Timberline Lodge was chosen for its
+        exterior appearance.
       trust_score: 8
       website: https://www.imdb.com/news/ni64213900/
-    - answer: The hotel used in the movie 'The Shining' for the opening establishing shots is the Timberline
-        Lodge in Oregon.
+    - answer: The hotel used in the movie 'The Shining' for the opening establishing shots is the Timberline Lodge in 
+        Oregon.
       index: 6
       reason:
-      - The webpage content explicitly states that the Timberline Lodge in Oregon was used for the opening
-        establishing shots of 'The Shining'.
-      - The Timberline Lodge is mentioned as the filming location in the title and description of the
-        YouTube video.
-      - The content is focused on visiting the Timberline Lodge as the filming location for the movie,
-        reinforcing its role in the film.
+      - The webpage content explicitly states that the Timberline Lodge in Oregon was used for the opening establishing 
+        shots of 'The Shining'.
+      - The Timberline Lodge is mentioned as the filming location in the title and description of the YouTube video.
+      - The content is focused on visiting the Timberline Lodge as the filming location for the movie, reinforcing its 
+        role in the film.
       trust_score: 8
       website: https://www.youtube.com/watch?v=kE3XjZ-OQcM
     - answer: The hotel used in the movie 'The Shining' is The Stanley Hotel in Estes Park, Colorado.
       index: 7
       reason:
-      - Stephen King was inspired to write 'The Shining' after staying at The Stanley Hotel, which is
-        known for its haunted history.
-      - The Stanley Hotel is featured as one of America's most haunted hotels and has been investigated
-        for paranormal activities.
-      - Stanley Kubrick based the film's famous Overlook Hotel on The Stanley Hotel, although the actual
-        filming was done elsewhere.
-      - A second film adaptation of 'The Shining' was filmed inside The Stanley Hotel, aligning more closely
-        with Stephen King's vision.
+      - Stephen King was inspired to write 'The Shining' after staying at The Stanley Hotel, which is known for its 
+        haunted history.
+      - The Stanley Hotel is featured as one of America's most haunted hotels and has been investigated for paranormal 
+        activities.
+      - Stanley Kubrick based the film's famous Overlook Hotel on The Stanley Hotel, although the actual filming was 
+        done elsewhere.
+      - A second film adaptation of 'The Shining' was filmed inside The Stanley Hotel, aligning more closely with 
+        Stephen King's vision.
       trust_score: 8
       website: https://estes-park.com/lodging-and-cabins/the-stanley-hotel/
-    - answer: The hotel used for the exterior shots of the 'Overlook Hotel' in the movie 'The Shining'
-        is the Timberline Lodge, located on Mount Hood in Oregon.
+    - answer: The hotel used for the exterior shots of the 'Overlook Hotel' in the movie 'The Shining' is the Timberline
+        Lodge, located on Mount Hood in Oregon.
       index: 8
       reason:
       - The Timberline Lodge was used for the exterior shots of the 'Overlook Hotel' in the film.
-      - The film was primarily shot in studios, but the Timberline Lodge provided the iconic exterior
-        setting.
-      - The interior of the hotel was constructed at Elstree Studios in England, and not at the Timberline
-        Lodge.
+      - The film was primarily shot in studios, but the Timberline Lodge provided the iconic exterior setting.
+      - The interior of the hotel was constructed at Elstree Studios in England, and not at the Timberline Lodge.
       trust_score: 9
       website: https://movie-locations.com/movies/s/Shining-1980.php
-    - answer: The hotel used for the exterior shots in the movie 'The Shining' is Timberline Lodge, located
-        on Mount Hood in Oregon.
+    - answer: The hotel used for the exterior shots in the movie 'The Shining' is Timberline Lodge, located on Mount 
+        Hood in Oregon.
       index: 10
       reason:
-      - Timberline Lodge was chosen for its rustic architecture and historical significance, which aligned
-        with Stanley Kubrick's aesthetic vision for the film.
-      - The Stanley Hotel in Estes Park, Colorado, inspired Stephen King to create the Overlook Hotel,
-        but it was not used in the film.
-      - The interior shots of the Overlook Hotel were filmed at Elstree Studios in England, with inspiration
-        from the Ahwahnee Hotel at Yosemite National Park.
+      - Timberline Lodge was chosen for its rustic architecture and historical significance, which aligned with Stanley 
+        Kubrick's aesthetic vision for the film.
+      - The Stanley Hotel in Estes Park, Colorado, inspired Stephen King to create the Overlook Hotel, but it was not 
+        used in the film.
+      - The interior shots of the Overlook Hotel were filmed at Elstree Studios in England, with inspiration from the 
+        Ahwahnee Hotel at Yosemite National Park.
       trust_score: 8
       website: https://raditmahindro.medium.com/fictional-hotels-in-films-overlook-hotel-the-shining-e9ec7d87dd9f
-    - answer: The hotel used in the movie 'The Shining' for the exterior shots of the Overlook Hotel is
-        Timberline Lodge, located in Mount Hood National Forest, Oregon.
+    - answer: The hotel used in the movie 'The Shining' for the exterior shots of the Overlook Hotel is Timberline 
+        Lodge, located in Mount Hood National Forest, Oregon.
       index: 12
       reason:
       - The Timberline Lodge was used for the exterior shots of the Overlook Hotel in 'The Shining'.
-      - The lodge is situated on the south face of Mount Hood in Mount Hood National Forest, Oregon, making
-        it a fitting location for the isolated and eerie setting required for the film.
-      - The location's natural beauty and isolation contributed to the film's atmosphere, enhancing the
-        horror elements of the story.
+      - The lodge is situated on the south face of Mount Hood in Mount Hood National Forest, Oregon, making it a fitting
+        location for the isolated and eerie setting required for the film.
+      - The location's natural beauty and isolation contributed to the film's atmosphere, enhancing the horror elements 
+        of the story.
       trust_score: 9
       website: https://giggster.com/guide/movie-location/where-was-the-shining-filmed
     - answer: The hotel used in the movie 'The Shining' is the Timberline Lodge in Oregon.
       index: 13
       reason:
-      - The webpage mentions the Timberline Lodge Hotel in Oregon as one of the film locations for 'The
-        Shining'.
+      - The webpage mentions the Timberline Lodge Hotel in Oregon as one of the film locations for 'The Shining'.
       - The Timberline Lodge was used for the exterior shots of the Overlook Hotel in the movie.
       trust_score: 8
       website: https://www.youtube.com/watch?v=S0oxtqV4hEY
@@ -220,12 +214,22 @@ gold:
   benchmark: confrag
   split: train
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: YES
+  required_claims:
+  - id: o1
+    assertion: The question must distinguish a hotel used as a filming location in Stanley Kubrick's The Shining from 
+      hotels that inspired the story or production design.
+  - id: o2
+    assertion: The exterior of the Overlook Hotel in the film was represented by Timberline Lodge.
+  - id: o3
+    assertion: Timberline Lodge is on Mount Hood in Oregon.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: OTHER
+    description: ConfRAG supplies no reference answer and the question is ambiguous between exterior filming location 
+      and interior set/design; the oracle records the required disambiguation rather than a benchmark gold proof.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth. ConfRAG supplies 
+    no gold answer; concrete location facts are assessor knowledge and later retrieved evidence, so this oracle must not
+    be treated as independent benchmark ground truth.
 decomposition:
   context:
     formula: OR(P1, P2)
@@ -234,43 +238,45 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: YES
+    complete: YES
+    has_unnecessary_premises: NO
+    has_missing_required_premises: NO
+    dependency_structure_matches: YES
+    notes: Reasonably handles the ambiguity between exterior filming location and interior location/design 
+      interpretation using alternatives.
 premises:
 - id: c_7a91e5373f3c1622
   context:
     label: P1
-    text: Identify the real-world location or set used for the Overlook Hotel’s interior scenes, including
-      its geographic location.
+    text: Identify the real-world location or set used for the Overlook Hotel’s interior scenes, including its 
+      geographic location.
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: NO
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise. Relevant but not required for the 
+      gold answer under the oracle decomposition.
 - id: c_7d90497938484384
   context:
     label: P2
-    text: Identify the real-world hotel or location used for the Overlook Hotel’s exterior shots, including
-      its geographic location.
+    text: Identify the real-world hotel or location used for the Overlook Hotel’s exterior shots, including its 
+      geographic location.
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 methods:
   epistemic_search:
     run: confrag-epistemic_search
@@ -280,17 +286,17 @@ methods:
         status: completed
         rv0_outcome: ungraded_answer
         answered: true
-        final_answer: The exterior of the Overlook Hotel was filmed at Timberline Lodge on Mount Hood
-          in Oregon. The hotel’s interior design was based on the Ahwahnee Hotel in Yosemite.
+        final_answer: The exterior of the Overlook Hotel was filmed at Timberline Lodge on Mount Hood in Oregon. The 
+          hotel’s interior design was based on the Ahwahnee Hotel in Yosemite.
         reference_answer: null
         exact_match: null
         token_f1: null
         final_decision_rationale: Supported by the extracted evidence model
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: YES
+        abstention_appropriate: NOT_APPLICABLE
+        notes: Final answer is semantically correct even if benchmark exact-match formatting differs.
     retrieval_rounds:
     - id: '88:3'
       context:
@@ -309,19 +315,20 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: null
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: NOT_APPLICABLE
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     extraction_batches:
     - id: '88:4'
       context:
         premise: P1
-        premise_text: Identify the real-world location or set used for the Overlook Hotel’s interior scenes,
-          including its geographic location.
+        premise_text: Identify the real-world location or set used for the Overlook Hotel’s interior scenes, including 
+          its geographic location.
         document:
           doc: 1e3a1d7ee642
           title: https://www.youtube.com/watch?v=kE3XjZ-OQcM
@@ -330,43 +337,43 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: The source describes Ahwahnee as design inspiration/copy, not the physical interior filming location/set.
       items:
       - id: 88:4#0
         context:
-          span: The interior of Kubrick’s Overlook was architecturally and design based on the Ahwahnee
-            hotel in Yosemite.
+          span: The interior of Kubrick’s Overlook was architecturally and design based on the Ahwahnee hotel in 
+            Yosemite.
           system_stance: SUPPORT
           system_stance_score: 0.88
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 88:4#1
         context:
-          span: 'Fun fact: the interiors of the movie hotel were an exact copy (even the elevators) of
-            the Ahwhanee Hotel in Yosemite Park.'
+          span: 'Fun fact: the interiors of the movie hotel were an exact copy (even the elevators) of the Ahwhanee Hotel
+            in Yosemite Park.'
           system_stance: SUPPORT
           system_stance_score: 0.96
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: '88:6'
       context:
         premise: P1
-        premise_text: Identify the real-world location or set used for the Overlook Hotel’s interior scenes,
-          including its geographic location.
+        premise_text: Identify the real-world location or set used for the Overlook Hotel’s interior scenes, including 
+          its geographic location.
         document:
           doc: e0a01a5ba075
           title: https://giggster.com/guide/movie-location/where-was-the-shining-filmed
@@ -375,29 +382,29 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 88:6#0
         context:
-          span: The location used for the exterior of the Overlook Hotel was Timberline Lodge, located
-            on the south face of Mount Hood in Mount Hood National Forest, Clackamas County, Oregon.
+          span: The location used for the exterior of the Overlook Hotel was Timberline Lodge, located on the south face
+            of Mount Hood in Mount Hood National Forest, Clackamas County, Oregon.
           system_stance: NEUTRAL
           system_stance_score: 0.98
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: '88:8'
       context:
         premise: P2
-        premise_text: Identify the real-world hotel or location used for the Overlook Hotel’s exterior
-          shots, including its geographic location.
+        premise_text: Identify the real-world hotel or location used for the Overlook Hotel’s exterior shots, including 
+          its geographic location.
         document:
           doc: 1e3a1d7ee642
           title: https://www.youtube.com/watch?v=kE3XjZ-OQcM
@@ -406,29 +413,29 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 88:8#0
         context:
-          span: Join us as we visit The Timberline Lodge in Oregon...this is where Stanley Kubrick filmed
-            the opening establishing shots to Stephen King's Horror classic...THE SHINING.
+          span: Join us as we visit The Timberline Lodge in Oregon...this is where Stanley Kubrick filmed the opening 
+            establishing shots to Stephen King's Horror classic...THE SHINING.
           system_stance: SUPPORT
           system_stance_score: 0.99
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: '88:10'
       context:
         premise: P2
-        premise_text: Identify the real-world hotel or location used for the Overlook Hotel’s exterior
-          shots, including its geographic location.
+        premise_text: Identify the real-world hotel or location used for the Overlook Hotel’s exterior shots, including 
+          its geographic location.
         document:
           doc: e0a01a5ba075
           title: https://giggster.com/guide/movie-location/where-was-the-shining-filmed
@@ -437,24 +444,24 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 88:10#0
         context:
-          span: The location used for the exterior of the Overlook Hotel was Timberline Lodge, located
-            on the south face of Mount Hood in Mount Hood National Forest, Clackamas County, Oregon.
+          span: The location used for the exterior of the Overlook Hotel was Timberline Lodge, located on the south face
+            of Mount Hood in Mount Hood National Forest, Clackamas County, Oregon.
           system_stance: SUPPORT
           system_stance_score: 1.0
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     belief_states:
     - id: '88:12'
       context:
@@ -481,13 +488,15 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
-        unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        claim_status_justified: NO
+        unjustified_premise_labels:
+        - P1
+        blockers_genuinely_blocking: NOT_APPLICABLE
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     controller_decisions:
     - id: '88:16'
       context:
@@ -499,16 +508,18 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     root_cause:
-      primary: null
+      primary: NO_IDENTIFIED_FAILURE
       secondary: []
-      rationale: null
-      notes: null
+      rationale: The final answer correctly distinguishes Timberline Lodge exterior filming from Ahwahnee design 
+        inspiration, despite an over-broad internal support label for P1.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: confrag-premise_only
     trace_sha256: 0cbfb7c9b611eeea3ecb20e58713f6e565d4d70f95d6b41bb52dfc91e7ee9c27
@@ -517,18 +528,18 @@ methods:
         status: completed
         rv0_outcome: ungraded_answer
         answered: true
-        final_answer: The Overlook Hotel’s exterior shots used Timberline Lodge on Mount Hood in Oregon.
-          Its interiors were filmed on sets at Elstree Studios in England, with design inspiration from
-          the Ahwahnee Hotel in Yosemite, California.
+        final_answer: The Overlook Hotel’s exterior shots used Timberline Lodge on Mount Hood in Oregon. Its interiors 
+          were filmed on sets at Elstree Studios in England, with design inspiration from the Ahwahnee Hotel in 
+          Yosemite, California.
         reference_answer: null
         exact_match: null
         token_f1: null
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: YES
+        abstention_appropriate: NOT_APPLICABLE
+        notes: Final answer is semantically correct even if benchmark exact-match formatting differs.
     retrieval_rounds:
     - id: '88:3'
       context:
@@ -547,19 +558,20 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: null
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: NOT_APPLICABLE
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: '88:8'
       context:
         round: 2
         kind: TARGETED
-        query: Identify the real-world location or set used for the Overlook Hotel’s interior scenes,
-          including its geographic location. where is the hotel used in the movie the shining
+        query: Identify the real-world location or set used for the Overlook Hotel’s interior scenes, including its 
+          geographic location. where is the hotel used in the movie the shining
         target_premise: P1
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: false
@@ -572,13 +584,13 @@ methods:
           rank: 2
         benchmark_gold_titles_in_this_round: null
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NO
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: NOT_APPLICABLE
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -589,15 +601,15 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: Identify the real-world location or set used for the Overlook Hotel’s interior scenes,
-          including its geographic location. where is the hotel used in the movie the shining
+        next_query: Identify the real-world location or set used for the Overlook Hotel’s interior scenes, including its
+          geographic location. where is the hotel used in the movie the shining
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: SEARCH_MORE
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     - id: '88:11'
       context:
         decision: 2
@@ -608,13 +620,15 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     root_cause:
-      primary: null
+      primary: NO_IDENTIFIED_FAILURE
       secondary: []
-      rationale: null
-      notes: null
+      rationale: The answer usefully disambiguates exterior filming, Elstree interior sets, and Ahwahnee design 
+        inspiration.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

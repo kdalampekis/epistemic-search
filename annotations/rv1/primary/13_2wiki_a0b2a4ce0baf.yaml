@@ -15,9 +15,9 @@ case_id: 2wiki:a0b2a4ce0baf11ebab90acde48001122
 order: 13
 dataset: 2wiki-april7-dev
 query_id: a0b2a4ce0baf11ebab90acde48001122
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: 9739e129f0be19ea8dce8771f258d5a35254711e856b59c68a442381c8806ffb
 question: Who is the maternal grandfather of Rudolph Of France?
 gold:
@@ -55,12 +55,18 @@ gold:
   benchmark: 2wikimultihopqa
   split: dev
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: YES
+  required_claims:
+  - id: o1
+    assertion: Rudolph of France was the son of Adelaide of Auxerre.
+  - id: o2
+    assertion: Adelaide of Auxerre was the daughter of Conrad II, Duke of Transjurane Burgundy.
+  - id: o3
+    assertion: Therefore Conrad II, Duke of Transjurane Burgundy was Rudolph of France’s maternal grandfather.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: AND
+    description: All listed oracle claims are jointly required.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth.
 decomposition:
   context:
     formula: AND(P2, P3, P1)
@@ -69,12 +75,13 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: YES
+    complete: YES
+    has_unnecessary_premises: NO
+    has_missing_required_premises: NO
+    dependency_structure_matches: YES
+    notes: 'Correct maternal-grandfather chain: resolve Rudolph, identify his mother, then identify her father. Premises are
+      tasks rather than assertions.'
 premises:
 - id: c_572d7d9117a424cd
   context:
@@ -83,13 +90,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: QUESTION_MARK
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_62cf81d6e361dd43
   context:
     label: P2
@@ -97,13 +104,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: QUESTION_MARK
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_d5f96cc0f34cc9b0
   context:
     label: P3
@@ -111,13 +118,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: QUESTION_MARK
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 methods:
   epistemic_search:
     run: 2wikimultihopqa-epistemic_search
@@ -134,9 +141,9 @@ methods:
         final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: a0b2a4ce0baf11ebab90acde48001122:3
       context:
@@ -156,19 +163,20 @@ methods:
         benchmark_gold_titles_in_this_round:
         - rudolph of france
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: a0b2a4ce0baf11ebab90acde48001122:20
       context:
         round: 2
         kind: TARGETED
-        query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph
-          Of France? independent verification primary source
+        query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph Of France? 
+          independent verification primary source
         target_premise: P1
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -176,25 +184,25 @@ methods:
         - doc: 9c57dad0cb8b
           title: Rudolph of France
           rank: 1
-        - doc: 4326252e2819
+        - doc: '4326252e2819'
           title: Kaya Alp
           rank: 2
         benchmark_gold_titles_in_this_round:
         - rudolph of france
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: a0b2a4ce0baf11ebab90acde48001122:29
       context:
         round: 3
         kind: TARGETED
-        query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph
-          Of France? independent verification primary source
+        query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph Of France? 
+          independent verification primary source
         target_premise: P1
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -202,19 +210,19 @@ methods:
         - doc: 9c57dad0cb8b
           title: Rudolph of France
           rank: 1
-        - doc: 4326252e2819
+        - doc: '4326252e2819'
           title: Kaya Alp
           rank: 2
         benchmark_gold_titles_in_this_round:
         - rudolph of france
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches:
     - id: a0b2a4ce0baf11ebab90acde48001122:4
       context:
@@ -230,9 +238,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: The Rudolph source names his mother Adelaide but not Adelaide’s father.
       items:
       - id: a0b2a4ce0baf11ebab90acde48001122:4#0
         context:
@@ -242,11 +250,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: a0b2a4ce0baf11ebab90acde48001122:6
       context:
         premise: P1
@@ -261,9 +269,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: a0b2a4ce0baf11ebab90acde48001122:8
       context:
@@ -279,24 +287,24 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: a0b2a4ce0baf11ebab90acde48001122:8#0
         context:
-          span: Rudolph or Rudolf (c. 890 – 14/15 January 936) was the elected King of France from 923
-            until his death in 936.
+          span: Rudolph or Rudolf (c. 890 – 14/15 January 936) was the elected King of France from 923 until his death 
+            in 936.
           system_stance: SUPPORT
           system_stance_score: 0.99
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
       - id: a0b2a4ce0baf11ebab90acde48001122:8#1
         context:
           span: He is frequently confused with his uncleRudolph I of Burgundy.
@@ -305,11 +313,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: a0b2a4ce0baf11ebab90acde48001122:10
       context:
         premise: P2
@@ -324,9 +332,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: a0b2a4ce0baf11ebab90acde48001122:12
       context:
@@ -342,9 +350,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: a0b2a4ce0baf11ebab90acde48001122:12#0
         context:
@@ -354,11 +362,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: a0b2a4ce0baf11ebab90acde48001122:14
       context:
         premise: P3
@@ -373,9 +381,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: a0b2a4ce0baf11ebab90acde48001122:14#0
         context:
@@ -385,11 +393,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: a0b2a4ce0baf11ebab90acde48001122:21
       context:
         premise: P1
@@ -404,9 +412,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: The Rudolph source names his mother Adelaide but not Adelaide’s father.
       items:
       - id: a0b2a4ce0baf11ebab90acde48001122:21#0
         context:
@@ -416,11 +424,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: a0b2a4ce0baf11ebab90acde48001122:23
       context:
         premise: P1
@@ -435,9 +443,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: a0b2a4ce0baf11ebab90acde48001122:30
       context:
@@ -453,9 +461,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: The Rudolph source names his mother Adelaide but not Adelaide’s father.
       items:
       - id: a0b2a4ce0baf11ebab90acde48001122:30#0
         context:
@@ -465,11 +473,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: a0b2a4ce0baf11ebab90acde48001122:32
       context:
         premise: P1
@@ -484,9 +492,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     belief_states:
     - id: a0b2a4ce0baf11ebab90acde48001122:16
@@ -522,13 +530,14 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: YES
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: a0b2a4ce0baf11ebab90acde48001122:25
       context:
         update: 2
@@ -562,13 +571,14 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: YES
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: a0b2a4ce0baf11ebab90acde48001122:34
       context:
         update: 3
@@ -602,13 +612,14 @@ methods:
         reasoner_conflicts: []
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
+        claim_status_justified: YES
         unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        blockers_genuinely_blocking: YES
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: YES
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     controller_decisions:
     - id: a0b2a4ce0baf11ebab90acde48001122:18
       context:
@@ -618,15 +629,15 @@ methods:
         blocking_premises:
         - P1
         rationale: Resolve c_572d7d9117a424cd toward SUPPORTED
-        next_query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph
-          Of France? independent verification primary source
+        next_query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph Of France? 
+          independent verification primary source
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     - id: a0b2a4ce0baf11ebab90acde48001122:27
       context:
         decision: 2
@@ -635,15 +646,15 @@ methods:
         blocking_premises:
         - P1
         rationale: Resolve c_572d7d9117a424cd toward SUPPORTED
-        next_query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph
-          Of France? independent verification primary source
+        next_query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph Of France? 
+          independent verification primary source
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: a0b2a4ce0baf11ebab90acde48001122:36
       context:
         decision: 3
@@ -655,16 +666,19 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: RETRIEVAL_ERROR
+      secondary:
+      - CONTROLLER_ERROR
+      rationale: The Rudolph page identifies his mother but the Adelaide of Auxerre page containing her father is never 
+        retrieved; the same failed query is repeated.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: 2wikimultihopqa-premise_only
     trace_sha256: 1a5d9bb0bcc35c39a3d793e79cffc9a2b57cb858c42277d52268c842dd2fb600
@@ -680,9 +694,9 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: a0b2a4ce0baf11ebab90acde48001122:3
       context:
@@ -702,19 +716,19 @@ methods:
         benchmark_gold_titles_in_this_round:
         - rudolph of france
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: a0b2a4ce0baf11ebab90acde48001122:8
       context:
         round: 2
         kind: TARGETED
-        query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph
-          Of France?
+        query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph Of France?
         target_premise: P1
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -728,19 +742,18 @@ methods:
         benchmark_gold_titles_in_this_round:
         - rudolph of france
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: a0b2a4ce0baf11ebab90acde48001122:13
       context:
         round: 3
         kind: TARGETED
-        query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph
-          Of France?
+        query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph Of France?
         target_premise: P1
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -754,13 +767,13 @@ methods:
         benchmark_gold_titles_in_this_round:
         - rudolph of france
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: YES
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -771,15 +784,14 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph
-          Of France?
+        next_query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph Of France?
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     - id: a0b2a4ce0baf11ebab90acde48001122:11
       context:
         decision: 2
@@ -787,15 +799,14 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph
-          Of France?
+        next_query: Who was the father of that person’s mother? Who is the maternal grandfather of Rudolph Of France?
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: YES
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: a0b2a4ce0baf11ebab90acde48001122:16
       context:
         decision: 3
@@ -806,13 +817,15 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: YES
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ABSTAIN
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: RETRIEVAL_ERROR
+      secondary:
+      - CONTROLLER_ERROR
+      rationale: The maternal-grandfather bridge evidence is not retrieved and acquisition repeats.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

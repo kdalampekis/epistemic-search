@@ -15,12 +15,12 @@ case_id: hotpotqa:5ae63b2255429908198fa526
 order: 5
 dataset: hotpotqa-distractor-dev
 query_id: 5ae63b2255429908198fa526
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: 2b15dd624980dfaa146bd9bd15285d47f7b312cf0d5c7dcef41110c071105f06
-question: What is the date played of this college football game at Sun Life Stadium in Miami Gardens,
-  Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
+question: What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where 
+  Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
 gold:
   reference_answer: December 31, 2015
   answerable: null
@@ -29,8 +29,8 @@ gold:
     answer: December 31, 2015
     answer_id: null
     level: hard
-    question: What is the date played of this college football game at Sun Life Stadium in Miami Gardens,
-      Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
+    question: What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where
+      Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
     supporting_facts:
     - - 2015 Clemson Tigers football team
       - 0
@@ -44,12 +44,16 @@ gold:
   benchmark: hotpotqa
   split: dev
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: YES
+  required_claims:
+  - id: o1
+    assertion: The described Clemson–Oklahoma game at Sun Life Stadium was the 2015 Orange Bowl.
+  - id: o2
+    assertion: The 2015 Orange Bowl was played on December 31, 2015.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: AND
+    description: All listed oracle claims are jointly required.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth.
 decomposition:
   context:
     formula: AND(P5, P4, P1, P2, P3, P6)
@@ -58,12 +62,13 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: NO
+    complete: NO
+    has_unnecessary_premises: YES
+    has_missing_required_premises: YES
+    dependency_structure_matches: NO
+    notes: Encodes identifying clues but omits the answer-bearing event/date fact; P1 and P6 are meta/redundant and 
+      conjunction of clues does not itself yield the date.
 premises:
 - id: c_275278e03d30ccc4
   context:
@@ -72,13 +77,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: NO
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Relevant but not required for the gold answer under the oracle decomposition.
 - id: c_35bb8d944a53ec6d
   context:
     label: P2
@@ -86,13 +91,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Semantically aligned with the benchmark gold facts.
 - id: c_4900f089704b4987
   context:
     label: P3
@@ -100,13 +105,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Semantically aligned with the benchmark gold facts.
 - id: c_6eb3874787254f70
   context:
     label: P4
@@ -114,13 +119,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Semantically aligned with the benchmark gold facts.
 - id: c_7741558da4934934
   context:
     label: P5
@@ -128,13 +133,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Semantically aligned with the benchmark gold facts.
 - id: c_aa291ad63c571ea4
   context:
     label: P6
@@ -142,13 +147,13 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: OTHER
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: YES
+    necessary: NO
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: YES
+    notes: Relevant but not required for the gold answer under the oracle decomposition.
 methods:
   epistemic_search:
     run: hotpotqa-epistemic_search
@@ -165,16 +170,16 @@ methods:
         final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: 5ae63b2255429908198fa526:3
       context:
         round: 1
         kind: ORIGINAL_QUESTION
-        query: What is the date played of this college football game at Sun Life Stadium in Miami Gardens,
-          Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
+        query: What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, 
+          where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
         target_premise: null
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: false
@@ -188,20 +193,21 @@ methods:
         benchmark_gold_titles_in_this_round:
         - 2015 clemson tigers football team
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 5ae63b2255429908198fa526:32
       context:
         round: 2
         kind: TARGETED
-        query: Clemson defeated the Oklahoma Sooners in the game. What is the date played of this college
-          football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No.
-          4 Oklahoma Sooners, 37-17? independent primary sources evidence for and against
+        query: Clemson defeated the Oklahoma Sooners in the game. What is the date played of this college football game 
+          at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17? 
+          independent primary sources evidence for and against
         target_premise: P2
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -215,20 +221,20 @@ methods:
         benchmark_gold_titles_in_this_round:
         - 2015 clemson tigers football team
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NO
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 5ae63b2255429908198fa526:41
       context:
         round: 3
         kind: TARGETED
-        query: Clemson defeated the Oklahoma Sooners in the game. What is the date played of this college
-          football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No.
-          4 Oklahoma Sooners, 37-17? independent primary sources evidence for and against
+        query: Clemson defeated the Oklahoma Sooners in the game. What is the date played of this college football game 
+          at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17? 
+          independent primary sources evidence for and against
         target_premise: P2
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -242,13 +248,13 @@ methods:
         benchmark_gold_titles_in_this_round:
         - 2015 clemson tigers football team
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NO
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches:
     - id: 5ae63b2255429908198fa526:4
       context:
@@ -264,39 +270,38 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5ae63b2255429908198fa526:4#0
         context:
-          span: On December 5, 2015, the Tigers won the 2015 ACC Championship Game by defeating the North
-            Carolina Tar Heels, 45–37, capping their first undefeated regular season since winning the
-            national title in 1981.
+          span: On December 5, 2015, the Tigers won the 2015 ACC Championship Game by defeating the North Carolina Tar 
+            Heels, 45–37, capping their first undefeated regular season since winning the national title in 1981.
           system_stance: NEUTRAL
           system_stance_score: 0.96
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 5ae63b2255429908198fa526:4#1
         context:
-          span: On January 11, 2016, the No. 2 Alabama Crimson Tide (13–1) defeated the No. 1 Clemson
-            Tigers (14–0) in the 2016 national championship, 45–40.
+          span: On January 11, 2016, the No. 2 Alabama Crimson Tide (13–1) defeated the No. 1 Clemson Tigers (14–0) in 
+            the 2016 national championship, 45–40.
           system_stance: NEUTRAL
           system_stance_score: 0.97
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5ae63b2255429908198fa526:6
       context:
         premise: P1
@@ -311,24 +316,24 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5ae63b2255429908198fa526:6#0
         context:
-          span: The 2012 Discover Orange Bowl was a postseason college football bowl game on Wednesday,
-            January 4, 2012, at Sun Life Stadium in Miami Gardens, Florida.
+          span: The 2012 Discover Orange Bowl was a postseason college football bowl game on Wednesday, January 4, 2012,
+            at Sun Life Stadium in Miami Gardens, Florida.
           system_stance: SUPPORT
           system_stance_score: 0.99
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5ae63b2255429908198fa526:8
       context:
         premise: P2
@@ -343,9 +348,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: The Clemson source directly states the Oklahoma 37–17 win.
       items:
       - id: 5ae63b2255429908198fa526:8#0
         context:
@@ -355,11 +360,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5ae63b2255429908198fa526:10
       context:
         premise: P2
@@ -374,9 +379,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5ae63b2255429908198fa526:10#0
         context:
@@ -386,11 +391,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5ae63b2255429908198fa526:12
       context:
         premise: P3
@@ -405,9 +410,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: The Clemson source directly states the 37–17 score.
       items:
       - id: 5ae63b2255429908198fa526:12#0
         context:
@@ -417,11 +422,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5ae63b2255429908198fa526:14
       context:
         premise: P3
@@ -436,9 +441,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5ae63b2255429908198fa526:14#0
         context:
@@ -448,11 +453,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5ae63b2255429908198fa526:16
       context:
         premise: P4
@@ -467,24 +472,24 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5ae63b2255429908198fa526:16#0
         context:
-          span: On January 11, 2016, the No. 2 Alabama Crimson Tide (13–1) defeated the No. 1 Clemson
-            Tigers (14–0) in the 2016 national championship, 45–40.
+          span: On January 11, 2016, the No. 2 Alabama Crimson Tide (13–1) defeated the No. 1 Clemson Tigers (14–0) in 
+            the 2016 national championship, 45–40.
           system_stance: NEUTRAL
           system_stance_score: 0.91
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5ae63b2255429908198fa526:18
       context:
         premise: P4
@@ -499,9 +504,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5ae63b2255429908198fa526:18#0
         context:
@@ -511,11 +516,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5ae63b2255429908198fa526:20
       context:
         premise: P5
@@ -530,9 +535,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: The Clemson source directly identifies Oklahoma as No. 4.
       items:
       - id: 5ae63b2255429908198fa526:20#0
         context:
@@ -542,11 +547,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5ae63b2255429908198fa526:22
       context:
         premise: P5
@@ -561,9 +566,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5ae63b2255429908198fa526:24
       context:
@@ -579,24 +584,24 @@ methods:
         schema_valid: true
         items_returned: 3
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5ae63b2255429908198fa526:24#0
         context:
-          span: On December 5, 2015, the Tigers won the 2015 ACC Championship Game by defeating the North
-            Carolina Tar Heels, 45–37
+          span: On December 5, 2015, the Tigers won the 2015 ACC Championship Game by defeating the North Carolina Tar 
+            Heels, 45–37
           system_stance: SUPPORT
           system_stance_score: 0.99
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 5ae63b2255429908198fa526:24#1
         context:
           span: Clemson defeated the No. 4 Oklahoma Sooners, 37–17, in the 2015 Orange Bowl
@@ -605,25 +610,25 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
       - id: 5ae63b2255429908198fa526:24#2
         context:
-          span: On January 11, 2016, the No. 2 Alabama Crimson Tide (13–1) defeated the No. 1 Clemson
-            Tigers (14–0) in the 2016 national championship, 45–40
+          span: On January 11, 2016, the No. 2 Alabama Crimson Tide (13–1) defeated the No. 1 Clemson Tigers (14–0) in 
+            the 2016 national championship, 45–40
           system_stance: SUPPORT
           system_stance_score: 0.99
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5ae63b2255429908198fa526:26
       context:
         premise: P6
@@ -638,9 +643,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5ae63b2255429908198fa526:26#0
         context:
@@ -650,11 +655,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5ae63b2255429908198fa526:33
       context:
         premise: P2
@@ -669,9 +674,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5ae63b2255429908198fa526:33#0
         context:
@@ -681,11 +686,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5ae63b2255429908198fa526:35
       context:
         premise: P2
@@ -700,9 +705,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: The Clemson source directly states the Oklahoma 37–17 win.
       items:
       - id: 5ae63b2255429908198fa526:35#0
         context:
@@ -712,11 +717,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5ae63b2255429908198fa526:42
       context:
         premise: P2
@@ -731,9 +736,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5ae63b2255429908198fa526:42#0
         context:
@@ -743,11 +748,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5ae63b2255429908198fa526:44
       context:
         premise: P2
@@ -762,9 +767,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: The Clemson source directly states the Oklahoma 37–17 win.
       items:
       - id: 5ae63b2255429908198fa526:44#0
         context:
@@ -774,11 +779,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     belief_states:
     - id: 5ae63b2255429908198fa526:28
       context:
@@ -832,13 +837,18 @@ methods:
         - P2
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
-        unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        claim_status_justified: NO
+        unjustified_premise_labels:
+        - P1
+        - P2
+        - P4
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: YES
+        missing_blockers_description: The actual answer-bearing 2015 Orange Bowl date is absent from the generated 
+          proof; P2 is not a genuine conflict.
+        formal_conclusion_appropriate: NO
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: 5ae63b2255429908198fa526:37
       context:
         update: 2
@@ -891,13 +901,18 @@ methods:
         - P2
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
-        unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        claim_status_justified: NO
+        unjustified_premise_labels:
+        - P1
+        - P2
+        - P4
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: YES
+        missing_blockers_description: The actual answer-bearing 2015 Orange Bowl date is absent from the generated 
+          proof; P2 is not a genuine conflict.
+        formal_conclusion_appropriate: NO
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: 5ae63b2255429908198fa526:46
       context:
         update: 3
@@ -950,13 +965,18 @@ methods:
         - P2
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
-        unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        claim_status_justified: NO
+        unjustified_premise_labels:
+        - P1
+        - P2
+        - P4
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: YES
+        missing_blockers_description: The actual answer-bearing 2015 Orange Bowl date is absent from the generated 
+          proof; P2 is not a genuine conflict.
+        formal_conclusion_appropriate: NO
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     controller_decisions:
     - id: 5ae63b2255429908198fa526:30
       context:
@@ -966,16 +986,16 @@ methods:
         blocking_premises:
         - P2
         rationale: Resolve c_35bb8d944a53ec6d toward SUPPORTED
-        next_query: Clemson defeated the Oklahoma Sooners in the game. What is the date played of this
-          college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated
-          the No. 4 Oklahoma Sooners, 37-17? independent primary sources evidence for and against
+        next_query: Clemson defeated the Oklahoma Sooners in the game. What is the date played of this college football 
+          game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17? 
+          independent primary sources evidence for and against
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: SEARCH_MORE
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     - id: 5ae63b2255429908198fa526:39
       context:
         decision: 2
@@ -984,16 +1004,16 @@ methods:
         blocking_premises:
         - P2
         rationale: Resolve c_35bb8d944a53ec6d toward SUPPORTED
-        next_query: Clemson defeated the Oklahoma Sooners in the game. What is the date played of this
-          college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated
-          the No. 4 Oklahoma Sooners, 37-17? independent primary sources evidence for and against
+        next_query: Clemson defeated the Oklahoma Sooners in the game. What is the date played of this college football 
+          game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17? 
+          independent primary sources evidence for and against
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 5ae63b2255429908198fa526:48
       context:
         decision: 3
@@ -1005,16 +1025,19 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: YES
+        repeat_justified: NOT_APPLICABLE
+        better_action: NONE
+        notes: Action type is reasonable given the unresolved evidence state.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: STANCE_ERROR
+      secondary:
+      - CONTROLLER_ERROR
+      rationale: Evidence from the unrelated 2012 Orange Bowl was treated as support/contradiction for the target 2015 
+        game, creating a false conflict that consumed the search budget.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: hotpotqa-premise_only
     trace_sha256: e518205c613654d16aae6a456fc59593a5c9aa658f111be778cc056212df835a
@@ -1030,16 +1053,16 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: YES
+        notes: Given the evidence actually available at termination, withholding an answer is preferable to guessing.
     retrieval_rounds:
     - id: 5ae63b2255429908198fa526:3
       context:
         round: 1
         kind: ORIGINAL_QUESTION
-        query: What is the date played of this college football game at Sun Life Stadium in Miami Gardens,
-          Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
+        query: What is the date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, 
+          where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
         target_premise: null
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: false
@@ -1053,20 +1076,21 @@ methods:
         benchmark_gold_titles_in_this_round:
         - 2015 clemson tigers football team
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 5ae63b2255429908198fa526:8
       context:
         round: 2
         kind: TARGETED
-        query: The date on which the matching game was played is the requested answer. What is the date
-          played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson
-          defeated the No. 4 Oklahoma Sooners, 37-17?
+        query: The date on which the matching game was played is the requested answer. What is the date played of this 
+          college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma
+          Sooners, 37-17?
         target_premise: P1
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -1080,20 +1104,20 @@ methods:
         benchmark_gold_titles_in_this_round:
         - 2015 clemson tigers football team
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NO
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 5ae63b2255429908198fa526:13
       context:
         round: 3
         kind: TARGETED
-        query: The date on which the matching game was played is the requested answer. What is the date
-          played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson
-          defeated the No. 4 Oklahoma Sooners, 37-17?
+        query: The date on which the matching game was played is the requested answer. What is the date played of this 
+          college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 Oklahoma
+          Sooners, 37-17?
         target_premise: P1
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -1107,13 +1131,13 @@ methods:
         benchmark_gold_titles_in_this_round:
         - 2015 clemson tigers football team
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NO
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -1124,16 +1148,16 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: The date on which the matching game was played is the requested answer. What is the
-          date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where
-          Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
+        next_query: The date on which the matching game was played is the requested answer. What is the date played of 
+          this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 
+          Oklahoma Sooners, 37-17?
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: SEARCH_MORE
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     - id: 5ae63b2255429908198fa526:11
       context:
         decision: 2
@@ -1141,16 +1165,16 @@ methods:
         target_premise: P1
         blocking_premises: []
         rationale: null
-        next_query: The date on which the matching game was played is the requested answer. What is the
-          date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where
-          Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
+        next_query: The date on which the matching game was played is the requested answer. What is the date played of 
+          this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No. 4 
+          Oklahoma Sooners, 37-17?
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NO
+        better_action: SEARCH_MORE
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 5ae63b2255429908198fa526:16
       context:
         decision: 3
@@ -1161,13 +1185,16 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ABSTAIN
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: DECOMPOSITION_ERROR
+      secondary:
+      - RETRIEVAL_ERROR
+      rationale: The proof contains no concrete game-date fact and the premise-only controller searches a meta premise 
+        rather than retrieving the 2015 Orange Bowl date.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.

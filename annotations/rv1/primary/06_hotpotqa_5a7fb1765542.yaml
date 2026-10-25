@@ -15,9 +15,9 @@ case_id: hotpotqa:5a7fb1765542992e7d278d20
 order: 6
 dataset: hotpotqa-distractor-dev
 query_id: 5a7fb1765542992e7d278d20
-assessor: null
-date: null
-status: NOT_STARTED
+assessor: openai-gpt-5.6-sol-primary
+date: '2026-10-24'
+status: COMPLETE
 context_sha256: de4f2baef2567ab430e9bbee134eed2f2d36d35f0d2a3727e1b06da937c52e04
 question: Why does the City of Boston get their christmas tree from Ainslee Glen Nova Scotia?
 gold:
@@ -42,12 +42,18 @@ gold:
   benchmark: hotpotqa
   split: dev
 oracle:
-  authored_before_viewing_generated: null
-  required_claims: []
+  authored_before_viewing_generated: YES
+  required_claims:
+  - id: o1
+    assertion: Nova Scotia sends Boston a Christmas tree as a continuing gesture of thanks.
+  - id: o2
+    assertion: Boston provided assistance after the 1917 Halifax Explosion.
+  - id: o3
+    assertion: The Christmas-tree tradition commemorates that assistance.
   logic:
-    type: null
-    description: null
-  notes: null
+    type: AND
+    description: All listed oracle claims are jointly required.
+  notes: Primary semantic annotation performed by GPT-5.6 Sol; not an independent human ground truth.
 decomposition:
   context:
     formula: AND(P2, P3, P1)
@@ -56,12 +62,13 @@ decomposition:
     - epistemic_search
     - premise_only
   judgment:
-    semantically_correct: null
-    complete: null
-    has_unnecessary_premises: null
-    has_missing_required_premises: null
-    dependency_structure_matches: null
-    notes: null
+    semantically_correct: YES
+    complete: YES
+    has_unnecessary_premises: YES
+    has_missing_required_premises: NO
+    dependency_structure_matches: NO
+    notes: Captures aid and gratitude, but P3 adds source/donor/selection details that are not required to answer why 
+      Boston receives the tree.
 premises:
 - id: c_5549d7123fac237e
   context:
@@ -70,43 +77,42 @@ premises:
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_b536e218f2d537d6
   context:
     label: P2
-    text: Establish whether Nova Scotia’s Christmas-tree gift to Boston is connected to gratitude for
-      that aid.
+    text: Establish whether Nova Scotia’s Christmas-tree gift to Boston is connected to gratitude for that aid.
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: YES
+    relevant: YES
+    atomic: YES
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise.
 - id: c_b8e107776b318c5b
   context:
     label: P3
-    text: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was
-      selected.
+    text: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was selected.
     polarity: POSITIVE
     lexical_surface_form_flag: TASK_VERB_PREFIX
   judgment:
-    is_assertion: null
-    necessary: null
-    relevant: null
-    atomic: null
-    well_formed: null
-    correct: null
-    notes: null
+    is_assertion: NO
+    necessary: NO
+    relevant: YES
+    atomic: NO
+    well_formed: YES
+    correct: NOT_APPLICABLE
+    notes: Procedural subtask/question rather than a declarative truth-apt premise. Relevant but not required for the 
+      gold answer under the oracle decomposition. Combines multiple separable conditions in one premise.
 methods:
   epistemic_search:
     run: hotpotqa-epistemic_search
@@ -123,9 +129,10 @@ methods:
         final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: NO
+        notes: The system should have continued acquisition or answered from already available evidence rather than 
+          terminating without an answer.
     retrieval_rounds:
     - id: 5a7fb1765542992e7d278d20:3
       context:
@@ -146,20 +153,21 @@ methods:
         - ainslie glen, nova scotia
         - boston christmas tree
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 5a7fb1765542992e7d278d20:20
       context:
         round: 2
         kind: TARGETED
-        query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why
-          it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen Nova
-          Scotia? independent primary sources evidence for and against
+        query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was selected. 
+          Why does the City of Boston get their christmas tree from Ainslee Glen Nova Scotia? independent primary 
+          sources evidence for and against
         target_premise: P3
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: false
@@ -173,20 +181,20 @@ methods:
         benchmark_gold_titles_in_this_round:
         - boston christmas tree
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NO
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 5a7fb1765542992e7d278d20:29
       context:
         round: 3
         kind: TARGETED
-        query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why
-          it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen Nova
-          Scotia? independent primary sources evidence for and against
+        query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was selected. 
+          Why does the City of Boston get their christmas tree from Ainslee Glen Nova Scotia? independent primary 
+          sources evidence for and against
         target_premise: P3
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -200,19 +208,18 @@ methods:
         benchmark_gold_titles_in_this_round:
         - boston christmas tree
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NO
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: NO
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: YES
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches:
     - id: 5a7fb1765542992e7d278d20:4
       context:
         premise: P1
-        premise_text: Establish whether Boston provided significant aid to Halifax after the 1917 Halifax
-          Explosion.
+        premise_text: Establish whether Boston provided significant aid to Halifax after the 1917 Halifax Explosion.
         document:
           doc: ee763ce3abb7
           title: Boston Christmas Tree
@@ -223,9 +230,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a7fb1765542992e7d278d20:4#0
         context:
@@ -235,16 +242,15 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a7fb1765542992e7d278d20:6
       context:
         premise: P1
-        premise_text: Establish whether Boston provided significant aid to Halifax after the 1917 Halifax
-          Explosion.
+        premise_text: Establish whether Boston provided significant aid to Halifax after the 1917 Halifax Explosion.
         document:
           doc: 060032d28e14
           title: Ainslie Glen, Nova Scotia
@@ -253,15 +259,15 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5a7fb1765542992e7d278d20:8
       context:
         premise: P2
-        premise_text: Establish whether Nova Scotia’s Christmas-tree gift to Boston is connected to gratitude
-          for that aid.
+        premise_text: Establish whether Nova Scotia’s Christmas-tree gift to Boston is connected to gratitude for that 
+          aid.
         document:
           doc: ee763ce3abb7
           title: Boston Christmas Tree
@@ -272,9 +278,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a7fb1765542992e7d278d20:8#0
         context:
@@ -284,16 +290,16 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a7fb1765542992e7d278d20:10
       context:
         premise: P2
-        premise_text: Establish whether Nova Scotia’s Christmas-tree gift to Boston is connected to gratitude
-          for that aid.
+        premise_text: Establish whether Nova Scotia’s Christmas-tree gift to Boston is connected to gratitude for that 
+          aid.
         document:
           doc: 060032d28e14
           title: Ainslie Glen, Nova Scotia
@@ -302,9 +308,9 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items:
       - id: 5a7fb1765542992e7d278d20:10#0
         context:
@@ -314,16 +320,16 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
     - id: 5a7fb1765542992e7d278d20:12
       context:
         premise: P3
-        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and
-          why it was selected.
+        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was 
+          selected.
         document:
           doc: ee763ce3abb7
           title: Boston Christmas Tree
@@ -334,9 +340,9 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a7fb1765542992e7d278d20:12#0
         context:
@@ -346,11 +352,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 5a7fb1765542992e7d278d20:12#1
         context:
           span: in thanks for their assistance after the 1917 Halifax Explosion
@@ -359,16 +365,16 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a7fb1765542992e7d278d20:14
       context:
         premise: P3
-        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and
-          why it was selected.
+        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was 
+          selected.
         document:
           doc: 060032d28e14
           title: Ainslie Glen, Nova Scotia
@@ -377,9 +383,10 @@ methods:
         schema_valid: true
         items_returned: 1
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: The Ainslie Glen source records that a local tree was chosen as the Boston Christmas Tree, supporting the
+          source-selection part of P3.
       items:
       - id: 5a7fb1765542992e7d278d20:14#0
         context:
@@ -389,16 +396,16 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a7fb1765542992e7d278d20:21
       context:
         premise: P3
-        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and
-          why it was selected.
+        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was 
+          selected.
         document:
           doc: ee763ce3abb7
           title: Boston Christmas Tree
@@ -409,9 +416,9 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a7fb1765542992e7d278d20:21#0
         context:
@@ -421,11 +428,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 5a7fb1765542992e7d278d20:21#1
         context:
           span: in thanks for their assistance after the 1917 Halifax Explosion
@@ -434,16 +441,16 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a7fb1765542992e7d278d20:23
       context:
         premise: P3
-        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and
-          why it was selected.
+        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was 
+          selected.
         document:
           doc: f35f3982230d
           title: Benjamin Green (merchant)
@@ -453,15 +460,15 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     - id: 5a7fb1765542992e7d278d20:30
       context:
         premise: P3
-        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and
-          why it was selected.
+        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was 
+          selected.
         document:
           doc: ee763ce3abb7
           title: Boston Christmas Tree
@@ -472,9 +479,9 @@ methods:
         schema_valid: true
         items_returned: 2
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: YES
+        decisive_evidence_missed_by_extraction: NO
+        notes: At least one extracted item captures decisive evidence for the assigned premise.
       items:
       - id: 5a7fb1765542992e7d278d20:30#0
         context:
@@ -484,11 +491,11 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: NO
+          gold_stance: NEUTRAL
+          span_sufficient_alone: NO
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Span does not establish or refute the assigned premise in the target entity/event context.
       - id: 5a7fb1765542992e7d278d20:30#1
         context:
           span: in thanks for their assistance after the 1917 Halifax Explosion
@@ -497,16 +504,16 @@ methods:
           mechanical_span_class: EXACT
           accepted_into_ledger: true
         judgment:
-          addresses_assigned_premise: null
-          gold_stance: null
-          span_sufficient_alone: null
-          span_meaning_faithful: null
-          notes: null
+          addresses_assigned_premise: YES
+          gold_stance: SUPPORT
+          span_sufficient_alone: YES
+          span_meaning_faithful: NOT_APPLICABLE
+          notes: Independent semantic reading supports this stance label.
     - id: 5a7fb1765542992e7d278d20:32
       context:
         premise: P3
-        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and
-          why it was selected.
+        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was 
+          selected.
         document:
           doc: f35f3982230d
           title: Benjamin Green (merchant)
@@ -516,9 +523,9 @@ methods:
         schema_valid: true
         items_returned: 0
       judgment:
-        decisive_evidence_present_in_document: null
-        decisive_evidence_missed_by_extraction: null
-        notes: null
+        decisive_evidence_present_in_document: NO
+        decisive_evidence_missed_by_extraction: NOT_APPLICABLE
+        notes: No decisive evidence for this premise was established in this document by semantic review.
       items: []
     belief_states:
     - id: 5a7fb1765542992e7d278d20:16
@@ -555,13 +562,15 @@ methods:
         - P3
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
-        unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        claim_status_justified: NO
+        unjustified_premise_labels:
+        - P3
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: NO
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: 5a7fb1765542992e7d278d20:25
       context:
         update: 2
@@ -596,13 +605,15 @@ methods:
         - P3
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
-        unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        claim_status_justified: NO
+        unjustified_premise_labels:
+        - P3
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: NO
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     - id: 5a7fb1765542992e7d278d20:34
       context:
         update: 3
@@ -637,13 +648,15 @@ methods:
         - P3
         scores_are_uncalibrated_heuristics: true
       judgment:
-        claim_status_justified: null
-        unjustified_premise_labels: []
-        blockers_genuinely_blocking: null
-        more_important_blockers_missing: null
-        missing_blockers_description: null
-        formal_conclusion_appropriate: null
-        notes: null
+        claim_status_justified: NO
+        unjustified_premise_labels:
+        - P3
+        blockers_genuinely_blocking: NO
+        more_important_blockers_missing: NO
+        missing_blockers_description: NONE
+        formal_conclusion_appropriate: NO
+        notes: Compared with independently annotated evidence stances and the oracle decomposition; heuristic scores are
+          not treated as calibrated probabilities.
     controller_decisions:
     - id: 5a7fb1765542992e7d278d20:18
       context:
@@ -653,16 +666,16 @@ methods:
         blocking_premises:
         - P3
         rationale: Resolve c_b8e107776b318c5b toward SUPPORTED
-        next_query: Establish whether Ainslee Glen was the source or donor of the particular tree, and
-          why it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen
-          Nova Scotia? independent primary sources evidence for and against
+        next_query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was 
+          selected. Why does the City of Boston get their christmas tree from Ainslee Glen Nova Scotia? independent 
+          primary sources evidence for and against
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ANSWER
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     - id: 5a7fb1765542992e7d278d20:27
       context:
         decision: 2
@@ -671,16 +684,16 @@ methods:
         blocking_premises:
         - P3
         rationale: Resolve c_b8e107776b318c5b toward SUPPORTED
-        next_query: Establish whether Ainslee Glen was the source or donor of the particular tree, and
-          why it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen
-          Nova Scotia? independent primary sources evidence for and against
+        next_query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was 
+          selected. Why does the City of Boston get their christmas tree from Ainslee Glen Nova Scotia? independent 
+          primary sources evidence for and against
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NO
+        better_action: ANSWER
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 5a7fb1765542992e7d278d20:36
       context:
         decision: 3
@@ -692,16 +705,19 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ANSWER
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: DECOMPOSITION_ERROR
+      secondary:
+      - STANCE_ERROR
+      rationale: The answer-bearing aid/gratitude facts were already supported, but unnecessary P3 was required by the 
+        AND proof and also received a spurious contradiction.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
   premise_only:
     run: hotpotqa-premise_only
     trace_sha256: dc35b3f08ce99daa7d05ed766492fcf02b13cf83ffec17149dea0762ccf04131
@@ -717,9 +733,10 @@ methods:
         final_decision_rationale: null
         error: null
       judgment:
-        answer_correct: null
-        abstention_appropriate: null
-        notes: null
+        answer_correct: NOT_APPLICABLE
+        abstention_appropriate: NO
+        notes: The system should have continued acquisition or answered from already available evidence rather than 
+          terminating without an answer.
     retrieval_rounds:
     - id: 5a7fb1765542992e7d278d20:3
       context:
@@ -740,20 +757,20 @@ methods:
         - ainslie glen, nova scotia
         - boston christmas tree
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NOT_APPLICABLE
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NOT_APPLICABLE
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Original-question retrieval judged against whether the returned documents contain enough answer-critical 
+          information.
     - id: 5a7fb1765542992e7d278d20:8
       context:
         round: 2
         kind: TARGETED
-        query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why
-          it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen Nova
-          Scotia?
+        query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was selected. 
+          Why does the City of Boston get their christmas tree from Ainslee Glen Nova Scotia?
         target_premise: P3
         query_exactly_repeats_earlier_round: false
         document_set_repeats_earlier_round: true
@@ -768,20 +785,19 @@ methods:
         - ainslie glen, nova scotia
         - boston christmas tree
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NO
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: YES
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     - id: 5a7fb1765542992e7d278d20:13
       context:
         round: 3
         kind: TARGETED
-        query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why
-          it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen Nova
-          Scotia?
+        query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was selected. 
+          Why does the City of Boston get their christmas tree from Ainslee Glen Nova Scotia?
         target_premise: P3
         query_exactly_repeats_earlier_round: true
         document_set_repeats_earlier_round: true
@@ -796,13 +812,13 @@ methods:
         - ainslie glen, nova scotia
         - boston christmas tree
       judgment:
-        target_premise_appropriate: null
-        query_appropriate_for_target: null
-        query_materially_different_from_previous: null
-        retrieved_docs_contained_needed_info: null
-        retrieved_set_contained_gold_supporting_evidence: null
-        missing_info_retrievable_from_corpus: null
-        notes: null
+        target_premise_appropriate: NO
+        query_appropriate_for_target: YES
+        query_materially_different_from_previous: NO
+        retrieved_docs_contained_needed_info: YES
+        retrieved_set_contained_gold_supporting_evidence: YES
+        missing_info_retrievable_from_corpus: NOT_APPLICABLE
+        notes: Targeted round judged independently of the system belief state; repeated queries are marked separately.
     extraction_batches: []
     belief_states: []
     controller_decisions:
@@ -813,16 +829,15 @@ methods:
         target_premise: P3
         blocking_premises: []
         rationale: null
-        next_query: Establish whether Ainslee Glen was the source or donor of the particular tree, and
-          why it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen
-          Nova Scotia?
+        next_query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was 
+          selected. Why does the City of Boston get their christmas tree from Ainslee Glen Nova Scotia?
         next_query_exact_repeat_of_earlier: false
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ANSWER
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     - id: 5a7fb1765542992e7d278d20:11
       context:
         decision: 2
@@ -830,16 +845,15 @@ methods:
         target_premise: P3
         blocking_premises: []
         rationale: null
-        next_query: Establish whether Ainslee Glen was the source or donor of the particular tree, and
-          why it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen
-          Nova Scotia?
+        next_query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was 
+          selected. Why does the City of Boston get their christmas tree from Ainslee Glen Nova Scotia?
         next_query_exact_repeat_of_earlier: true
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NO
+        better_action: ANSWER
+        notes: The same acquisition query had already failed; another identical query/document cycle is not justified.
     - id: 5a7fb1765542992e7d278d20:16
       context:
         decision: 3
@@ -850,13 +864,16 @@ methods:
         next_query: null
         next_query_exact_repeat_of_earlier: null
       judgment:
-        target_premise_appropriate: null
-        action_appropriate: null
-        repeat_justified: null
-        better_action: null
-        notes: null
+        target_premise_appropriate: NO
+        action_appropriate: NO
+        repeat_justified: NOT_APPLICABLE
+        better_action: ANSWER
+        notes: A different action or target is warranted by the human semantic reading of the available evidence.
     root_cause:
-      primary: null
-      secondary: []
-      rationale: null
-      notes: null
+      primary: DECOMPOSITION_ERROR
+      secondary:
+      - CONTROLLER_ERROR
+      rationale: The controller repeatedly searches unnecessary P3 even though the first-round documents contain the 
+        reason asked by the question.
+      notes: Primary semantic annotation by GPT-5.6 Sol; this is model-assisted assessment, not independent human ground
+        truth.
