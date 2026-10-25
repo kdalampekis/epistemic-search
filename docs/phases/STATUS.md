@@ -124,7 +124,8 @@ research-validation experiments in [RESEARCH_VALIDATION_PLAN.md](../../RESEARCH_
 | --- | --- | --- |
 | RV0 — Pilot failure audit | Complete (offline, $0; mechanical facts only) | [RV0 report](../experiments/RV0_PILOT_AUDIT.md), [results](../results/rv0/) |
 | RV1 — Semantic annotation (primary assessor: GPT-5.6 Sol; **model-assisted, not independent human ground truth**) | Complete and validated: 22 of 22 questions; aggregated | [Summary](../experiments/RV1_SUMMARY.md), [protocol](../experiments/RV1_ANNOTATION_PROTOCOL.md), `annotations/rv1/primary/`, [results](../results/rv1/) |
-| RV2–RV10 | Not started | Gated by RV1 and the plan's decision gates |
+| RV2 — Diagnostic validation | RV2-0 blind human spot-check artifact generated; **awaiting the human reviewer**. RV2-1 to RV2-3 not started | [Plan](../experiments/RV2_PLAN.md), `docs/experiments/rv2/`, `annotations/rv2_0/responses.yaml` |
+| RV3–RV10 | Not started | Gated by RV2 and the plan's decision gates |
 
 RV0 produced no semantic failure distribution: 0 annotations, 0 API calls,
 cumulative research spend unchanged at $0.067952575. It records candidate

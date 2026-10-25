@@ -1,0 +1,16 @@
+# RV2-0 blind spot-check of the RV1 labels. Paths relative to this file. No model is called.
+rv1_annotations: ../annotations/rv1/primary
+rv0_dir: ../artifacts/rv0-pilot-audit
+output_dir: ../docs/experiments/rv2
+responses_path: ../annotations/rv2_0/responses.yaml
+cases: [5, 6, 8, 12, 17]
+seed: 20261024
+# Every item in the four disagreement strata plus a seeded sample of the large ones, and
+# agreeing-label controls. 6 + 8 + 3 + 6 + 7 = 30.
+strata:
+  - {system: CONTRADICT, gold: NEUTRAL}
+  - {system: CONTRADICT, gold: SUPPORT}
+  - {system: SUPPORT, gold: NEUTRAL, n: 8}
+  - {system: NEUTRAL, gold: SUPPORT}
+  - {system: SUPPORT, gold: SUPPORT, n: 6}
+  - {system: NEUTRAL, gold: NEUTRAL, n: 7}

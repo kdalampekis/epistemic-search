@@ -30,6 +30,7 @@ from epistemic_search.parity import compare
 from epistemic_search.pilot_audit import audit_pilot
 from epistemic_search.reproduction import bundle_reproduction, verify_reproduction
 from epistemic_search.rv1 import add_assessor, aggregate_rv1, init_rv1, validate_rv1
+from epistemic_search.rv2_review import build_review, score_review
 from epistemic_search.selective import analyze_saved_run
 from epistemic_search.statistics import analyze_comparison
 from epistemic_search.tracing import configure_logging
@@ -161,6 +162,30 @@ def rv1_aggregate(config_path: Path) -> None:
         raise typer.Exit(code=1) from exc
     complete = {a: v["complete"] for a, v in summary["assessors"].items()}
     typer.echo(f"Aggregated; complete cases per assessor: {complete}; API cost $0")
+
+
+@app.command("rv2-review-build")
+def rv2_review_build(config_path: Path) -> None:
+    """RV2-0: write the blind human spot-check of the RV1 labels; no API calls."""
+    try:
+        report = build_review(config_path)
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"RV2-0 build failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(
+        f"Wrote {report['items']} stance items and {report['cases']} case packets; API cost $0"
+    )
+
+
+@app.command("rv2-review-score")
+def rv2_review_score(config_path: Path) -> None:
+    """RV2-0: agreement of the reviewer's answers with RV1 and with the system (informational)."""
+    try:
+        report = score_review(config_path)
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"RV2-0 scoring failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(json.dumps(report, indent=2, sort_keys=True))
 
 
 @app.command("analyze-comparison")

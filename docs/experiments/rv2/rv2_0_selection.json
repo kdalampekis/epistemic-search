@@ -1,0 +1,345 @@
+{
+  "cases": [
+    5,
+    6,
+    8,
+    12,
+    17
+  ],
+  "items": [
+    {
+      "case": 8,
+      "id": "S01",
+      "premise_label": "P2",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "NEUTRAL",
+      "span": "Acting Secretary of Labor",
+      "stratum": "CONTRADICT->NEUTRAL",
+      "system_stance": "CONTRADICT"
+    },
+    {
+      "case": 7,
+      "id": "S02",
+      "premise_label": "P2",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "NEUTRAL",
+      "span": "Westbridge was out of service on January 1, 1939 and was discontinued as a station stop.",
+      "stratum": "SUPPORT->NEUTRAL",
+      "system_stance": "SUPPORT"
+    },
+    {
+      "case": 21,
+      "id": "S03",
+      "premise_label": "P1",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "NEUTRAL",
+      "span": "The location used for the exterior of the Overlook Hotel was Timberline Lodge, located on the south face of Mount Hood in Mount Hood National Forest, Clackamas County, Oregon.",
+      "stratum": "NEUTRAL->NEUTRAL",
+      "system_stance": "NEUTRAL"
+    },
+    {
+      "case": 17,
+      "id": "S04",
+      "premise_label": "P1",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "NEUTRAL",
+      "span": "the Landgrave George II of Hesse-Darmstadt",
+      "stratum": "SUPPORT->NEUTRAL",
+      "system_stance": "SUPPORT"
+    },
+    {
+      "case": 19,
+      "id": "S05",
+      "premise_label": "P2",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "NEUTRAL",
+      "span": "She is a film director",
+      "stratum": "NEUTRAL->NEUTRAL",
+      "system_stance": "NEUTRAL"
+    },
+    {
+      "case": 20,
+      "id": "S06",
+      "premise_label": "P2",
+      "rv1_premise_is_assertion": "YES",
+      "rv1_stance": "SUPPORT",
+      "span": "It offers a high-resolution Retina Display",
+      "stratum": "SUPPORT->SUPPORT",
+      "system_stance": "SUPPORT"
+    },
+    {
+      "case": 5,
+      "id": "S07",
+      "premise_label": "P2",
+      "rv1_premise_is_assertion": "YES",
+      "rv1_stance": "NEUTRAL",
+      "span": "The West Virginia Mountaineers defeated the Clemson Tigers by a score of 70–33.",
+      "stratum": "CONTRADICT->NEUTRAL",
+      "system_stance": "CONTRADICT"
+    },
+    {
+      "case": 8,
+      "id": "S08",
+      "premise_label": "P2",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "NEUTRAL",
+      "span": "He was replaced as party chairman by Markham Robinson in July 2008.",
+      "stratum": "SUPPORT->NEUTRAL",
+      "system_stance": "SUPPORT"
+    },
+    {
+      "case": 5,
+      "id": "S09",
+      "premise_label": "P6",
+      "rv1_premise_is_assertion": "YES",
+      "rv1_stance": "SUPPORT",
+      "span": "Clemson defeated the No. 4 Oklahoma Sooners, 37–17, in the 2015 Orange Bowl",
+      "stratum": "SUPPORT->SUPPORT",
+      "system_stance": "SUPPORT"
+    },
+    {
+      "case": 3,
+      "id": "S10",
+      "premise_label": "P3",
+      "rv1_premise_is_assertion": "YES",
+      "rv1_stance": "SUPPORT",
+      "span": "Key West, Florida",
+      "stratum": "NEUTRAL->SUPPORT",
+      "system_stance": "NEUTRAL"
+    },
+    {
+      "case": 20,
+      "id": "S11",
+      "premise_label": "P1",
+      "rv1_premise_is_assertion": "YES",
+      "rv1_stance": "SUPPORT",
+      "span": "Retina Display is a brand name used by Apple for its series of IPS panel displays that have a higher pixel density than traditional displays.",
+      "stratum": "SUPPORT->SUPPORT",
+      "system_stance": "SUPPORT"
+    },
+    {
+      "case": 8,
+      "id": "S12",
+      "premise_label": "P3",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "SUPPORT",
+      "span": "he served as Acting Secretary of Labor",
+      "stratum": "SUPPORT->SUPPORT",
+      "system_stance": "SUPPORT"
+    },
+    {
+      "case": 8,
+      "id": "S13",
+      "premise_label": "P2",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "NEUTRAL",
+      "span": "Deputy Assistant Secretary for Operations in the U.S. Department of Labor's Office of the Assistant Secretary for Administration and Management",
+      "stratum": "CONTRADICT->NEUTRAL",
+      "system_stance": "CONTRADICT"
+    },
+    {
+      "case": 10,
+      "id": "S14",
+      "premise_label": "P7",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "SUPPORT",
+      "span": "Manuel Romeo (September 21, 1891 – October 3, 1954 in Buenos Aires)",
+      "stratum": "NEUTRAL->SUPPORT",
+      "system_stance": "NEUTRAL"
+    },
+    {
+      "case": 7,
+      "id": "S15",
+      "premise_label": "P1",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "NEUTRAL",
+      "span": "the station was built around June, 1875",
+      "stratum": "NEUTRAL->NEUTRAL",
+      "system_stance": "NEUTRAL"
+    },
+    {
+      "case": 3,
+      "id": "S16",
+      "premise_label": "P4",
+      "rv1_premise_is_assertion": "YES",
+      "rv1_stance": "SUPPORT",
+      "span": "a group of desert coral islets 60 miles west of Key West, Florida",
+      "stratum": "SUPPORT->SUPPORT",
+      "system_stance": "SUPPORT"
+    },
+    {
+      "case": 10,
+      "id": "S17",
+      "premise_label": "P7",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "NEUTRAL",
+      "span": "directed by Manuel Romero",
+      "stratum": "NEUTRAL->NEUTRAL",
+      "system_stance": "NEUTRAL"
+    },
+    {
+      "case": 6,
+      "id": "S18",
+      "premise_label": "P3",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "NEUTRAL",
+      "span": "it has been given to the people of Boston by the people of Nova Scotia",
+      "stratum": "CONTRADICT->NEUTRAL",
+      "system_stance": "CONTRADICT"
+    },
+    {
+      "case": 7,
+      "id": "S19",
+      "premise_label": "P2",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "NEUTRAL",
+      "span": "Westbridge used to operate as a freight station after its closing.",
+      "stratum": "CONTRADICT->NEUTRAL",
+      "system_stance": "CONTRADICT"
+    },
+    {
+      "case": 11,
+      "id": "S20",
+      "premise_label": "P3",
+      "rv1_premise_is_assertion": "YES",
+      "rv1_stance": "NEUTRAL",
+      "span": "released on March 13, 1942",
+      "stratum": "SUPPORT->NEUTRAL",
+      "system_stance": "SUPPORT"
+    },
+    {
+      "case": 5,
+      "id": "S21",
+      "premise_label": "P1",
+      "rv1_premise_is_assertion": "YES",
+      "rv1_stance": "NEUTRAL",
+      "span": "The 2012 Discover Orange Bowl was a postseason college football bowl game on Wednesday, January 4, 2012, at Sun Life Stadium in Miami Gardens, Florida.",
+      "stratum": "SUPPORT->NEUTRAL",
+      "system_stance": "SUPPORT"
+    },
+    {
+      "case": 7,
+      "id": "S22",
+      "premise_label": "P2",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "NEUTRAL",
+      "span": "the station stop itself continued to operate until March 16, 1998.",
+      "stratum": "SUPPORT->NEUTRAL",
+      "system_stance": "SUPPORT"
+    },
+    {
+      "case": 19,
+      "id": "S23",
+      "premise_label": "P3",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "NEUTRAL",
+      "span": "Dana Blankstein- Cohen( born March 3, 1981) is the director of the Israeli Academy of Film and Television.",
+      "stratum": "NEUTRAL->NEUTRAL",
+      "system_stance": "NEUTRAL"
+    },
+    {
+      "case": 5,
+      "id": "S24",
+      "premise_label": "P6",
+      "rv1_premise_is_assertion": "YES",
+      "rv1_stance": "NEUTRAL",
+      "span": "On December 5, 2015, the Tigers won the 2015 ACC Championship Game by defeating the North Carolina Tar Heels, 45–37",
+      "stratum": "SUPPORT->NEUTRAL",
+      "system_stance": "SUPPORT"
+    },
+    {
+      "case": 4,
+      "id": "S25",
+      "premise_label": "P1",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "SUPPORT",
+      "span": "Blackpool Illuminations, an annual lights festival in Blackpool.",
+      "stratum": "SUPPORT->SUPPORT",
+      "system_stance": "SUPPORT"
+    },
+    {
+      "case": 12,
+      "id": "S26",
+      "premise_label": "P3",
+      "rv1_premise_is_assertion": "YES",
+      "rv1_stance": "NEUTRAL",
+      "span": "written and directed by Oren Moverman",
+      "stratum": "NEUTRAL->NEUTRAL",
+      "system_stance": "NEUTRAL"
+    },
+    {
+      "case": 11,
+      "id": "S27",
+      "premise_label": "P5",
+      "rv1_premise_is_assertion": "YES",
+      "rv1_stance": "NEUTRAL",
+      "span": "The film was released on March 13, 1942, by RKO Pictures.",
+      "stratum": "SUPPORT->NEUTRAL",
+      "system_stance": "SUPPORT"
+    },
+    {
+      "case": 6,
+      "id": "S28",
+      "premise_label": "P3",
+      "rv1_premise_is_assertion": "NO",
+      "rv1_stance": "SUPPORT",
+      "span": "In 2016, a tree on Crown Lands was chosen to become the Boston Christmas Tree.",
+      "stratum": "NEUTRAL->SUPPORT",
+      "system_stance": "NEUTRAL"
+    },
+    {
+      "case": 11,
+      "id": "S29",
+      "premise_label": "P4",
+      "rv1_premise_is_assertion": "YES",
+      "rv1_stance": "SUPPORT",
+      "span": "directed by Leslie Goodwins",
+      "stratum": "CONTRADICT->SUPPORT",
+      "system_stance": "CONTRADICT"
+    },
+    {
+      "case": 14,
+      "id": "S30",
+      "premise_label": "P3",
+      "rv1_premise_is_assertion": "YES",
+      "rv1_stance": "NEUTRAL",
+      "span": "co-written and directed by Priyadarshan",
+      "stratum": "NEUTRAL->NEUTRAL",
+      "system_stance": "NEUTRAL"
+    }
+  ],
+  "protocol": "rv2-0-blind-spot-check-v1",
+  "seed": 20261024,
+  "strata_requested": [
+    {
+      "gold": "NEUTRAL",
+      "n": null,
+      "system": "CONTRADICT"
+    },
+    {
+      "gold": "SUPPORT",
+      "n": null,
+      "system": "CONTRADICT"
+    },
+    {
+      "gold": "NEUTRAL",
+      "n": 8,
+      "system": "SUPPORT"
+    },
+    {
+      "gold": "SUPPORT",
+      "n": null,
+      "system": "NEUTRAL"
+    },
+    {
+      "gold": "SUPPORT",
+      "n": 6,
+      "system": "SUPPORT"
+    },
+    {
+      "gold": "NEUTRAL",
+      "n": 7,
+      "system": "NEUTRAL"
+    }
+  ]
+}
