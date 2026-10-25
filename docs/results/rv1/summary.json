@@ -1,0 +1,21 @@
+{
+  "agreement": null,
+  "api_calls": 0,
+  "assessors": {
+    "primary": {
+      "all_complete": false,
+      "blank_fields_total": 3166,
+      "cases_expected": 22,
+      "complete": 0,
+      "failure_distribution": null,
+      "in_progress": 0,
+      "not_started": 22,
+      "sections": null
+    }
+  },
+  "context_manifest_sha256": "4b171eac46569d4c1bb6c12216359bce08b68d66ac7bf4ab5b86f482758a3b5f",
+  "disagreements": 0,
+  "note": "Distributions appear only when an assessor has completed every case.",
+  "oracle_decompositions_exported": 0,
+  "protocol": "rv1-human-annotation-v1"
+}

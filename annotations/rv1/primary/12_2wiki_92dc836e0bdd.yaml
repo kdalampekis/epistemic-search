@@ -1,0 +1,857 @@
+# RV1 human annotation file (2wiki:92dc836e0bdd11eba7f7acde48001122). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: 2wiki:92dc836e0bdd11eba7f7acde48001122
+order: 12
+dataset: 2wiki-april7-dev
+query_id: 92dc836e0bdd11eba7f7acde48001122
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: 43d776995977a98b571c87095e563dda0c197c39e666e0dc49c89e1f19f02e3c
+question: What is the place of birth of the director of film Time Out Of Mind (2014 Film)?
+gold:
+  reference_answer: Israeli
+  answerable: null
+  annotations:
+    _id: 92dc836e0bdd11eba7f7acde48001122
+    answer: Israeli
+    answer_id: Q801
+    entity_ids: Q17479279_Q736069
+    evidences:
+    - - Time Out of Mind
+      - director
+      - Oren Moverman
+    - - Oren Moverman
+      - place of birth
+      - Israeli
+    evidences_id:
+    - - Q17479279
+      - director
+      - Q736069
+    - - Q736069
+      - place of birth
+      - Q801
+    question: What is the place of birth of the director of film Time Out Of Mind (2014 Film)?
+    supporting_facts:
+    - - Time Out of Mind (2014 film)
+      - 0
+    - - Oren Moverman
+      - 0
+    type: compositional
+  answer_references:
+  - Holy Land
+  - ISR
+  - Israel
+  - Israeli
+  - Israelite
+  - State of Israel
+  - il
+  - the Jewish state
+  - 🇮🇱
+  benchmark: 2wikimultihopqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: AND(P2, P1, P3)
+    premises: 3
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_382bbe4fa313e277
+  context:
+    label: P1
+    text: The target is the 2014 film titled Time Out of Mind.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_62d258d1427a2272
+  context:
+    label: P2
+    text: The director of that film is identified.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_aa34e1291198f1f3
+  context:
+    label: P3
+    text: The place of birth of that director is identified.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: 2wikimultihopqa-epistemic_search
+    trace_sha256: 62545b7a59cc8c7633a516fa875b8c48b75bd857a2f0a29f2f0faa1d3883cd30
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: Israeli
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 92dc836e0bdd11eba7f7acde48001122:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: What is the place of birth of the director of film Time Out Of Mind (2014 Film)?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 8d8df9ec7d8b
+          title: Time Out of Mind (2014 film)
+          rank: 1
+        - doc: d0e5347fb9a8
+          title: Oren Moverman
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - oren moverman
+        - time out of mind (2014 film)
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:20
+      context:
+        round: 2
+        kind: TARGETED
+        query: The place of birth of that director is identified. What is the place of birth of the director
+          of film Time Out Of Mind (2014 Film)? independent verification primary source
+        target_premise: P3
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: a6aca47eaa36
+          title: Time Out of Mind (2014 film)
+          rank: 1
+        - doc: 953efad4a382
+          title: Oren Moverman
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - oren moverman
+        - time out of mind (2014 film)
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:29
+      context:
+        round: 3
+        kind: TARGETED
+        query: The place of birth of that director is identified. What is the place of birth of the director
+          of film Time Out Of Mind (2014 Film)? independent verification primary source
+        target_premise: P3
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: a6aca47eaa36
+          title: Time Out of Mind (2014 film)
+          rank: 1
+        - doc: 953efad4a382
+          title: Oren Moverman
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - oren moverman
+        - time out of mind (2014 film)
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: 92dc836e0bdd11eba7f7acde48001122:4
+      context:
+        premise: P1
+        premise_text: The target is the 2014 film titled Time Out of Mind.
+        document:
+          doc: 8d8df9ec7d8b
+          title: Time Out of Mind (2014 film)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 92dc836e0bdd11eba7f7acde48001122:4#0
+        context:
+          span: Time Out of Mind is a 2014 American drama film
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:6
+      context:
+        premise: P1
+        premise_text: The target is the 2014 film titled Time Out of Mind.
+        document:
+          doc: d0e5347fb9a8
+          title: Oren Moverman
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 92dc836e0bdd11eba7f7acde48001122:8
+      context:
+        premise: P2
+        premise_text: The director of that film is identified.
+        document:
+          doc: 8d8df9ec7d8b
+          title: Time Out of Mind (2014 film)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 92dc836e0bdd11eba7f7acde48001122:8#0
+        context:
+          span: directed by Oren Moverman
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:10
+      context:
+        premise: P2
+        premise_text: The director of that film is identified.
+        document:
+          doc: d0e5347fb9a8
+          title: Oren Moverman
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 92dc836e0bdd11eba7f7acde48001122:10#0
+        context:
+          span: Moverman most recently wrote and directed "The Dinner" starring Richard Gere, Laura Linney,
+            Steve Coogan, Chloe Sevigny and Rebecca Hall.
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:12
+      context:
+        premise: P3
+        premise_text: The place of birth of that director is identified.
+        document:
+          doc: 8d8df9ec7d8b
+          title: Time Out of Mind (2014 film)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 92dc836e0bdd11eba7f7acde48001122:12#0
+        context:
+          span: written and directed by Oren Moverman
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:14
+      context:
+        premise: P3
+        premise_text: The place of birth of that director is identified.
+        document:
+          doc: d0e5347fb9a8
+          title: Oren Moverman
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 92dc836e0bdd11eba7f7acde48001122:14#0
+        context:
+          span: based in New York City
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:21
+      context:
+        premise: P3
+        premise_text: The place of birth of that director is identified.
+        document:
+          doc: 8d8df9ec7d8b
+          title: Time Out of Mind (2014 film)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 92dc836e0bdd11eba7f7acde48001122:21#0
+        context:
+          span: written and directed by Oren Moverman
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:23
+      context:
+        premise: P3
+        premise_text: The place of birth of that director is identified.
+        document:
+          doc: d0e5347fb9a8
+          title: Oren Moverman
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 92dc836e0bdd11eba7f7acde48001122:23#0
+        context:
+          span: based in New York City
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:30
+      context:
+        premise: P3
+        premise_text: The place of birth of that director is identified.
+        document:
+          doc: 8d8df9ec7d8b
+          title: Time Out of Mind (2014 film)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 92dc836e0bdd11eba7f7acde48001122:30#0
+        context:
+          span: written and directed by Oren Moverman
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:32
+      context:
+        premise: P3
+        premise_text: The place of birth of that director is identified.
+        document:
+          doc: d0e5347fb9a8
+          title: Oren Moverman
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 92dc836e0bdd11eba7f7acde48001122:32#0
+        context:
+          span: based in New York City
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    belief_states:
+    - id: 92dc836e0bdd11eba7f7acde48001122:16
+      context:
+        update: 1
+        reasoner_event: 92dc836e0bdd11eba7f7acde48001122:17
+        claims_after_update:
+        - premise: P1
+          status: SUPPORTED
+          support_score: 0.99
+          contradiction_score: 0.0
+          uncertainty: 0.010000000000000009
+          evidence_items: 1
+        - premise: P2
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 2
+        - premise: P3
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 2
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P3
+        reasoner_minimal_frontier:
+        - P3
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:25
+      context:
+        update: 2
+        reasoner_event: 92dc836e0bdd11eba7f7acde48001122:26
+        claims_after_update:
+        - premise: P1
+          status: SUPPORTED
+          support_score: 0.99
+          contradiction_score: 0.0
+          uncertainty: 0.010000000000000009
+          evidence_items: 1
+        - premise: P2
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 2
+        - premise: P3
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 4
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P3
+        reasoner_minimal_frontier:
+        - P3
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:34
+      context:
+        update: 3
+        reasoner_event: 92dc836e0bdd11eba7f7acde48001122:35
+        claims_after_update:
+        - premise: P1
+          status: SUPPORTED
+          support_score: 0.99
+          contradiction_score: 0.0
+          uncertainty: 0.010000000000000009
+          evidence_items: 1
+        - premise: P2
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 2
+        - premise: P3
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 4
+        beliefs_unchanged_by_this_update: true
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P3
+        reasoner_minimal_frontier:
+        - P3
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    controller_decisions:
+    - id: 92dc836e0bdd11eba7f7acde48001122:18
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P3
+        blocking_premises:
+        - P3
+        rationale: Resolve c_aa34e1291198f1f3 toward SUPPORTED
+        next_query: The place of birth of that director is identified. What is the place of birth of the
+          director of film Time Out Of Mind (2014 Film)? independent verification primary source
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:27
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P3
+        blocking_premises:
+        - P3
+        rationale: Resolve c_aa34e1291198f1f3 toward SUPPORTED
+        next_query: The place of birth of that director is identified. What is the place of birth of the
+          director of film Time Out Of Mind (2014 Film)? independent verification primary source
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:36
+      context:
+        decision: 3
+        action: ABSTAIN
+        target_premise: null
+        blocking_premises:
+        - P3
+        rationale: 'Acquisition budget unavailable: search_calls, documents'
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: 2wikimultihopqa-premise_only
+    trace_sha256: ce4d829485106f2a028f3cdba92a3214b5d3b7d3646844b2c1373cb5809d1a5c
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: Israeli
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 92dc836e0bdd11eba7f7acde48001122:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: What is the place of birth of the director of film Time Out Of Mind (2014 Film)?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 8d8df9ec7d8b
+          title: Time Out of Mind (2014 film)
+          rank: 1
+        - doc: d0e5347fb9a8
+          title: Oren Moverman
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - oren moverman
+        - time out of mind (2014 film)
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:8
+      context:
+        round: 2
+        kind: TARGETED
+        query: The place of birth of that director is identified. What is the place of birth of the director
+          of film Time Out Of Mind (2014 Film)?
+        target_premise: P3
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 7790c50fb44a
+          title: Time Out of Mind (2014 film)
+          rank: 1
+        - doc: 2a3d31ffd13a
+          title: Oren Moverman
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - oren moverman
+        - time out of mind (2014 film)
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:13
+      context:
+        round: 3
+        kind: TARGETED
+        query: The place of birth of that director is identified. What is the place of birth of the director
+          of film Time Out Of Mind (2014 Film)?
+        target_premise: P3
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 7790c50fb44a
+          title: Time Out of Mind (2014 film)
+          rank: 1
+        - doc: 2a3d31ffd13a
+          title: Oren Moverman
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - oren moverman
+        - time out of mind (2014 film)
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: 92dc836e0bdd11eba7f7acde48001122:6
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P3
+        blocking_premises: []
+        rationale: null
+        next_query: The place of birth of that director is identified. What is the place of birth of the
+          director of film Time Out Of Mind (2014 Film)?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:11
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P3
+        blocking_premises: []
+        rationale: null
+        next_query: The place of birth of that director is identified. What is the place of birth of the
+          director of film Time Out Of Mind (2014 Film)?
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 92dc836e0bdd11eba7f7acde48001122:16
+      context:
+        decision: 3
+        action: SEARCH_MORE
+        target_premise: P3
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null

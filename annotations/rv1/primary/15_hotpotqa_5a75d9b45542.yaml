@@ -1,0 +1,740 @@
+# RV1 human annotation file (hotpotqa:5a75d9b4554299109176e5a7). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: hotpotqa:5a75d9b4554299109176e5a7
+order: 15
+dataset: hotpotqa-distractor-dev
+query_id: 5a75d9b4554299109176e5a7
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: 9b27bc8b3e947e2a5379596656149af3b03935760950641fdc12a3cd9989e3cc
+question: What type of crab can be grown in a fishery and is known for its sweet and tender flesh?
+gold:
+  reference_answer: The Dungeness crab
+  answerable: null
+  annotations:
+    _id: 5a75d9b4554299109176e5a7
+    answer: The Dungeness crab
+    answer_id: null
+    level: hard
+    question: What type of crab can be grown in a fishery and is known for its sweet and tender flesh?
+    supporting_facts:
+    - - Crab fisheries
+      - 0
+    - - Crab fisheries
+      - 1
+    - - Dungeness crab
+      - 0
+    - - Dungeness crab
+      - 1
+    type: bridge
+  answer_references:
+  - The Dungeness crab
+  benchmark: hotpotqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: AND(P3, P1, P2)
+    premises: 3
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_1f692eff383328dd
+  context:
+    label: P1
+    text: The crab type can be grown in a fishery.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_625268a26498e5d9
+  context:
+    label: P2
+    text: The crab type is known for sweet flesh.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_bfbc00cd53cff774
+  context:
+    label: P3
+    text: The crab type is known for tender flesh.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: hotpotqa-epistemic_search
+    trace_sha256: 55b80c7596e1b808b81ddd9cb83508732f9076f793914e2c5ae17329e103025c
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: The Dungeness crab
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5a75d9b4554299109176e5a7:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: What type of crab can be grown in a fishery and is known for its sweet and tender flesh?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: ca31b3bc786d
+          title: Straightneck squash
+          rank: 1
+        - doc: 01bb62ec4cbd
+          title: Gari (ginger)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a75d9b4554299109176e5a7:20
+      context:
+        round: 2
+        kind: TARGETED
+        query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and
+          is known for its sweet and tender flesh?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: c000a28b55eb
+          title: Straightneck squash
+          rank: 1
+        - doc: 98a1fa053af7
+          title: Gari (ginger)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a75d9b4554299109176e5a7:29
+      context:
+        round: 3
+        kind: TARGETED
+        query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and
+          is known for its sweet and tender flesh?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: c000a28b55eb
+          title: Straightneck squash
+          rank: 1
+        - doc: 98a1fa053af7
+          title: Gari (ginger)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: 5a75d9b4554299109176e5a7:4
+      context:
+        premise: P1
+        premise_text: The crab type can be grown in a fishery.
+        document:
+          doc: ca31b3bc786d
+          title: Straightneck squash
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a75d9b4554299109176e5a7:6
+      context:
+        premise: P1
+        premise_text: The crab type can be grown in a fishery.
+        document:
+          doc: 01bb62ec4cbd
+          title: Gari (ginger)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a75d9b4554299109176e5a7:8
+      context:
+        premise: P2
+        premise_text: The crab type is known for sweet flesh.
+        document:
+          doc: ca31b3bc786d
+          title: Straightneck squash
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a75d9b4554299109176e5a7:10
+      context:
+        premise: P2
+        premise_text: The crab type is known for sweet flesh.
+        document:
+          doc: 01bb62ec4cbd
+          title: Gari (ginger)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a75d9b4554299109176e5a7:12
+      context:
+        premise: P3
+        premise_text: The crab type is known for tender flesh.
+        document:
+          doc: ca31b3bc786d
+          title: Straightneck squash
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a75d9b4554299109176e5a7:14
+      context:
+        premise: P3
+        premise_text: The crab type is known for tender flesh.
+        document:
+          doc: 01bb62ec4cbd
+          title: Gari (ginger)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a75d9b4554299109176e5a7:14#0
+        context:
+          span: Young ginger is generally preferred for gari because of its tender flesh and natural sweetness.
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a75d9b4554299109176e5a7:21
+      context:
+        premise: P1
+        premise_text: The crab type can be grown in a fishery.
+        document:
+          doc: ca31b3bc786d
+          title: Straightneck squash
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a75d9b4554299109176e5a7:23
+      context:
+        premise: P1
+        premise_text: The crab type can be grown in a fishery.
+        document:
+          doc: 01bb62ec4cbd
+          title: Gari (ginger)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a75d9b4554299109176e5a7:30
+      context:
+        premise: P1
+        premise_text: The crab type can be grown in a fishery.
+        document:
+          doc: ca31b3bc786d
+          title: Straightneck squash
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a75d9b4554299109176e5a7:32
+      context:
+        premise: P1
+        premise_text: The crab type can be grown in a fishery.
+        document:
+          doc: 01bb62ec4cbd
+          title: Gari (ginger)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    belief_states:
+    - id: 5a75d9b4554299109176e5a7:16
+      context:
+        update: 1
+        reasoner_event: 5a75d9b4554299109176e5a7:17
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P3
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 1
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        - P3
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        - P3
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 5a75d9b4554299109176e5a7:25
+      context:
+        update: 2
+        reasoner_event: 5a75d9b4554299109176e5a7:26
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P3
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 1
+        beliefs_unchanged_by_this_update: true
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        - P3
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        - P3
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 5a75d9b4554299109176e5a7:34
+      context:
+        update: 3
+        reasoner_event: 5a75d9b4554299109176e5a7:35
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P3
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 1
+        beliefs_unchanged_by_this_update: true
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        - P3
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        - P3
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    controller_decisions:
+    - id: 5a75d9b4554299109176e5a7:18
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises:
+        - P1
+        - P2
+        - P3
+        rationale: Resolve c_1f692eff383328dd toward SUPPORTED
+        next_query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery
+          and is known for its sweet and tender flesh?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a75d9b4554299109176e5a7:27
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises:
+        - P1
+        - P2
+        - P3
+        rationale: Resolve c_1f692eff383328dd toward SUPPORTED
+        next_query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery
+          and is known for its sweet and tender flesh?
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a75d9b4554299109176e5a7:36
+      context:
+        decision: 3
+        action: ABSTAIN
+        target_premise: null
+        blocking_premises:
+        - P1
+        - P2
+        - P3
+        rationale: 'Acquisition budget unavailable: search_calls, documents'
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: hotpotqa-premise_only
+    trace_sha256: 66b3666a8289f0094f9639e6c25c1daa46470156464dedcb9c0a6c2d28ea6fb1
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: The Dungeness crab
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5a75d9b4554299109176e5a7:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: What type of crab can be grown in a fishery and is known for its sweet and tender flesh?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: ca31b3bc786d
+          title: Straightneck squash
+          rank: 1
+        - doc: 01bb62ec4cbd
+          title: Gari (ginger)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a75d9b4554299109176e5a7:8
+      context:
+        round: 2
+        kind: TARGETED
+        query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and
+          is known for its sweet and tender flesh?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: c000a28b55eb
+          title: Straightneck squash
+          rank: 1
+        - doc: 98a1fa053af7
+          title: Gari (ginger)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a75d9b4554299109176e5a7:13
+      context:
+        round: 3
+        kind: TARGETED
+        query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery and
+          is known for its sweet and tender flesh?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: c000a28b55eb
+          title: Straightneck squash
+          rank: 1
+        - doc: 98a1fa053af7
+          title: Gari (ginger)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: 5a75d9b4554299109176e5a7:6
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery
+          and is known for its sweet and tender flesh?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a75d9b4554299109176e5a7:11
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: The crab type can be grown in a fishery. What type of crab can be grown in a fishery
+          and is known for its sweet and tender flesh?
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a75d9b4554299109176e5a7:16
+      context:
+        decision: 3
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null

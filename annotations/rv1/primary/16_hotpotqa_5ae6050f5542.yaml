@@ -1,0 +1,698 @@
+# RV1 human annotation file (hotpotqa:5ae6050f55429929b0807a5e). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: hotpotqa:5ae6050f55429929b0807a5e
+order: 16
+dataset: hotpotqa-distractor-dev
+query_id: 5ae6050f55429929b0807a5e
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: 787acbe012de3f1f255717d2dd8e9c2596d5e1134a381328d40cb4e24c232b0a
+question: This singer of A Rather Blustery Day also voiced what hedgehog?
+gold:
+  reference_answer: Sonic
+  answerable: null
+  annotations:
+    _id: 5ae6050f55429929b0807a5e
+    answer: Sonic
+    answer_id: null
+    level: hard
+    question: This singer of A Rather Blustery Day also voiced what hedgehog?
+    supporting_facts:
+    - - A Rather Blustery Day
+      - 1
+    - - Jim Cummings
+      - 1
+    type: bridge
+  answer_references:
+  - Sonic
+  benchmark: hotpotqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: AND(P2, P1)
+    premises: 2
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_4aa671bd186b459a
+  context:
+    label: P1
+    text: Identify the singer of “A Rather Blustery Day.”
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_98cce6293e475fef
+  context:
+    label: P2
+    text: Identify the hedgehog character voiced by that singer.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: hotpotqa-epistemic_search
+    trace_sha256: 581c8b52d1213011ec218f7f39efb3ff9435dbe88234f51d7b60af100af76201
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: Sonic
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5ae6050f55429929b0807a5e:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: This singer of A Rather Blustery Day also voiced what hedgehog?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 92171c9c02d6
+          title: The Wonderful Thing About Tiggers
+          rank: 1
+        - doc: 81015a30369e
+          title: The House That Jack Built (1967 film)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5ae6050f55429929b0807a5e:16
+      context:
+        round: 2
+        kind: TARGETED
+        query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also
+          voiced what hedgehog? independent verification primary source
+        target_premise: P1
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 36d79abccf3a
+          title: The Wonderful Thing About Tiggers
+          rank: 1
+        - doc: 6471681b080c
+          title: The House That Jack Built (1967 film)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5ae6050f55429929b0807a5e:25
+      context:
+        round: 3
+        kind: TARGETED
+        query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also
+          voiced what hedgehog? independent verification primary source
+        target_premise: P1
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 36d79abccf3a
+          title: The Wonderful Thing About Tiggers
+          rank: 1
+        - doc: 6471681b080c
+          title: The House That Jack Built (1967 film)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: 5ae6050f55429929b0807a5e:4
+      context:
+        premise: P1
+        premise_text: Identify the singer of “A Rather Blustery Day.”
+        document:
+          doc: 92171c9c02d6
+          title: The Wonderful Thing About Tiggers
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5ae6050f55429929b0807a5e:6
+      context:
+        premise: P1
+        premise_text: Identify the singer of “A Rather Blustery Day.”
+        document:
+          doc: 81015a30369e
+          title: The House That Jack Built (1967 film)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae6050f55429929b0807a5e:6#0
+        context:
+          span: '"Winnie the Pooh and the Blustery Day"'
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae6050f55429929b0807a5e:8
+      context:
+        premise: P2
+        premise_text: Identify the hedgehog character voiced by that singer.
+        document:
+          doc: 92171c9c02d6
+          title: The Wonderful Thing About Tiggers
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae6050f55429929b0807a5e:8#0
+        context:
+          span: In 1974, Paul Winchell earned a Grammy for his rendition of the song.
+          system_stance: NEUTRAL
+          system_stance_score: 0.92
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae6050f55429929b0807a5e:10
+      context:
+        premise: P2
+        premise_text: Identify the hedgehog character voiced by that singer.
+        document:
+          doc: 81015a30369e
+          title: The House That Jack Built (1967 film)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5ae6050f55429929b0807a5e:17
+      context:
+        premise: P1
+        premise_text: Identify the singer of “A Rather Blustery Day.”
+        document:
+          doc: 92171c9c02d6
+          title: The Wonderful Thing About Tiggers
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5ae6050f55429929b0807a5e:19
+      context:
+        premise: P1
+        premise_text: Identify the singer of “A Rather Blustery Day.”
+        document:
+          doc: 81015a30369e
+          title: The House That Jack Built (1967 film)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae6050f55429929b0807a5e:19#0
+        context:
+          span: '"Winnie the Pooh and the Blustery Day"'
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae6050f55429929b0807a5e:26
+      context:
+        premise: P1
+        premise_text: Identify the singer of “A Rather Blustery Day.”
+        document:
+          doc: 92171c9c02d6
+          title: The Wonderful Thing About Tiggers
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5ae6050f55429929b0807a5e:28
+      context:
+        premise: P1
+        premise_text: Identify the singer of “A Rather Blustery Day.”
+        document:
+          doc: 81015a30369e
+          title: The House That Jack Built (1967 film)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae6050f55429929b0807a5e:28#0
+        context:
+          span: '"Winnie the Pooh and the Blustery Day"'
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    belief_states:
+    - id: 5ae6050f55429929b0807a5e:12
+      context:
+        update: 1
+        reasoner_event: 5ae6050f55429929b0807a5e:13
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 1
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 1
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 5ae6050f55429929b0807a5e:21
+      context:
+        update: 2
+        reasoner_event: 5ae6050f55429929b0807a5e:22
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 2
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 1
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 5ae6050f55429929b0807a5e:30
+      context:
+        update: 3
+        reasoner_event: 5ae6050f55429929b0807a5e:31
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 2
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 1
+        beliefs_unchanged_by_this_update: true
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    controller_decisions:
+    - id: 5ae6050f55429929b0807a5e:14
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises:
+        - P1
+        - P2
+        rationale: Resolve c_4aa671bd186b459a toward SUPPORTED
+        next_query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day
+          also voiced what hedgehog? independent verification primary source
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5ae6050f55429929b0807a5e:23
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises:
+        - P1
+        - P2
+        rationale: Resolve c_4aa671bd186b459a toward SUPPORTED
+        next_query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day
+          also voiced what hedgehog? independent verification primary source
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5ae6050f55429929b0807a5e:32
+      context:
+        decision: 3
+        action: ABSTAIN
+        target_premise: null
+        blocking_premises:
+        - P1
+        - P2
+        rationale: 'Acquisition budget unavailable: search_calls, documents'
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: hotpotqa-premise_only
+    trace_sha256: ff201515a2fcfba6c512a94ca554838eaf200d511e3a166e344f1ed2fe427a9b
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: Sonic
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5ae6050f55429929b0807a5e:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: This singer of A Rather Blustery Day also voiced what hedgehog?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 92171c9c02d6
+          title: The Wonderful Thing About Tiggers
+          rank: 1
+        - doc: 81015a30369e
+          title: The House That Jack Built (1967 film)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5ae6050f55429929b0807a5e:8
+      context:
+        round: 2
+        kind: TARGETED
+        query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also
+          voiced what hedgehog?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 58baa282f06b
+          title: The Wonderful Thing About Tiggers
+          rank: 1
+        - doc: 22ab41dc3786
+          title: The House That Jack Built (1967 film)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5ae6050f55429929b0807a5e:13
+      context:
+        round: 3
+        kind: TARGETED
+        query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day also
+          voiced what hedgehog?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 58baa282f06b
+          title: The Wonderful Thing About Tiggers
+          rank: 1
+        - doc: 22ab41dc3786
+          title: The House That Jack Built (1967 film)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: 5ae6050f55429929b0807a5e:6
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day
+          also voiced what hedgehog?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5ae6050f55429929b0807a5e:11
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: Identify the singer of “A Rather Blustery Day.” This singer of A Rather Blustery Day
+          also voiced what hedgehog?
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5ae6050f55429929b0807a5e:16
+      context:
+        decision: 3
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null

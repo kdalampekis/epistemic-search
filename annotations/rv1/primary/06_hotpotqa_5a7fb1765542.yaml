@@ -1,0 +1,862 @@
+# RV1 human annotation file (hotpotqa:5a7fb1765542992e7d278d20). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: hotpotqa:5a7fb1765542992e7d278d20
+order: 6
+dataset: hotpotqa-distractor-dev
+query_id: 5a7fb1765542992e7d278d20
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: de4f2baef2567ab430e9bbee134eed2f2d36d35f0d2a3727e1b06da937c52e04
+question: Why does the City of Boston get their christmas tree from Ainslee Glen Nova Scotia?
+gold:
+  reference_answer: for their assistance after the 1917 Halifax Explosion
+  answerable: null
+  annotations:
+    _id: 5a7fb1765542992e7d278d20
+    answer: for their assistance after the 1917 Halifax Explosion
+    answer_id: null
+    level: hard
+    question: Why does the City of Boston get their christmas tree from Ainslee Glen Nova Scotia?
+    supporting_facts:
+    - - Ainslie Glen, Nova Scotia
+      - 0
+    - - Ainslie Glen, Nova Scotia
+      - 1
+    - - Boston Christmas Tree
+      - 1
+    type: bridge
+  answer_references:
+  - for their assistance after the 1917 Halifax Explosion
+  benchmark: hotpotqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: AND(P2, P3, P1)
+    premises: 3
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_5549d7123fac237e
+  context:
+    label: P1
+    text: Establish whether Boston provided significant aid to Halifax after the 1917 Halifax Explosion.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_b536e218f2d537d6
+  context:
+    label: P2
+    text: Establish whether Nova Scotia’s Christmas-tree gift to Boston is connected to gratitude for
+      that aid.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_b8e107776b318c5b
+  context:
+    label: P3
+    text: Establish whether Ainslee Glen was the source or donor of the particular tree, and why it was
+      selected.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: hotpotqa-epistemic_search
+    trace_sha256: ecfeee4f5618d38bb00d9bf4e20207502061208dbfcb92ca51e6d1c9ce523b72
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: for their assistance after the 1917 Halifax Explosion
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5a7fb1765542992e7d278d20:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: Why does the City of Boston get their christmas tree from Ainslee Glen Nova Scotia?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: ee763ce3abb7
+          title: Boston Christmas Tree
+          rank: 1
+        - doc: 060032d28e14
+          title: Ainslie Glen, Nova Scotia
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - ainslie glen, nova scotia
+        - boston christmas tree
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a7fb1765542992e7d278d20:20
+      context:
+        round: 2
+        kind: TARGETED
+        query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why
+          it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen Nova
+          Scotia? independent primary sources evidence for and against
+        target_premise: P3
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 30a02b5eccda
+          title: Boston Christmas Tree
+          rank: 1
+        - doc: f35f3982230d
+          title: Benjamin Green (merchant)
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - boston christmas tree
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a7fb1765542992e7d278d20:29
+      context:
+        round: 3
+        kind: TARGETED
+        query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why
+          it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen Nova
+          Scotia? independent primary sources evidence for and against
+        target_premise: P3
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 30a02b5eccda
+          title: Boston Christmas Tree
+          rank: 1
+        - doc: f35f3982230d
+          title: Benjamin Green (merchant)
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - boston christmas tree
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: 5a7fb1765542992e7d278d20:4
+      context:
+        premise: P1
+        premise_text: Establish whether Boston provided significant aid to Halifax after the 1917 Halifax
+          Explosion.
+        document:
+          doc: ee763ce3abb7
+          title: Boston Christmas Tree
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7fb1765542992e7d278d20:4#0
+        context:
+          span: in thanks for their assistance after the 1917 Halifax Explosion
+          system_stance: SUPPORT
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7fb1765542992e7d278d20:6
+      context:
+        premise: P1
+        premise_text: Establish whether Boston provided significant aid to Halifax after the 1917 Halifax
+          Explosion.
+        document:
+          doc: 060032d28e14
+          title: Ainslie Glen, Nova Scotia
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a7fb1765542992e7d278d20:8
+      context:
+        premise: P2
+        premise_text: Establish whether Nova Scotia’s Christmas-tree gift to Boston is connected to gratitude
+          for that aid.
+        document:
+          doc: ee763ce3abb7
+          title: Boston Christmas Tree
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7fb1765542992e7d278d20:8#0
+        context:
+          span: in thanks for their assistance after the 1917 Halifax Explosion
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7fb1765542992e7d278d20:10
+      context:
+        premise: P2
+        premise_text: Establish whether Nova Scotia’s Christmas-tree gift to Boston is connected to gratitude
+          for that aid.
+        document:
+          doc: 060032d28e14
+          title: Ainslie Glen, Nova Scotia
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7fb1765542992e7d278d20:10#0
+        context:
+          span: In 2016, a tree on Crown Lands was chosen to become the Boston Christmas Tree.
+          system_stance: NEUTRAL
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7fb1765542992e7d278d20:12
+      context:
+        premise: P3
+        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and
+          why it was selected.
+        document:
+          doc: ee763ce3abb7
+          title: Boston Christmas Tree
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7fb1765542992e7d278d20:12#0
+        context:
+          span: it has been given to the people of Boston by the people of Nova Scotia
+          system_stance: CONTRADICT
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5a7fb1765542992e7d278d20:12#1
+        context:
+          span: in thanks for their assistance after the 1917 Halifax Explosion
+          system_stance: SUPPORT
+          system_stance_score: 0.95
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7fb1765542992e7d278d20:14
+      context:
+        premise: P3
+        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and
+          why it was selected.
+        document:
+          doc: 060032d28e14
+          title: Ainslie Glen, Nova Scotia
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7fb1765542992e7d278d20:14#0
+        context:
+          span: In 2016, a tree on Crown Lands was chosen to become the Boston Christmas Tree.
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7fb1765542992e7d278d20:21
+      context:
+        premise: P3
+        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and
+          why it was selected.
+        document:
+          doc: ee763ce3abb7
+          title: Boston Christmas Tree
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7fb1765542992e7d278d20:21#0
+        context:
+          span: it has been given to the people of Boston by the people of Nova Scotia
+          system_stance: CONTRADICT
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5a7fb1765542992e7d278d20:21#1
+        context:
+          span: in thanks for their assistance after the 1917 Halifax Explosion
+          system_stance: SUPPORT
+          system_stance_score: 0.95
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7fb1765542992e7d278d20:23
+      context:
+        premise: P3
+        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and
+          why it was selected.
+        document:
+          doc: f35f3982230d
+          title: Benjamin Green (merchant)
+          rounds:
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a7fb1765542992e7d278d20:30
+      context:
+        premise: P3
+        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and
+          why it was selected.
+        document:
+          doc: ee763ce3abb7
+          title: Boston Christmas Tree
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7fb1765542992e7d278d20:30#0
+        context:
+          span: it has been given to the people of Boston by the people of Nova Scotia
+          system_stance: CONTRADICT
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5a7fb1765542992e7d278d20:30#1
+        context:
+          span: in thanks for their assistance after the 1917 Halifax Explosion
+          system_stance: SUPPORT
+          system_stance_score: 0.95
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7fb1765542992e7d278d20:32
+      context:
+        premise: P3
+        premise_text: Establish whether Ainslee Glen was the source or donor of the particular tree, and
+          why it was selected.
+        document:
+          doc: f35f3982230d
+          title: Benjamin Green (merchant)
+          rounds:
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    belief_states:
+    - id: 5a7fb1765542992e7d278d20:16
+      context:
+        update: 1
+        reasoner_event: 5a7fb1765542992e7d278d20:17
+        claims_after_update:
+        - premise: P1
+          status: SUPPORTED
+          support_score: 0.98
+          contradiction_score: 0.0
+          uncertainty: 0.020000000000000018
+          evidence_items: 1
+        - premise: P2
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 2
+        - premise: P3
+          status: MIXED
+          support_score: 0.95
+          contradiction_score: 0.98
+          uncertainty: 0.97
+          evidence_items: 3
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: MIXED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P3
+        reasoner_minimal_frontier:
+        - P3
+        reasoner_conflicts:
+        - P3
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 5a7fb1765542992e7d278d20:25
+      context:
+        update: 2
+        reasoner_event: 5a7fb1765542992e7d278d20:26
+        claims_after_update:
+        - premise: P1
+          status: SUPPORTED
+          support_score: 0.98
+          contradiction_score: 0.0
+          uncertainty: 0.020000000000000018
+          evidence_items: 1
+        - premise: P2
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 2
+        - premise: P3
+          status: MIXED
+          support_score: 0.95
+          contradiction_score: 0.98
+          uncertainty: 0.97
+          evidence_items: 5
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: MIXED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P3
+        reasoner_minimal_frontier:
+        - P3
+        reasoner_conflicts:
+        - P3
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 5a7fb1765542992e7d278d20:34
+      context:
+        update: 3
+        reasoner_event: 5a7fb1765542992e7d278d20:35
+        claims_after_update:
+        - premise: P1
+          status: SUPPORTED
+          support_score: 0.98
+          contradiction_score: 0.0
+          uncertainty: 0.020000000000000018
+          evidence_items: 1
+        - premise: P2
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 2
+        - premise: P3
+          status: MIXED
+          support_score: 0.95
+          contradiction_score: 0.98
+          uncertainty: 0.97
+          evidence_items: 5
+        beliefs_unchanged_by_this_update: true
+        reasoner_status: MIXED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P3
+        reasoner_minimal_frontier:
+        - P3
+        reasoner_conflicts:
+        - P3
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    controller_decisions:
+    - id: 5a7fb1765542992e7d278d20:18
+      context:
+        decision: 1
+        action: RESOLVE_CONFLICT
+        target_premise: P3
+        blocking_premises:
+        - P3
+        rationale: Resolve c_b8e107776b318c5b toward SUPPORTED
+        next_query: Establish whether Ainslee Glen was the source or donor of the particular tree, and
+          why it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen
+          Nova Scotia? independent primary sources evidence for and against
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a7fb1765542992e7d278d20:27
+      context:
+        decision: 2
+        action: RESOLVE_CONFLICT
+        target_premise: P3
+        blocking_premises:
+        - P3
+        rationale: Resolve c_b8e107776b318c5b toward SUPPORTED
+        next_query: Establish whether Ainslee Glen was the source or donor of the particular tree, and
+          why it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen
+          Nova Scotia? independent primary sources evidence for and against
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a7fb1765542992e7d278d20:36
+      context:
+        decision: 3
+        action: ABSTAIN
+        target_premise: null
+        blocking_premises:
+        - P3
+        rationale: 'Acquisition budget unavailable: search_calls, documents'
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: hotpotqa-premise_only
+    trace_sha256: dc35b3f08ce99daa7d05ed766492fcf02b13cf83ffec17149dea0762ccf04131
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: for their assistance after the 1917 Halifax Explosion
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5a7fb1765542992e7d278d20:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: Why does the City of Boston get their christmas tree from Ainslee Glen Nova Scotia?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: ee763ce3abb7
+          title: Boston Christmas Tree
+          rank: 1
+        - doc: 060032d28e14
+          title: Ainslie Glen, Nova Scotia
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - ainslie glen, nova scotia
+        - boston christmas tree
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a7fb1765542992e7d278d20:8
+      context:
+        round: 2
+        kind: TARGETED
+        query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why
+          it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen Nova
+          Scotia?
+        target_premise: P3
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 50e1be68ba5b
+          title: Boston Christmas Tree
+          rank: 1
+        - doc: ba30b8411302
+          title: Ainslie Glen, Nova Scotia
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - ainslie glen, nova scotia
+        - boston christmas tree
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a7fb1765542992e7d278d20:13
+      context:
+        round: 3
+        kind: TARGETED
+        query: Establish whether Ainslee Glen was the source or donor of the particular tree, and why
+          it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen Nova
+          Scotia?
+        target_premise: P3
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 50e1be68ba5b
+          title: Boston Christmas Tree
+          rank: 1
+        - doc: ba30b8411302
+          title: Ainslie Glen, Nova Scotia
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - ainslie glen, nova scotia
+        - boston christmas tree
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: 5a7fb1765542992e7d278d20:6
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P3
+        blocking_premises: []
+        rationale: null
+        next_query: Establish whether Ainslee Glen was the source or donor of the particular tree, and
+          why it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen
+          Nova Scotia?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a7fb1765542992e7d278d20:11
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P3
+        blocking_premises: []
+        rationale: null
+        next_query: Establish whether Ainslee Glen was the source or donor of the particular tree, and
+          why it was selected. Why does the City of Boston get their christmas tree from Ainslee Glen
+          Nova Scotia?
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a7fb1765542992e7d278d20:16
+      context:
+        decision: 3
+        action: SEARCH_MORE
+        target_premise: P3
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null

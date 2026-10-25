@@ -1,0 +1,8 @@
+# Paths are relative to this file. Reads the frozen RV0 outputs; never calls a model.
+rv0_dir: ../artifacts/rv0-pilot-audit
+frozen_rv0_summary: ../docs/results/rv0/summary.json
+annotations_dir: ../annotations/rv1
+sheets_dir: ../artifacts/rv1-sheets
+results_dir: ../docs/results/rv1
+assessors:
+  - primary

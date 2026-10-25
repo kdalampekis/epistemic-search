@@ -1,0 +1,557 @@
+# RV1 human annotation file (hotpotqa:5a7363ec5542991f29ee2dd7). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: hotpotqa:5a7363ec5542991f29ee2dd7
+order: 3
+dataset: hotpotqa-distractor-dev
+query_id: 5a7363ec5542991f29ee2dd7
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: c29163f317f25f373faeb1b0d71de8f59c06ac29942f827ad93840e509584585
+question: The USS Tortuga was named after the Dry Tortugas, a group of desert coral islets 60 miles west
+  of which city with the motto "One Human Family"?
+gold:
+  reference_answer: Key West
+  answerable: null
+  annotations:
+    _id: 5a7363ec5542991f29ee2dd7
+    answer: Key West
+    answer_id: null
+    level: hard
+    question: The USS Tortuga was named after the Dry Tortugas, a group of desert coral islets 60 miles
+      west of which city with the motto "One Human Family"?
+    supporting_facts:
+    - - USS Tortuga (LSD-46)
+      - 0
+    - - USS Tortuga (LSD-46)
+      - 1
+    - - Key West, Florida
+      - 6
+    type: bridge
+  answer_references:
+  - Key West
+  benchmark: hotpotqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: AND(P4, P1, P2, P3, P5)
+    premises: 5
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_18f76e618e903fb7
+  context:
+    label: P1
+    text: The city is identified by the motto "One Human Family."
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_1baa24266b7d5df6
+  context:
+    label: P2
+    text: The question identifies the USS Tortuga as named after the Dry Tortugas.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_22dc6ddad352f9e9
+  context:
+    label: P3
+    text: The requested answer is the name of that city.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_2b8104a44d597627
+  context:
+    label: P4
+    text: The islets are described as 60 miles west of a city.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_447c2f8e57114dee
+  context:
+    label: P5
+    text: The Dry Tortugas are described as a group of desert coral islets.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: hotpotqa-epistemic_search
+    trace_sha256: 8ef0cf308e5b7785ac01babf27f3ce4c26c388ff508400b0570acff8f26028f6
+    outcome:
+      context:
+        status: error
+        rv0_outcome: execution_error
+        answered: false
+        final_answer: null
+        reference_answer: Key West
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: Extracted span is absent from the exact source text
+        error: Extracted span is absent from the exact source text
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5a7363ec5542991f29ee2dd7:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: The USS Tortuga was named after the Dry Tortugas, a group of desert coral islets 60 miles
+          west of which city with the motto "One Human Family"?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 51c5047bf143
+          title: USS Tortuga (LSD-26)
+          rank: 1
+        - doc: c51c83d02320
+          title: USS Tortuga (LSD-46)
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - uss tortuga (lsd-46)
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: 5a7363ec5542991f29ee2dd7:4
+      context:
+        premise: P1
+        premise_text: The city is identified by the motto "One Human Family."
+        document:
+          doc: 51c5047bf143
+          title: USS Tortuga (LSD-26)
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a7363ec5542991f29ee2dd7:6
+      context:
+        premise: P1
+        premise_text: The city is identified by the motto "One Human Family."
+        document:
+          doc: c51c83d02320
+          title: USS Tortuga (LSD-46)
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7363ec5542991f29ee2dd7:6#0
+        context:
+          span: Key West, Florida
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7363ec5542991f29ee2dd7:8
+      context:
+        premise: P2
+        premise_text: The question identifies the USS Tortuga as named after the Dry Tortugas.
+        document:
+          doc: 51c5047bf143
+          title: USS Tortuga (LSD-26)
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7363ec5542991f29ee2dd7:8#0
+        context:
+          span: She was the first Navy ship to be named for the Dry Tortugas
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7363ec5542991f29ee2dd7:10
+      context:
+        premise: P2
+        premise_text: The question identifies the USS Tortuga as named after the Dry Tortugas.
+        document:
+          doc: c51c83d02320
+          title: USS Tortuga (LSD-46)
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7363ec5542991f29ee2dd7:10#0
+        context:
+          span: She was the second Navy ship to be named for the Dry Tortugas
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7363ec5542991f29ee2dd7:12
+      context:
+        premise: P3
+        premise_text: The requested answer is the name of that city.
+        document:
+          doc: 51c5047bf143
+          title: USS Tortuga (LSD-26)
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7363ec5542991f29ee2dd7:12#0
+        context:
+          span: Key West, Florida
+          system_stance: NEUTRAL
+          system_stance_score: 0.94
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7363ec5542991f29ee2dd7:14
+      context:
+        premise: P3
+        premise_text: The requested answer is the name of that city.
+        document:
+          doc: c51c83d02320
+          title: USS Tortuga (LSD-46)
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7363ec5542991f29ee2dd7:14#0
+        context:
+          span: Key West, Florida
+          system_stance: NEUTRAL
+          system_stance_score: 0.5
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7363ec5542991f29ee2dd7:16
+      context:
+        premise: P4
+        premise_text: The islets are described as 60 miles west of a city.
+        document:
+          doc: 51c5047bf143
+          title: USS Tortuga (LSD-26)
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7363ec5542991f29ee2dd7:16#0
+        context:
+          span: a group of desert coral islets 60 miles west of Key West, Florida
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: NORMALIZATION_EQUIVALENT
+          accepted_into_ledger: false
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    belief_states: []
+    controller_decisions:
+    - id: 5a7363ec5542991f29ee2dd7:18
+      context:
+        decision: 1
+        action: ABSTAIN
+        target_premise: null
+        blocking_premises:
+        - P1
+        - P2
+        - P3
+        - P4
+        - P5
+        rationale: Extracted span is absent from the exact source text
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: hotpotqa-premise_only
+    trace_sha256: 454281636beb32a90adffa3c14f10c3dcf546607ce55fd160e3cd90c29f20bc9
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: Key West
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5a7363ec5542991f29ee2dd7:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: The USS Tortuga was named after the Dry Tortugas, a group of desert coral islets 60 miles
+          west of which city with the motto "One Human Family"?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 51c5047bf143
+          title: USS Tortuga (LSD-26)
+          rank: 1
+        - doc: c51c83d02320
+          title: USS Tortuga (LSD-46)
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - uss tortuga (lsd-46)
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a7363ec5542991f29ee2dd7:8
+      context:
+        round: 2
+        kind: TARGETED
+        query: The city is identified by the motto "One Human Family." The USS Tortuga was named after
+          the Dry Tortugas, a group of desert coral islets 60 miles west of which city with the motto
+          "One Human Family"?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: e4eed7a9d4dc
+          title: USS Tortuga (LSD-26)
+          rank: 1
+        - doc: e30d537cac5e
+          title: USS Tortuga (LSD-46)
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - uss tortuga (lsd-46)
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a7363ec5542991f29ee2dd7:13
+      context:
+        round: 3
+        kind: TARGETED
+        query: The city is identified by the motto "One Human Family." The USS Tortuga was named after
+          the Dry Tortugas, a group of desert coral islets 60 miles west of which city with the motto
+          "One Human Family"?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: e4eed7a9d4dc
+          title: USS Tortuga (LSD-26)
+          rank: 1
+        - doc: e30d537cac5e
+          title: USS Tortuga (LSD-46)
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - uss tortuga (lsd-46)
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: 5a7363ec5542991f29ee2dd7:6
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: The city is identified by the motto "One Human Family." The USS Tortuga was named
+          after the Dry Tortugas, a group of desert coral islets 60 miles west of which city with the
+          motto "One Human Family"?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a7363ec5542991f29ee2dd7:11
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: The city is identified by the motto "One Human Family." The USS Tortuga was named
+          after the Dry Tortugas, a group of desert coral islets 60 miles west of which city with the
+          motto "One Human Family"?
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a7363ec5542991f29ee2dd7:16
+      context:
+        decision: 3
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null

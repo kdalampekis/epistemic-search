@@ -43,7 +43,7 @@ phases. An experiment may change code only where its own section permits it.
 | ID | Experiment | Cost | Decision gate |
 | --- | --- | ---: | --- |
 | RV0 | Pilot failure audit: mechanical facts from the 110 saved cases | $0 | **Done**; see [RV0 report](docs/experiments/RV0_PILOT_AUDIT.md) |
-| RV1 | Manual semantic annotation of decomposition, evidence stance and failure attribution | $0 | Needs a human assessor; yields the first real failure distribution |
+| RV1 | Human semantic annotation of decomposition, evidence stance, controller decisions and failure attribution, plus a human oracle decomposition per question | $0 | Infrastructure done ([protocol](docs/experiments/RV1_ANNOTATION_PROTOCOL.md)); needs a human assessor; yields the first real failure distribution |
 | RV2 | Fix confirmed implementation defects only; freeze `epistemic-search-v1` | small | Only defects shown by RV1/RV0 evidence; no hypothesis-tuning |
 | RV3 | Small controlled validation: ~50 new questions (HotpotQA, 2Wiki, contradiction/insufficient) × matched methods | ≈ $2 | **Stop** if no interesting signal; do not scale |
 | RV4 | Main Luna experiment at larger N, quality-vs-cost Pareto figure | ≈ $5 | Only if RV3 is promising |

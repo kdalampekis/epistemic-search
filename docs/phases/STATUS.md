@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-10-24 (RV0 added).
+Updated: 2026-10-24 (RV0 complete, RV1 infrastructure added).
 
 | Phase | Status | Evidence |
 | --- | --- | --- |
@@ -123,7 +123,7 @@ research-validation experiments in [RESEARCH_VALIDATION_PLAN.md](../../RESEARCH_
 | Experiment | Status | Evidence |
 | --- | --- | --- |
 | RV0 — Pilot failure audit | Complete (offline, $0; mechanical facts only) | [RV0 report](../experiments/RV0_PILOT_AUDIT.md), [results](../results/rv0/) |
-| RV1 — Manual semantic annotation | Not started; needs a human assessor | Protocol proposed in the RV0 report |
+| RV1 — Human semantic annotation | Infrastructure complete; **0 of 22 questions annotated** (human assessor required) | [Protocol](../experiments/RV1_ANNOTATION_PROTOCOL.md), `annotations/rv1/primary/`, [results](../results/rv1/) |
 | RV2–RV10 | Not started | Gated by RV1 and the plan's decision gates |
 
 RV0 produced no semantic failure distribution: 0 human annotations, 0 API calls,
@@ -132,3 +132,10 @@ bottlenecks (premise phrasing, repeated targeted queries ending in budget
 abstention, supporting-title recall, single-span aborts) without deciding whether
 any is an implementation defect or a failure of the hypothesis. No claim about the
 research hypothesis follows.
+
+RV0 was committed as `919e86d` before any RV1 work and is frozen. RV1 provides a
+validated annotation schema (`rv1-init`, `rv1-validate`, `rv1-aggregate`,
+`rv1-add-assessor`), blank files for all 22 pilot questions, an oracle-decomposition
+export that converts to the pipeline's `ProofGraph`, and agreement tooling for a second
+assessor. No human field is filled, no failure distribution exists, no API call was made.
+The 22 pilot questions are development data and cannot serve as a test set.

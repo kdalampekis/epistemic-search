@@ -1,0 +1,362 @@
+# RV1 human annotation file (hotpotqa:5a8a5c0d554299515336137b). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: hotpotqa:5a8a5c0d554299515336137b
+order: 4
+dataset: hotpotqa-distractor-dev
+query_id: 5a8a5c0d554299515336137b
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: 75de7c101c7f12859e530d36418e7f38e5c07def0216458e62b7d553da62ed6d
+question: What professional dancers twice turned on a lights festival taking place on the Fylde Coast
+  in Lancashire?
+gold:
+  reference_answer: Audrey Mossom
+  answerable: null
+  annotations:
+    _id: 5a8a5c0d554299515336137b
+    answer: Audrey Mossom
+    answer_id: null
+    level: hard
+    question: What professional dancers twice turned on a lights festival taking place on the Fylde Coast
+      in Lancashire?
+    supporting_facts:
+    - - Audrey Mossom
+      - 0
+    - - Audrey Mossom
+      - 2
+    - - Audrey Mossom
+      - 3
+    - - Blackpool Illuminations
+      - 0
+    type: bridge
+  answer_references:
+  - Audrey Mossom
+  benchmark: hotpotqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: AND(P2, P1, P3)
+    premises: 3
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_131044c976c25a55
+  context:
+    label: P1
+    text: Identify the lights festival held on the Fylde Coast in Lancashire.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_9b86e647d2867f7d
+  context:
+    label: P2
+    text: Identify the professional dancer or dancers associated with turning on that festival’s lights.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_dfd5642f150d0c33
+  context:
+    label: P3
+    text: Determine which of those dancer or dancers turned on the lights on two occasions.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: hotpotqa-epistemic_search
+    trace_sha256: d05f39c571d2d5861e81df39241e30d6623ae2a6dbf33a376a1017729fe4a18e
+    outcome:
+      context:
+        status: error
+        rv0_outcome: execution_error
+        answered: false
+        final_answer: null
+        reference_answer: Audrey Mossom
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: Extracted span is absent from the exact source text
+        error: Extracted span is absent from the exact source text
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5a8a5c0d554299515336137b:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: What professional dancers twice turned on a lights festival taking place on the Fylde Coast
+          in Lancashire?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: a337e60920dd
+          title: Blackpool Illuminations
+          rank: 1
+        - doc: 7ccd700cdb0a
+          title: Audrey Mossom
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - audrey mossom
+        - blackpool illuminations
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: 5a8a5c0d554299515336137b:4
+      context:
+        premise: P1
+        premise_text: Identify the lights festival held on the Fylde Coast in Lancashire.
+        document:
+          doc: a337e60920dd
+          title: Blackpool Illuminations
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a8a5c0d554299515336137b:4#0
+        context:
+          span: Blackpool Illuminations is an annual lights festival, founded in 1879 and first switched
+            on 19 September that year, held each autumn in the British seaside resort of Blackpool on
+            the Fylde Coast in Lancashire.
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a8a5c0d554299515336137b:6
+      context:
+        premise: P1
+        premise_text: Identify the lights festival held on the Fylde Coast in Lancashire.
+        document:
+          doc: 7ccd700cdb0a
+          title: Audrey Mossom
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a8a5c0d554299515336137b:6#0
+        context:
+          span: Blackpool Illuminations, an annual lights festival in Blackpool.
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a8a5c0d554299515336137b:8
+      context:
+        premise: P2
+        premise_text: Identify the professional dancer or dancers associated with turning on that festival’s
+          lights.
+        document:
+          doc: a337e60920dd
+          title: Blackpool Illuminations
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a8a5c0d554299515336137b:10
+      context:
+        premise: P2
+        premise_text: Identify the professional dancer or dancers associated with turning on that festival’s
+          lights.
+        document:
+          doc: 7ccd700cdb0a
+          title: Audrey Mossom
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a8a5c0d554299515336137b:10#0
+        context:
+          span: Elsie Audrey Mossom (3 September 1920, Preston – 1 September 2009, Hastings) was an English
+            teen celebrity and later a professional dancer. Later in 1935, she turned on the Blackpool
+            Illuminations, an annual lights festival in Blackpool.
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: NON_VERBATIM
+          accepted_into_ledger: false
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    belief_states: []
+    controller_decisions:
+    - id: 5a8a5c0d554299515336137b:12
+      context:
+        decision: 1
+        action: ABSTAIN
+        target_premise: null
+        blocking_premises:
+        - P1
+        - P2
+        - P3
+        rationale: Extracted span is absent from the exact source text
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: hotpotqa-premise_only
+    trace_sha256: e4381e85521a55dbf794edf18f297522bcb89d3375524a05064721f4800e53c5
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: answer_mismatch
+        answered: true
+        final_answer: Elsie Audrey Mossom
+        reference_answer: Audrey Mossom
+        exact_match: 0.0
+        token_f1: 0.8
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5a8a5c0d554299515336137b:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: What professional dancers twice turned on a lights festival taking place on the Fylde Coast
+          in Lancashire?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: a337e60920dd
+          title: Blackpool Illuminations
+          rank: 1
+        - doc: 7ccd700cdb0a
+          title: Audrey Mossom
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - audrey mossom
+        - blackpool illuminations
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: 5a8a5c0d554299515336137b:6
+      context:
+        decision: 1
+        action: ANSWER
+        target_premise: null
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null

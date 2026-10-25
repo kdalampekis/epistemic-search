@@ -1,0 +1,779 @@
+# RV1 human annotation file (hotpotqa:5a7b3ec95542995eb53be8d3). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: hotpotqa:5a7b3ec95542995eb53be8d3
+order: 8
+dataset: hotpotqa-distractor-dev
+query_id: 5a7b3ec95542995eb53be8d3
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: d68fba531349b1a724382b2d89d507d2b92ea5c6c44a0bae18fe8adef7be7bfa
+question: Edward C. Hugger and Alexander Acosta served at appointees for what job?
+gold:
+  reference_answer: Secretary of Labor
+  answerable: null
+  annotations:
+    _id: 5a7b3ec95542995eb53be8d3
+    answer: Secretary of Labor
+    answer_id: null
+    level: hard
+    question: Edward C. Hugger and Alexander Acosta served at appointees for what job?
+    supporting_facts:
+    - - Edward C. Hugler
+      - 2
+    - - Alexander Acosta
+      - 0
+    - - Alexander Acosta
+      - 1
+    type: bridge
+  answer_references:
+  - Secretary of Labor
+  benchmark: hotpotqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: AND(P2, P1, P3)
+    premises: 3
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_30113af62533c21a
+  context:
+    label: P1
+    text: Identify the job for which Alexander Acosta served as an appointee.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_a7a1e88de09c87be
+  context:
+    label: P2
+    text: Determine whether the identified jobs are the same.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_ac7da287ea02a497
+  context:
+    label: P3
+    text: Identify the job for which Edward C. Hugger served as an appointee.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: hotpotqa-epistemic_search
+    trace_sha256: 334f4712f20a9579d9b240044603b58c4a68729fbbf868b259894cff1fd913cc
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: Secretary of Labor
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5a7b3ec95542995eb53be8d3:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: Edward C. Hugger and Alexander Acosta served at appointees for what job?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 30652ce4ece9
+          title: Edward C. Hugler
+          rank: 1
+        - doc: aca428a6f655
+          title: Edward C. Noonan
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - edward c. hugler
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a7b3ec95542995eb53be8d3:20
+      context:
+        round: 2
+        kind: TARGETED
+        query: Determine whether the identified jobs are the same. Edward C. Hugger and Alexander Acosta
+          served at appointees for what job? independent primary sources evidence for and against
+        target_premise: P2
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: bcc351555307
+          title: Edward C. Noonan
+          rank: 1
+        - doc: f4d0bbd88d31
+          title: Edward C. Hugler
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - edward c. hugler
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a7b3ec95542995eb53be8d3:29
+      context:
+        round: 3
+        kind: TARGETED
+        query: Determine whether the identified jobs are the same. Edward C. Hugger and Alexander Acosta
+          served at appointees for what job? independent primary sources evidence for and against
+        target_premise: P2
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: bcc351555307
+          title: Edward C. Noonan
+          rank: 1
+        - doc: f4d0bbd88d31
+          title: Edward C. Hugler
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - edward c. hugler
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: 5a7b3ec95542995eb53be8d3:4
+      context:
+        premise: P1
+        premise_text: Identify the job for which Alexander Acosta served as an appointee.
+        document:
+          doc: 30652ce4ece9
+          title: Edward C. Hugler
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7b3ec95542995eb53be8d3:4#0
+        context:
+          span: Alexander Acosta was confirmed and sworn into office.
+          system_stance: SUPPORT
+          system_stance_score: 0.79
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7b3ec95542995eb53be8d3:6
+      context:
+        premise: P1
+        premise_text: Identify the job for which Alexander Acosta served as an appointee.
+        document:
+          doc: aca428a6f655
+          title: Edward C. Noonan
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a7b3ec95542995eb53be8d3:8
+      context:
+        premise: P2
+        premise_text: Determine whether the identified jobs are the same.
+        document:
+          doc: 30652ce4ece9
+          title: Edward C. Hugler
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7b3ec95542995eb53be8d3:8#0
+        context:
+          span: Deputy Assistant Secretary for Operations in the U.S. Department of Labor's Office of
+            the Assistant Secretary for Administration and Management
+          system_stance: CONTRADICT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5a7b3ec95542995eb53be8d3:8#1
+        context:
+          span: Acting Secretary of Labor
+          system_stance: CONTRADICT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7b3ec95542995eb53be8d3:10
+      context:
+        premise: P2
+        premise_text: Determine whether the identified jobs are the same.
+        document:
+          doc: aca428a6f655
+          title: Edward C. Noonan
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7b3ec95542995eb53be8d3:10#0
+        context:
+          span: He was replaced as party chairman by Markham Robinson in July 2008.
+          system_stance: SUPPORT
+          system_stance_score: 0.96
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7b3ec95542995eb53be8d3:12
+      context:
+        premise: P3
+        premise_text: Identify the job for which Edward C. Hugger served as an appointee.
+        document:
+          doc: 30652ce4ece9
+          title: Edward C. Hugler
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7b3ec95542995eb53be8d3:12#0
+        context:
+          span: he served as Acting Secretary of Labor
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7b3ec95542995eb53be8d3:14
+      context:
+        premise: P3
+        premise_text: Identify the job for which Edward C. Hugger served as an appointee.
+        document:
+          doc: aca428a6f655
+          title: Edward C. Noonan
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a7b3ec95542995eb53be8d3:21
+      context:
+        premise: P2
+        premise_text: Determine whether the identified jobs are the same.
+        document:
+          doc: aca428a6f655
+          title: Edward C. Noonan
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7b3ec95542995eb53be8d3:21#0
+        context:
+          span: He was replaced as party chairman by Markham Robinson in July 2008.
+          system_stance: SUPPORT
+          system_stance_score: 0.96
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7b3ec95542995eb53be8d3:23
+      context:
+        premise: P2
+        premise_text: Determine whether the identified jobs are the same.
+        document:
+          doc: 30652ce4ece9
+          title: Edward C. Hugler
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7b3ec95542995eb53be8d3:23#0
+        context:
+          span: Deputy Assistant Secretary for Operations in the U.S. Department of Labor's Office of
+            the Assistant Secretary for Administration and Management
+          system_stance: CONTRADICT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5a7b3ec95542995eb53be8d3:23#1
+        context:
+          span: Acting Secretary of Labor
+          system_stance: CONTRADICT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7b3ec95542995eb53be8d3:30
+      context:
+        premise: P2
+        premise_text: Determine whether the identified jobs are the same.
+        document:
+          doc: aca428a6f655
+          title: Edward C. Noonan
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7b3ec95542995eb53be8d3:30#0
+        context:
+          span: He was replaced as party chairman by Markham Robinson in July 2008.
+          system_stance: SUPPORT
+          system_stance_score: 0.96
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a7b3ec95542995eb53be8d3:32
+      context:
+        premise: P2
+        premise_text: Determine whether the identified jobs are the same.
+        document:
+          doc: 30652ce4ece9
+          title: Edward C. Hugler
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a7b3ec95542995eb53be8d3:32#0
+        context:
+          span: Deputy Assistant Secretary for Operations in the U.S. Department of Labor's Office of
+            the Assistant Secretary for Administration and Management
+          system_stance: CONTRADICT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5a7b3ec95542995eb53be8d3:32#1
+        context:
+          span: Acting Secretary of Labor
+          system_stance: CONTRADICT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    belief_states:
+    - id: 5a7b3ec95542995eb53be8d3:16
+      context:
+        update: 1
+        reasoner_event: 5a7b3ec95542995eb53be8d3:17
+        claims_after_update:
+        - premise: P1
+          status: SUPPORTED
+          support_score: 0.79
+          contradiction_score: 0.0
+          uncertainty: 0.20999999999999996
+          evidence_items: 1
+        - premise: P2
+          status: MIXED
+          support_score: 0.96
+          contradiction_score: 0.99
+          uncertainty: 0.97
+          evidence_items: 3
+        - premise: P3
+          status: SUPPORTED
+          support_score: 0.99
+          contradiction_score: 0.0
+          uncertainty: 0.010000000000000009
+          evidence_items: 1
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: MIXED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P2
+        reasoner_minimal_frontier:
+        - P2
+        reasoner_conflicts:
+        - P2
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 5a7b3ec95542995eb53be8d3:25
+      context:
+        update: 2
+        reasoner_event: 5a7b3ec95542995eb53be8d3:26
+        claims_after_update:
+        - premise: P1
+          status: SUPPORTED
+          support_score: 0.79
+          contradiction_score: 0.0
+          uncertainty: 0.20999999999999996
+          evidence_items: 1
+        - premise: P2
+          status: MIXED
+          support_score: 0.96
+          contradiction_score: 0.99
+          uncertainty: 0.97
+          evidence_items: 6
+        - premise: P3
+          status: SUPPORTED
+          support_score: 0.99
+          contradiction_score: 0.0
+          uncertainty: 0.010000000000000009
+          evidence_items: 1
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: MIXED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P2
+        reasoner_minimal_frontier:
+        - P2
+        reasoner_conflicts:
+        - P2
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 5a7b3ec95542995eb53be8d3:34
+      context:
+        update: 3
+        reasoner_event: 5a7b3ec95542995eb53be8d3:35
+        claims_after_update:
+        - premise: P1
+          status: SUPPORTED
+          support_score: 0.79
+          contradiction_score: 0.0
+          uncertainty: 0.20999999999999996
+          evidence_items: 1
+        - premise: P2
+          status: MIXED
+          support_score: 0.96
+          contradiction_score: 0.99
+          uncertainty: 0.97
+          evidence_items: 6
+        - premise: P3
+          status: SUPPORTED
+          support_score: 0.99
+          contradiction_score: 0.0
+          uncertainty: 0.010000000000000009
+          evidence_items: 1
+        beliefs_unchanged_by_this_update: true
+        reasoner_status: MIXED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P2
+        reasoner_minimal_frontier:
+        - P2
+        reasoner_conflicts:
+        - P2
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    controller_decisions:
+    - id: 5a7b3ec95542995eb53be8d3:18
+      context:
+        decision: 1
+        action: RESOLVE_CONFLICT
+        target_premise: P2
+        blocking_premises:
+        - P2
+        rationale: Resolve c_a7a1e88de09c87be toward SUPPORTED
+        next_query: Determine whether the identified jobs are the same. Edward C. Hugger and Alexander
+          Acosta served at appointees for what job? independent primary sources evidence for and against
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a7b3ec95542995eb53be8d3:27
+      context:
+        decision: 2
+        action: RESOLVE_CONFLICT
+        target_premise: P2
+        blocking_premises:
+        - P2
+        rationale: Resolve c_a7a1e88de09c87be toward SUPPORTED
+        next_query: Determine whether the identified jobs are the same. Edward C. Hugger and Alexander
+          Acosta served at appointees for what job? independent primary sources evidence for and against
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a7b3ec95542995eb53be8d3:36
+      context:
+        decision: 3
+        action: ABSTAIN
+        target_premise: null
+        blocking_premises:
+        - P2
+        rationale: 'Acquisition budget unavailable: search_calls, documents'
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: hotpotqa-premise_only
+    trace_sha256: d1c3a5b6cbb22d62795159fb0ab5496843911be4e127a6fdcf03380a8092ed53
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: answer_mismatch
+        answered: true
+        final_answer: 'Secretary of Labor: Edward C. Hugler served as Acting Secretary, and Alexander
+          Acosta was confirmed and sworn into the office.'
+        reference_answer: Secretary of Labor
+        exact_match: 0.0
+        token_f1: 0.2727272727272727
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5a7b3ec95542995eb53be8d3:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: Edward C. Hugger and Alexander Acosta served at appointees for what job?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 30652ce4ece9
+          title: Edward C. Hugler
+          rank: 1
+        - doc: aca428a6f655
+          title: Edward C. Noonan
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - edward c. hugler
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: 5a7b3ec95542995eb53be8d3:6
+      context:
+        decision: 1
+        action: ANSWER
+        target_premise: null
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null

@@ -1,0 +1,142 @@
+{
+  "cases": [
+    {
+      "case_id": "2wiki:2bf61f58088a11ebbd6eac1f6bf848b6",
+      "context_sha256": "0cff569a1922ff1eb960946917443b5be42945ae9d3da2c322c4f5ddafede39c",
+      "file": "01_2wiki_2bf61f58088a.yaml",
+      "order": 1
+    },
+    {
+      "case_id": "confrag:1105",
+      "context_sha256": "877043d811f71eacf248b20f79511c77db62d819fbbdfce55e3c186ef9e458bc",
+      "file": "02_confrag_1105.yaml",
+      "order": 2
+    },
+    {
+      "case_id": "hotpotqa:5a7363ec5542991f29ee2dd7",
+      "context_sha256": "c29163f317f25f373faeb1b0d71de8f59c06ac29942f827ad93840e509584585",
+      "file": "03_hotpotqa_5a7363ec5542.yaml",
+      "order": 3
+    },
+    {
+      "case_id": "hotpotqa:5a8a5c0d554299515336137b",
+      "context_sha256": "75de7c101c7f12859e530d36418e7f38e5c07def0216458e62b7d553da62ed6d",
+      "file": "04_hotpotqa_5a8a5c0d5542.yaml",
+      "order": 4
+    },
+    {
+      "case_id": "hotpotqa:5ae63b2255429908198fa526",
+      "context_sha256": "2b15dd624980dfaa146bd9bd15285d47f7b312cf0d5c7dcef41110c071105f06",
+      "file": "05_hotpotqa_5ae63b225542.yaml",
+      "order": 5
+    },
+    {
+      "case_id": "hotpotqa:5a7fb1765542992e7d278d20",
+      "context_sha256": "de4f2baef2567ab430e9bbee134eed2f2d36d35f0d2a3727e1b06da937c52e04",
+      "file": "06_hotpotqa_5a7fb1765542.yaml",
+      "order": 6
+    },
+    {
+      "case_id": "hotpotqa:5a86eee85542994775f60787",
+      "context_sha256": "c0d394771f1044c4e44c7e94560767364ab303097db0539b7e4a6462730e9154",
+      "file": "07_hotpotqa_5a86eee85542.yaml",
+      "order": 7
+    },
+    {
+      "case_id": "hotpotqa:5a7b3ec95542995eb53be8d3",
+      "context_sha256": "d68fba531349b1a724382b2d89d507d2b92ea5c6c44a0bae18fe8adef7be7bfa",
+      "file": "08_hotpotqa_5a7b3ec95542.yaml",
+      "order": 8
+    },
+    {
+      "case_id": "2wiki:1118315c0bdd11eba7f7acde48001122",
+      "context_sha256": "c8609c1a11d9a61a0390b4135fe72bbbd982efc4230098e1cf4bb26d244b3fce",
+      "file": "09_2wiki_1118315c0bdd.yaml",
+      "order": 9
+    },
+    {
+      "case_id": "2wiki:28b6cbf808d511ebbd98ac1f6bf848b6",
+      "context_sha256": "a54e091031f3b5e9e4cb3e2c9e89cef60b99d9570fa714a0f20d7b035f55aec7",
+      "file": "10_2wiki_28b6cbf808d5.yaml",
+      "order": 10
+    },
+    {
+      "case_id": "2wiki:7aa50b6a08a711ebbd7fac1f6bf848b6",
+      "context_sha256": "38139a3e5d4d953be0bf0fee5594f8f23a12679e222c738036e0f04a2190d0e6",
+      "file": "11_2wiki_7aa50b6a08a7.yaml",
+      "order": 11
+    },
+    {
+      "case_id": "2wiki:92dc836e0bdd11eba7f7acde48001122",
+      "context_sha256": "43d776995977a98b571c87095e563dda0c197c39e666e0dc49c89e1f19f02e3c",
+      "file": "12_2wiki_92dc836e0bdd.yaml",
+      "order": 12
+    },
+    {
+      "case_id": "2wiki:a0b2a4ce0baf11ebab90acde48001122",
+      "context_sha256": "9739e129f0be19ea8dce8771f258d5a35254711e856b59c68a442381c8806ffb",
+      "file": "13_2wiki_a0b2a4ce0baf.yaml",
+      "order": 13
+    },
+    {
+      "case_id": "2wiki:f7ccb422088311ebbd6dac1f6bf848b6",
+      "context_sha256": "e529c80a91dec78fffd1d415e3c15720285e784bb8eb4b1a9984389ec44c894c",
+      "file": "14_2wiki_f7ccb4220883.yaml",
+      "order": 14
+    },
+    {
+      "case_id": "hotpotqa:5a75d9b4554299109176e5a7",
+      "context_sha256": "9b27bc8b3e947e2a5379596656149af3b03935760950641fdc12a3cd9989e3cc",
+      "file": "15_hotpotqa_5a75d9b45542.yaml",
+      "order": 15
+    },
+    {
+      "case_id": "hotpotqa:5ae6050f55429929b0807a5e",
+      "context_sha256": "787acbe012de3f1f255717d2dd8e9c2596d5e1134a381328d40cb4e24c232b0a",
+      "file": "16_hotpotqa_5ae6050f5542.yaml",
+      "order": 16
+    },
+    {
+      "case_id": "2wiki:5352c0240baf11ebab90acde48001122",
+      "context_sha256": "74f99313379e3b4af438b4fd763b0d878644459a2cfdb073bcd8815d9c7dff5c",
+      "file": "17_2wiki_5352c0240baf.yaml",
+      "order": 17
+    },
+    {
+      "case_id": "2wiki:80774c5508f911ebbdaaac1f6bf848b6",
+      "context_sha256": "e2d5dd69aae135332b12c90b3f2e1431a4cda76689b066a5fc0dcedfffb9800b",
+      "file": "18_2wiki_80774c5508f9.yaml",
+      "order": 18
+    },
+    {
+      "case_id": "2wiki:a3b95abe0bdc11eba7f7acde48001122",
+      "context_sha256": "85b7d93c7eab12dad82eb885fce69f1ceb74cca6e8350b8d07b426347d7cca0f",
+      "file": "19_2wiki_a3b95abe0bdc.yaml",
+      "order": 19
+    },
+    {
+      "case_id": "hotpotqa:5abc089b5542993f40c73c57",
+      "context_sha256": "ddae7610baebbbbbda83da78fb5d94218f10bb42923460e87f643524a4ef6113",
+      "file": "20_hotpotqa_5abc089b5542.yaml",
+      "order": 20
+    },
+    {
+      "case_id": "confrag:88",
+      "context_sha256": "2095442e3b3e116b7d4f88d3cc866a1e3c5fcb2aa66ddcedbef5c54a967ad64e",
+      "file": "21_confrag_88.yaml",
+      "order": 21
+    },
+    {
+      "case_id": "hotpotqa:5a80ad19554299485f5986a8",
+      "context_sha256": "d1fa9321ba85de30c617eb4b64b5d86a3214c3230255d4d45b8b83b156dc78c6",
+      "file": "22_hotpotqa_5a80ad195542.yaml",
+      "order": 22
+    }
+  ],
+  "protocol": "rv1-human-annotation-v1",
+  "rv0_output_hashes": {
+    "diagnostics.jsonl": "4a18df55d9a691de6a2af7be63aa84d253aee2c0a97fbd6d27f55c9389728468",
+    "documents.jsonl": "096b2062d806f0de4048ccf7d86dae330e7a58419943bd745c81e408feddc34d",
+    "manual_review_priority.jsonl": "c05eed70720adfdc889a0df5ffb008336f73cbf93ecef96b7edb88f4e4fb0da3"
+  }
+}

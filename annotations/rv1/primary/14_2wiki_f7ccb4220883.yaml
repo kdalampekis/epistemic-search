@@ -1,0 +1,982 @@
+# RV1 human annotation file (2wiki:f7ccb422088311ebbd6dac1f6bf848b6). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: 2wiki:f7ccb422088311ebbd6dac1f6bf848b6
+order: 14
+dataset: 2wiki-april7-dev
+query_id: f7ccb422088311ebbd6dac1f6bf848b6
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: e529c80a91dec78fffd1d415e3c15720285e784bb8eb4b1a9984389ec44c894c
+question: Which film has the director born later, Kaalapani or Strictly Modern?
+gold:
+  reference_answer: Kaalapani
+  answerable: null
+  annotations:
+    _id: f7ccb422088311ebbd6dac1f6bf848b6
+    answer: Kaalapani
+    answer_id: Q6343350
+    entity_ids: Q6343350_Q12128431_Q3115713_Q1361631
+    evidences:
+    - - Kaalapani
+      - director
+      - Priyadarshan
+    - - Strictly Modern
+      - director
+      - William A. Seiter
+    - - Priyadarshan
+      - date of birth
+      - 30 January 1957
+    - - William A. Seiter
+      - date of birth
+      - June 10, 1890
+    evidences_id: []
+    question: Which film has the director born later, Kaalapani or Strictly Modern?
+    supporting_facts:
+    - - Kaalapani
+      - 0
+    - - Strictly Modern
+      - 0
+    - - Priyadarshan
+      - 0
+    - - William A. Seiter
+      - 0
+    type: bridge_comparison
+  answer_references:
+  - Kaalapani
+  - Kalapaani
+  - Kalapani
+  benchmark: 2wikimultihopqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: OR(AND(P3, P4, P1), AND(P3, P2, P1))
+    premises: 4
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_1d1201cf90898423
+  context:
+    label: P1
+    text: The birth date of Strictly Modern's director is established.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_37ff3d0db775d133
+  context:
+    label: P2
+    text: Strictly Modern's director was born later than Kaalapani's director.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_5608d812122bd3b0
+  context:
+    label: P3
+    text: The birth date of Kaalapani's director is established.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_99af4caa40abe8c4
+  context:
+    label: P4
+    text: Kaalapani's director was born later than Strictly Modern's director.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: 2wikimultihopqa-epistemic_search
+    trace_sha256: c1145962c43dca503c135a2119d196b5cce6eb027a94f78058d809cf334f3433
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: Kaalapani
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: Which film has the director born later, Kaalapani or Strictly Modern?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 93cb995a0b62
+          title: Kaalapani
+          rank: 1
+        - doc: 515c2c8fc971
+          title: Priyadarshan
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - kaalapani
+        - priyadarshan
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:24
+      context:
+        round: 2
+        kind: TARGETED
+        query: The birth date of Strictly Modern's director is established. Which film has the director
+          born later, Kaalapani or Strictly Modern? independent verification primary source
+        target_premise: P1
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 8ec87b24a116
+          title: Kaalapani
+          rank: 1
+        - doc: 2f765a207bf4
+          title: Priyadarshan
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - kaalapani
+        - priyadarshan
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:33
+      context:
+        round: 3
+        kind: TARGETED
+        query: The birth date of Strictly Modern's director is established. Which film has the director
+          born later, Kaalapani or Strictly Modern? independent verification primary source
+        target_premise: P1
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 8ec87b24a116
+          title: Kaalapani
+          rank: 1
+        - doc: 2f765a207bf4
+          title: Priyadarshan
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - kaalapani
+        - priyadarshan
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:4
+      context:
+        premise: P1
+        premise_text: The birth date of Strictly Modern's director is established.
+        document:
+          doc: 93cb995a0b62
+          title: Kaalapani
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:6
+      context:
+        premise: P1
+        premise_text: The birth date of Strictly Modern's director is established.
+        document:
+          doc: 515c2c8fc971
+          title: Priyadarshan
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: f7ccb422088311ebbd6dac1f6bf848b6:6#0
+        context:
+          span: Priyadarshan (born Priyadarshan Soman Nair; 30 January 1957)
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:8
+      context:
+        premise: P2
+        premise_text: Strictly Modern's director was born later than Kaalapani's director.
+        document:
+          doc: 93cb995a0b62
+          title: Kaalapani
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: f7ccb422088311ebbd6dac1f6bf848b6:8#0
+        context:
+          span: co-written and directed by Priyadarshan.
+          system_stance: NEUTRAL
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:10
+      context:
+        premise: P2
+        premise_text: Strictly Modern's director was born later than Kaalapani's director.
+        document:
+          doc: 515c2c8fc971
+          title: Priyadarshan
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: f7ccb422088311ebbd6dac1f6bf848b6:10#0
+        context:
+          span: Priyadarshan (born Priyadarshan Soman Nair; 30 January 1957)
+          system_stance: NEUTRAL
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: f7ccb422088311ebbd6dac1f6bf848b6:10#1
+        context:
+          span: His collaborations with Mohanlal were highly popular in Malayalam cinema during the 1980s
+            and 1990s, with most notable films being "Poochakkoru MookkuthiMazha Peyyunnu Maddalam KottunnuThalavattamVellanakalude
+            NaduChithramVandanamKilukkamAbhimanyuMithunamThenmavin KombathKala Pani", and "Chandralekha".
+          system_stance: NEUTRAL
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:12
+      context:
+        premise: P3
+        premise_text: The birth date of Kaalapani's director is established.
+        document:
+          doc: 93cb995a0b62
+          title: Kaalapani
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: f7ccb422088311ebbd6dac1f6bf848b6:12#0
+        context:
+          span: co-written and directed by Priyadarshan
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:14
+      context:
+        premise: P3
+        premise_text: The birth date of Kaalapani's director is established.
+        document:
+          doc: 515c2c8fc971
+          title: Priyadarshan
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: f7ccb422088311ebbd6dac1f6bf848b6:14#0
+        context:
+          span: Priyadarshan (born Priyadarshan Soman Nair; 30 January 1957) is an Indian film director,
+            producer, and screenwriter.
+          system_stance: SUPPORT
+          system_stance_score: 0.91
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: f7ccb422088311ebbd6dac1f6bf848b6:14#1
+        context:
+          span: His collaborations with Mohanlal were highly popular in Malayalam cinema during the 1980s
+            and 1990s, with most notable films being "Poochakkoru MookkuthiMazha Peyyunnu Maddalam KottunnuThalavattamVellanakalude
+            NaduChithramVandanamKilukkamAbhimanyuMithunamThenmavin KombathKala Pani", and "Chandralekha".
+          system_stance: SUPPORT
+          system_stance_score: 0.77
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:16
+      context:
+        premise: P4
+        premise_text: Kaalapani's director was born later than Strictly Modern's director.
+        document:
+          doc: 93cb995a0b62
+          title: Kaalapani
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: f7ccb422088311ebbd6dac1f6bf848b6:16#0
+        context:
+          span: co-written and directed by Priyadarshan
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:18
+      context:
+        premise: P4
+        premise_text: Kaalapani's director was born later than Strictly Modern's director.
+        document:
+          doc: 515c2c8fc971
+          title: Priyadarshan
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: f7ccb422088311ebbd6dac1f6bf848b6:18#0
+        context:
+          span: Priyadarshan (born Priyadarshan Soman Nair; 30 January 1957)
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: f7ccb422088311ebbd6dac1f6bf848b6:18#1
+        context:
+          span: most notable films being "Poochakkoru MookkuthiMazha Peyyunnu Maddalam KottunnuThalavattamVellanakalude
+            NaduChithramVandanamKilukkamAbhimanyuMithunamThenmavin KombathKala Pani", and "Chandralekha"
+          system_stance: NEUTRAL
+          system_stance_score: 0.9
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:25
+      context:
+        premise: P1
+        premise_text: The birth date of Strictly Modern's director is established.
+        document:
+          doc: 93cb995a0b62
+          title: Kaalapani
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:27
+      context:
+        premise: P1
+        premise_text: The birth date of Strictly Modern's director is established.
+        document:
+          doc: 515c2c8fc971
+          title: Priyadarshan
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: f7ccb422088311ebbd6dac1f6bf848b6:27#0
+        context:
+          span: Priyadarshan (born Priyadarshan Soman Nair; 30 January 1957)
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:34
+      context:
+        premise: P1
+        premise_text: The birth date of Strictly Modern's director is established.
+        document:
+          doc: 93cb995a0b62
+          title: Kaalapani
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:36
+      context:
+        premise: P1
+        premise_text: The birth date of Strictly Modern's director is established.
+        document:
+          doc: 515c2c8fc971
+          title: Priyadarshan
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: f7ccb422088311ebbd6dac1f6bf848b6:36#0
+        context:
+          span: Priyadarshan (born Priyadarshan Soman Nair; 30 January 1957)
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    belief_states:
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:20
+      context:
+        update: 1
+        reasoner_event: f7ccb422088311ebbd6dac1f6bf848b6:21
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 1
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 3
+        - premise: P3
+          status: SUPPORTED
+          support_score: 0.91
+          contradiction_score: 0.0
+          uncertainty: 0.08999999999999997
+          evidence_items: 3
+        - premise: P4
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 3
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        - P4
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:29
+      context:
+        update: 2
+        reasoner_event: f7ccb422088311ebbd6dac1f6bf848b6:30
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 2
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 3
+        - premise: P3
+          status: SUPPORTED
+          support_score: 0.91
+          contradiction_score: 0.0
+          uncertainty: 0.08999999999999997
+          evidence_items: 3
+        - premise: P4
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 3
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        - P4
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:38
+      context:
+        update: 3
+        reasoner_event: f7ccb422088311ebbd6dac1f6bf848b6:39
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 2
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 3
+        - premise: P3
+          status: SUPPORTED
+          support_score: 0.91
+          contradiction_score: 0.0
+          uncertainty: 0.08999999999999997
+          evidence_items: 3
+        - premise: P4
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 3
+        beliefs_unchanged_by_this_update: true
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        - P4
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    controller_decisions:
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:22
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises:
+        - P1
+        - P2
+        - P4
+        rationale: Resolve c_1d1201cf90898423 toward SUPPORTED
+        next_query: The birth date of Strictly Modern's director is established. Which film has the director
+          born later, Kaalapani or Strictly Modern? independent verification primary source
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:31
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises:
+        - P1
+        - P2
+        - P4
+        rationale: Resolve c_1d1201cf90898423 toward SUPPORTED
+        next_query: The birth date of Strictly Modern's director is established. Which film has the director
+          born later, Kaalapani or Strictly Modern? independent verification primary source
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:40
+      context:
+        decision: 3
+        action: ABSTAIN
+        target_premise: null
+        blocking_premises:
+        - P1
+        - P2
+        - P4
+        rationale: 'Acquisition budget unavailable: search_calls, documents'
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: 2wikimultihopqa-premise_only
+    trace_sha256: a504cc38a11bd762168979edbbfc23ca60f7ab99c16b69cd8f6ebc48c4aec0f0
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: Kaalapani
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: Which film has the director born later, Kaalapani or Strictly Modern?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 93cb995a0b62
+          title: Kaalapani
+          rank: 1
+        - doc: 515c2c8fc971
+          title: Priyadarshan
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - kaalapani
+        - priyadarshan
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:8
+      context:
+        round: 2
+        kind: TARGETED
+        query: The birth date of Strictly Modern's director is established. Which film has the director
+          born later, Kaalapani or Strictly Modern?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: a526c8d423b3
+          title: Kaalapani
+          rank: 1
+        - doc: 1c87521e7904
+          title: Priyadarshan
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - kaalapani
+        - priyadarshan
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:13
+      context:
+        round: 3
+        kind: TARGETED
+        query: The birth date of Strictly Modern's director is established. Which film has the director
+          born later, Kaalapani or Strictly Modern?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: a526c8d423b3
+          title: Kaalapani
+          rank: 1
+        - doc: 1c87521e7904
+          title: Priyadarshan
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - kaalapani
+        - priyadarshan
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:6
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: The birth date of Strictly Modern's director is established. Which film has the director
+          born later, Kaalapani or Strictly Modern?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:11
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: The birth date of Strictly Modern's director is established. Which film has the director
+          born later, Kaalapani or Strictly Modern?
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: f7ccb422088311ebbd6dac1f6bf848b6:16
+      context:
+        decision: 3
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null

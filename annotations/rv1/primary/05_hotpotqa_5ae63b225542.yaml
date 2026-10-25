@@ -1,0 +1,1173 @@
+# RV1 human annotation file (hotpotqa:5ae63b2255429908198fa526). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: hotpotqa:5ae63b2255429908198fa526
+order: 5
+dataset: hotpotqa-distractor-dev
+query_id: 5ae63b2255429908198fa526
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: 2b15dd624980dfaa146bd9bd15285d47f7b312cf0d5c7dcef41110c071105f06
+question: What is the date played of this college football game at Sun Life Stadium in Miami Gardens,
+  Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
+gold:
+  reference_answer: December 31, 2015
+  answerable: null
+  annotations:
+    _id: 5ae63b2255429908198fa526
+    answer: December 31, 2015
+    answer_id: null
+    level: hard
+    question: What is the date played of this college football game at Sun Life Stadium in Miami Gardens,
+      Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
+    supporting_facts:
+    - - 2015 Clemson Tigers football team
+      - 0
+    - - 2015 Clemson Tigers football team
+      - 5
+    - - 2015 Orange Bowl
+      - 0
+    type: bridge
+  answer_references:
+  - December 31, 2015
+  benchmark: hotpotqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: AND(P5, P4, P1, P2, P3, P6)
+    premises: 6
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_275278e03d30ccc4
+  context:
+    label: P1
+    text: The date on which the matching game was played is the requested answer.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_35bb8d944a53ec6d
+  context:
+    label: P2
+    text: Clemson defeated the Oklahoma Sooners in the game.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_4900f089704b4987
+  context:
+    label: P3
+    text: The game’s score was Clemson 37, Oklahoma 17.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_6eb3874787254f70
+  context:
+    label: P4
+    text: The game was played at Sun Life Stadium in Miami Gardens, Florida.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_7741558da4934934
+  context:
+    label: P5
+    text: The Oklahoma Sooners were ranked No. 4 for the game.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_aa291ad63c571ea4
+  context:
+    label: P6
+    text: The target event is a college football game.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: hotpotqa-epistemic_search
+    trace_sha256: ad707dd48b1574ea67530003bb301b7fd2f08a4de61f5bb4c8b8405f8cf6b70d
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: December 31, 2015
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5ae63b2255429908198fa526:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: What is the date played of this college football game at Sun Life Stadium in Miami Gardens,
+          Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 51a0fcbd266e
+          title: 2015 Clemson Tigers football team
+          rank: 1
+        - doc: aa3d0100c77c
+          title: 2012 Orange Bowl
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - 2015 clemson tigers football team
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5ae63b2255429908198fa526:32
+      context:
+        round: 2
+        kind: TARGETED
+        query: Clemson defeated the Oklahoma Sooners in the game. What is the date played of this college
+          football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No.
+          4 Oklahoma Sooners, 37-17? independent primary sources evidence for and against
+        target_premise: P2
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 6d7aef74b020
+          title: 2012 Orange Bowl
+          rank: 1
+        - doc: 06abe7c51dde
+          title: 2015 Clemson Tigers football team
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - 2015 clemson tigers football team
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5ae63b2255429908198fa526:41
+      context:
+        round: 3
+        kind: TARGETED
+        query: Clemson defeated the Oklahoma Sooners in the game. What is the date played of this college
+          football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated the No.
+          4 Oklahoma Sooners, 37-17? independent primary sources evidence for and against
+        target_premise: P2
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 6d7aef74b020
+          title: 2012 Orange Bowl
+          rank: 1
+        - doc: 06abe7c51dde
+          title: 2015 Clemson Tigers football team
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - 2015 clemson tigers football team
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: 5ae63b2255429908198fa526:4
+      context:
+        premise: P1
+        premise_text: The date on which the matching game was played is the requested answer.
+        document:
+          doc: 51a0fcbd266e
+          title: 2015 Clemson Tigers football team
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:4#0
+        context:
+          span: On December 5, 2015, the Tigers won the 2015 ACC Championship Game by defeating the North
+            Carolina Tar Heels, 45–37, capping their first undefeated regular season since winning the
+            national title in 1981.
+          system_stance: NEUTRAL
+          system_stance_score: 0.96
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5ae63b2255429908198fa526:4#1
+        context:
+          span: On January 11, 2016, the No. 2 Alabama Crimson Tide (13–1) defeated the No. 1 Clemson
+            Tigers (14–0) in the 2016 national championship, 45–40.
+          system_stance: NEUTRAL
+          system_stance_score: 0.97
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae63b2255429908198fa526:6
+      context:
+        premise: P1
+        premise_text: The date on which the matching game was played is the requested answer.
+        document:
+          doc: aa3d0100c77c
+          title: 2012 Orange Bowl
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:6#0
+        context:
+          span: The 2012 Discover Orange Bowl was a postseason college football bowl game on Wednesday,
+            January 4, 2012, at Sun Life Stadium in Miami Gardens, Florida.
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae63b2255429908198fa526:8
+      context:
+        premise: P2
+        premise_text: Clemson defeated the Oklahoma Sooners in the game.
+        document:
+          doc: 51a0fcbd266e
+          title: 2015 Clemson Tigers football team
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:8#0
+        context:
+          span: Clemson defeated the No. 4 Oklahoma Sooners, 37–17, in the 2015 Orange Bowl
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae63b2255429908198fa526:10
+      context:
+        premise: P2
+        premise_text: Clemson defeated the Oklahoma Sooners in the game.
+        document:
+          doc: aa3d0100c77c
+          title: 2012 Orange Bowl
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:10#0
+        context:
+          span: The West Virginia Mountaineers defeated the Clemson Tigers by a score of 70–33.
+          system_stance: CONTRADICT
+          system_stance_score: 0.91
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae63b2255429908198fa526:12
+      context:
+        premise: P3
+        premise_text: The game’s score was Clemson 37, Oklahoma 17.
+        document:
+          doc: 51a0fcbd266e
+          title: 2015 Clemson Tigers football team
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:12#0
+        context:
+          span: Clemson defeated the No. 4 Oklahoma Sooners, 37–17, in the 2015 Orange Bowl
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae63b2255429908198fa526:14
+      context:
+        premise: P3
+        premise_text: The game’s score was Clemson 37, Oklahoma 17.
+        document:
+          doc: aa3d0100c77c
+          title: 2012 Orange Bowl
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:14#0
+        context:
+          span: The West Virginia Mountaineers defeated the Clemson Tigers by a score of 70–33.
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae63b2255429908198fa526:16
+      context:
+        premise: P4
+        premise_text: The game was played at Sun Life Stadium in Miami Gardens, Florida.
+        document:
+          doc: 51a0fcbd266e
+          title: 2015 Clemson Tigers football team
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:16#0
+        context:
+          span: On January 11, 2016, the No. 2 Alabama Crimson Tide (13–1) defeated the No. 1 Clemson
+            Tigers (14–0) in the 2016 national championship, 45–40.
+          system_stance: NEUTRAL
+          system_stance_score: 0.91
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae63b2255429908198fa526:18
+      context:
+        premise: P4
+        premise_text: The game was played at Sun Life Stadium in Miami Gardens, Florida.
+        document:
+          doc: aa3d0100c77c
+          title: 2012 Orange Bowl
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:18#0
+        context:
+          span: at Sun Life Stadium in Miami Gardens, Florida
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae63b2255429908198fa526:20
+      context:
+        premise: P5
+        premise_text: The Oklahoma Sooners were ranked No. 4 for the game.
+        document:
+          doc: 51a0fcbd266e
+          title: 2015 Clemson Tigers football team
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:20#0
+        context:
+          span: the No. 4 Oklahoma Sooners, 37–17, in the 2015 Orange Bowl
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae63b2255429908198fa526:22
+      context:
+        premise: P5
+        premise_text: The Oklahoma Sooners were ranked No. 4 for the game.
+        document:
+          doc: aa3d0100c77c
+          title: 2012 Orange Bowl
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5ae63b2255429908198fa526:24
+      context:
+        premise: P6
+        premise_text: The target event is a college football game.
+        document:
+          doc: 51a0fcbd266e
+          title: 2015 Clemson Tigers football team
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 3
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:24#0
+        context:
+          span: On December 5, 2015, the Tigers won the 2015 ACC Championship Game by defeating the North
+            Carolina Tar Heels, 45–37
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5ae63b2255429908198fa526:24#1
+        context:
+          span: Clemson defeated the No. 4 Oklahoma Sooners, 37–17, in the 2015 Orange Bowl
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5ae63b2255429908198fa526:24#2
+        context:
+          span: On January 11, 2016, the No. 2 Alabama Crimson Tide (13–1) defeated the No. 1 Clemson
+            Tigers (14–0) in the 2016 national championship, 45–40
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae63b2255429908198fa526:26
+      context:
+        premise: P6
+        premise_text: The target event is a college football game.
+        document:
+          doc: aa3d0100c77c
+          title: 2012 Orange Bowl
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:26#0
+        context:
+          span: a postseason college football bowl game
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae63b2255429908198fa526:33
+      context:
+        premise: P2
+        premise_text: Clemson defeated the Oklahoma Sooners in the game.
+        document:
+          doc: aa3d0100c77c
+          title: 2012 Orange Bowl
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:33#0
+        context:
+          span: The West Virginia Mountaineers defeated the Clemson Tigers by a score of 70–33.
+          system_stance: CONTRADICT
+          system_stance_score: 0.91
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae63b2255429908198fa526:35
+      context:
+        premise: P2
+        premise_text: Clemson defeated the Oklahoma Sooners in the game.
+        document:
+          doc: 51a0fcbd266e
+          title: 2015 Clemson Tigers football team
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:35#0
+        context:
+          span: Clemson defeated the No. 4 Oklahoma Sooners, 37–17, in the 2015 Orange Bowl
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae63b2255429908198fa526:42
+      context:
+        premise: P2
+        premise_text: Clemson defeated the Oklahoma Sooners in the game.
+        document:
+          doc: aa3d0100c77c
+          title: 2012 Orange Bowl
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:42#0
+        context:
+          span: The West Virginia Mountaineers defeated the Clemson Tigers by a score of 70–33.
+          system_stance: CONTRADICT
+          system_stance_score: 0.91
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5ae63b2255429908198fa526:44
+      context:
+        premise: P2
+        premise_text: Clemson defeated the Oklahoma Sooners in the game.
+        document:
+          doc: 51a0fcbd266e
+          title: 2015 Clemson Tigers football team
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5ae63b2255429908198fa526:44#0
+        context:
+          span: Clemson defeated the No. 4 Oklahoma Sooners, 37–17, in the 2015 Orange Bowl
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    belief_states:
+    - id: 5ae63b2255429908198fa526:28
+      context:
+        update: 1
+        reasoner_event: 5ae63b2255429908198fa526:29
+        claims_after_update:
+        - premise: P1
+          status: SUPPORTED
+          support_score: 0.99
+          contradiction_score: 0.0
+          uncertainty: 0.010000000000000009
+          evidence_items: 3
+        - premise: P2
+          status: MIXED
+          support_score: 1.0
+          contradiction_score: 0.91
+          uncertainty: 0.91
+          evidence_items: 2
+        - premise: P3
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 2
+        - premise: P4
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 2
+        - premise: P5
+          status: SUPPORTED
+          support_score: 0.99
+          contradiction_score: 0.0
+          uncertainty: 0.010000000000000009
+          evidence_items: 1
+        - premise: P6
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 4
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: MIXED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P2
+        reasoner_minimal_frontier:
+        - P2
+        reasoner_conflicts:
+        - P2
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 5ae63b2255429908198fa526:37
+      context:
+        update: 2
+        reasoner_event: 5ae63b2255429908198fa526:38
+        claims_after_update:
+        - premise: P1
+          status: SUPPORTED
+          support_score: 0.99
+          contradiction_score: 0.0
+          uncertainty: 0.010000000000000009
+          evidence_items: 3
+        - premise: P2
+          status: MIXED
+          support_score: 1.0
+          contradiction_score: 0.91
+          uncertainty: 0.91
+          evidence_items: 4
+        - premise: P3
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 2
+        - premise: P4
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 2
+        - premise: P5
+          status: SUPPORTED
+          support_score: 0.99
+          contradiction_score: 0.0
+          uncertainty: 0.010000000000000009
+          evidence_items: 1
+        - premise: P6
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 4
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: MIXED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P2
+        reasoner_minimal_frontier:
+        - P2
+        reasoner_conflicts:
+        - P2
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 5ae63b2255429908198fa526:46
+      context:
+        update: 3
+        reasoner_event: 5ae63b2255429908198fa526:47
+        claims_after_update:
+        - premise: P1
+          status: SUPPORTED
+          support_score: 0.99
+          contradiction_score: 0.0
+          uncertainty: 0.010000000000000009
+          evidence_items: 3
+        - premise: P2
+          status: MIXED
+          support_score: 1.0
+          contradiction_score: 0.91
+          uncertainty: 0.91
+          evidence_items: 4
+        - premise: P3
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 2
+        - premise: P4
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 2
+        - premise: P5
+          status: SUPPORTED
+          support_score: 0.99
+          contradiction_score: 0.0
+          uncertainty: 0.010000000000000009
+          evidence_items: 1
+        - premise: P6
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 4
+        beliefs_unchanged_by_this_update: true
+        reasoner_status: MIXED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P2
+        reasoner_minimal_frontier:
+        - P2
+        reasoner_conflicts:
+        - P2
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    controller_decisions:
+    - id: 5ae63b2255429908198fa526:30
+      context:
+        decision: 1
+        action: RESOLVE_CONFLICT
+        target_premise: P2
+        blocking_premises:
+        - P2
+        rationale: Resolve c_35bb8d944a53ec6d toward SUPPORTED
+        next_query: Clemson defeated the Oklahoma Sooners in the game. What is the date played of this
+          college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated
+          the No. 4 Oklahoma Sooners, 37-17? independent primary sources evidence for and against
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5ae63b2255429908198fa526:39
+      context:
+        decision: 2
+        action: RESOLVE_CONFLICT
+        target_premise: P2
+        blocking_premises:
+        - P2
+        rationale: Resolve c_35bb8d944a53ec6d toward SUPPORTED
+        next_query: Clemson defeated the Oklahoma Sooners in the game. What is the date played of this
+          college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson defeated
+          the No. 4 Oklahoma Sooners, 37-17? independent primary sources evidence for and against
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5ae63b2255429908198fa526:48
+      context:
+        decision: 3
+        action: ABSTAIN
+        target_premise: null
+        blocking_premises:
+        - P2
+        rationale: 'Acquisition budget unavailable: search_calls, documents'
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: hotpotqa-premise_only
+    trace_sha256: e518205c613654d16aae6a456fc59593a5c9aa658f111be778cc056212df835a
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: December 31, 2015
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5ae63b2255429908198fa526:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: What is the date played of this college football game at Sun Life Stadium in Miami Gardens,
+          Florida, where Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 51a0fcbd266e
+          title: 2015 Clemson Tigers football team
+          rank: 1
+        - doc: aa3d0100c77c
+          title: 2012 Orange Bowl
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - 2015 clemson tigers football team
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5ae63b2255429908198fa526:8
+      context:
+        round: 2
+        kind: TARGETED
+        query: The date on which the matching game was played is the requested answer. What is the date
+          played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson
+          defeated the No. 4 Oklahoma Sooners, 37-17?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: a94ca03f70cb
+          title: 2012 Orange Bowl
+          rank: 1
+        - doc: 0ba173839376
+          title: 2015 Clemson Tigers football team
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - 2015 clemson tigers football team
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5ae63b2255429908198fa526:13
+      context:
+        round: 3
+        kind: TARGETED
+        query: The date on which the matching game was played is the requested answer. What is the date
+          played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where Clemson
+          defeated the No. 4 Oklahoma Sooners, 37-17?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: a94ca03f70cb
+          title: 2012 Orange Bowl
+          rank: 1
+        - doc: 0ba173839376
+          title: 2015 Clemson Tigers football team
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - 2015 clemson tigers football team
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: 5ae63b2255429908198fa526:6
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: The date on which the matching game was played is the requested answer. What is the
+          date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where
+          Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5ae63b2255429908198fa526:11
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: The date on which the matching game was played is the requested answer. What is the
+          date played of this college football game at Sun Life Stadium in Miami Gardens, Florida, where
+          Clemson defeated the No. 4 Oklahoma Sooners, 37-17?
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5ae63b2255429908198fa526:16
+      context:
+        decision: 3
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null

@@ -1,0 +1,483 @@
+# RV1 human annotation file (2wiki:2bf61f58088a11ebbd6eac1f6bf848b6). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: 2wiki:2bf61f58088a11ebbd6eac1f6bf848b6
+order: 1
+dataset: 2wiki-april7-dev
+query_id: 2bf61f58088a11ebbd6eac1f6bf848b6
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: 0cff569a1922ff1eb960946917443b5be42945ae9d3da2c322c4f5ddafede39c
+question: Which film whose director was born first, Great West End Theatres or My Own True Love?
+gold:
+  reference_answer: My Own True Love
+  answerable: null
+  annotations:
+    _id: 2bf61f58088a11ebbd6eac1f6bf848b6
+    answer: My Own True Love
+    answer_id: Q13423489
+    entity_ids: Q5600164_Q13423489_Q6755876_Q466415
+    evidences:
+    - - Great West End Theatres
+      - director
+      - Marc Sinden
+    - - My Own True Love
+      - director
+      - Compton Bennett
+    - - Marc Sinden
+      - date of birth
+      - 9 May 1954
+    - - Compton Bennett
+      - date of birth
+      - 15 January 1900
+    evidences_id: []
+    question: Which film whose director was born first, Great West End Theatres or My Own True Love?
+    supporting_facts:
+    - - Great West End Theatres
+      - 2
+    - - My Own True Love
+      - 0
+    - - Marc Sinden
+      - 0
+    - - Compton Bennett
+      - 0
+    type: bridge_comparison
+  answer_references:
+  - My Own True Love
+  benchmark: 2wikimultihopqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: OR(AND(P2, P5, P1, P3, P6), AND(P2, P1, P3, P6, P4), AND(P2, P1, P3, P7, P6))
+    premises: 7
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_2c3a38bd0ef7369d
+  context:
+    label: P1
+    text: Establish the birth date of the director of Great West End Theatres.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_40c085f08b9f9e44
+  context:
+    label: P2
+    text: Establish the birth date of the director of My Own True Love.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_511034a99b4d8ab5
+  context:
+    label: P3
+    text: Identify the director of Great West End Theatres.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_615042161d8ed02e
+  context:
+    label: P4
+    text: The director of My Own True Love was born earlier than the director of Great West End Theatres.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_79bc0a1515b5dabb
+  context:
+    label: P5
+    text: The director of Great West End Theatres was born earlier than the director of My Own True Love.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_d3ee5ae8fab18154
+  context:
+    label: P6
+    text: Identify the director of My Own True Love.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_d9b6bcc3d8e6b30b
+  context:
+    label: P7
+    text: The directors of the two films were born on the same date.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: 2wikimultihopqa-epistemic_search
+    trace_sha256: 1e28d378da6c151a7bcd654657886e4fb49029f02982e19d7f13ba2e9b1fc4eb
+    outcome:
+      context:
+        status: error
+        rv0_outcome: execution_error
+        answered: false
+        final_answer: null
+        reference_answer: My Own True Love
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: Extracted span is absent from the exact source text
+        error: Extracted span is absent from the exact source text
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 2bf61f58088a11ebbd6eac1f6bf848b6:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: Which film whose director was born first, Great West End Theatres or My Own True Love?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 74f5a20fd26b
+          title: Marc Sinden
+          rank: 1
+        - doc: d3b3d42df4a0
+          title: Great West End Theatres
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - great west end theatres
+        - marc sinden
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: 2bf61f58088a11ebbd6eac1f6bf848b6:4
+      context:
+        premise: P1
+        premise_text: Establish the birth date of the director of Great West End Theatres.
+        document:
+          doc: 74f5a20fd26b
+          title: Marc Sinden
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 2bf61f58088a11ebbd6eac1f6bf848b6:4#0
+        context:
+          span: Marc Sinden( born 9 May 1954) is an English film director, actor and theatre producer.Sinden
+            has worked in film and theatre( mainly in London's West End) as both actor and producer and
+            directed the documentary series" Great West End Theatres", detailing the history of the 40
+            major playhouses in London.
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 2bf61f58088a11ebbd6eac1f6bf848b6:6
+      context:
+        premise: P1
+        premise_text: Establish the birth date of the director of Great West End Theatres.
+        document:
+          doc: d3b3d42df4a0
+          title: Great West End Theatres
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 2bf61f58088a11ebbd6eac1f6bf848b6:6#0
+        context:
+          span: Directed and narrated by Marc Sinden
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: false
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 2bf61f58088a11ebbd6eac1f6bf848b6:6#1
+        context:
+          span: the lovely documentary series is made by the director Marc Sinden
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: NON_VERBATIM
+          accepted_into_ledger: false
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    belief_states: []
+    controller_decisions:
+    - id: 2bf61f58088a11ebbd6eac1f6bf848b6:8
+      context:
+        decision: 1
+        action: ABSTAIN
+        target_premise: null
+        blocking_premises:
+        - P1
+        - P2
+        - P3
+        - P4
+        - P5
+        - P6
+        - P7
+        rationale: Extracted span is absent from the exact source text
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: 2wikimultihopqa-premise_only
+    trace_sha256: c99b45ced5b45a2b4e026c9744e527b60d9a11346c9d1d716f545692d6da5465
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: My Own True Love
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 2bf61f58088a11ebbd6eac1f6bf848b6:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: Which film whose director was born first, Great West End Theatres or My Own True Love?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 74f5a20fd26b
+          title: Marc Sinden
+          rank: 1
+        - doc: d3b3d42df4a0
+          title: Great West End Theatres
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - great west end theatres
+        - marc sinden
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 2bf61f58088a11ebbd6eac1f6bf848b6:8
+      context:
+        round: 2
+        kind: TARGETED
+        query: Identify the director of My Own True Love. Which film whose director was born first, Great
+          West End Theatres or My Own True Love?
+        target_premise: P6
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 9af3cbb29c39
+          title: Marc Sinden
+          rank: 1
+        - doc: 3d3dedf7d018
+          title: Great West End Theatres
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - great west end theatres
+        - marc sinden
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 2bf61f58088a11ebbd6eac1f6bf848b6:13
+      context:
+        round: 3
+        kind: TARGETED
+        query: Identify the director of My Own True Love. Which film whose director was born first, Great
+          West End Theatres or My Own True Love?
+        target_premise: P6
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 9af3cbb29c39
+          title: Marc Sinden
+          rank: 1
+        - doc: 3d3dedf7d018
+          title: Great West End Theatres
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - great west end theatres
+        - marc sinden
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: 2bf61f58088a11ebbd6eac1f6bf848b6:6
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P6
+        blocking_premises: []
+        rationale: null
+        next_query: Identify the director of My Own True Love. Which film whose director was born first,
+          Great West End Theatres or My Own True Love?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 2bf61f58088a11ebbd6eac1f6bf848b6:11
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P6
+        blocking_premises: []
+        rationale: null
+        next_query: Identify the director of My Own True Love. Which film whose director was born first,
+          Great West End Theatres or My Own True Love?
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 2bf61f58088a11ebbd6eac1f6bf848b6:16
+      context:
+        decision: 3
+        action: SEARCH_MORE
+        target_premise: P6
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null

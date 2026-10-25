@@ -1,0 +1,907 @@
+# RV1 human annotation file (hotpotqa:5a86eee85542994775f60787). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: hotpotqa:5a86eee85542994775f60787
+order: 7
+dataset: hotpotqa-distractor-dev
+query_id: 5a86eee85542994775f60787
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: c0d394771f1044c4e44c7e94560767364ab303097db0539b7e4a6462730e9154
+question: During what years did the railroad that had a station stop in Ringling, Montana operate?
+gold:
+  reference_answer: from 1847 until 1980
+  answerable: null
+  annotations:
+    _id: 5a86eee85542994775f60787
+    answer: from 1847 until 1980
+    answer_id: null
+    level: hard
+    question: During what years did the railroad that had a station stop in Ringling, Montana operate?
+    supporting_facts:
+    - - Ringling, Montana
+      - 1
+    - - Chicago, Milwaukee, St. Paul and Pacific Railroad
+      - 0
+    type: bridge
+  answer_references:
+  - from 1847 until 1980
+  benchmark: hotpotqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: AND(P3, P2, P1)
+    premises: 3
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_85e8c7a0ecaf2058
+  context:
+    label: P1
+    text: Establish the year that railroad began operating.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_898e19da99a4dbe8
+  context:
+    label: P2
+    text: Establish the year that railroad ceased operating, if it ceased operating.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_b6ced12d340c2fb5
+  context:
+    label: P3
+    text: Identify the railroad that had a station stop in Ringling, Montana.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: hotpotqa-epistemic_search
+    trace_sha256: a4f666e9ec0ddc91ad39401933b7fabea59c37ca133e7eba4e830c5fc98469e5
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: from 1847 until 1980
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5a86eee85542994775f60787:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: During what years did the railroad that had a station stop in Ringling, Montana operate?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 1f14d5945150
+          title: Quogue (LIRR station)
+          rank: 1
+        - doc: 61ca0856ceff
+          title: Westbridge (LIRR station)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a86eee85542994775f60787:20
+      context:
+        round: 2
+        kind: TARGETED
+        query: Establish the year that railroad ceased operating, if it ceased operating. During what
+          years did the railroad that had a station stop in Ringling, Montana operate? independent primary
+          sources evidence for and against
+        target_premise: P2
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 255709c2acf6
+          title: Quogue (LIRR station)
+          rank: 1
+        - doc: dfdc0c80a93e
+          title: Ringling, Montana
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - ringling, montana
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a86eee85542994775f60787:29
+      context:
+        round: 3
+        kind: TARGETED
+        query: Establish the year that railroad ceased operating, if it ceased operating. During what
+          years did the railroad that had a station stop in Ringling, Montana operate? independent primary
+          sources evidence for and against
+        target_premise: P2
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 255709c2acf6
+          title: Quogue (LIRR station)
+          rank: 1
+        - doc: dfdc0c80a93e
+          title: Ringling, Montana
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - ringling, montana
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: 5a86eee85542994775f60787:4
+      context:
+        premise: P1
+        premise_text: Establish the year that railroad began operating.
+        document:
+          doc: 1f14d5945150
+          title: Quogue (LIRR station)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a86eee85542994775f60787:4#0
+        context:
+          span: the station was built around June, 1875
+          system_stance: NEUTRAL
+          system_stance_score: 0.93
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5a86eee85542994775f60787:4#1
+        context:
+          span: the station stop itself continued to operate until March 16, 1998
+          system_stance: NEUTRAL
+          system_stance_score: 0.91
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a86eee85542994775f60787:6
+      context:
+        premise: P1
+        premise_text: Establish the year that railroad began operating.
+        document:
+          doc: 61ca0856ceff
+          title: Westbridge (LIRR station)
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a86eee85542994775f60787:6#0
+        context:
+          span: The station opened as a pair of sheltered sheds on June 28, 1916 and a ticket office at
+            street level.
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a86eee85542994775f60787:8
+      context:
+        premise: P2
+        premise_text: Establish the year that railroad ceased operating, if it ceased operating.
+        document:
+          doc: 1f14d5945150
+          title: Quogue (LIRR station)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a86eee85542994775f60787:8#0
+        context:
+          span: the station stop itself continued to operate until March 16, 1998.
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5a86eee85542994775f60787:8#1
+        context:
+          span: This station, along with nine others around that time were closed due to low ridership
+          system_stance: SUPPORT
+          system_stance_score: 0.9
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a86eee85542994775f60787:10
+      context:
+        premise: P2
+        premise_text: Establish the year that railroad ceased operating, if it ceased operating.
+        document:
+          doc: 61ca0856ceff
+          title: Westbridge (LIRR station)
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 3
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a86eee85542994775f60787:10#0
+        context:
+          span: Westbridge was out of service on January 1, 1939 and was discontinued as a station stop.
+          system_stance: SUPPORT
+          system_stance_score: 0.94
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5a86eee85542994775f60787:10#1
+        context:
+          span: Westbridge used to operate as a freight station after its closing.
+          system_stance: CONTRADICT
+          system_stance_score: 0.88
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5a86eee85542994775f60787:10#2
+        context:
+          span: quite to the contrary that freight is no longer used here.
+          system_stance: NEUTRAL
+          system_stance_score: 0.72
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a86eee85542994775f60787:12
+      context:
+        premise: P3
+        premise_text: Identify the railroad that had a station stop in Ringling, Montana.
+        document:
+          doc: 1f14d5945150
+          title: Quogue (LIRR station)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a86eee85542994775f60787:14
+      context:
+        premise: P3
+        premise_text: Identify the railroad that had a station stop in Ringling, Montana.
+        document:
+          doc: 61ca0856ceff
+          title: Westbridge (LIRR station)
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 5a86eee85542994775f60787:21
+      context:
+        premise: P2
+        premise_text: Establish the year that railroad ceased operating, if it ceased operating.
+        document:
+          doc: 1f14d5945150
+          title: Quogue (LIRR station)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a86eee85542994775f60787:21#0
+        context:
+          span: the station stop itself continued to operate until March 16, 1998.
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5a86eee85542994775f60787:21#1
+        context:
+          span: This station, along with nine others around that time were closed due to low ridership
+          system_stance: SUPPORT
+          system_stance_score: 0.9
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a86eee85542994775f60787:23
+      context:
+        premise: P2
+        premise_text: Establish the year that railroad ceased operating, if it ceased operating.
+        document:
+          doc: dfdc0c80a93e
+          title: Ringling, Montana
+          rounds:
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a86eee85542994775f60787:23#0
+        context:
+          span: Both railroad lines through Ringling were abandoned in 1980
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a86eee85542994775f60787:30
+      context:
+        premise: P2
+        premise_text: Establish the year that railroad ceased operating, if it ceased operating.
+        document:
+          doc: 1f14d5945150
+          title: Quogue (LIRR station)
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a86eee85542994775f60787:30#0
+        context:
+          span: the station stop itself continued to operate until March 16, 1998.
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 5a86eee85542994775f60787:30#1
+        context:
+          span: This station, along with nine others around that time were closed due to low ridership
+          system_stance: SUPPORT
+          system_stance_score: 0.9
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a86eee85542994775f60787:32
+      context:
+        premise: P2
+        premise_text: Establish the year that railroad ceased operating, if it ceased operating.
+        document:
+          doc: dfdc0c80a93e
+          title: Ringling, Montana
+          rounds:
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a86eee85542994775f60787:32#0
+        context:
+          span: Both railroad lines through Ringling were abandoned in 1980
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    belief_states:
+    - id: 5a86eee85542994775f60787:16
+      context:
+        update: 1
+        reasoner_event: 5a86eee85542994775f60787:17
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 3
+        - premise: P2
+          status: MIXED
+          support_score: 1.0
+          contradiction_score: 0.88
+          uncertainty: 0.88
+          evidence_items: 5
+        - premise: P3
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: MIXED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        - P3
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        - P3
+        reasoner_conflicts:
+        - P2
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 5a86eee85542994775f60787:25
+      context:
+        update: 2
+        reasoner_event: 5a86eee85542994775f60787:26
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 3
+        - premise: P2
+          status: MIXED
+          support_score: 1.0
+          contradiction_score: 0.88
+          uncertainty: 0.88
+          evidence_items: 8
+        - premise: P3
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: MIXED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        - P3
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        - P3
+        reasoner_conflicts:
+        - P2
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 5a86eee85542994775f60787:34
+      context:
+        update: 3
+        reasoner_event: 5a86eee85542994775f60787:35
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 3
+        - premise: P2
+          status: MIXED
+          support_score: 1.0
+          contradiction_score: 0.88
+          uncertainty: 0.88
+          evidence_items: 8
+        - premise: P3
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        beliefs_unchanged_by_this_update: true
+        reasoner_status: MIXED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        - P3
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        - P3
+        reasoner_conflicts:
+        - P2
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    controller_decisions:
+    - id: 5a86eee85542994775f60787:18
+      context:
+        decision: 1
+        action: RESOLVE_CONFLICT
+        target_premise: P2
+        blocking_premises:
+        - P1
+        - P2
+        - P3
+        rationale: Resolve c_898e19da99a4dbe8 toward SUPPORTED
+        next_query: Establish the year that railroad ceased operating, if it ceased operating. During
+          what years did the railroad that had a station stop in Ringling, Montana operate? independent
+          primary sources evidence for and against
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a86eee85542994775f60787:27
+      context:
+        decision: 2
+        action: RESOLVE_CONFLICT
+        target_premise: P2
+        blocking_premises:
+        - P1
+        - P2
+        - P3
+        rationale: Resolve c_898e19da99a4dbe8 toward SUPPORTED
+        next_query: Establish the year that railroad ceased operating, if it ceased operating. During
+          what years did the railroad that had a station stop in Ringling, Montana operate? independent
+          primary sources evidence for and against
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a86eee85542994775f60787:36
+      context:
+        decision: 3
+        action: ABSTAIN
+        target_premise: null
+        blocking_premises:
+        - P1
+        - P2
+        - P3
+        rationale: 'Acquisition budget unavailable: search_calls, documents'
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: hotpotqa-premise_only
+    trace_sha256: 4bd0a210f7fe42f5f56fa698768ec135fb3a99585c1e162715f8fd6488472c4a
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: from 1847 until 1980
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5a86eee85542994775f60787:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: During what years did the railroad that had a station stop in Ringling, Montana operate?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 1f14d5945150
+          title: Quogue (LIRR station)
+          rank: 1
+        - doc: 61ca0856ceff
+          title: Westbridge (LIRR station)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a86eee85542994775f60787:8
+      context:
+        round: 2
+        kind: TARGETED
+        query: Identify the railroad that had a station stop in Ringling, Montana. During what years did
+          the railroad that had a station stop in Ringling, Montana operate?
+        target_premise: P3
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 319e0db8ab61
+          title: Quogue (LIRR station)
+          rank: 1
+        - doc: 6a3d8cb77eea
+          title: Westbridge (LIRR station)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5a86eee85542994775f60787:13
+      context:
+        round: 3
+        kind: TARGETED
+        query: Identify the railroad that had a station stop in Ringling, Montana. During what years did
+          the railroad that had a station stop in Ringling, Montana operate?
+        target_premise: P3
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 319e0db8ab61
+          title: Quogue (LIRR station)
+          rank: 1
+        - doc: 6a3d8cb77eea
+          title: Westbridge (LIRR station)
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: 5a86eee85542994775f60787:6
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P3
+        blocking_premises: []
+        rationale: null
+        next_query: Identify the railroad that had a station stop in Ringling, Montana. During what years
+          did the railroad that had a station stop in Ringling, Montana operate?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a86eee85542994775f60787:11
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P3
+        blocking_premises: []
+        rationale: null
+        next_query: Identify the railroad that had a station stop in Ringling, Montana. During what years
+          did the railroad that had a station stop in Ringling, Montana operate?
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5a86eee85542994775f60787:16
+      context:
+        decision: 3
+        action: SEARCH_MORE
+        target_premise: P3
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null

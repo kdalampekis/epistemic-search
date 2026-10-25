@@ -1,0 +1,1107 @@
+# RV1 human annotation file (2wiki:7aa50b6a08a711ebbd7fac1f6bf848b6). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: 2wiki:7aa50b6a08a711ebbd7fac1f6bf848b6
+order: 11
+dataset: 2wiki-april7-dev
+query_id: 7aa50b6a08a711ebbd7fac1f6bf848b6
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: 38139a3e5d4d953be0bf0fee5594f8f23a12679e222c738036e0f04a2190d0e6
+question: Which film has the director born earlier, The Mexican Spitfire'S Baby or Chhalia?
+gold:
+  reference_answer: The Mexican Spitfire'S Baby
+  answerable: null
+  annotations:
+    _id: 7aa50b6a08a711ebbd7fac1f6bf848b6
+    answer: The Mexican Spitfire'S Baby
+    answer_id: Q18155000
+    entity_ids: Q18155000_Q3419772_Q3236698_Q6750648
+    evidences:
+    - - The Mexican Spitfire's Baby
+      - director
+      - Leslie Goodwins
+    - - Chhalia
+      - director
+      - Manmohan Desai
+    - - Leslie Goodwins
+      - date of birth
+      - 17 September 1899
+    - - Manmohan Desai
+      - date of birth
+      - 26 February 1937
+    evidences_id: []
+    question: Which film has the director born earlier, The Mexican Spitfire'S Baby or Chhalia?
+    supporting_facts:
+    - - The Mexican Spitfire's Baby
+      - 0
+    - - Chhalia
+      - 0
+    - - Leslie Goodwins
+      - 0
+    - - Manmohan Desai
+      - 0
+    type: bridge_comparison
+  answer_references:
+  - Mexican Spitfire's Baby
+  - The Mexican Spitfire'S Baby
+  - The Mexican Spitfire's Baby
+  benchmark: 2wikimultihopqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: AND(P4, OR(P5, P3), P6, P2, P1)
+    premises: 6
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_11f404284c185f78
+  context:
+    label: P1
+    text: D_A's birth date is T_A.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_346323112de3ed0b
+  context:
+    label: P2
+    text: D_B's birth date is T_B.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_52f267df868c9277
+  context:
+    label: P3
+    text: T_A is earlier than T_B.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_561bbb50299171fc
+  context:
+    label: P4
+    text: The director of The Mexican Spitfire's Baby is D_A.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_9143567c85432804
+  context:
+    label: P5
+    text: T_B is earlier than T_A.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_cab3013734da58e0
+  context:
+    label: P6
+    text: The director of Chhalia is D_B.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: 2wikimultihopqa-epistemic_search
+    trace_sha256: 9680e70f4eacf165fb7c0eb1b02e8637d1a809f32e337b2f09b19162094fa02e
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: The Mexican Spitfire'S Baby
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: Which film has the director born earlier, The Mexican Spitfire'S Baby or Chhalia?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 7198132c4907
+          title: The Mexican Spitfire's Baby
+          rank: 1
+        - doc: 62372c96e098
+          title: Mexican Spitfire at Sea
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - the mexican spitfire's baby
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:32
+      context:
+        round: 2
+        kind: TARGETED
+        query: The director of The Mexican Spitfire's Baby is D_A. Which film has the director born earlier,
+          The Mexican Spitfire'S Baby or Chhalia? independent primary sources evidence for and against
+        target_premise: P4
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: d74d4c71d9e3
+          title: The Mexican Spitfire's Baby
+          rank: 1
+        - doc: 5bd2ba496b6e
+          title: Mexican Spitfire at Sea
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - the mexican spitfire's baby
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:41
+      context:
+        round: 3
+        kind: TARGETED
+        query: The director of The Mexican Spitfire's Baby is D_A. Which film has the director born earlier,
+          The Mexican Spitfire'S Baby or Chhalia? independent primary sources evidence for and against
+        target_premise: P4
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: d74d4c71d9e3
+          title: The Mexican Spitfire's Baby
+          rank: 1
+        - doc: 5bd2ba496b6e
+          title: Mexican Spitfire at Sea
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - the mexican spitfire's baby
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:4
+      context:
+        premise: P1
+        premise_text: D_A's birth date is T_A.
+        document:
+          doc: 7198132c4907
+          title: The Mexican Spitfire's Baby
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:6
+      context:
+        premise: P1
+        premise_text: D_A's birth date is T_A.
+        document:
+          doc: 62372c96e098
+          title: Mexican Spitfire at Sea
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:8
+      context:
+        premise: P2
+        premise_text: D_B's birth date is T_B.
+        document:
+          doc: 7198132c4907
+          title: The Mexican Spitfire's Baby
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:10
+      context:
+        premise: P2
+        premise_text: D_B's birth date is T_B.
+        document:
+          doc: 62372c96e098
+          title: Mexican Spitfire at Sea
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:12
+      context:
+        premise: P3
+        premise_text: T_A is earlier than T_B.
+        document:
+          doc: 7198132c4907
+          title: The Mexican Spitfire's Baby
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:14
+      context:
+        premise: P3
+        premise_text: T_A is earlier than T_B.
+        document:
+          doc: 62372c96e098
+          title: Mexican Spitfire at Sea
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:14#0
+        context:
+          span: the 1941 film
+          system_stance: SUPPORT
+          system_stance_score: 0.78
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:14#1
+        context:
+          span: released on March 13, 1942
+          system_stance: SUPPORT
+          system_stance_score: 0.78
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:16
+      context:
+        premise: P4
+        premise_text: The director of The Mexican Spitfire's Baby is D_A.
+        document:
+          doc: 7198132c4907
+          title: The Mexican Spitfire's Baby
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:16#0
+        context:
+          span: directed by Leslie Goodwins
+          system_stance: CONTRADICT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:18
+      context:
+        premise: P4
+        premise_text: The director of The Mexican Spitfire's Baby is D_A.
+        document:
+          doc: 62372c96e098
+          title: Mexican Spitfire at Sea
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:18#0
+        context:
+          span: It is the sequel to the 1941 film" The Mexican Spitfire's Baby".
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:20
+      context:
+        premise: P5
+        premise_text: T_B is earlier than T_A.
+        document:
+          doc: 7198132c4907
+          title: The Mexican Spitfire's Baby
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:20#0
+        context:
+          span: It is the sequel to the 1940 film" Mexican Spitfire Out West".
+          system_stance: SUPPORT
+          system_stance_score: 0.93
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:22
+      context:
+        premise: P5
+        premise_text: T_B is earlier than T_A.
+        document:
+          doc: 62372c96e098
+          title: Mexican Spitfire at Sea
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 2
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:22#0
+        context:
+          span: It is the sequel to the 1941 film" The Mexican Spitfire's Baby".
+          system_stance: SUPPORT
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+      - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:22#1
+        context:
+          span: The film was released on March 13, 1942, by RKO Pictures.
+          system_stance: SUPPORT
+          system_stance_score: 0.9
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:24
+      context:
+        premise: P6
+        premise_text: The director of Chhalia is D_B.
+        document:
+          doc: 7198132c4907
+          title: The Mexican Spitfire's Baby
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:26
+      context:
+        premise: P6
+        premise_text: The director of Chhalia is D_B.
+        document:
+          doc: 62372c96e098
+          title: Mexican Spitfire at Sea
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:33
+      context:
+        premise: P4
+        premise_text: The director of The Mexican Spitfire's Baby is D_A.
+        document:
+          doc: 7198132c4907
+          title: The Mexican Spitfire's Baby
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:33#0
+        context:
+          span: directed by Leslie Goodwins
+          system_stance: CONTRADICT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:35
+      context:
+        premise: P4
+        premise_text: The director of The Mexican Spitfire's Baby is D_A.
+        document:
+          doc: 62372c96e098
+          title: Mexican Spitfire at Sea
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:35#0
+        context:
+          span: It is the sequel to the 1941 film" The Mexican Spitfire's Baby".
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:42
+      context:
+        premise: P4
+        premise_text: The director of The Mexican Spitfire's Baby is D_A.
+        document:
+          doc: 7198132c4907
+          title: The Mexican Spitfire's Baby
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:42#0
+        context:
+          span: directed by Leslie Goodwins
+          system_stance: CONTRADICT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:44
+      context:
+        premise: P4
+        premise_text: The director of The Mexican Spitfire's Baby is D_A.
+        document:
+          doc: 62372c96e098
+          title: Mexican Spitfire at Sea
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:44#0
+        context:
+          span: It is the sequel to the 1941 film" The Mexican Spitfire's Baby".
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    belief_states:
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:28
+      context:
+        update: 1
+        reasoner_event: 7aa50b6a08a711ebbd7fac1f6bf848b6:29
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P3
+          status: SUPPORTED
+          support_score: 0.78
+          contradiction_score: 0.0
+          uncertainty: 0.21999999999999997
+          evidence_items: 2
+        - premise: P4
+          status: CONTRADICTED
+          support_score: 0.0
+          contradiction_score: 0.99
+          uncertainty: 0.010000000000000009
+          evidence_items: 2
+        - premise: P5
+          status: SUPPORTED
+          support_score: 0.98
+          contradiction_score: 0.0
+          uncertainty: 0.020000000000000018
+          evidence_items: 3
+        - premise: P6
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: CONTRADICTED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        - P4
+        - P6
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        - P4
+        - P6
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:37
+      context:
+        update: 2
+        reasoner_event: 7aa50b6a08a711ebbd7fac1f6bf848b6:38
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P3
+          status: SUPPORTED
+          support_score: 0.78
+          contradiction_score: 0.0
+          uncertainty: 0.21999999999999997
+          evidence_items: 2
+        - premise: P4
+          status: CONTRADICTED
+          support_score: 0.0
+          contradiction_score: 0.99
+          uncertainty: 0.010000000000000009
+          evidence_items: 4
+        - premise: P5
+          status: SUPPORTED
+          support_score: 0.98
+          contradiction_score: 0.0
+          uncertainty: 0.020000000000000018
+          evidence_items: 3
+        - premise: P6
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: CONTRADICTED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        - P4
+        - P6
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        - P4
+        - P6
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:46
+      context:
+        update: 3
+        reasoner_event: 7aa50b6a08a711ebbd7fac1f6bf848b6:47
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P3
+          status: SUPPORTED
+          support_score: 0.78
+          contradiction_score: 0.0
+          uncertainty: 0.21999999999999997
+          evidence_items: 2
+        - premise: P4
+          status: CONTRADICTED
+          support_score: 0.0
+          contradiction_score: 0.99
+          uncertainty: 0.010000000000000009
+          evidence_items: 4
+        - premise: P5
+          status: SUPPORTED
+          support_score: 0.98
+          contradiction_score: 0.0
+          uncertainty: 0.020000000000000018
+          evidence_items: 3
+        - premise: P6
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        beliefs_unchanged_by_this_update: true
+        reasoner_status: CONTRADICTED
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        - P4
+        - P6
+        reasoner_minimal_frontier:
+        - P1
+        - P2
+        - P4
+        - P6
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    controller_decisions:
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:30
+      context:
+        decision: 1
+        action: RESOLVE_CONFLICT
+        target_premise: P4
+        blocking_premises:
+        - P1
+        - P2
+        - P4
+        - P6
+        rationale: Resolve c_561bbb50299171fc toward SUPPORTED
+        next_query: The director of The Mexican Spitfire's Baby is D_A. Which film has the director born
+          earlier, The Mexican Spitfire'S Baby or Chhalia? independent primary sources evidence for and
+          against
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:39
+      context:
+        decision: 2
+        action: RESOLVE_CONFLICT
+        target_premise: P4
+        blocking_premises:
+        - P1
+        - P2
+        - P4
+        - P6
+        rationale: Resolve c_561bbb50299171fc toward SUPPORTED
+        next_query: The director of The Mexican Spitfire's Baby is D_A. Which film has the director born
+          earlier, The Mexican Spitfire'S Baby or Chhalia? independent primary sources evidence for and
+          against
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:48
+      context:
+        decision: 3
+        action: ABSTAIN
+        target_premise: null
+        blocking_premises:
+        - P1
+        - P2
+        - P4
+        - P6
+        rationale: 'Acquisition budget unavailable: search_calls, documents'
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: 2wikimultihopqa-premise_only
+    trace_sha256: 38129f000a3fbcfc13dca2520480527de1a8c49e0beb3ea89d1ca3a0c7785567
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: The Mexican Spitfire'S Baby
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: Which film has the director born earlier, The Mexican Spitfire'S Baby or Chhalia?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 7198132c4907
+          title: The Mexican Spitfire's Baby
+          rank: 1
+        - doc: 62372c96e098
+          title: Mexican Spitfire at Sea
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - the mexican spitfire's baby
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:8
+      context:
+        round: 2
+        kind: TARGETED
+        query: The director of Chhalia is D_B. Which film has the director born earlier, The Mexican Spitfire'S
+          Baby or Chhalia?
+        target_premise: P6
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 7bee84c10b00
+          title: The Mexican Spitfire's Baby
+          rank: 1
+        - doc: a8039fc6f2d5
+          title: Mexican Spitfire at Sea
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - the mexican spitfire's baby
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:13
+      context:
+        round: 3
+        kind: TARGETED
+        query: The director of Chhalia is D_B. Which film has the director born earlier, The Mexican Spitfire'S
+          Baby or Chhalia?
+        target_premise: P6
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 7bee84c10b00
+          title: The Mexican Spitfire's Baby
+          rank: 1
+        - doc: a8039fc6f2d5
+          title: Mexican Spitfire at Sea
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - the mexican spitfire's baby
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:6
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P6
+        blocking_premises: []
+        rationale: null
+        next_query: The director of Chhalia is D_B. Which film has the director born earlier, The Mexican
+          Spitfire'S Baby or Chhalia?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:11
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P6
+        blocking_premises: []
+        rationale: null
+        next_query: The director of Chhalia is D_B. Which film has the director born earlier, The Mexican
+          Spitfire'S Baby or Chhalia?
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 7aa50b6a08a711ebbd7fac1f6bf848b6:16
+      context:
+        decision: 3
+        action: SEARCH_MORE
+        target_premise: P6
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null

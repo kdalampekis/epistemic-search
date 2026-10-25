@@ -29,6 +29,7 @@ from epistemic_search.paper_artifacts import generate_paper_artifacts
 from epistemic_search.parity import compare
 from epistemic_search.pilot_audit import audit_pilot
 from epistemic_search.reproduction import bundle_reproduction, verify_reproduction
+from epistemic_search.rv1 import add_assessor, aggregate_rv1, init_rv1, validate_rv1
 from epistemic_search.selective import analyze_saved_run
 from epistemic_search.statistics import analyze_comparison
 from epistemic_search.tracing import configure_logging
@@ -105,6 +106,61 @@ def pilot_audit(config_path: Path) -> None:
         f"Audited {report['cases']} saved method-cases; {report['human_annotations_completed']} "
         "human annotations; additional API cost $0"
     )
+
+
+@app.command("rv1-init")
+def rv1_init(config_path: Path) -> None:
+    """RV1: write blank human annotation files for every audited pilot question; no API calls."""
+    try:
+        report = init_rv1(config_path)
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"RV1 init failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"Wrote blank annotation files for {report['cases']} questions; API cost $0")
+
+
+@app.command("rv1-add-assessor")
+def rv1_add_assessor(config_path: Path, assessor: str) -> None:
+    """RV1: add a blank, context-identical annotation set for a second assessor."""
+    try:
+        report = add_assessor(config_path, assessor)
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"RV1 add-assessor failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"Added {report['cases']} blank files for assessor {report['assessor']}")
+
+
+@app.command("rv1-validate")
+def rv1_validate(config_path: Path, require_complete: bool = False) -> None:
+    """RV1: check annotations are untampered, consistent and (optionally) all complete."""
+    try:
+        report = validate_rv1(config_path)
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"RV1 validation failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    for name, row in report["assessors"].items():
+        typer.echo(
+            f"{name}: {row['complete']}/{row['cases_expected']} complete, "
+            f"{row['in_progress']} in progress, {row['not_started']} not started, "
+            f"{row['blank_fields_total']} blank fields"
+        )
+    for issue in report["issues"]:
+        typer.echo(f"ISSUE {issue}", err=True)
+    incomplete = any(r["complete"] < r["cases_expected"] for r in report["assessors"].values())
+    if report["issues"] or (require_complete and incomplete):
+        raise typer.Exit(code=1)
+
+
+@app.command("rv1-aggregate")
+def rv1_aggregate(config_path: Path) -> None:
+    """RV1: deterministic summary, oracle export and agreement; distributions need 22/22."""
+    try:
+        summary = aggregate_rv1(config_path)
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"RV1 aggregation failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    complete = {a: v["complete"] for a, v in summary["assessors"].items()}
+    typer.echo(f"Aggregated; complete cases per assessor: {complete}; API cost $0")
 
 
 @app.command("analyze-comparison")

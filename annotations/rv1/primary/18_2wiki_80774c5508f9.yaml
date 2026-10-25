@@ -1,0 +1,645 @@
+# RV1 human annotation file (2wiki:80774c5508f911ebbdaaac1f6bf848b6). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: 2wiki:80774c5508f911ebbdaaac1f6bf848b6
+order: 18
+dataset: 2wiki-april7-dev
+query_id: 80774c5508f911ebbdaaac1f6bf848b6
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: e2d5dd69aae135332b12c90b3f2e1431a4cda76689b066a5fc0dcedfffb9800b
+question: Which magazine came out first, Tit-Bits or Illustreret Nyhedsblad?
+gold:
+  reference_answer: Illustreret Nyhedsblad
+  answerable: null
+  annotations:
+    _id: 80774c5508f911ebbdaaac1f6bf848b6
+    answer: Illustreret Nyhedsblad
+    answer_id: Q6000615
+    entity_ids: Q7809693_Q6000615
+    evidences:
+    - - Tit-Bits
+      - inception
+      - '1881'
+    - - Illustreret Nyhedsblad
+      - inception
+      - '1851'
+    evidences_id: []
+    question: Which magazine came out first, Tit-Bits or Illustreret Nyhedsblad?
+    supporting_facts:
+    - - Tit-Bits
+      - 0
+    - - Illustreret Nyhedsblad
+      - 0
+    type: comparison
+  answer_references:
+  - Illustreret Nyhedsblad
+  benchmark: 2wikimultihopqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: OR(P2, P1)
+    premises: 2
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_d5cd2442048b5452
+  context:
+    label: P1
+    text: Tit-Bits's first issue predates Illustreret Nyhedsblad's first issue.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_e98bdedab86ce9d7
+  context:
+    label: P2
+    text: Illustreret Nyhedsblad's first issue predates Tit-Bits's first issue.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: 2wikimultihopqa-epistemic_search
+    trace_sha256: a77bd546b135e117e7192e940055eee966f3782cfe87cec1682313224e2c3aec
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: Illustreret Nyhedsblad
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: 'Acquisition budget unavailable: search_calls, documents'
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: Which magazine came out first, Tit-Bits or Illustreret Nyhedsblad?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 739ce741007b
+          title: LeftLion
+          rank: 1
+        - doc: c8f754a54281
+          title: Vsyakaya vsyachina
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:16
+      context:
+        round: 2
+        kind: TARGETED
+        query: Tit-Bits's first issue predates Illustreret Nyhedsblad's first issue. Which magazine came
+          out first, Tit-Bits or Illustreret Nyhedsblad?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 6b490cf7c1e3
+          title: LeftLion
+          rank: 1
+        - doc: 4d31ed59c210
+          title: Personal Computer World
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:25
+      context:
+        round: 3
+        kind: TARGETED
+        query: Tit-Bits's first issue predates Illustreret Nyhedsblad's first issue. Which magazine came
+          out first, Tit-Bits or Illustreret Nyhedsblad?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 6b490cf7c1e3
+          title: LeftLion
+          rank: 1
+        - doc: 4d31ed59c210
+          title: Personal Computer World
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:4
+      context:
+        premise: P1
+        premise_text: Tit-Bits's first issue predates Illustreret Nyhedsblad's first issue.
+        document:
+          doc: 739ce741007b
+          title: LeftLion
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:6
+      context:
+        premise: P1
+        premise_text: Tit-Bits's first issue predates Illustreret Nyhedsblad's first issue.
+        document:
+          doc: c8f754a54281
+          title: Vsyakaya vsyachina
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:8
+      context:
+        premise: P2
+        premise_text: Illustreret Nyhedsblad's first issue predates Tit-Bits's first issue.
+        document:
+          doc: 739ce741007b
+          title: LeftLion
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:10
+      context:
+        premise: P2
+        premise_text: Illustreret Nyhedsblad's first issue predates Tit-Bits's first issue.
+        document:
+          doc: c8f754a54281
+          title: Vsyakaya vsyachina
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:17
+      context:
+        premise: P1
+        premise_text: Tit-Bits's first issue predates Illustreret Nyhedsblad's first issue.
+        document:
+          doc: 739ce741007b
+          title: LeftLion
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:19
+      context:
+        premise: P1
+        premise_text: Tit-Bits's first issue predates Illustreret Nyhedsblad's first issue.
+        document:
+          doc: 4d31ed59c210
+          title: Personal Computer World
+          rounds:
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:26
+      context:
+        premise: P1
+        premise_text: Tit-Bits's first issue predates Illustreret Nyhedsblad's first issue.
+        document:
+          doc: 739ce741007b
+          title: LeftLion
+          rounds:
+          - 1
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:28
+      context:
+        premise: P1
+        premise_text: Tit-Bits's first issue predates Illustreret Nyhedsblad's first issue.
+        document:
+          doc: 4d31ed59c210
+          title: Personal Computer World
+          rounds:
+          - 2
+          - 3
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    belief_states:
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:12
+      context:
+        update: 1
+        reasoner_event: 80774c5508f911ebbdaaac1f6bf848b6:13
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        beliefs_unchanged_by_this_update: true
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        reasoner_minimal_frontier:
+        - P1
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:21
+      context:
+        update: 2
+        reasoner_event: 80774c5508f911ebbdaaac1f6bf848b6:22
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        beliefs_unchanged_by_this_update: true
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        reasoner_minimal_frontier:
+        - P1
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:30
+      context:
+        update: 3
+        reasoner_event: 80774c5508f911ebbdaaac1f6bf848b6:31
+        claims_after_update:
+        - premise: P1
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        - premise: P2
+          status: UNKNOWN
+          support_score: 0.0
+          contradiction_score: 0.0
+          uncertainty: 1.0
+          evidence_items: 0
+        beliefs_unchanged_by_this_update: true
+        reasoner_status: UNKNOWN
+        reasoner_sufficient: false
+        reasoner_blockers:
+        - P1
+        - P2
+        reasoner_minimal_frontier:
+        - P1
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    controller_decisions:
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:14
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises:
+        - P1
+        - P2
+        rationale: Resolve c_d5cd2442048b5452 toward SUPPORTED
+        next_query: Tit-Bits's first issue predates Illustreret Nyhedsblad's first issue. Which magazine
+          came out first, Tit-Bits or Illustreret Nyhedsblad?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:23
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises:
+        - P1
+        - P2
+        rationale: Resolve c_d5cd2442048b5452 toward SUPPORTED
+        next_query: Tit-Bits's first issue predates Illustreret Nyhedsblad's first issue. Which magazine
+          came out first, Tit-Bits or Illustreret Nyhedsblad?
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:32
+      context:
+        decision: 3
+        action: ABSTAIN
+        target_premise: null
+        blocking_premises:
+        - P1
+        - P2
+        rationale: 'Acquisition budget unavailable: search_calls, documents'
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: 2wikimultihopqa-premise_only
+    trace_sha256: 46d00221728ec3b2a8bfa25e6a0e055e6e285b6f70a63c0382c84e0c3d6e2204
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: Illustreret Nyhedsblad
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: Which magazine came out first, Tit-Bits or Illustreret Nyhedsblad?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 739ce741007b
+          title: LeftLion
+          rank: 1
+        - doc: c8f754a54281
+          title: Vsyakaya vsyachina
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:8
+      context:
+        round: 2
+        kind: TARGETED
+        query: Illustreret Nyhedsblad's first issue predates Tit-Bits's first issue. Which magazine came
+          out first, Tit-Bits or Illustreret Nyhedsblad?
+        target_premise: P2
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 2ba9dbc5205b
+          title: LeftLion
+          rank: 1
+        - doc: 13bdc006834a
+          title: Personal Computer World
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:13
+      context:
+        round: 3
+        kind: TARGETED
+        query: Tit-Bits's first issue predates Illustreret Nyhedsblad's first issue. Which magazine came
+          out first, Tit-Bits or Illustreret Nyhedsblad?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: 6b490cf7c1e3
+          title: LeftLion
+          rank: 1
+        - doc: 4d31ed59c210
+          title: Personal Computer World
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:6
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P2
+        blocking_premises: []
+        rationale: null
+        next_query: Illustreret Nyhedsblad's first issue predates Tit-Bits's first issue. Which magazine
+          came out first, Tit-Bits or Illustreret Nyhedsblad?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:11
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: Tit-Bits's first issue predates Illustreret Nyhedsblad's first issue. Which magazine
+          came out first, Tit-Bits or Illustreret Nyhedsblad?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 80774c5508f911ebbdaaac1f6bf848b6:16
+      context:
+        decision: 3
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null

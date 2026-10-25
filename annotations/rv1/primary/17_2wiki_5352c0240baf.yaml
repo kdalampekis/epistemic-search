@@ -1,0 +1,469 @@
+# RV1 human annotation file (2wiki:5352c0240baf11ebab90acde48001122). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: 2wiki:5352c0240baf11ebab90acde48001122
+order: 17
+dataset: 2wiki-april7-dev
+query_id: 5352c0240baf11ebab90acde48001122
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: 74f99313379e3b4af438b4fd763b0d878644459a2cfdb073bcd8815d9c7dff5c
+question: Who is George Ii, Landgrave Of Hesse-Darmstadt's father?
+gold:
+  reference_answer: Louis V, Landgrave of Hesse-Darmstadt
+  answerable: null
+  annotations:
+    _id: 5352c0240baf11ebab90acde48001122
+    answer: Louis V, Landgrave of Hesse-Darmstadt
+    answer_id: Q267331
+    entity_ids: Q267354_Q290616
+    evidences:
+    - - George II of Hesse-Darmstadt
+      - mother
+      - Magdalene of Brandenburg
+    - - Magdalene of Brandenburg
+      - spouse
+      - Louis V, Landgrave of Hesse-Darmstadt
+    evidences_id:
+    - - Q267354
+      - mother
+      - Q290616
+    - - Q290616
+      - spouse
+      - Q267331
+    question: Who is George Ii, Landgrave Of Hesse-Darmstadt's father?
+    supporting_facts:
+    - - George II, Landgrave of Hesse-Darmstadt
+      - 1
+    - - Magdalene of Brandenburg
+      - 1
+    type: inference
+  answer_references:
+  - Louis V of Hesse-Darmstadt
+  - Louis V, Landgrave of Hesse-Darmstadt
+  benchmark: 2wikimultihopqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: AND(P2, P1)
+    premises: 2
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_e349611fd4f1c62d
+  context:
+    label: P1
+    text: Determine the father of the resolved person.
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_ee0fc90a2e8339ea
+  context:
+    label: P2
+    text: Resolve the person denoted by “George II, Landgrave of Hesse-Darmstadt.”
+    polarity: POSITIVE
+    lexical_surface_form_flag: TASK_VERB_PREFIX
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: 2wikimultihopqa-epistemic_search
+    trace_sha256: 2a8f70a654bb42dd0c890b20bf6826d2f0aae16350c41a584acba7fcd456aa6a
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: answer_mismatch
+        answered: true
+        final_answer: George I, Landgrave of Hesse-Darmstadt.
+        reference_answer: Louis V, Landgrave of Hesse-Darmstadt
+        exact_match: 0.0
+        token_f1: 0.6
+        final_decision_rationale: Supported by the extracted evidence model
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5352c0240baf11ebab90acde48001122:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: Who is George Ii, Landgrave Of Hesse-Darmstadt's father?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 1b8b60af73dc
+          title: Louis V, Landgrave of Hesse-Darmstadt
+          rank: 1
+        - doc: 93001d07ab1a
+          title: Louis VI, Landgrave of Hesse-Darmstadt
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: 5352c0240baf11ebab90acde48001122:4
+      context:
+        premise: P1
+        premise_text: Determine the father of the resolved person.
+        document:
+          doc: 1b8b60af73dc
+          title: Louis V, Landgrave of Hesse-Darmstadt
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5352c0240baf11ebab90acde48001122:4#0
+        context:
+          span: son of George I, Landgrave of Hesse-Darmstadt
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5352c0240baf11ebab90acde48001122:6
+      context:
+        premise: P1
+        premise_text: Determine the father of the resolved person.
+        document:
+          doc: 93001d07ab1a
+          title: Louis VI, Landgrave of Hesse-Darmstadt
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5352c0240baf11ebab90acde48001122:6#0
+        context:
+          span: the Landgrave George II of Hesse-Darmstadt
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5352c0240baf11ebab90acde48001122:8
+      context:
+        premise: P2
+        premise_text: Resolve the person denoted by “George II, Landgrave of Hesse-Darmstadt.”
+        document:
+          doc: 1b8b60af73dc
+          title: Louis V, Landgrave of Hesse-Darmstadt
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5352c0240baf11ebab90acde48001122:8#0
+        context:
+          span: The Landgrave died in 1626 and he was succeeded by George II, Landgrave of Hesse-Darmstadt.
+          system_stance: SUPPORT
+          system_stance_score: 0.96
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5352c0240baf11ebab90acde48001122:10
+      context:
+        premise: P2
+        premise_text: Resolve the person denoted by “George II, Landgrave of Hesse-Darmstadt.”
+        document:
+          doc: 93001d07ab1a
+          title: Louis VI, Landgrave of Hesse-Darmstadt
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5352c0240baf11ebab90acde48001122:10#0
+        context:
+          span: the Landgrave George II of Hesse-Darmstadt
+          system_stance: SUPPORT
+          system_stance_score: 0.85
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    belief_states:
+    - id: 5352c0240baf11ebab90acde48001122:12
+      context:
+        update: 1
+        reasoner_event: 5352c0240baf11ebab90acde48001122:13
+        claims_after_update:
+        - premise: P1
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 2
+        - premise: P2
+          status: SUPPORTED
+          support_score: 0.96
+          contradiction_score: 0.0
+          uncertainty: 0.040000000000000036
+          evidence_items: 2
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: SUPPORTED
+        reasoner_sufficient: true
+        reasoner_blockers: []
+        reasoner_minimal_frontier: []
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    controller_decisions:
+    - id: 5352c0240baf11ebab90acde48001122:16
+      context:
+        decision: 1
+        action: ANSWER
+        target_premise: null
+        blocking_premises: []
+        rationale: Supported by the extracted evidence model
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: 2wikimultihopqa-premise_only
+    trace_sha256: db8c84384d4863d560cf337510985a9c26433ab23d41e22d5ddfe76243ba3214
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: abstention
+        answered: false
+        final_answer: null
+        reference_answer: Louis V, Landgrave of Hesse-Darmstadt
+        exact_match: 0.0
+        token_f1: 0.0
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5352c0240baf11ebab90acde48001122:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: Who is George Ii, Landgrave Of Hesse-Darmstadt's father?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 1b8b60af73dc
+          title: Louis V, Landgrave of Hesse-Darmstadt
+          rank: 1
+        - doc: 93001d07ab1a
+          title: Louis VI, Landgrave of Hesse-Darmstadt
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5352c0240baf11ebab90acde48001122:8
+      context:
+        round: 2
+        kind: TARGETED
+        query: Determine the father of the resolved person. Who is George Ii, Landgrave Of Hesse-Darmstadt's
+          father?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: b022d5469274
+          title: Louis V, Landgrave of Hesse-Darmstadt
+          rank: 1
+        - doc: 5b7039a31ec1
+          title: Louis VI, Landgrave of Hesse-Darmstadt
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    - id: 5352c0240baf11ebab90acde48001122:13
+      context:
+        round: 3
+        kind: TARGETED
+        query: Determine the father of the resolved person. Who is George Ii, Landgrave Of Hesse-Darmstadt's
+          father?
+        target_premise: P1
+        query_exactly_repeats_earlier_round: true
+        document_set_repeats_earlier_round: true
+        documents:
+        - doc: b022d5469274
+          title: Louis V, Landgrave of Hesse-Darmstadt
+          rank: 1
+        - doc: 5b7039a31ec1
+          title: Louis VI, Landgrave of Hesse-Darmstadt
+          rank: 2
+        benchmark_gold_titles_in_this_round: []
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: 5352c0240baf11ebab90acde48001122:6
+      context:
+        decision: 1
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: Determine the father of the resolved person. Who is George Ii, Landgrave Of Hesse-Darmstadt's
+          father?
+        next_query_exact_repeat_of_earlier: false
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5352c0240baf11ebab90acde48001122:11
+      context:
+        decision: 2
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: Determine the father of the resolved person. Who is George Ii, Landgrave Of Hesse-Darmstadt's
+          father?
+        next_query_exact_repeat_of_earlier: true
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    - id: 5352c0240baf11ebab90acde48001122:16
+      context:
+        decision: 3
+        action: SEARCH_MORE
+        target_premise: P1
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null

@@ -1,0 +1,369 @@
+# RV1 human annotation file (hotpotqa:5a80ad19554299485f5986a8). Edit ONLY the `assessor`, `date`, `status` fields
+# and the blank `judgment` / `oracle` / `root_cause` fields. `context` blocks are generated, hashed
+# and read-only: do not edit them.
+#
+# Fill order, to limit hindsight: (1) oracle (written from the question and gold only, BEFORE
+# reading the generated decomposition below); (2) decomposition + premises; (3) per method:
+# retrieval rounds, extraction batches/items, belief states, controller decisions, outcome;
+# (4) root_cause last. Answers: YES / NO / UNSURE (NOT_APPLICABLE where offered). null means
+# not yet answered, never NO. Set status to IN_PROGRESS while working and COMPLETE only when
+# every field is answered; `rv1-validate` rejects a COMPLETE file with blanks.
+# Full retrieved-document text is in the matching sheet under the sheets directory.
+# See docs/experiments/RV1_ANNOTATION_PROTOCOL.md.
+schema_version: rv1-case-v1
+case_id: hotpotqa:5a80ad19554299485f5986a8
+order: 22
+dataset: hotpotqa-distractor-dev
+query_id: 5a80ad19554299485f5986a8
+assessor: null
+date: null
+status: NOT_STARTED
+context_sha256: d1fa9321ba85de30c617eb4b64b5d86a3214c3230255d4d45b8b83b156dc78c6
+question: In addition to his role in The Fattest Man in Britain, Bobby Ball is best known for his half
+  of the doublt act Cannon and Ball with which other comedian?
+gold:
+  reference_answer: Tommy Cannon
+  answerable: null
+  annotations:
+    _id: 5a80ad19554299485f5986a8
+    answer: Tommy Cannon
+    answer_id: null
+    level: hard
+    question: In addition to his role in The Fattest Man in Britain, Bobby Ball is best known for his
+      half of the doublt act Cannon and Ball with which other comedian?
+    supporting_facts:
+    - - The Fattest Man in Britain
+      - 0
+    - - The Fattest Man in Britain
+      - 1
+    - - Bobby Ball
+      - 0
+    - - Bobby Ball
+      - 1
+    type: bridge
+  answer_references:
+  - Tommy Cannon
+  benchmark: hotpotqa
+  split: dev
+oracle:
+  authored_before_viewing_generated: null
+  required_claims: []
+  logic:
+    type: null
+    description: null
+  notes: null
+decomposition:
+  context:
+    formula: AND(P2, P1)
+    premises: 2
+    shared_by_methods:
+    - epistemic_search
+    - premise_only
+  judgment:
+    semantically_correct: null
+    complete: null
+    has_unnecessary_premises: null
+    has_missing_required_premises: null
+    dependency_structure_matches: null
+    notes: null
+premises:
+- id: c_bf1f07f355939d8e
+  context:
+    label: P1
+    text: The question concerns Bobby Ball’s comedy partnership in Cannon and Ball.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+- id: c_ed4e3896226f85f2
+  context:
+    label: P2
+    text: The comedian paired with Bobby Ball in Cannon and Ball is Tommy Cannon.
+    polarity: POSITIVE
+    lexical_surface_form_flag: OTHER
+  judgment:
+    is_assertion: null
+    necessary: null
+    relevant: null
+    atomic: null
+    well_formed: null
+    correct: null
+    notes: null
+methods:
+  epistemic_search:
+    run: hotpotqa-epistemic_search
+    trace_sha256: f9cc52172ddac3258902c7483510d0dd96e028a6689334cc558697d413db6a0b
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: reference_match
+        answered: true
+        final_answer: Tommy Cannon
+        reference_answer: Tommy Cannon
+        exact_match: 1.0
+        token_f1: 1.0
+        final_decision_rationale: Supported by the extracted evidence model
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5a80ad19554299485f5986a8:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: In addition to his role in The Fattest Man in Britain, Bobby Ball is best known for his
+          half of the doublt act Cannon and Ball with which other comedian?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 57ddb591c66f
+          title: Bobby Ball
+          rank: 1
+        - doc: b1f27c3afdc3
+          title: Crystal Powell (comedian)
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - bobby ball
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches:
+    - id: 5a80ad19554299485f5986a8:4
+      context:
+        premise: P1
+        premise_text: The question concerns Bobby Ball’s comedy partnership in Cannon and Ball.
+        document:
+          doc: 57ddb591c66f
+          title: Bobby Ball
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a80ad19554299485f5986a8:4#0
+        context:
+          span: He is best known as one half of the double act Cannon and Ball, with Tommy Cannon.
+          system_stance: SUPPORT
+          system_stance_score: 1.0
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a80ad19554299485f5986a8:6
+      context:
+        premise: P1
+        premise_text: The question concerns Bobby Ball’s comedy partnership in Cannon and Ball.
+        document:
+          doc: b1f27c3afdc3
+          title: Crystal Powell (comedian)
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a80ad19554299485f5986a8:6#0
+        context:
+          span: her role in "Ball Don't Lie" featuring Ludacris, Rosanna Arquette and Nick Cannon.
+          system_stance: NEUTRAL
+          system_stance_score: 0.98
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a80ad19554299485f5986a8:8
+      context:
+        premise: P2
+        premise_text: The comedian paired with Bobby Ball in Cannon and Ball is Tommy Cannon.
+        document:
+          doc: 57ddb591c66f
+          title: Bobby Ball
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 1
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items:
+      - id: 5a80ad19554299485f5986a8:8#0
+        context:
+          span: with Tommy Cannon.
+          system_stance: SUPPORT
+          system_stance_score: 0.99
+          mechanical_span_class: EXACT
+          accepted_into_ledger: true
+        judgment:
+          addresses_assigned_premise: null
+          gold_stance: null
+          span_sufficient_alone: null
+          span_meaning_faithful: null
+          notes: null
+    - id: 5a80ad19554299485f5986a8:10
+      context:
+        premise: P2
+        premise_text: The comedian paired with Bobby Ball in Cannon and Ball is Tommy Cannon.
+        document:
+          doc: b1f27c3afdc3
+          title: Crystal Powell (comedian)
+          rounds:
+          - 1
+        schema_valid: true
+        items_returned: 0
+      judgment:
+        decisive_evidence_present_in_document: null
+        decisive_evidence_missed_by_extraction: null
+        notes: null
+      items: []
+    belief_states:
+    - id: 5a80ad19554299485f5986a8:12
+      context:
+        update: 1
+        reasoner_event: 5a80ad19554299485f5986a8:13
+        claims_after_update:
+        - premise: P1
+          status: SUPPORTED
+          support_score: 1.0
+          contradiction_score: 0.0
+          uncertainty: 0.0
+          evidence_items: 2
+        - premise: P2
+          status: SUPPORTED
+          support_score: 0.99
+          contradiction_score: 0.0
+          uncertainty: 0.010000000000000009
+          evidence_items: 1
+        beliefs_unchanged_by_this_update: false
+        reasoner_status: SUPPORTED
+        reasoner_sufficient: true
+        reasoner_blockers: []
+        reasoner_minimal_frontier: []
+        reasoner_conflicts: []
+        scores_are_uncalibrated_heuristics: true
+      judgment:
+        claim_status_justified: null
+        unjustified_premise_labels: []
+        blockers_genuinely_blocking: null
+        more_important_blockers_missing: null
+        missing_blockers_description: null
+        formal_conclusion_appropriate: null
+        notes: null
+    controller_decisions:
+    - id: 5a80ad19554299485f5986a8:16
+      context:
+        decision: 1
+        action: ANSWER
+        target_premise: null
+        blocking_premises: []
+        rationale: Supported by the extracted evidence model
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
+  premise_only:
+    run: hotpotqa-premise_only
+    trace_sha256: 583e31a41244ec5a57be6ce84ad9a4c9a0c86143b08f0a69c6745e0374a16f28
+    outcome:
+      context:
+        status: completed
+        rv0_outcome: reference_match
+        answered: true
+        final_answer: Tommy Cannon
+        reference_answer: Tommy Cannon
+        exact_match: 1.0
+        token_f1: 1.0
+        final_decision_rationale: null
+        error: null
+      judgment:
+        answer_correct: null
+        abstention_appropriate: null
+        notes: null
+    retrieval_rounds:
+    - id: 5a80ad19554299485f5986a8:3
+      context:
+        round: 1
+        kind: ORIGINAL_QUESTION
+        query: In addition to his role in The Fattest Man in Britain, Bobby Ball is best known for his
+          half of the doublt act Cannon and Ball with which other comedian?
+        target_premise: null
+        query_exactly_repeats_earlier_round: false
+        document_set_repeats_earlier_round: false
+        documents:
+        - doc: 57ddb591c66f
+          title: Bobby Ball
+          rank: 1
+        - doc: b1f27c3afdc3
+          title: Crystal Powell (comedian)
+          rank: 2
+        benchmark_gold_titles_in_this_round:
+        - bobby ball
+      judgment:
+        target_premise_appropriate: null
+        query_appropriate_for_target: null
+        query_materially_different_from_previous: null
+        retrieved_docs_contained_needed_info: null
+        retrieved_set_contained_gold_supporting_evidence: null
+        missing_info_retrievable_from_corpus: null
+        notes: null
+    extraction_batches: []
+    belief_states: []
+    controller_decisions:
+    - id: 5a80ad19554299485f5986a8:6
+      context:
+        decision: 1
+        action: ANSWER
+        target_premise: null
+        blocking_premises: []
+        rationale: null
+        next_query: null
+        next_query_exact_repeat_of_earlier: null
+      judgment:
+        target_premise_appropriate: null
+        action_appropriate: null
+        repeat_justified: null
+        better_action: null
+        notes: null
+    root_cause:
+      primary: null
+      secondary: []
+      rationale: null
+      notes: null
