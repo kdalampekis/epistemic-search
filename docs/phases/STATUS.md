@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-10-24.
+Updated: 2026-10-24 (RV0 added).
 
 | Phase | Status | Evidence |
 | --- | --- | --- |
@@ -114,3 +114,21 @@ confirmed: real calibration, causal ablations, independent semantic review and
 stronger-model transfer remain unvalidated. No Phase 26 or benchmark scaling is
 authorized by the roadmap itself. See the technical report for the next research
 decision and the unchanged $50 cumulative API boundary.
+
+## Scientific validation (post-roadmap)
+
+Implementation is finished; no Phase 26 exists. Remaining work is organised as
+research-validation experiments in [RESEARCH_VALIDATION_PLAN.md](../../RESEARCH_VALIDATION_PLAN.md).
+
+| Experiment | Status | Evidence |
+| --- | --- | --- |
+| RV0 — Pilot failure audit | Complete (offline, $0; mechanical facts only) | [RV0 report](../experiments/RV0_PILOT_AUDIT.md), [results](../results/rv0/) |
+| RV1 — Manual semantic annotation | Not started; needs a human assessor | Protocol proposed in the RV0 report |
+| RV2–RV10 | Not started | Gated by RV1 and the plan's decision gates |
+
+RV0 produced no semantic failure distribution: 0 human annotations, 0 API calls,
+cumulative research spend unchanged at $0.067952575. It records candidate
+bottlenecks (premise phrasing, repeated targeted queries ending in budget
+abstention, supporting-title recall, single-span aborts) without deciding whether
+any is an implementation defect or a failure of the hypothesis. No claim about the
+research hypothesis follows.

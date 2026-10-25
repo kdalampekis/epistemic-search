@@ -27,6 +27,7 @@ from epistemic_search.formal import compare_formal
 from epistemic_search.models import QueryCase
 from epistemic_search.paper_artifacts import generate_paper_artifacts
 from epistemic_search.parity import compare
+from epistemic_search.pilot_audit import audit_pilot
 from epistemic_search.reproduction import bundle_reproduction, verify_reproduction
 from epistemic_search.selective import analyze_saved_run
 from epistemic_search.statistics import analyze_comparison
@@ -90,6 +91,20 @@ def failure_analysis(config_path: Path) -> None:
         typer.echo(f"Failure analysis failed: {exc}", err=True)
         raise typer.Exit(code=1) from exc
     typer.echo(f"Rendered {report['examples']} saved traces; additional API cost $0")
+
+
+@app.command("audit-pilot")
+def pilot_audit(config_path: Path) -> None:
+    """RV0: record mechanically observable pilot diagnostics offline; no semantic judging."""
+    try:
+        report = audit_pilot(config_path)
+    except (OSError, ValueError, yaml.YAMLError) as exc:
+        typer.echo(f"Pilot audit failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(
+        f"Audited {report['cases']} saved method-cases; {report['human_annotations_completed']} "
+        "human annotations; additional API cost $0"
+    )
 
 
 @app.command("analyze-comparison")
