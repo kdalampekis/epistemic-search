@@ -2,6 +2,7 @@
 
 import asyncio
 import json
+import unicodedata
 from datetime import UTC, datetime
 from decimal import Decimal
 from typing import Literal
@@ -84,8 +85,67 @@ class EvidenceLedger:
         ]
 
 
+class SpanRejection(Schema):
+    """A model-proposed span that could not be aligned to the source; only this item is lost."""
+
+    claim_id: Text
+    source_id: Text
+    span: str
+    reason: Literal["empty_span", "absent_from_source"]
+
+
+_DASHES = "\u2010\u2011\u2012\u2013\u2014\u2015\u2212"
+_SINGLE = "\u2018\u2019\u201a\u201b"
+_DOUBLE = "\u201c\u201d\u201e\u201f"
+
+
+def canonical(text: str) -> tuple[str, list[int]]:
+    """Fold formatting-only differences, keeping the original index of every output character.
+
+    Unicode spaces and whitespace runs become one space; dashes and curly quotes are
+    straightened; characters are NFKC-normalized one at a time so offsets stay exact. Case and
+    wording are never touched.
+    """
+    out: list[str] = []
+    origin: list[int] = []
+    previous_space = False
+    for index, char in enumerate(text):
+        for piece in unicodedata.normalize("NFKC", char):
+            if piece in _DASHES:
+                piece = "-"
+            elif piece in _SINGLE:
+                piece = "'"
+            elif piece in _DOUBLE:
+                piece = '"'
+            if piece.isspace():
+                if previous_space:
+                    continue
+                piece, previous_space = " ", True
+            else:
+                previous_space = False
+            out.append(piece)
+            origin.append(index)
+    return "".join(out), origin
+
+
+def align_span(span: str, text: str) -> tuple[str, Literal["exact", "normalized"]] | None:
+    """The exact original substring that ``span`` denotes, or None if it is not in the source."""
+    if not span.strip():
+        return None
+    if span in text:
+        return span, "exact"
+    folded_span, _ = canonical(span)
+    folded_span = folded_span.strip()
+    folded_text, origin = canonical(text)
+    at = folded_text.find(folded_span) if folded_span else -1
+    if at < 0:
+        return None
+    return text[origin[at] : origin[at + len(folded_span) - 1] + 1], "normalized"
+
+
 class EvidenceBatch(Schema):
     items: list[EvidenceItem] = Field(default_factory=list)
+    rejections: list[SpanRejection] = Field(default_factory=list)
     trace: list[AgentEvent] = Field(default_factory=list)
     usage: Usage = Field(default_factory=lambda: Usage(cost_usd=Decimal(0)))
     usage_complete: bool = True
@@ -174,46 +234,72 @@ async def classify_evidence(
         identifier,
     )
     items: list[EvidenceItem] = []
+    rejections: list[SpanRejection] = []
     try:
         extracted = response.parse(Extraction)
-        for span in extracted.items:
-            if not span.span.strip() or span.span not in document.text:
-                raise ValueError("Extracted span is absent from the exact source text")
-            duplicate = digest(" ".join(span.span.casefold().split()))
-            item = EvidenceItem(
-                id="e_"
-                + digest(
-                    [
-                        claim.id,
-                        document.source.model_dump(mode="json"),
-                        span.model_dump(mode="json"),
-                        document.query,
-                        document.rank,
-                        response.model,
-                        PROMPT_VERSION,
-                    ]
-                )[:16],
-                claim_id=claim.id,
-                source=document.source,
-                span=span.span,
-                stance=span.stance,
-                stance_score=span.stance_score,
-                retrieval_score=document.retrieval_score,
-                provenance=EvidenceProvenance(
-                    search_query=document.query,
-                    rank=document.rank,
-                    extraction_model=response.model,
-                    prompt_version=PROMPT_VERSION,
-                    duplication_group=duplicate,
-                ),
-            )
-            items.append(item)
     except ValueError as exc:
         return EvidenceBatch(usage=usage, trace=[trace], errors=[str(exc)])
+    for span in extracted.items:
+        aligned = align_span(span.span, document.text)
+        if aligned is None:
+            rejections.append(
+                SpanRejection(
+                    claim_id=claim.id,
+                    source_id=document.source.id,
+                    span=span.span,
+                    reason="absent_from_source" if span.span.strip() else "empty_span",
+                )
+            )
+            continue
+        stored, how = aligned
+        duplicate = digest(" ".join(stored.casefold().split()))
+        item = EvidenceItem(
+            id="e_"
+            + digest(
+                [
+                    claim.id,
+                    document.source.model_dump(mode="json"),
+                    span.model_dump(mode="json"),
+                    document.query,
+                    document.rank,
+                    response.model,
+                    PROMPT_VERSION,
+                ]
+            )[:16],
+            claim_id=claim.id,
+            source=document.source,
+            span=stored,
+            stance=span.stance,
+            stance_score=span.stance_score,
+            retrieval_score=document.retrieval_score,
+            provenance=EvidenceProvenance(
+                search_query=document.query,
+                rank=document.rank,
+                extraction_model=response.model,
+                prompt_version=PROMPT_VERSION,
+                duplication_group=duplicate,
+            ),
+            metadata={"alignment": "normalized", "model_span": span.span}
+            if how == "normalized"
+            else {},
+        )
+        items.append(item)
+    traces = [trace]
+    for rejected in rejections:
+        traces.append(
+            event(
+                query_id,
+                "EVIDENCE_SPAN_REJECTED",
+                "evidence",
+                Usage(cost_usd=Decimal(0)),
+                rejected.model_dump(mode="json"),
+                f"{identifier}:rejected:{len(traces)}",
+            )
+        )
     ledger = EvidenceLedger()
     for item in items:
         ledger.add(item)
-    return EvidenceBatch(items=ledger.items, usage=usage, trace=[trace])
+    return EvidenceBatch(items=ledger.items, rejections=rejections, usage=usage, trace=traces)
 
 
 async def collect_evidence(
@@ -277,6 +363,7 @@ async def collect_evidence(
         for item in extracted.items:
             ledger.add(item)
         batch.errors.extend(extracted.errors)
+        batch.rejections.extend(extracted.rejections)
         batch.usage_complete = batch.usage_complete and extracted.usage_complete
         batch.trace.extend(extracted.trace)
         for item_event in extracted.trace:

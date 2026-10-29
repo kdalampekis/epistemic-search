@@ -2,6 +2,7 @@ import asyncio
 import json
 from decimal import Decimal
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -218,3 +219,153 @@ def test_timeout_attempt_is_not_lost_to_outer_timeout(tmp_path: Path, source: So
     assert result.status == "error" and not result.usage_complete
     assert result.usage.model_calls == 1
     assert result.usage.cost_usd is None
+
+
+class SloppySpanModel(ScenarioModel):
+    """Like the scripted model, but every extraction also returns a hallucinated span."""
+
+    async def complete(self, request: ModelRequest) -> ModelResponse:
+        response = await super().complete(request)
+        if request.prompt_version == "evidence-stance-v1":
+            items = json.loads(response.text)["items"]
+            items.append({"span": "Gamma is invented.", "stance": "SUPPORT", "stance_score": 0.9})
+            response.text = json.dumps({"items": items})
+        return response
+
+
+def test_v11_a_hallucinated_span_no_longer_aborts_the_question(
+    tmp_path: Path, source: Source
+) -> None:
+    result = asyncio.run(
+        run_epistemic(
+            QueryCase(id="q", question="Are both conditions met?"),
+            config(),
+            ScenarioSearch("A", source),
+            SloppySpanModel(),
+            tmp_path / "cache",
+        )
+    )
+    assert result.error is None and result.decision is not None
+    assert result.decision.action == "ANSWER" and result.output is not None
+    added = [e for e in result.trace if e.type == "EVIDENCE_ADDED"]
+    payloads: list[Any] = [e.payload for e in added]
+    rejections = [r for payload in payloads for r in payload["rejections"]]
+    assert rejections and all(r["span"] == "Gamma is invented." for r in rejections)
+    assert all(payload["errors"] == [] for payload in payloads)
+    assert result.state is not None
+    assert all(item.span != "Gamma is invented." for item in result.state.evidence)
+
+
+class NbspModel(ScenarioModel):
+    """Returns spans with ordinary spaces, as a model reading the page would."""
+
+    async def complete(self, request: ModelRequest) -> ModelResponse:
+        if request.prompt_version != "evidence-stance-v1":
+            return await super().complete(request)
+        self.calls.append(request.prompt_version)
+        data = json.loads(request.prompt[request.prompt.index('{"claim"') :])
+        found = data["claim"] in data["document"].replace("\u00a0", " ")
+        items = [{"span": data["claim"], "stance": "SUPPORT", "stance_score": 0.8}] * found
+        text = json.dumps({"items": items})
+        return ModelResponse(
+            text=text,
+            model=request.model,
+            usage=Usage(model_calls=1, completion_tokens=count_tokens(text), cost_usd=Decimal(0)),
+        )
+
+
+class NbspSearch(ScenarioSearch):
+    async def search(self, query: str, k: int) -> SearchResponse:
+        response = await super().search(query, k)
+        for r in response.results:
+            r.text = r.text.replace("Alpha holds.", "Alpha holds.")
+        return response
+
+
+def test_v11_nbsp_difference_is_repaired_to_the_exact_source_text(
+    tmp_path: Path, source: Source
+) -> None:
+    result = asyncio.run(
+        run_epistemic(
+            QueryCase(id="q", question="Are both conditions met?"),
+            config(),
+            NbspSearch("A", source),
+            NbspModel(),
+            tmp_path / "cache",
+        )
+    )
+    assert result.error is None and result.decision is not None
+    assert result.decision.action == "ANSWER"
+    assert result.state is not None
+    repaired = [e for e in result.state.evidence if e.metadata.get("alignment") == "normalized"]
+    assert repaired and all(" " in e.span for e in repaired)
+    assert all(e.metadata["model_span"] == "Alpha holds." for e in repaired)
+
+
+class StuckSearch:
+    """A retriever that keeps returning the same document, however the query changes."""
+
+    def __init__(self, source: Source) -> None:
+        self.source = source
+        self.queries: list[str] = []
+
+    async def search(self, query: str, k: int) -> SearchResponse:
+        self.queries.append(query)
+        text = "Alpha holds."
+        return SearchResponse(
+            results=[SearchResult(source=self.source, text=text, query=query, rank=1)],
+            usage=Usage(
+                search_calls=1,
+                documents=1,
+                retrieved_tokens=count_tokens(text),
+                cost_usd=Decimal(0),
+            ),
+        )
+
+
+def long_config() -> RunConfig:
+    settings = config()
+    assert settings.rag is not None
+    settings.rag.max_rounds = 5
+    settings.budget.max_search_calls = 6
+    settings.budget.max_documents = 6
+    return settings
+
+
+def test_v11_no_progress_guard_stops_a_repeated_search_loop(tmp_path: Path, source: Source) -> None:
+    search = StuckSearch(source)
+    result = asyncio.run(
+        run_epistemic(
+            QueryCase(id="q", question="Are both conditions met?"),
+            long_config(),
+            search,
+            ScenarioModel(),
+            tmp_path / "cache",
+        )
+    )
+    # search 1 (question) then one targeted search; the next proposal repeats it exactly.
+    assert len(search.queries) == 2 and search.queries[1].startswith("Beta holds.")
+    assert result.status == "completed" and result.error is None
+    assert result.decision is not None and result.decision.action == "ABSTAIN"
+    assert result.decision.rationale.startswith("NO_PROGRESS")
+    event = next(e for e in result.trace if e.type == "NO_PROGRESS")
+    assert event.payload["new_documents"] == [] and event.payload["state_unchanged"] is True
+    assert result.decision.blocking_claims  # the unresolved premise is still reported
+
+
+def test_v11_guard_does_not_fire_when_a_search_makes_progress(
+    tmp_path: Path, source: Source
+) -> None:
+    search, model = ScenarioSearch("B", source), ScenarioModel()
+    result = asyncio.run(
+        run_epistemic(
+            QueryCase(id="q", question="Are both conditions met?"),
+            long_config(),
+            search,
+            model,
+            tmp_path / "cache",
+        )
+    )
+    assert result.decision is not None and result.decision.action == "ANSWER"
+    assert not any(e.type == "NO_PROGRESS" for e in result.trace)
+    assert len(search.queries) == 2

@@ -207,6 +207,14 @@ async def run_epistemic(
         state.blockers = [claim.id for claim in graph.claims]
     query = case.question
     targets = graph.claims
+    # v1.1 no-progress guard bookkeeping: what each search asked, returned, and did to the state.
+    issued: list[str] = []
+    returned: list[set[str]] = []
+
+    def snapshot() -> list[dict[str, object]]:
+        return [b.model_dump(mode="json") for b in state.beliefs]
+
+    history = [snapshot()]
 
     for round_index in range(settings.max_rounds):
         run.component = "retrieval"
@@ -214,6 +222,8 @@ async def run_epistemic(
             retrieved = await guarded_search.search(query, settings.k)
         except ProviderError as exc:
             return abstain(run.stopped_reason or str(exc), error=True)
+        issued.append(query)
+        returned.append({d.source.id for d in retrieved.results})
         for document in retrieved.results:
             prior = documents.get(document.source.id)
             if prior and (prior.text != document.text or prior.source.uri != document.source.uri):
@@ -232,6 +242,7 @@ async def run_epistemic(
                         "claim_id": claim.id,
                         "items": [item.model_dump(mode="json") for item in batch.items],
                         "errors": batch.errors,
+                        "rejections": [r.model_dump(mode="json") for r in batch.rejections],
                     },
                     Usage(context_tokens=batch.usage.context_tokens, cost_usd=Decimal(0)),
                 )
@@ -241,6 +252,7 @@ async def run_epistemic(
                 if batch.errors:
                     return abstain(run.stopped_reason or "; ".join(batch.errors), error=True)
         state.beliefs = aggregate_beliefs(graph.claims, ledger.items, config.belief)
+        history.append(snapshot())
         state.budget = BudgetState(limits=config.budget, used=run.ledger.total())
         run.component = "control"
         run.add("BELIEF_UPDATE", {"beliefs": [b.model_dump(mode="json") for b in state.beliefs]})
@@ -323,6 +335,23 @@ async def run_epistemic(
         )
         generated = generate_query(context, resolve_conflicts=switches.use_conflict_resolution)
         run.component = "querying"
+        earlier = set().union(*returned[:-1])
+        if generated.text == issued[-1] and returned[-1] <= earlier and history[-1] == history[-2]:
+            # Same query as the last search, which found nothing new and left the state
+            # unchanged: repeating it cannot help. Query generation itself is untouched.
+            run.add(
+                "NO_PROGRESS",
+                {
+                    "proposed_query": generated.text,
+                    "last_query": issued[-1],
+                    "new_documents": [],
+                    "state_unchanged": True,
+                    "searches_so_far": len(issued),
+                },
+            )
+            if not switches.allow_abstention:
+                return await generate_answer(decision, forced=True)
+            return abstain("NO_PROGRESS: repeated query, no new documents, state unchanged")
         run.add("QUERY_GENERATED", generated.event.model_dump(mode="json")["payload"])
         query, targets = generated.text, [target]
     return abstain("Acquisition round limit exhausted")

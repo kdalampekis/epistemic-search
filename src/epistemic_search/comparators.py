@@ -143,9 +143,15 @@ async def run_comparator(
         # evidence stance classification, belief aggregation or formal checker.
         claims = {c.id: c for c in decomposed.graph.claims}
         query = case.question
+        # v1.1 no-progress guard bookkeeping (no belief state here: "state" is the chosen target).
+        issued: list[str] = []
+        returned: list[set[str]] = []
+        chosen: list[str | None] = []
         for round_index in range(cfg.max_rounds):
             run.component = "retrieval"
             response_search = await guarded_search.search(query, cfg.k)
+            issued.append(query)
+            returned.append({r.source.id for r in response_search.results})
             for doc in response_search.results:
                 previous = documents.get(doc.source.id)
                 if previous is not None and (
@@ -197,6 +203,25 @@ async def run_comparator(
                     target=claims[step.target_claim_id],
                 )
             )
+            chosen.append(step.target_claim_id)
+            earlier = set().union(*returned[:-1])
+            if (
+                generated.text == issued[-1]
+                and returned[-1] <= earlier
+                and len(chosen) > 1
+                and chosen[-1] == chosen[-2]
+            ):
+                run.add(
+                    "NO_PROGRESS",
+                    {
+                        "proposed_query": generated.text,
+                        "last_query": issued[-1],
+                        "new_documents": [],
+                        "target_unchanged": True,
+                        "searches_so_far": len(issued),
+                    },
+                )
+                return finish(Answer(answer=None, citation_ids=[]))
             run.add("QUERY_GENERATED", dict(generated.event.payload))
             query = generated.text
     except (ProviderError, ValueError, OSError) as exc:
