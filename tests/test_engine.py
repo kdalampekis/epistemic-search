@@ -369,3 +369,42 @@ def test_v11_guard_does_not_fire_when_a_search_makes_progress(
     assert result.decision is not None and result.decision.action == "ANSWER"
     assert not any(e.type == "NO_PROGRESS" for e in result.trace)
     assert len(search.queries) == 2
+
+
+class NeutralEchoModel(ScenarioModel):
+    """Every extraction returns the same NEUTRAL span, whatever the claim."""
+
+    async def complete(self, request: ModelRequest) -> ModelResponse:
+        if request.prompt_version != "evidence-stance-v1":
+            return await super().complete(request)
+        self.calls.append(request.prompt_version)
+        data = json.loads(request.prompt[request.prompt.index('{"claim"') :])
+        if data["claim"] == "Alpha holds.":
+            items = [{"span": "Alpha holds.", "stance": "SUPPORT", "stance_score": 0.9}]
+        else:
+            items = [{"span": "Alpha holds.", "stance": "NEUTRAL", "stance_score": 0.9}]
+        text = json.dumps({"items": items})
+        return ModelResponse(
+            text=text,
+            model=request.model,
+            usage=Usage(model_calls=1, completion_tokens=count_tokens(text), cost_usd=Decimal(0)),
+        )
+
+
+def test_v111_rereading_the_same_span_under_a_new_query_is_not_progress(
+    tmp_path: Path, source: Source
+) -> None:
+    """Evidence ids hash the query, so a naive state comparison would call this 'changed'."""
+    search = StuckSearch(source)
+    result = asyncio.run(
+        run_epistemic(
+            QueryCase(id="q", question="Are both conditions met?"),
+            long_config(),
+            search,
+            NeutralEchoModel(),
+            tmp_path / "cache",
+        )
+    )
+    assert len(search.queries) == 2, search.queries
+    assert result.decision is not None and result.decision.rationale.startswith("NO_PROGRESS")
+    assert any(e.type == "NO_PROGRESS" for e in result.trace)

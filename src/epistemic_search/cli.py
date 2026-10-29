@@ -31,6 +31,7 @@ from epistemic_search.pilot_audit import audit_pilot
 from epistemic_search.reproduction import bundle_reproduction, verify_reproduction
 from epistemic_search.rv1 import add_assessor, aggregate_rv1, init_rv1, validate_rv1
 from epistemic_search.rv2_audit import audit_datasets
+from epistemic_search.rv2_decision import write as write_decision
 from epistemic_search.rv2_retrieval import stage_estimate as retrieval_estimate
 from epistemic_search.rv2_retrieval import stage_run as retrieval_run
 from epistemic_search.rv2_review import build_review, score_review
@@ -260,6 +261,17 @@ def rv2_retrieval(stage: Literal["estimate", "run"]) -> None:
         raise typer.Exit(code=1) from exc
     keys = ("plans", "chosen_per_dataset") if stage == "estimate" else ("metrics", "ledger")
     typer.echo(json.dumps({k: result[k] for k in keys}, indent=2, default=str))
+
+
+@app.command("rv2-decision")
+def rv2_decision() -> None:
+    """RV2: apply the pre-registered classification rule to the four result files."""
+    try:
+        decision = write_decision()
+    except (OSError, ValueError) as exc:
+        typer.echo(f"RV2 decision failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(json.dumps(decision["classification"], indent=2))
 
 
 @app.command("analyze-comparison")

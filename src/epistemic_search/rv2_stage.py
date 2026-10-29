@@ -23,6 +23,7 @@ from epistemic_search.rv2_analysis import (
     depth_split,
     distractor_robustness,
     index,
+    j_stat,
     q1,
     q2,
     q3,
@@ -196,10 +197,34 @@ def summarize_b(
         & set(complete_examples(generated, ["epistemic_search"]))
     )
     out: dict[str, Any] = {"examples_with_both_arms": len(both), "example_ids": both}
-    if both:
-        out["oracle"] = system_metrics(oracle, "epistemic_search", both)
-        out["generated"] = system_metrics(generated, "epistemic_search", both)
-        out["Q4"] = q4(oracle, generated, both)
+    if not both:
+        return out
+    out["oracle"] = system_metrics(oracle, "epistemic_search", both)
+    out["generated"] = system_metrics(generated, "epistemic_search", both)
+    # Pre-registered Q4: structural failures count as no answer, exactly as in the plan.
+    out["Q4"] = q4(oracle, generated, both)
+    valid = [
+        e
+        for e in both
+        if all(generated["epistemic_search"][e][c]["decomposition_valid"] for c in CONDITIONS)
+    ]
+    out["generated_decomposition_validity"] = {
+        "examples": len(both),
+        "valid": len(valid),
+        "rate": len(valid) / len(both),
+        "note": "invalid = the model's graph failed the pipeline's structural validation",
+    }
+    # Secondary, not used for the verdict: separates "invalid graph" from "worse graph".
+    if len(valid) >= 6:
+        jo = j_stat(oracle, "epistemic_search", valid)
+        jg = j_stat(generated, "epistemic_search", valid)
+        out["conditional_on_valid_generated_decomposition"] = {
+            "examples": len(valid),
+            "J_oracle": jo,
+            "J_generated": jg,
+            "gap": None if jo is None or jg is None else jo - jg,
+            "generated": system_metrics(generated, "epistemic_search", valid),
+        }
     return out
 
 

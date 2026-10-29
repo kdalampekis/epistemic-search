@@ -59,3 +59,24 @@ difference is repaired to the exact source text; the guard stops a stuck loop af
 instead of 5; it does not fire when a search makes progress), and
 `tests/test_no_progress_premise_only.py` (same loop stopped; no firing while documents are
 new). One older test encoded the abort-on-bad-span behaviour and was replaced on purpose.
+
+## v1.1.1: correction to Fix B's state comparison (2026-10-29)
+
+Tag `epistemic-search-v1.1` is unchanged and still marks the code RV2-A ran on. RV2-A does not
+exercise Fix B (one gold document per item, no search loop), and Fix A is identical in
+v1.1.1, so RV2-A is unaffected.
+
+The first RV2-B probe (superseded files are kept in
+`docs/results/rv2/rv2_b_superseded_probe_v1_1/`) showed the guard not firing when it should:
+Epistemic Search issued the same targeted query three times against an unchanged pool. The
+cause was a defect in my implementation, not in the rule. The state snapshot compared
+`evidence_ids`, and an evidence id hashes the query that found the span, so re-reading the
+same span under a new query looked like a changed state.
+
+v1.1.1 compares what the rule means by "epistemic state": each claim's status and scores
+plus the set of distinct evidence (claim, source, span, stance). Nothing else changed.
+`tests/test_engine.py::test_v111_…` fails on the v1.1 engine and passes on v1.1.1. The
+change does not alter any answer-or-abstain outcome in the probe (both runs answer C1/C4 and
+abstain on C2/C3 with the removed leaf as the only blocker); it only stops the redundant
+third search. This was found by observing a model run, so it is disclosed as such. RV2-B,
+RV2-C and RV2-D run on v1.1.1.

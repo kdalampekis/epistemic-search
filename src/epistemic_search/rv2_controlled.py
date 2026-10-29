@@ -173,6 +173,7 @@ def row_from(
     events = result.trace
     payloads: list[Any] = [e.payload for e in events if e.type == "EVIDENCE_ADDED"]
     rejections = sum(len(p.get("rejections", [])) for p in payloads)
+    decomposed = [e.payload.get("graph") for e in events if e.type == "DECOMPOSE"]
     usage = result.usage
     outcome = (
         "ANSWER"
@@ -199,6 +200,7 @@ def row_from(
         "question": ex.question,
         "gold_answer": ex.answer,
         "outcome": outcome,
+        "decomposition_valid": (bool(decomposed[0]) if decomposed else None),
         "answered": answered,
         "answer": answer,
         "answer_f1": f1,

@@ -45,6 +45,7 @@ def row(
         "answered": answered,
         "answer_hit": hit if answered else None,
         "answer_f1": 1.0 if answered and hit else 0.0,
+        "decomposition_valid": True,
         "outcome": "ANSWER" if answered else "ABSTAIN",
         "depth": depth,
         "usage": USAGE,

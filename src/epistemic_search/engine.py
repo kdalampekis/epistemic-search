@@ -211,8 +211,17 @@ async def run_epistemic(
     issued: list[str] = []
     returned: list[set[str]] = []
 
-    def snapshot() -> list[dict[str, object]]:
-        return [b.model_dump(mode="json") for b in state.beliefs]
+    def snapshot() -> dict[str, object]:
+        # The epistemic state: each claim's status and scores, and the distinct evidence held.
+        # Evidence ids are deliberately not compared: they hash the query that found the span,
+        # so re-reading the same span under a new query is not new knowledge.
+        return {
+            "beliefs": [
+                (b.claim_id, b.status.value, b.support_score, b.contradiction_score, b.uncertainty)
+                for b in state.beliefs
+            ],
+            "evidence": sorted({(e.claim_id, e.source.id, e.span, e.stance) for e in ledger.items}),
+        }
 
     history = [snapshot()]
 

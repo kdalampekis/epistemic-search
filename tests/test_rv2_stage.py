@@ -69,3 +69,19 @@ def test_planning_cost_scales_with_leaves_but_not_for_the_other_systems() -> Non
 def test_a_full_run_needs_a_logged_estimate(tmp_path: Any) -> None:
     with pytest.raises(RuntimeError, match="estimate"):
         stage_run(SPEC_C, tmp_path)
+
+
+def test_invalid_generated_decompositions_are_counted_and_analysed_separately() -> None:
+    oracle = build({"epistemic_search": GOOD["epistemic_search"]}, n=12)
+    generated = build({"epistemic_search": GOOD["epistemic_search"]}, n=12)  # valid graphs match
+    for r in generated:
+        if int(r["example_id"][1:]) < 6:  # half the examples: the model's graph was invalid
+            r.update(decomposition_valid=False, answered=False, answer_hit=None, outcome="ERROR")
+    summary = summarize_b({"oracle": oracle, "generated": generated})
+    validity = summary["generated_decomposition_validity"]
+    assert validity["valid"] == 6 and validity["rate"] == 0.5
+    # Pre-registered Q4 counts structural failures as no answer, so it reports a gap that is
+    # entirely broken graphs; the conditional block shows the valid graphs are not worse.
+    assert summary["Q4"]["verdict"] == "YES" and summary["Q4"]["gap"] == pytest.approx(0.5)
+    conditional = summary["conditional_on_valid_generated_decomposition"]
+    assert conditional["examples"] == 6 and conditional["gap"] == 0.0
