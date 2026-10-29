@@ -1,4 +1,8 @@
-# RV2 — diagnostic validation plan (pre-registered before any RV2 run)
+# RV2 — diagnostic validation plan (SUPERSEDED_BEFORE_ANNOTATION)
+
+> **Superseded 2026-10-29.** The manual RV2-0 path below was never run; see
+> [rv2/SUPERSEDED.md](rv2/SUPERSEDED.md) and
+> [RV2_EXTERNAL_VALIDATION_PLAN.md](RV2_EXTERNAL_VALIDATION_PLAN.md). Kept as history.
 
 Date: 2026-10-24. Cumulative project API spend at this point: **$0.067952575**. RV0 and
 RV1 are frozen. The 22 pilot questions are development data, so nothing here is a
@@ -64,6 +68,5 @@ the hypothesis more cleanly. Then propose an RV3 design on fresh, disjoint quest
 
 ## Status
 
-* RV2-0: review artifact generated (see `docs/experiments/rv2/`); **awaiting the human
-  reviewer's answers** in `annotations/rv2_0/responses.yaml`.
-* RV2-1 to RV2-3: not started.
+* RV2-0: `SUPERSEDED_BEFORE_ANNOTATION` (no labels collected, no API calls).
+* RV2-1 to RV2-3 of this plan: replaced by the external-gold plan.
