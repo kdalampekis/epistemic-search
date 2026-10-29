@@ -124,7 +124,7 @@ research-validation experiments in [RESEARCH_VALIDATION_PLAN.md](../../RESEARCH_
 | --- | --- | --- |
 | RV0 — Pilot failure audit | Complete (offline, $0; mechanical facts only) | [RV0 report](../experiments/RV0_PILOT_AUDIT.md), [results](../results/rv0/) |
 | RV1 — Semantic annotation (primary assessor: GPT-5.6 Sol; **model-assisted, not independent human ground truth**) | Complete and validated: 22 of 22 questions; aggregated | [Summary](../experiments/RV1_SUMMARY.md), [protocol](../experiments/RV1_ANNOTATION_PROTOCOL.md), `annotations/rv1/primary/`, [results](../results/rv1/) |
-| RV2 — External-gold validation | RV2-0 manual spot-check: `SUPERSEDED_BEFORE_ANNOTATION`. Dataset audit and pre-registered plan done; v1.1 (two defect fixes) frozen; RV2-A to RV2-D pending | [Plan](../experiments/RV2_EXTERNAL_VALIDATION_PLAN.md), [audit](../experiments/RV2_DATASET_AUDIT.md), [v1.1](../experiments/RV2_V1_1_FREEZE.md) |
+| RV2 — External-gold validation | RV2-0 manual spot-check `SUPERSEDED_BEFORE_ANNOTATION`; audit, plan, v1.1 frozen; **RV2-A done** (stance works on matched pairs: macro-F1 0.82, false-CONTRADICT 1.5% / 4.5%); RV2-B to RV2-D pending | [Plan](../experiments/RV2_EXTERNAL_VALIDATION_PLAN.md), [audit](../experiments/RV2_DATASET_AUDIT.md), [v1.1](../experiments/RV2_V1_1_FREEZE.md), [RV2-A](../experiments/RV2_A_STANCE.md) |
 | RV3–RV10 | Not started | Gated by RV2 and the plan's decision gates |
 
 RV0 produced no semantic failure distribution: 0 annotations, 0 API calls,

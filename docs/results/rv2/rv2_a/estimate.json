@@ -1,0 +1,118 @@
+{
+  "hard_cap_usd": "0.25",
+  "ledger_after_probe": {
+    "cumulative_project_cost_usd": "0.068170275",
+    "generation_attempts": 280,
+    "halted": null,
+    "pending_attempts": 0,
+    "remaining_usd": "49.931829725",
+    "run_cap_usd": "0.25",
+    "run_id": "rv2-a-stance-v1",
+    "run_spent_plus_reserved_usd": "0.0002177",
+    "settled_physical_usage": {
+      "project": {
+        "api_calls": 560,
+        "cache_write_tokens": 198627,
+        "cached_input_tokens": 0,
+        "completion_tokens": 65889,
+        "latency_seconds": 1098.8253966717748,
+        "model_calls": 280,
+        "preflight_calls": 280,
+        "prompt_tokens": 302601,
+        "reasoning_tokens": 48077
+      },
+      "run": {
+        "api_calls": 4,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "completion_tokens": 320,
+        "latency_seconds": 6.718529416015372,
+        "model_calls": 2,
+        "preflight_calls": 2,
+        "prompt_tokens": 577,
+        "reasoning_tokens": 226
+      }
+    },
+    "total_cap_usd": "50",
+    "validation_reserve_usd": "5"
+  },
+  "note": "The ceiling bound assumes every call spends its full output allowance; the ledger stops the run before the cap regardless.",
+  "planned_calls": 200,
+  "planning_estimate_usd": "0.02177000",
+  "probe_items": [
+    "5eafed81c9e77c0009ce1aff_1",
+    "scifact-dev-1-31715818"
+  ],
+  "probe_mean_cost_usd": "0.00010885",
+  "probe_mean_latency_seconds": 3.3652844375465065,
+  "probe_records": [
+    {
+      "belief_status": "UNKNOWN",
+      "claim": "Worldwide less than 12 million hybrid electric vehicles have been sold .",
+      "contradiction_score": 0.0,
+      "dataset": "vitaminc",
+      "errors": [],
+      "gold": "SUPPORT",
+      "group": "5eafed81c9e77c0009ce1aff:8eca490d",
+      "id": "5eafed81c9e77c0009ce1aff_1",
+      "items": [
+        {
+          "alignment": "exact",
+          "span": "over 11�million hybrid electric vehicles have been sold worldwide since their inception in 1997",
+          "stance": "NEUTRAL",
+          "stance_score": 0.98
+        }
+      ],
+      "predicted": "NEUTRAL",
+      "rejections": [],
+      "source_label": "SUPPORTS",
+      "support_score": 0.0,
+      "usage": {
+        "completion_tokens": 137,
+        "cost_usd": "0.0000922",
+        "latency_seconds": 3.498201832990162,
+        "model_cache_hits": 0,
+        "model_calls": 1,
+        "prompt_tokens": 237,
+        "reasoning_tokens": 87,
+        "reused_cost_usd": "0"
+      },
+      "wall_seconds": 3.5053577920189127
+    },
+    {
+      "belief_status": "UNKNOWN",
+      "claim": "0-dimensional biomaterials show inductive properties.",
+      "contradiction_score": 0.0,
+      "dataset": "scifact",
+      "errors": [],
+      "gold": "NEUTRAL",
+      "group": "1",
+      "id": "scifact-dev-1-31715818",
+      "items": [
+        {
+          "alignment": "exact",
+          "span": "engineered nanometer-scale scaffolds for stem cell differentiation and transplantation",
+          "stance": "NEUTRAL",
+          "stance_score": 0.76
+        }
+      ],
+      "predicted": "NEUTRAL",
+      "rejections": [],
+      "source_label": "NEI",
+      "support_score": 0.0,
+      "usage": {
+        "completion_tokens": 183,
+        "cost_usd": "0.0001255",
+        "latency_seconds": 3.2219794580014423,
+        "model_cache_hits": 0,
+        "model_calls": 1,
+        "prompt_tokens": 340,
+        "reasoning_tokens": 139,
+        "reused_cost_usd": "0"
+      },
+      "wall_seconds": 3.2252110830741003
+    }
+  ],
+  "run_id": "rv2-a-stance-v1",
+  "token_ceiling_bound_usd": "0.4181000"
+}
