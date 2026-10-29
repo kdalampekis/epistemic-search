@@ -154,11 +154,29 @@ class DecompositionResult(Schema):
     error: str | None = None
 
 
+ORACLE_KEY = "oracle_proof_graph"
+
+
 async def decompose(
     case: QueryCase, config: RunConfig, model: ModelProvider, cache_dir: Path
 ) -> DecompositionResult:
     if config.rag is None:
         raise ValueError("Model settings in rag are required")
+    if (oracle := case.metadata.get(ORACLE_KEY)) is not None:
+        # Experiment harness: a gold structure supplied with the case replaces the model call.
+        # Nothing else changes; with no oracle in the case metadata this branch is never taken.
+        return DecompositionResult(
+            query_id=case.id,
+            graph=ProofGraph.model_validate(oracle),
+            request=ModelRequest(
+                prompt="Oracle structure supplied with the case; no model call was made.",
+                model=config.rag.model,
+                prompt_version="oracle-decomposition-injected-v1",
+                max_output_tokens=1,
+            ),
+            response=None,
+            usage=Usage(cost_usd=Decimal(0)),
+        )
     request = ModelRequest(
         prompt="Decompose the question into atomic answer-critical premises "
         "and a dependency graph. "
