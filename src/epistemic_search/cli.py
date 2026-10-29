@@ -30,6 +30,7 @@ from epistemic_search.parity import compare
 from epistemic_search.pilot_audit import audit_pilot
 from epistemic_search.reproduction import bundle_reproduction, verify_reproduction
 from epistemic_search.rv1 import add_assessor, aggregate_rv1, init_rv1, validate_rv1
+from epistemic_search.rv2_audit import audit_datasets
 from epistemic_search.rv2_review import build_review, score_review
 from epistemic_search.selective import analyze_saved_run
 from epistemic_search.statistics import analyze_comparison
@@ -186,6 +187,23 @@ def rv2_review_score(config_path: Path) -> None:
         typer.echo(f"RV2-0 scoring failed: {exc}", err=True)
         raise typer.Exit(code=1) from exc
     typer.echo(json.dumps(report, indent=2, sort_keys=True))
+
+
+@app.command("rv2-dataset-audit")
+def rv2_dataset_audit(
+    data_root: Path = Path("data/external"),
+    manifests: Path = Path("data/manifests"),
+    output: Path = Path("docs/results/rv2/dataset_audit.json"),
+) -> None:
+    """RV2: measure the cached external datasets offline and write the audit statistics."""
+    try:
+        report = audit_datasets(data_root, manifests)
+    except (OSError, ValueError, KeyError) as exc:
+        typer.echo(f"Dataset audit failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False) + "\n")
+    typer.echo(f"Wrote {output}; no network, no API calls")
 
 
 @app.command("analyze-comparison")

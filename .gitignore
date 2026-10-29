@@ -12,3 +12,6 @@ dist/
 .DS_Store
 artifacts/*
 !artifacts/.gitkeep
+
+# RV2 external datasets (raw third-party data is never committed; manifests are)
+data/external/

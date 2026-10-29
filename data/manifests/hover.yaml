@@ -1,0 +1,14 @@
+name: hover
+canonical_source: https://github.com/hover-nlp/hover
+download_source: not downloaded
+license: 'repository: MIT per GitHub API'
+retrieved_at: '2026-10-29T17:51:45Z'
+version_or_commit: n/a
+archive_sha256: null
+split_used: none
+sampling_seed: null
+transformations: []
+notes: 'Optional in the RV2 plan and skipped: the official download script also fetches
+  wiki_wo_links.db and retrieval caches. RV2 does not depend on it.'
+status: not_used
+files: {}

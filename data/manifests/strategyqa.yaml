@@ -1,0 +1,21 @@
+name: strategyqa
+canonical_source: 'https://allenai.org/data/strategyqa (code: https://github.com/eladsegal/strategyqa)'
+download_source: https://storage.googleapis.com/ai2i/strategyqa/data/strategyqa_dataset.zip
+license: 'code repository: MIT per GitHub API; dataset content license not independently
+  verified in this audit'
+retrieved_at: '2026-10-29T17:51:41Z'
+version_or_commit: archive sha256 4911d85eb6721a93bed7645419df77e721808b32b9785dee14ad80e6249e0a90
+archive_sha256: 4911d85eb6721a93bed7645419df77e721808b32b9785dee14ad80e6249e0a90
+split_used: train only carries decompositions/evidence; an internal deterministic
+  split is used
+sampling_seed: null
+transformations:
+- extracted unchanged
+notes: Official dataset ZIP linked from the AI2 dataset page. Which splits carry which
+  fields is audited in RV2_DATASET_AUDIT.md.
+status: downloaded
+files:
+  strategyqa_test.json: 268bec2605a45830ae7f1f3861d5ee2a4a10f4aeaca0358a076760b2eff3ed25
+  strategyqa_train.json: 728e28b7d6bdfe6da3a0a5f8c5923113a79063d199e960cfcc9f8a3ab34cd92c
+  strategyqa_train_filtered.json: 5c207a051a4753c930f446591d232520b7db854b19c9da873650643bb03b0362
+  strategyqa_train_paragraphs.json: e664979065b2eabfb5412b968c82d532d099e3ad86c9e3de5d3065a016edf96b

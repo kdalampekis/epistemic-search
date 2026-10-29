@@ -1,0 +1,16 @@
+name: 2wikimultihop
+canonical_source: https://github.com/Alab-NII/2wikimultihop
+download_source: https://www.dropbox.com/s/ms2m13252h6xubs/data_ids_april7.zip?dl=1
+license: repository Apache-2.0; Wikipedia-derived content has its own terms
+retrieved_at: 2026-10-23T00:00:00Z (pilot setup; copied locally on retrieval)
+version_or_commit: data_ids_april7.zip (official April 7 2021 release with ids)
+archive_sha256: 95df2bf56fdabe034e27aebc580e02264232203cf52552f9efe8a919e5529eef
+split_used: dev; official test untouched
+sampling_seed: null
+transformations:
+- dev.json and id_aliases.json extracted from the archive unchanged
+notes: Same locked archive as the pilot.
+status: downloaded
+files:
+  dev.json: 79f77ae104088ea8e25b1a65dbece768d45771194663bc5660ec9a98070dadf5
+  id_aliases.json: f08ffcb6c2cefca9bdbe86b4248d6ad7a7743762d3f7264c14ff0bae85726fb6

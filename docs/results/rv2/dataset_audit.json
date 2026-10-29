@@ -1,0 +1,232 @@
+{
+  "entailmentbank": {
+    "convertible_with_shared_nodes": 21,
+    "depth": {
+      "1": 51,
+      "2": 62,
+      "3": 30,
+      "4": 17,
+      "5": 14,
+      "6": 7,
+      "7": 6
+    },
+    "dev_examples": 187,
+    "distractors_available": {
+      "10": 1,
+      "11": 1,
+      "13": 2,
+      "14": 3,
+      "15": 4,
+      "16": 10,
+      "17": 2,
+      "18": 4,
+      "19": 16,
+      "20": 144
+    },
+    "fully_convertible": 187,
+    "leaves": {
+      "10": 4,
+      "11": 3,
+      "12": 2,
+      "14": 1,
+      "15": 1,
+      "2": 41,
+      "3": 51,
+      "4": 35,
+      "5": 17,
+      "6": 16,
+      "7": 4,
+      "8": 2,
+      "9": 10
+    },
+    "not_convertible": 0,
+    "sample_for_controlled_experiments": {
+      "by_leaf_count": {
+        "3": 6,
+        "4": 6,
+        "5": 6
+      },
+      "examples": 18
+    }
+  },
+  "hover": "not used (see data/manifests/hover.yaml)",
+  "multihop": {
+    "2wikimultihop_dev": {
+      "examples": 12576,
+      "gold_titles": {
+        "2": 9825,
+        "4": 2751
+      },
+      "paragraphs_per_question": {
+        "10": 12576
+      },
+      "types": {
+        "bridge_comparison": 2751,
+        "comparison": 3040,
+        "compositional": 5236,
+        "inference": 1549
+      }
+    },
+    "hotpotqa_dev_distractor": {
+      "examples": 7405,
+      "gold_titles": {
+        "2": 7405
+      },
+      "paragraphs_per_question": {
+        "10": 7345,
+        "2": 21,
+        "3": 7,
+        "4": 9,
+        "5": 6,
+        "6": 8,
+        "7": 2,
+        "8": 4,
+        "9": 3
+      },
+      "types": {
+        "bridge": 5918,
+        "comparison": 1487
+      }
+    }
+  },
+  "scifact": {
+    "dev": {
+      "claim_document_pairs": 340,
+      "claims": 300,
+      "labeled": true,
+      "pair_labels": {
+        "CONTRADICT": 71,
+        "NEI": 131,
+        "SUPPORT": 138
+      }
+    },
+    "sample": {
+      "CONTRADICT": 34,
+      "NEUTRAL": 33,
+      "SUPPORT": 33
+    },
+    "test": {
+      "claims": 300,
+      "labeled": false
+    },
+    "train": {
+      "claim_document_pairs": 919,
+      "claims": 809,
+      "labeled": true,
+      "pair_labels": {
+        "CONTRADICT": 194,
+        "NEI": 355,
+        "SUPPORT": 370
+      }
+    }
+  },
+  "seed": 20261029,
+  "strategyqa": {
+    "test": {
+      "examples": 490,
+      "fields": [
+        "qid",
+        "question"
+      ]
+    },
+    "train": {
+      "examples": 2290,
+      "fields": [
+        "answer",
+        "decomposition",
+        "description",
+        "evidence",
+        "facts",
+        "qid",
+        "question",
+        "term"
+      ]
+    },
+    "train_filtered": {
+      "examples": 2821,
+      "fields": [
+        "answer",
+        "description",
+        "qid",
+        "question",
+        "term"
+      ]
+    },
+    "train_structure": {
+      "answer_true": 1071,
+      "classes": {
+        "PARTIAL_FACTS_ONLY": 2290
+      },
+      "decomposition_steps": 6720,
+      "examples": 2290,
+      "steps_that_are_questions": 6671,
+      "steps_with_back_references": 3000
+    }
+  },
+  "versions": {
+    "2wikimultihop": "data_ids_april7.zip (official April 7 2021 release with ids)",
+    "entailmentbank": "daac2fdb7ab52ec3ef8f2953f59288c1edd7c2f0",
+    "hotpotqa": "huggingface hotpotqa/hotpot_qa revision 1908d6afbbead072334abe2965f91bd2709910ab",
+    "hover": "n/a",
+    "scifact": "archive sha256 11c621288d41ac144d29b13b0f8503b3820b7d6e8b1f6ff24dff335c196d76be",
+    "strategyqa": "archive sha256 4911d85eb6721a93bed7645419df77e721808b32b9785dee14ad80e6249e0a90",
+    "vitaminc": "archive sha256 49d82dc1690cbee420d18e2c26f687a7937710bb211845d2571430dfd4dc0337"
+  },
+  "vitaminc": {
+    "dev": {
+      "contrastive_pairs_by_type": {
+        "CN": 148,
+        "CS": 22362,
+        "NS": 8867
+      },
+      "labels": {
+        "NOT ENOUGH INFO": 9042,
+        "REFUTES": 22528,
+        "SUPPORTS": 31484
+      },
+      "revision_types": {
+        "real": 42290,
+        "synthetic": 20764
+      },
+      "rows": 63054,
+      "sample": {
+        "items": 100,
+        "labels": {
+          "CONTRADICT": 34,
+          "NEUTRAL": 33,
+          "SUPPORT": 33
+        },
+        "pairs": 50
+      }
+    },
+    "label_mapping": {
+      "NOT ENOUGH INFO": "NEUTRAL",
+      "REFUTES": "CONTRADICT",
+      "SUPPORTS": "SUPPORT"
+    },
+    "test": {
+      "labels": {
+        "NOT ENOUGH INFO": 7268,
+        "REFUTES": 20265,
+        "SUPPORTS": 27664
+      },
+      "revision_types": {
+        "real": 34481,
+        "synthetic": 20716
+      },
+      "rows": 55197
+    },
+    "train": {
+      "labels": {
+        "NOT ENOUGH INFO": 52981,
+        "REFUTES": 131958,
+        "SUPPORTS": 185714
+      },
+      "revision_types": {
+        "real": 248953,
+        "synthetic": 121700
+      },
+      "rows": 370653
+    }
+  }
+}

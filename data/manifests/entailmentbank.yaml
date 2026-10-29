@@ -1,0 +1,26 @@
+name: entailmentbank
+canonical_source: https://github.com/allenai/entailment_bank
+download_source: https://github.com/allenai/entailment_bank (shallow git clone)
+license: 'repository: Apache-2.0 per GitHub API; dataset content license not independently
+  verified in this audit'
+retrieved_at: '2026-10-29T17:51:45Z'
+version_or_commit: daac2fdb7ab52ec3ef8f2953f59288c1edd7c2f0
+archive_sha256: null
+split_used: dev (task_1 complete leaves, task_2 with distractors); test untouched
+sampling_seed: null
+transformations:
+- only data/public_dataset and LICENSE kept; git metadata removed
+notes: The repository ships the public dataset as entailment_trees_emnlp2021_data_v2.
+status: downloaded
+files:
+  LICENSE: c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4
+  data/public_dataset/entailment_trees_emnlp2021_data_v2/dataset/task_1/dev.jsonl: a9779787851fcdf2cdd5841520deda73474ebc4915e562225744807b5d8d1f5d
+  data/public_dataset/entailment_trees_emnlp2021_data_v2/dataset/task_1/test.jsonl: ae02515bf620f2cc865a4c6ed60adba595aba575e3ab471ecd27d65e6ff9c52f
+  data/public_dataset/entailment_trees_emnlp2021_data_v2/dataset/task_1/train.jsonl: cb96db359d4a4a135ce21274497f218ff2306cf874593aad3e0619b6546247ba
+  data/public_dataset/entailment_trees_emnlp2021_data_v2/dataset/task_2/dev.jsonl: 3271adc67c65149780adbd3729f6b19404ff288e1849905fc16c1c22814a28f7
+  data/public_dataset/entailment_trees_emnlp2021_data_v2/dataset/task_2/test.jsonl: 8bba350ef207f92f9d153e3b1651d90535586a157e444fe037756a8c1cb84f0f
+  data/public_dataset/entailment_trees_emnlp2021_data_v2/dataset/task_2/train.jsonl: 36cdb362c24755b9640ed54e671fc9c72427b6c918f79429551a0800e9055a1b
+  data/public_dataset/entailment_trees_emnlp2021_data_v2/dataset/task_3/dev.jsonl: 9a0fbf937661f13dc44d533623f241c624f5dadd82dac9512a4652dbb26a883b
+  data/public_dataset/entailment_trees_emnlp2021_data_v2/dataset/task_3/test.jsonl: 0234caf458366b5a2f455f77801129f6db2497e7007a95ae1b878f0bf6be0ddb
+  data/public_dataset/entailment_trees_emnlp2021_data_v2/dataset/task_3/train.jsonl: d5ec46a271f16cafe4986acb91e5893d413393ee17860382d311f7cc3b89fe89
+  data/public_dataset/entailment_trees_emnlp2021_data_v2/supporting_data/worldtree_corpus_sentences_extended.json: 7afb6b0464e02b83a29615b06cb8a28002625dbbf707f6c0a86bfd450f5aefcb
