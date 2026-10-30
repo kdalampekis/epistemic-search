@@ -100,7 +100,7 @@ def system_metrics(rows: Rows, system: str, examples: Sequence[str]) -> dict[str
         else None,
         "span_rejections": sum(r["span_rejections"] for r in all_cells),
     }
-    if system == "epistemic_search":
+    if system in {"epistemic_search", "premise_state"}:
         complete_cells = [r for c in COMPLETE for r in cells[c]]
         missing_cells = [r for c in INCOMPLETE for r in cells[c]]
         out["proof_completion_accuracy"] = ratio(

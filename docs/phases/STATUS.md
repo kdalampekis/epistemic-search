@@ -146,3 +146,13 @@ validate (one file needed a mechanical YAML quoting repair, no judgment edited) 
 aggregate. See the [RV1 summary](../experiments/RV1_SUMMARY.md) for the failure
 distribution and its caveats. A human spot-check has not been done. The 22 pilot questions
 are development data and cannot serve as a test set. RV2 has not started.
+
+## RV2-E (pivot validation of the simpler architecture)
+
+After the RV2 decision (`NOT_PROMISING_IN_CURRENT_FORM`), one last narrow test was designed:
+premise-state (per-premise RESOLVED / UNRESOLVED / CONFLICTING judged from the whole evidence set,
+fixed controller, no per-document stance or formal closure) against premise-only and the
+baselines on fresh EntailmentBank examples, with a pre-registered rule
+([plan](../experiments/RV2_E_PIVOT_PLAN.md)). Method, tests and plan are committed; **no model
+call has been made**. Running it needs an explicit decision to clear the ledger halt left by the
+RV2-D uncertain-charge failure. If it loses, the project stops.

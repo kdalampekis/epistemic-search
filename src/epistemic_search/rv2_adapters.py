@@ -274,7 +274,7 @@ class PoolDoc(Schema):
 
 class ControlledCase(Schema):
     example_id: Text
-    condition: Literal["C1", "C2", "C3", "C4"]
+    condition: Literal["C1", "C2", "C3", "C4", "R1", "R2"]
     removed_leaf: str | None
     docs: list[PoolDoc]
 
@@ -309,6 +309,35 @@ def controlled_conditions(ex: EBExample, seed: int, n_distractors: int = 4) -> l
         "C3": ([d for s, d in leaf_docs.items() if s != removed] + distractors, removed),
         "C4": (list(leaf_docs.values()) + distractors, None),
     }
+    cases = []
+    for name, (docs, gone) in plan.items():
+        ordered = sorted(docs, key=lambda d: order_key(seed, f"order-{name}", f"{ex.id}:{d.text}"))
+        cases.append(
+            ControlledCase(
+                example_id=ex.id,
+                condition=name,
+                removed_leaf=gone,
+                docs=[d.model_copy(update={"key": f"doc{i + 1}"}) for i, d in enumerate(ordered)],
+            )
+        )
+    return cases
+
+
+def retrieval_conditions(ex: EBExample, seed: int) -> list[ControlledCase]:
+    """Retrieval-bearing pools: the dataset's full 25-sentence context, with or without one leaf.
+
+    R1 holds every gold leaf among all the distractors; R2 is R1 without the seeded removed leaf.
+    A system must find what it needs through search; nothing is handed over.
+    """
+    removed = min(ex.leaves, key=lambda s: order_key(seed, "removed-leaf", f"{ex.id}:{s}"))
+    every = [
+        PoolDoc(key="unassigned", text=t, role="leaf", leaf_id=s) for s, t in ex.leaves.items()
+    ]
+    every += [
+        PoolDoc(key="unassigned", text=t, role="distractor", leaf_id=d)
+        for d, t, _ in ex.distractors
+    ]
+    plan = {"R1": (every, None), "R2": ([d for d in every if d.leaf_id != removed], removed)}
     cases = []
     for name, (docs, gone) in plan.items():
         ordered = sorted(docs, key=lambda d: order_key(seed, f"order-{name}", f"{ex.id}:{d.text}"))

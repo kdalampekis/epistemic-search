@@ -26,13 +26,15 @@ from epistemic_search.engine import run_epistemic
 from epistemic_search.evaluation import file_hash
 from epistemic_search.execution import configured_model
 from epistemic_search.models import BudgetLimits, QueryCase, Source, Usage
-from epistemic_search.providers import ModelProvider, SearchResponse, SearchResult
+from epistemic_search.premise_state import run_premise_state
+from epistemic_search.providers import ModelProvider, SearchProvider, SearchResponse, SearchResult
 from epistemic_search.rv2_adapters import ControlledCase, EBExample, eb_proof_graph
 from epistemic_search.rv2_metrics import token_f1
 from epistemic_search.rv2_run import CONFIG_DIR, run_config
 from epistemic_search.tokens import count_tokens
 
 SYSTEMS = ("closed_book", "naive_rag", "premise_only", "epistemic_search")
+ORACLE_SYSTEMS = {"premise_only", "premise_state", "epistemic_search"}
 SNAPSHOT = datetime(2026, 10, 29, tzinfo=UTC)
 ANSWER_HIT_F1 = 0.5
 
@@ -101,6 +103,18 @@ def pool_budget(pool: int) -> BudgetLimits:
     )
 
 
+# The RV2-D / Phase 12 ceilings, used when evidence must be found by search.
+LEXICAL_BUDGET = BudgetLimits(
+    max_search_calls=3,
+    max_documents=6,
+    max_retrieved_tokens=50_000,
+    max_llm_calls=24,
+    max_total_llm_input_tokens=100_000,
+    max_total_llm_output_tokens=32_768,
+    max_latency_seconds=600,
+)
+
+
 def case_for(ex: EBExample, condition: str, graph: ProofGraph | None) -> QueryCase:
     metadata = {ORACLE_KEY: graph.model_dump(mode="json")} if graph is not None else {}
     return QueryCase(
@@ -119,26 +133,40 @@ async def run_system(
     cache_dir: Path,
     client: httpx.AsyncClient,
     model: ModelProvider | None = None,
+    retrieval: str = "given",
 ) -> RunResult:
-    """One method on one case. ``condition`` is None only for closed-book (no pool)."""
+    """One method on one case. ``condition`` is None only for closed-book (no pool).
+
+    ``retrieval="given"`` hands every system the whole pool; ``"lexical"`` makes it find evidence
+    by search (k = 2, three searches) in the pool, as in RV2-D.
+    """
     pool = condition.docs if condition else []
-    graph = (
-        eb_proof_graph(ex)[0] if oracle and system in {"premise_only", "epistemic_search"} else None
-    )
-    if oracle and system in {"premise_only", "epistemic_search"} and graph is None:
+    needs_graph = oracle and system in ORACLE_SYSTEMS
+    graph = eb_proof_graph(ex)[0] if needs_graph else None
+    if needs_graph and graph is None:
         raise ValueError(f"{ex.id}: no convertible proof graph")
     name = condition.condition if condition else "NA"
     case = case_for(ex, name, graph)
-    rag = base_rag.model_copy(update={"k": max(1, len(pool))})
-    config = run_config(system, run_id, rag, pool_budget(len(pool)), cache_dir)
+    lexical = retrieval == "lexical"
+    rag = base_rag.model_copy(update={"k": 2 if lexical else max(1, len(pool))})
+    budget = LEXICAL_BUDGET if lexical else pool_budget(len(pool))
+    config = run_config(system, run_id, rag, budget, cache_dir)
     model = model or configured_model(rag, CONFIG_DIR, client)
-    search = GivenPoolSearch(corpus(condition)) if condition else FixtureSearchProvider([])
+    search: SearchProvider
+    if condition is None:
+        search = FixtureSearchProvider([])
+    elif lexical:
+        search = FixtureSearchProvider(corpus(condition))
+    else:
+        search = GivenPoolSearch(corpus(condition))
     if system == "closed_book":
         return await run_comparator(case, config, FixtureSearchProvider([]), model, cache_dir)
-    if system == "naive_rag":
+    if system in {"naive_rag", "iterative_rag"}:
         return await run_guarded_baseline(case, config, search, model)
     if system == "premise_only":
         return await run_comparator(case, config, search, model, cache_dir)
+    if system == "premise_state":
+        return await run_premise_state(case, config, search, model, cache_dir)
     return await run_epistemic(case, config, search, model, cache_dir)
 
 
@@ -174,6 +202,10 @@ def row_from(
     payloads: list[Any] = [e.payload for e in events if e.type == "EVIDENCE_ADDED"]
     rejections = sum(len(p.get("rejections", [])) for p in payloads)
     decomposed = [e.payload.get("graph") for e in events if e.type == "DECOMPOSE"]
+    search_events: list[Any] = [e.payload for e in events if e.type == "SEARCH"]
+    retrieved_texts = [
+        r["text"] for p in search_events for r in p.get("response", {}).get("results", [])
+    ]
     usage = result.usage
     outcome = (
         "ANSWER"
@@ -209,7 +241,13 @@ def row_from(
         "error": result.error,
         "decision": result.decision.model_dump(mode="json") if result.decision else None,
         "no_progress": any(e.type == "NO_PROGRESS" for e in events),
-        "unresolved_leaves": sorted(blockers) if system == "epistemic_search" else None,
+        "unresolved_leaves": (
+            sorted(blockers) if system in {"epistemic_search", "premise_state"} else None
+        ),
+        "leaves_retrieved": sorted(
+            {s for t in retrieved_texts for s, tx in ex.leaves.items() if norm(tx) == norm(t)}
+        ),
+        "searches_run": len(search_events),
         "belief_by_leaf": beliefs or None,
         "span_rejections": rejections,
         "usage": {
@@ -270,6 +308,7 @@ async def run_example(
     traces: Path,
     client: httpx.AsyncClient,
     model: ModelProvider | None = None,
+    retrieval: str = "given",
 ) -> str | None:
     """All systems x conditions for one example; returns a stop reason if a cap interrupted."""
     finished = done_keys(out)
@@ -294,6 +333,7 @@ async def run_example(
             cache_dir=cache_dir,
             client=client,
             model=model,
+            retrieval=retrieval,
         )
         reason = stop_reason(result, base_rag)
         if reason:

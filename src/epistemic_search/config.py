@@ -120,7 +120,9 @@ class BeliefConfig(Schema):
     threshold: Annotated[float, Field(gt=0, le=1, allow_inf_nan=False)] = 0.5
 
 
-Method = Literal["closed_book", "naive_rag", "iterative_rag", "premise_only", "epistemic_search"]
+Method = Literal[
+    "closed_book", "naive_rag", "iterative_rag", "premise_only", "premise_state", "epistemic_search"
+]
 
 
 class ControllerConfig(Schema):
