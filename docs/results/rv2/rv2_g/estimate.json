@@ -1,0 +1,51 @@
+{
+  "chosen_examples": 30,
+  "experiment": "RV2-G evidence-grounded decomposition",
+  "hard_cap_usd": "0.30",
+  "ledger_after_probe": {
+    "cumulative_project_cost_usd": "0.430194975",
+    "generation_attempts": 3573,
+    "halted": null,
+    "pending_attempts": 0,
+    "remaining_usd": "49.569805025",
+    "run_cap_usd": "0.30",
+    "run_id": "rv2-g-evidence-grounded-v1",
+    "run_spent_plus_reserved_usd": "0.0013041",
+    "settled_physical_usage": {
+      "project": {
+        "api_calls": 7146,
+        "cache_write_tokens": 295166,
+        "cached_input_tokens": 0,
+        "completion_tokens": 533955,
+        "latency_seconds": 10340.737543651252,
+        "model_calls": 3573,
+        "preflight_calls": 3573,
+        "prompt_tokens": 1516167,
+        "reasoning_tokens": 334631
+      },
+      "run": {
+        "api_calls": 24,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "completion_tokens": 1787,
+        "latency_seconds": 37.451596252969466,
+        "model_calls": 12,
+        "preflight_calls": 12,
+        "prompt_tokens": 4106,
+        "reasoning_tokens": 1031
+      }
+    },
+    "total_cap_usd": "50",
+    "validation_reserve_usd": "5"
+  },
+  "planning_cost_usd": {
+    "24": 0.0647712,
+    "30": 0.080964
+  },
+  "planning_factor": 2.0,
+  "probe_example": "Mercury_7084525",
+  "probe_leaves": 2,
+  "probe_logical_cost_usd": 0.0013494,
+  "rule": "30 if probe x N x 2 is within 80% of the cap, else 24; never fewer",
+  "run_id": "rv2-g-evidence-grounded-v1"
+}

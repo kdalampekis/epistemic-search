@@ -1,0 +1,330 @@
+{
+  "analysis": {
+    "J_ci95": {
+      "B0_naive_rag": {
+        "lower": 0.2333333333333334,
+        "point": 0.4,
+        "upper": 0.5666666666666667
+      },
+      "B1_question_only": {
+        "lower": -0.1,
+        "point": 0.0,
+        "upper": 0.1
+      },
+      "M0_gold_premises": {
+        "lower": 1.0,
+        "point": 1.0,
+        "upper": 1.0
+      },
+      "M2_evidence_grounded": {
+        "lower": 0.16666666666666669,
+        "point": 0.36666666666666664,
+        "upper": 0.5666666666666667
+      }
+    },
+    "classification": {
+      "class": "NO_SIGNAL",
+      "rule": "M2 does not materially outperform B1, or J/coverage remain weak"
+    },
+    "complete_examples": 30,
+    "difference_ci95": {
+      "M0_minus_B1": {
+        "lower": 0.9,
+        "point": 1.0,
+        "upper": 1.1
+      },
+      "M2_minus_B0": {
+        "lower": -0.2,
+        "point": -0.03333333333333338,
+        "upper": 0.1333333333333333
+      },
+      "M2_minus_B1": {
+        "lower": 0.16666666666666669,
+        "point": 0.36666666666666664,
+        "upper": 0.5666666666666667
+      },
+      "M2_minus_M0": {
+        "lower": -0.8333333333333333,
+        "point": -0.6333333333333333,
+        "upper": -0.43333333333333335
+      }
+    },
+    "example_ids": [
+      "ACTAAP_2009_5_6",
+      "MCAS_2004_8_16",
+      "MCAS_2006_8_35",
+      "MCAS_8_2015_16",
+      "MDSA_2007_8_47",
+      "MSA_2015_5_46",
+      "Mercury_405939",
+      "Mercury_7011375",
+      "Mercury_7013178",
+      "Mercury_7083370",
+      "Mercury_7084525",
+      "Mercury_7097545",
+      "Mercury_7121765",
+      "Mercury_7166635",
+      "Mercury_SC_400022",
+      "Mercury_SC_400064",
+      "Mercury_SC_400689",
+      "Mercury_SC_401220",
+      "Mercury_SC_402240",
+      "Mercury_SC_406660",
+      "Mercury_SC_413558",
+      "Mercury_SC_416158",
+      "Mercury_SC_LBS10587",
+      "NCEOGA_2013_5_7",
+      "NYSEDREGENTS_2004_4_29",
+      "NYSEDREGENTS_2005_4_29",
+      "OHAT_2009_5_44",
+      "TIMSS_2003_8_pg97",
+      "TIMSS_2011_4_pg64",
+      "VASoL_2008_3_2"
+    ],
+    "inputs": {
+      "M2_J_over_M0_J": 0.36666666666666664,
+      "M2_minus_B1": 0.36666666666666664,
+      "failed_thresholds": [
+        "A_complete_coverage_ge_0.90",
+        "B_J_ge_0.65",
+        "D_retains_70pct_of_gold_J",
+        "F_not_abstention_only"
+      ],
+      "partial_signal_requirements_met": false
+    },
+    "m2_decompositions": {
+      "COMPLETE": {
+        "answered": 17,
+        "cases": 30,
+        "claimed_support_rejected_facts": 0,
+        "compression_ratio": 1.0666666666666667,
+        "decomposition_size": 5.7,
+        "derived_claims": 1.7666666666666666,
+        "duplicate_claims": 0,
+        "evidence_facts": 3.933333333333333,
+        "evidence_sentences": 3.6666666666666665,
+        "facts_without_cited_support": 0.7,
+        "graph_depth": 1.5333333333333334,
+        "n": 30,
+        "no_answer_categories": {
+          "EVIDENCE_FACT": 13
+        },
+        "required_equals_all_evidence": 13,
+        "required_evidence_facts": 3.7666666666666666,
+        "required_nodes": 4.866666666666666,
+        "share_of_required_nodes_that_are_evidence_facts": 0.678082191780822
+      },
+      "MISSING_ONE": {
+        "answered": 5,
+        "cases": 30,
+        "claimed_support_rejected_facts": 2,
+        "compression_ratio": 1.5933333333333333,
+        "decomposition_size": 5.266666666666667,
+        "derived_claims": 1.3333333333333333,
+        "duplicate_claims": 0,
+        "evidence_facts": 3.933333333333333,
+        "evidence_sentences": 2.6666666666666665,
+        "facts_without_cited_support": 1.6333333333333333,
+        "graph_depth": 1.2333333333333334,
+        "n": 30,
+        "no_answer_categories": {
+          "ANSWER_GENERATION_FAILURE": 1,
+          "EVIDENCE_FACT": 23,
+          "STRUCTURAL_ERROR": 1
+        },
+        "required_equals_all_evidence": 9,
+        "required_evidence_facts": 3.3666666666666667,
+        "required_nodes": 4.566666666666666,
+        "share_of_required_nodes_that_are_evidence_facts": 0.7226277372262774
+      },
+      "dangling_reference_decompositions": 0,
+      "decompositions": 60,
+      "failures": [],
+      "malformed_rate": 0.0,
+      "usable": 60,
+      "usable_rate": 1.0
+    },
+    "question_only_generation": {
+      "duplicate_premise_rate": 0.0,
+      "examples": 30,
+      "failures": [],
+      "generation_cost_usd": 0.0056856,
+      "generation_failure_rate": 0.0,
+      "generation_tokens": 17656,
+      "mean_gold_leaves": 3.6666666666666665,
+      "mean_premises": 1.8666666666666667,
+      "non_assertion_premise_rate": 0.0,
+      "proof_graph_conversion_rate": 1.0,
+      "structural_validity_rate": 1.0,
+      "structurally_usable": 30
+    },
+    "stop_rule_fired": true,
+    "strong_signal": false,
+    "systems": {
+      "B0_naive_rag": {
+        "J": 0.4,
+        "abstention_rate": 0.2666666666666666,
+        "answer_exact_match_among_complete_answers": 0.35714285714285715,
+        "answer_normalized_match_among_complete_answers": 0.5357142857142857,
+        "complete_answer_rate": 0.9333333333333333,
+        "completion_tokens": 5173,
+        "errors": 0,
+        "logical_cost_usd": 0.0039846,
+        "mean_latency_seconds": 1.9942095250550969,
+        "missing_answer_rate": 0.5333333333333333,
+        "model_calls": 60,
+        "new_api_cost_usd": 0.0039846,
+        "prompt_tokens": 13981,
+        "resolved_but_no_answer": 0,
+        "strict_J": 0.4,
+        "strict_complete_rate": 0.9333333333333333,
+        "strict_missing_rate": 0.5333333333333333
+      },
+      "B1_question_only": {
+        "J": 0.0,
+        "abstention_rate": 0.9333333333333333,
+        "answer_exact_match_among_complete_answers": 0.5,
+        "answer_normalized_match_among_complete_answers": 0.5,
+        "complete_answer_rate": 0.06666666666666667,
+        "completion_tokens": 12181,
+        "errors": 1,
+        "logical_cost_usd": 0.008698000000000001,
+        "mean_latency_seconds": 3.0529373408974303,
+        "missing_answer_rate": 0.06666666666666667,
+        "model_calls": 64,
+        "new_api_cost_usd": 0.008698000000000001,
+        "prompt_tokens": 26075,
+        "resolved_but_no_answer": 0,
+        "strict_J": 0.0,
+        "strict_complete_rate": 0.06666666666666667,
+        "strict_missing_rate": 0.06666666666666667
+      },
+      "M0_gold_premises": {
+        "J": 1.0,
+        "abstention_rate": 0.5,
+        "answer_exact_match_among_complete_answers": 0.36666666666666664,
+        "answer_normalized_match_among_complete_answers": 0.5,
+        "complete_answer_rate": 1.0,
+        "completion_tokens": 11891,
+        "errors": 0,
+        "logical_cost_usd": 0.0093973,
+        "mean_latency_seconds": 3.2603632347561264,
+        "missing_answer_rate": 0.0,
+        "model_calls": 90,
+        "new_api_cost_usd": 0.009233,
+        "prompt_tokens": 34518,
+        "resolved_but_no_answer": 0,
+        "strict_J": 1.0,
+        "strict_complete_rate": 1.0,
+        "strict_missing_rate": 0.0
+      },
+      "M2_evidence_grounded": {
+        "J": 0.36666666666666664,
+        "abstention_rate": 0.6166666666666667,
+        "answer_exact_match_among_complete_answers": 0.4117647058823529,
+        "answer_normalized_match_among_complete_answers": 0.5294117647058824,
+        "complete_answer_rate": 0.5666666666666667,
+        "completion_tokens": 73282,
+        "errors": 2,
+        "logical_cost_usd": 0.0434745,
+        "mean_latency_seconds": 12.907981042418395,
+        "missing_answer_rate": 0.2,
+        "model_calls": 143,
+        "new_api_cost_usd": 0.0423424,
+        "prompt_tokens": 68335,
+        "resolved_but_no_answer": 1,
+        "strict_J": 0.4,
+        "strict_complete_rate": 0.5666666666666667,
+        "strict_missing_rate": 0.16666666666666666
+      }
+    },
+    "viability": {
+      "A_complete_coverage_ge_0.90": false,
+      "B_J_ge_0.65": false,
+      "C_recovery_over_question_only_ge_0.30": true,
+      "D_retains_70pct_of_gold_J": false,
+      "E_structurally_usable_ge_0.90": true,
+      "F_not_abstention_only": false
+    }
+  },
+  "case_rows": 240,
+  "code": "tag epistemic-search-v1.1.1 + sufficiency + grounded",
+  "decomposition_rows": 60,
+  "experiment": "RV2-G evidence-grounded decomposition",
+  "generation_rows": 30,
+  "ledger": {
+    "cumulative_project_cost_usd": "0.498834475",
+    "generation_attempts": 3928,
+    "halted": null,
+    "pending_attempts": 0,
+    "remaining_usd": "49.501165525",
+    "run_cap_usd": "0.30",
+    "run_id": "rv2-g-evidence-grounded-v1",
+    "run_spent_plus_reserved_usd": "0.0699436",
+    "settled_physical_usage": {
+      "project": {
+        "api_calls": 7856,
+        "cache_write_tokens": 295166,
+        "cached_input_tokens": 0,
+        "completion_tokens": 642809,
+        "latency_seconds": 11690.878577273455,
+        "model_calls": 3928,
+        "preflight_calls": 3928,
+        "prompt_tokens": 1658292,
+        "reasoning_tokens": 407127
+      },
+      "run": {
+        "api_calls": 734,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "completion_tokens": 110641,
+        "latency_seconds": 1387.5926298751729,
+        "model_calls": 367,
+        "preflight_calls": 367,
+        "prompt_tokens": 146231,
+        "reasoning_tokens": 73527
+      }
+    },
+    "total_cap_usd": "50",
+    "validation_reserve_usd": "5"
+  },
+  "model": "gpt-6-luna",
+  "reasoning_effort": "medium",
+  "run_id": "rv2-g-evidence-grounded-v1",
+  "sample_ids": [
+    "Mercury_7084525",
+    "Mercury_7121765",
+    "Mercury_SC_406660",
+    "Mercury_SC_LBS10587",
+    "MCAS_8_2015_16",
+    "TIMSS_2003_8_pg97",
+    "Mercury_SC_400022",
+    "Mercury_SC_402240",
+    "Mercury_7166635",
+    "Mercury_7011375",
+    "OHAT_2009_5_44",
+    "Mercury_SC_400689",
+    "Mercury_SC_400064",
+    "Mercury_SC_413558",
+    "Mercury_SC_401220",
+    "MCAS_2006_8_35",
+    "Mercury_7083370",
+    "Mercury_SC_416158",
+    "MDSA_2007_8_47",
+    "NYSEDREGENTS_2004_4_29",
+    "Mercury_7097545",
+    "Mercury_7013178",
+    "VASoL_2008_3_2",
+    "MCAS_2004_8_16",
+    "ACTAAP_2009_5_6",
+    "NYSEDREGENTS_2005_4_29",
+    "TIMSS_2011_4_pg64",
+    "Mercury_405939",
+    "MSA_2015_5_46",
+    "NCEOGA_2013_5_7"
+  ],
+  "sampling_seed": 20261029,
+  "seed": 42,
+  "stopped_by": null,
+  "wall_seconds": 1364.8282672080677
+}

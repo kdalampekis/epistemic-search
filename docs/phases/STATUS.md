@@ -167,12 +167,12 @@ well-formed (30/30 structurally usable) but insufficiently resolvable from the e
 The project stops; no RV3. See [RV2-F](../experiments/RV2_F_GENERATED_PREMISES.md) (pre-registration
 and results) and the [ledger audit](../results/rv2/rv2_f/ledger_halt_audit.md).
 
-## RV2-G (evidence-grounded decomposition): pre-registered, not yet run
+## RV2-G (evidence-grounded decomposition): complete
 
-New, narrowly scoped diagnostic derived from RV2-F: decompose from question + the evidence actually
-available, separating evidence-level facts from derived claims, then judge sufficiency from the whole
-evidence set. Four systems (naive RAG, RV2-F question-only premises, gold premises, evidence-grounded
-M2) on 30 fresh EntailmentBank dev examples (2-, 3- and 6-leaf proofs; the 3-5 leaf supply is exhausted
-after RV2-F), cap $0.30. Thresholds, classification and interpretation rules are committed in
-[RV2-G](../experiments/RV2_G_EVIDENCE_GROUNDED_DECOMPOSITION.md) before any model call. The RV2-F
-`NO_END_TO_END_SIGNAL` result and the other frozen conclusions are unchanged.
+Result under the pre-registered rule: **`NO_SIGNAL`; the direction is closed.** 30 fresh EntailmentBank
+examples, all four systems. J: gold premises 1.00, evidence-grounded M2 0.37 (complete coverage 0.57),
+naive RAG 0.40, question-only premises 0.00. M2 beat question-only premises by +0.37 [0.17, 0.57] but not
+naive RAG, and fell 0.63 below the gold control; it missed the `PARTIAL_SIGNAL` bar (J >= 0.40) by 0.033.
+All 13 complete-evidence abstentions were required evidence facts the decomposer itself had cited no source
+for. Spend $0.0699. See [RV2-G](../experiments/RV2_G_EVIDENCE_GROUNDED_DECOMPOSITION.md) and the
+[ledger audit](../results/rv2/rv2_g/ledger_halt_audit.md). No RV3.

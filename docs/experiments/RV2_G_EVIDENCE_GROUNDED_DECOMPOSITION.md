@@ -204,3 +204,125 @@ decomposition, raw response and structure, failures included, never edited), `me
   hard, and 10 questions per stratum is too few for per-stratum conclusions. Strata are reported
   descriptively only.
 * Answer text is a weak proxy; no verdict uses it. One dataset, 24-30 examples; intervals are over questions.
+
+---
+
+# Results (appended after the run; everything above is the unchanged pre-registration)
+
+Pre-registration commit `8c8f2e3`. Files: [metrics.json](../results/rv2/rv2_g/metrics.json),
+[decision.json](../results/rv2/rv2_g/decision.json), [cases.jsonl](../results/rv2/rv2_g/cases.jsonl),
+[decompositions.jsonl](../results/rv2/rv2_g/decompositions.jsonl),
+[generated_premises.jsonl](../results/rv2/rv2_g/generated_premises.jsonl),
+[estimate.json](../results/rv2/rv2_g/estimate.json). The probe cost $0.0013, so the committed rule chose
+30 examples. **30 of 30 examples completed for all four systems and both conditions** (240 case rows, 60
+M2 decompositions, 30 B1 generations); no ledger halt, no cap reached. Run spend **$0.0699** of the $0.30
+cap (probe included); cumulative project spend $0.4988 of $50; no Sol.
+
+## Classification: `NO_SIGNAL`. The direction is closed.
+
+Sample: 10 two-leaf + 10 three-leaf + 10 six-leaf fresh dev examples; overlap with the 89 excluded ids is empty.
+
+| System | COMPLETE answer rate | MISSING_ONE answer rate | **J** | 95% CI of J | Errors |
+| --- | ---: | ---: | ---: | --- | ---: |
+| B0 naive RAG | 0.933 | 0.533 | 0.400 | [0.23, 0.57] | 0 |
+| B1 question-only premises | 0.067 | 0.067 | **0.000** | [-0.10, 0.10] | 1 |
+| M0 gold premises | **1.000** | 0.000 | **1.000** | [1.00, 1.00] | 0 |
+| M2 evidence-grounded | **0.567** | 0.200 | **0.367** | [0.17, 0.57] | 2 |
+
+Paired differences in J (95% bootstrap): **M2 - B1 +0.37 [+0.17, +0.57]**; M2 - B0 -0.03 [-0.20, +0.13];
+**M2 - M0 -0.63 [-0.83, -0.43]**; M0 - B1 +1.00 [+0.90, +1.10 (bootstrap artefact of a constant 1.0)].
+
+### Viability of M2
+
+| Condition | Result |
+| --- | --- |
+| A complete coverage >= 0.90 | **fail** (0.567) |
+| B J >= 0.65 | **fail** (0.367) |
+| C J(M2) - J(B1) >= +0.30 | pass (+0.367) |
+| D J(M2) >= 0.70 x J(M0) | **fail** (0.367 vs 0.700 required) |
+| E >= 90% structurally usable | pass (60/60) |
+| F not abstention-only | **fail** (same bar as A) |
+
+`STRONG_SIGNAL`: no. `PARTIAL_SIGNAL` required J(M2) - J(B1) >= +0.20 with the lower bound above 0 (met:
++0.37, lower bound +0.17), complete coverage >= 0.50 (met: 0.567) **and J(M2) >= 0.40 (missed: 0.367)**.
+That is the single requirement that sent this to `NO_SIGNAL` instead of `PARTIAL_SIGNAL`, by 0.033. The
+rule was fixed before the run and is not moved. Two facts keep that from being a near miss in substance:
+the +0.37 over B1 is mostly a very low B1 (J 0.00 here, 0.13 in RV2-F), and **M2 is no better than naive
+RAG** (J 0.37 against 0.40, difference -0.03, interval spanning zero).
+
+### Where the signal is (descriptive only; 10 questions per stratum)
+
+| Leaves | B0 J | B1 J | M0 J | M2 J (complete / missing answer rate) |
+| --- | ---: | ---: | ---: | --- |
+| 2 | 0.80 | 0.10 | 1.00 | **0.90** (1.0 / 0.1) |
+| 3 | 0.40 | -0.10 | 1.00 | 0.10 (0.4 / 0.3) |
+| 6 | 0.00 | 0.00 | 1.00 | 0.10 (0.3 / 0.2) |
+
+M2 works on two-leaf proofs and not on the longer ones, where it abstains on most complete-evidence
+cases. These strata are too small for inference.
+
+### Required diagnostic: why M2 abstained on complete evidence
+
+Of 30 COMPLETE cases M2 answered 17 and abstained on 13. **All 13 are `EVIDENCE_FACT`** (a required
+evidence-level fact stayed unresolved); none are `DERIVED_CLAIM`, `STRUCTURAL_ERROR` or
+`ANSWER_GENERATION_FAILURE`. In all 13, **every unresolved fact was one for which the decomposer itself
+had cited no supporting source** (0.7 uncited facts per COMPLETE decomposition on average); the judge never
+rejected support the decomposer had claimed (0 rejections in COMPLETE, 2 in MISSING_ONE). The decomposer
+therefore listed statements as "evidence facts" that the evidence does not state, such as "The acorns in
+question have been buried in soil", "Leafy vegetables are food" and "The requested measurement is the mass
+of a 2-teaspoon quantity of sand". This is the RV2-F mechanism again, one level down: the fact/derived-claim
+distinction did not stop the model from placing background or restated-question claims at the evidence
+level. M2 wrote 1.77 derived claims and 3.93 evidence facts per example against 3.67 evidence sentences;
+68% of required nodes were evidence-level.
+
+### What happened when a leaf disappeared
+
+M2 abstained in 24 of 30 MISSING_ONE cases (23 `EVIDENCE_FACT`, 1 `STRUCTURAL_ERROR` from an unusable
+judgment) and answered in 6 (decision) / 5 (final answer: one `ANSWER_GENERATION_FAILURE`). Five of the six
+leaks have `required == all evidence`: the decomposer only described the evidence it saw, including three
+cases with a one- or two-document pool, so the gap was invisible. Uncited facts rose from 0.7 (COMPLETE)
+to 1.63 (MISSING_ONE) per decomposition, so the gap is often noticed, but the same mechanism also produces
+uncited facts when evidence is complete, which is why abstaining on MISSING_ONE is not a clean signal.
+
+### Structure and cost
+
+60/60 decompositions parsed and passed the structural check (0 malformed, 0 dangling references, 0
+duplicate claims); mean compression ratio 1.07 (COMPLETE) and 1.59 (MISSING_ONE); `required == all
+evidence` in 13 of 30 COMPLETE and 9 of 30 MISSING_ONE decompositions (reported, not a failure rule).
+Depth 1.5. B1 reproduced RV2-F's pattern (structurally valid, mean 1.87 premises, complete coverage 0.07).
+Logical cost for 60 cases per system: B0 $0.004, B1 $0.009, M0 $0.009, **M2 $0.043** (143 calls against 90
+for M0), a roughly five-fold cost for a lower J than M0 and no gain over naive RAG.
+
+### Disclosures and limits
+
+* The eligibility range was widened to 2-6 leaves (pre-registered) because the 3-5 leaf supply was exhausted
+  after RV2-F. M2's one strong stratum is the 2-leaf one, which RV2-F did not cover; B1's weakness there is
+  consistent with RV2-F.
+* A two-leaf MISSING_ONE pool has one document; five of the six M2 leaks are cases where the decomposer
+  described that thin pool, so a small-pool effect cannot be separated from a decomposer effect.
+* One M2 MISSING_ONE case errored on an unusable judgment and one answered at the decision step without a
+  final answer; both were counted as pre-registered and not repaired. B1 had one error.
+* Leaf-only pools are the most favourable setting for M2; it failed here anyway.
+
+## Answers to the pre-registered questions
+
+1. **Does evidence-grounded decomposition substantially outperform question-only decomposition?** Yes by the
+   numbers, +0.37 J [+0.17, +0.57], but against a baseline that scored J 0.00 in this sample, and it does not
+   beat naive RAG.
+2. **Does it recover most of the oracle-premise signal?** No. J 0.37 against 1.00; M2 - M0 -0.63 [-0.83, -0.43];
+   retention 37% against the 70% bar. It recovers most of it only on two-leaf proofs.
+3. **Can it answer with complete evidence without near-universal abstention?** Not reliably: complete coverage
+   0.57 (0.43 abstention); 1.00 on two-leaf proofs and 0.30-0.40 on three- and six-leaf proofs.
+4. **When one leaf disappears, does the structure expose the insufficiency?** Partly: 24 of 30 abstained,
+   but the same structures abstain on 13 of 30 complete cases for the same reason (an uncited fact), and 5 of
+   the 6 leaks are decompositions that described only the available evidence.
+5. **Is the representation primarily evidence-level rather than unsupported high-level claims?** No. It is
+   evidence-level in form (68% of required nodes), but 0.7 of the facts per complete decomposition are
+   claims the evidence does not state, which is what blocked every complete-evidence abstention.
+
+## Closure
+
+`NO_SIGNAL` closes this direction as pre-registered: no other decomposition architecture, better premise
+prompts, larger models, chain-of-thought variants, additional proof representations, more EntailmentBank
+experiments or retrieval redesign is proposed. The result is archived; premise-only sufficiency checking
+remains a component that works only with gold premises (RV2-C, RV2-E, RV2-F M0, RV2-G M0).

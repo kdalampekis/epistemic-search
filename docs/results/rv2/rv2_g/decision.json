@@ -1,0 +1,28 @@
+{
+  "classification": {
+    "class": "NO_SIGNAL",
+    "rule": "M2 does not materially outperform B1, or J/coverage remain weak"
+  },
+  "complete_examples": 30,
+  "inputs": {
+    "M2_J_over_M0_J": 0.36666666666666664,
+    "M2_minus_B1": 0.36666666666666664,
+    "failed_thresholds": [
+      "A_complete_coverage_ge_0.90",
+      "B_J_ge_0.65",
+      "D_retains_70pct_of_gold_J",
+      "F_not_abstention_only"
+    ],
+    "partial_signal_requirements_met": false
+  },
+  "stop_rule_fired": true,
+  "strong_signal": false,
+  "viability": {
+    "A_complete_coverage_ge_0.90": false,
+    "B_J_ge_0.65": false,
+    "C_recovery_over_question_only_ge_0.30": true,
+    "D_retains_70pct_of_gold_J": false,
+    "E_structurally_usable_ge_0.90": true,
+    "F_not_abstention_only": false
+  }
+}
