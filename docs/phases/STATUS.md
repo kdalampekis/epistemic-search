@@ -158,10 +158,11 @@ setting. New spend $0.0939. See [RV2-E](../experiments/RV2_E_PIVOT.md) and
 [plan](../experiments/RV2_E_PIVOT_PLAN.md). The ledger is halted again (cancelled in-flight
 request); not cleared.
 
-## RV2-F (generated-premise sufficiency): pre-registered, not yet run
+## RV2-F (generated-premise sufficiency): complete
 
-Final go/no-go for the surviving idea: question -> generated premises -> whole-evidence check ->
-ANSWER iff all resolved. Four systems on 30 fresh EntailmentBank dev examples (COMPLETE vs
-MISSING_ONE), cap $0.40. Thresholds, classification and the mandatory stop rule are committed in
-[RV2-F](../experiments/RV2_F_GENERATED_PREMISES.md) before any model call. Ledger halt audited and
-cleared per policy: [audit](../results/rv2/rv2_f/ledger_halt_audit.md).
+Result under the pre-registered rule: **`NO_END_TO_END_SIGNAL`; the mandatory stop rule fired.**
+30 fresh EntailmentBank examples, all four systems. J: gold-premise premise-only 0.93, generated-premise
+premise-only 0.13 (coverage 0.17), naive RAG 0.20, iterative RAG 0.27. Generated premises were
+well-formed (30/30 structurally usable) but insufficiently resolvable from the evidence. Spend $0.0327.
+The project stops; no RV3. See [RV2-F](../experiments/RV2_F_GENERATED_PREMISES.md) (pre-registration
+and results) and the [ledger audit](../results/rv2/rv2_f/ledger_halt_audit.md).

@@ -1,0 +1,25 @@
+{
+  "classification": {
+    "class": "NO_END_TO_END_SIGNAL",
+    "rule": "M1 not viable and shows no meaningful signal over the baselines"
+  },
+  "complete_examples": 30,
+  "inputs": {
+    "M0_strong": true,
+    "M1_minus_best_baseline": -0.1333333333333334,
+    "best_baseline_J": 0.2666666666666667,
+    "no_signal_flags": {
+      "delta_over_best_baseline_below_0.10": true,
+      "m1_J_below_0.40": true,
+      "m1_complete_coverage_below_0.75": true
+    }
+  },
+  "stop_rule_fired": true,
+  "viability": {
+    "A_complete_coverage_ge_0.90": false,
+    "B_J_ge_0.65": false,
+    "C_advantage_over_best_baseline": false,
+    "D_retains_75pct_of_gold_J": false,
+    "E_structurally_usable_ge_0.90": true
+  }
+}

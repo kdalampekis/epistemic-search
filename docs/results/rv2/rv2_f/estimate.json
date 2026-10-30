@@ -1,0 +1,49 @@
+{
+  "chosen_examples": 30,
+  "experiment": "RV2-F generated-premise sufficiency",
+  "hard_cap_usd": "0.40",
+  "ledger_after_probe": {
+    "cumulative_project_cost_usd": "0.397360875",
+    "generation_attempts": 3268,
+    "halted": null,
+    "pending_attempts": 0,
+    "remaining_usd": "49.602639125",
+    "run_cap_usd": "0.40",
+    "run_id": "rv2-f-generated-premises-v1",
+    "run_spent_plus_reserved_usd": "0.0011200",
+    "settled_physical_usage": {
+      "project": {
+        "api_calls": 6536,
+        "cache_write_tokens": 295166,
+        "cached_input_tokens": 0,
+        "completion_tokens": 488475,
+        "latency_seconds": 9567.330942680943,
+        "model_calls": 3268,
+        "preflight_calls": 3268,
+        "prompt_tokens": 1415226,
+        "reasoning_tokens": 309857
+      },
+      "run": {
+        "api_calls": 20,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "completion_tokens": 1636,
+        "latency_seconds": 30.34030520892702,
+        "model_calls": 10,
+        "preflight_calls": 10,
+        "prompt_tokens": 3020,
+        "reasoning_tokens": 1013
+      }
+    },
+    "total_cap_usd": "50",
+    "validation_reserve_usd": "5"
+  },
+  "planning_cost_usd": {
+    "24": 0.026879999999999998,
+    "30": 0.0336
+  },
+  "probe_example": "MCAS_2000_4_2",
+  "probe_logical_cost_usd": 0.00112,
+  "rule": "30 if the planning cost is within 80% of the cap, else 24; never fewer",
+  "run_id": "rv2-f-generated-premises-v1"
+}

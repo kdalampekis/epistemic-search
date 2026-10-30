@@ -1,0 +1,279 @@
+{
+  "analysis": {
+    "J_ci95": {
+      "B0_naive_rag": {
+        "lower": 0.0,
+        "point": 0.20000000000000007,
+        "upper": 0.4
+      },
+      "B1_iterative_rag": {
+        "lower": 0.1333333333333333,
+        "point": 0.2666666666666667,
+        "upper": 0.43333333333333335
+      },
+      "M0_gold_premises": {
+        "lower": 0.8333333333333334,
+        "point": 0.9333333333333333,
+        "upper": 1.0
+      },
+      "M1_generated_premises": {
+        "lower": 0.0,
+        "point": 0.13333333333333333,
+        "upper": 0.3
+      }
+    },
+    "classification": {
+      "class": "NO_END_TO_END_SIGNAL",
+      "rule": "M1 not viable and shows no meaningful signal over the baselines"
+    },
+    "complete_examples": 30,
+    "difference_ci95": {
+      "M0_minus_best_baseline": {
+        "lower": 0.5,
+        "point": 0.6666666666666666,
+        "upper": 0.8333333333333334
+      },
+      "M1_minus_B0": {
+        "lower": -0.30000000000000004,
+        "point": -0.06666666666666674,
+        "upper": 0.16666666666666669
+      },
+      "M1_minus_B1": {
+        "lower": -0.3666666666666667,
+        "point": -0.1333333333333334,
+        "upper": 0.10000000000000003
+      },
+      "M1_minus_M0": {
+        "lower": -0.9666666666666667,
+        "point": -0.8,
+        "upper": -0.6000000000000001
+      },
+      "M1_minus_best_baseline": {
+        "lower": -0.3666666666666667,
+        "point": -0.1333333333333334,
+        "upper": 0.10000000000000003
+      }
+    },
+    "example_ids": [
+      "AKDE&ED_2008_4_17",
+      "AKDE&ED_2012_8_5",
+      "MCAS_1999_8_24",
+      "MCAS_2000_4_2",
+      "MCAS_2001_8_15",
+      "MCAS_2008_5_5614",
+      "MSA_2012_5_36",
+      "Mercury_404796",
+      "Mercury_7016818",
+      "Mercury_7038535",
+      "Mercury_7122763",
+      "Mercury_7167020",
+      "Mercury_7197383",
+      "Mercury_7213185",
+      "Mercury_7263393",
+      "Mercury_LBS10185",
+      "Mercury_SC_400338",
+      "Mercury_SC_401371",
+      "Mercury_SC_401775",
+      "Mercury_SC_402047",
+      "Mercury_SC_406541",
+      "NAEP_2005_8_S14+10",
+      "NAEP_2009_4_S11+2",
+      "NYSEDREGENTS_2005_4_19",
+      "NYSEDREGENTS_2006_4_28",
+      "NYSEDREGENTS_2007_4_5",
+      "OHAT_2009_5_9",
+      "OHAT_2011_5_33",
+      "TIMSS_2003_8_pg32",
+      "TIMSS_2011_8_pg100"
+    ],
+    "generation": {
+      "duplicate_premise_rate": 0.0,
+      "examples": 30,
+      "failures": [],
+      "generation_cost_usd": 0.005247,
+      "generation_failure_rate": 0.0,
+      "generation_tokens": 16894,
+      "mean_gold_leaves": 3.466666666666667,
+      "mean_premises": 2.2333333333333334,
+      "non_assertion_premise_rate": 0.0,
+      "proof_graph_conversion_rate": 1.0,
+      "structural_validity_rate": 1.0,
+      "structurally_usable": 30
+    },
+    "inputs": {
+      "M0_strong": true,
+      "M1_minus_best_baseline": -0.1333333333333334,
+      "best_baseline_J": 0.2666666666666667,
+      "no_signal_flags": {
+        "delta_over_best_baseline_below_0.10": true,
+        "m1_J_below_0.40": true,
+        "m1_complete_coverage_below_0.75": true
+      }
+    },
+    "stop_rule_fired": true,
+    "systems": {
+      "B0_naive_rag": {
+        "J": 0.20000000000000007,
+        "abstention_rate": 0.2333333333333334,
+        "answer_exact_match_among_complete_answers": 0.19230769230769232,
+        "answer_normalized_match_among_complete_answers": 0.5,
+        "complete_answer_rate": 0.8666666666666667,
+        "completion_tokens": 4826,
+        "errors": 0,
+        "logical_cost_usd": 0.0037962,
+        "mean_latency_seconds": 2.042047145064377,
+        "missing_answer_rate": 0.6666666666666666,
+        "model_calls": 60,
+        "new_api_cost_usd": 0.0037962,
+        "prompt_tokens": 13832,
+        "resolved_but_no_answer": 0,
+        "strict_J": 0.20000000000000007,
+        "strict_complete_rate": 0.8666666666666667,
+        "strict_missing_rate": 0.6666666666666666
+      },
+      "B1_iterative_rag": {
+        "J": 0.2666666666666667,
+        "abstention_rate": 0.19999999999999996,
+        "answer_exact_match_among_complete_answers": 0.03571428571428571,
+        "answer_normalized_match_among_complete_answers": 0.21428571428571427,
+        "complete_answer_rate": 0.9333333333333333,
+        "completion_tokens": 7602,
+        "errors": 12,
+        "logical_cost_usd": 0.006215,
+        "mean_latency_seconds": 2.1843636923042746,
+        "missing_answer_rate": 0.6666666666666666,
+        "model_calls": 82,
+        "new_api_cost_usd": 0.0046012,
+        "prompt_tokens": 24140,
+        "resolved_but_no_answer": 0,
+        "strict_J": 0.2666666666666667,
+        "strict_complete_rate": 0.9333333333333333,
+        "strict_missing_rate": 0.6666666666666666
+      },
+      "M0_gold_premises": {
+        "J": 0.9333333333333333,
+        "abstention_rate": 0.4666666666666667,
+        "answer_exact_match_among_complete_answers": 0.10714285714285714,
+        "answer_normalized_match_among_complete_answers": 0.35714285714285715,
+        "complete_answer_rate": 1.0,
+        "completion_tokens": 11716,
+        "errors": 0,
+        "logical_cost_usd": 0.0092992,
+        "mean_latency_seconds": 3.3659982006880456,
+        "missing_answer_rate": 0.06666666666666667,
+        "model_calls": 92,
+        "new_api_cost_usd": 0.0092992,
+        "prompt_tokens": 34412,
+        "resolved_but_no_answer": 2,
+        "strict_J": 0.8666666666666667,
+        "strict_complete_rate": 0.9333333333333333,
+        "strict_missing_rate": 0.06666666666666667
+      },
+      "M1_generated_premises": {
+        "J": 0.13333333333333333,
+        "abstention_rate": 0.9,
+        "answer_exact_match_among_complete_answers": 0.0,
+        "answer_normalized_match_among_complete_answers": 0.4,
+        "complete_answer_rate": 0.16666666666666666,
+        "completion_tokens": 14661,
+        "errors": 1,
+        "logical_cost_usd": 0.0100292,
+        "mean_latency_seconds": 3.3439966048152807,
+        "missing_answer_rate": 0.03333333333333333,
+        "model_calls": 66,
+        "new_api_cost_usd": 0.0097064,
+        "prompt_tokens": 26987,
+        "resolved_but_no_answer": 0,
+        "strict_J": 0.13333333333333333,
+        "strict_complete_rate": 0.16666666666666666,
+        "strict_missing_rate": 0.03333333333333333
+      }
+    },
+    "viability": {
+      "A_complete_coverage_ge_0.90": false,
+      "B_J_ge_0.65": false,
+      "C_advantage_over_best_baseline": false,
+      "D_retains_75pct_of_gold_J": false,
+      "E_structurally_usable_ge_0.90": true
+    }
+  },
+  "case_rows": 240,
+  "code": "tag epistemic-search-v1.1.1 + sufficiency",
+  "experiment": "RV2-F generated-premise sufficiency",
+  "generation_rows": 30,
+  "ledger": {
+    "cumulative_project_cost_usd": "0.428890875",
+    "generation_attempts": 3561,
+    "halted": null,
+    "pending_attempts": 0,
+    "remaining_usd": "49.571109125",
+    "run_cap_usd": "0.40",
+    "run_id": "rv2-f-generated-premises-v1",
+    "run_spent_plus_reserved_usd": "0.0326500",
+    "settled_physical_usage": {
+      "project": {
+        "api_calls": 7122,
+        "cache_write_tokens": 295166,
+        "cached_input_tokens": 0,
+        "completion_tokens": 532168,
+        "latency_seconds": 10303.285947398283,
+        "model_calls": 3561,
+        "preflight_calls": 3561,
+        "prompt_tokens": 1512061,
+        "reasoning_tokens": 333600
+      },
+      "run": {
+        "api_calls": 606,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "completion_tokens": 45329,
+        "latency_seconds": 766.2953099262668,
+        "model_calls": 303,
+        "preflight_calls": 303,
+        "prompt_tokens": 99855,
+        "reasoning_tokens": 24756
+      }
+    },
+    "total_cap_usd": "50",
+    "validation_reserve_usd": "5"
+  },
+  "model": "gpt-6-luna",
+  "reasoning_effort": "medium",
+  "run_id": "rv2-f-generated-premises-v1",
+  "sample_ids": [
+    "MCAS_2000_4_2",
+    "NYSEDREGENTS_2007_4_5",
+    "AKDE&ED_2008_4_17",
+    "AKDE&ED_2012_8_5",
+    "TIMSS_2003_8_pg32",
+    "Mercury_7016818",
+    "Mercury_SC_401371",
+    "MCAS_2008_5_5614",
+    "OHAT_2009_5_9",
+    "MCAS_1999_8_24",
+    "Mercury_SC_401775",
+    "NYSEDREGENTS_2006_4_28",
+    "Mercury_7038535",
+    "Mercury_SC_402047",
+    "OHAT_2011_5_33",
+    "Mercury_7213185",
+    "Mercury_SC_400338",
+    "MCAS_2001_8_15",
+    "NAEP_2009_4_S11+2",
+    "Mercury_SC_406541",
+    "Mercury_7122763",
+    "Mercury_404796",
+    "NYSEDREGENTS_2005_4_19",
+    "Mercury_7263393",
+    "NAEP_2005_8_S14+10",
+    "TIMSS_2011_8_pg100",
+    "Mercury_7167020",
+    "Mercury_LBS10185",
+    "Mercury_7197383",
+    "MSA_2012_5_36"
+  ],
+  "sampling_seed": 20261029,
+  "seed": 42,
+  "stopped_by": null,
+  "wall_seconds": 747.0446066668956
+}

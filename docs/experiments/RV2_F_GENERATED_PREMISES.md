@@ -183,3 +183,90 @@ kept; nothing is filtered.
 * One dataset (grade-school science), 24-30 examples; intervals are over examples.
 * A fresh pool without five-leaf examples (16 + 14 sample); a different dataset or more complex
   questions may behave differently.
+
+---
+
+# Results (appended after the run; everything above is the unchanged pre-registration)
+
+Pre-registration commit `313fd5c`. Files: [results.json](../results/rv2/rv2_f/results.json),
+[decision.json](../results/rv2/rv2_f/decision.json), [cases.jsonl](../results/rv2/rv2_f/cases.jsonl),
+[generated_premises.jsonl](../results/rv2/rv2_f/generated_premises.jsonl),
+[estimate.json](../results/rv2/rv2_f/estimate.json). Estimate probe: 1 example, $0.0011, so the
+committed rule chose 30 examples. **30 of 30 examples completed for all four systems and both
+conditions** (240 case rows, 30 generations); no ledger halt, no cap reached.
+Run spend **$0.0327** of the $0.40 cap (probe included); no Sol.
+
+## Classification: `NO_END_TO_END_SIGNAL`. The mandatory stop rule fired.
+
+Sample: 16 three-leaf + 14 four-leaf fresh dev examples; the 59 ids used in RV2-B/C/E were
+excluded and the overlap is empty.
+
+| System | COMPLETE answer rate | MISSING_ONE answer rate | **J** | 95% CI of J | Errors |
+| --- | ---: | ---: | ---: | --- | ---: |
+| B0 naive RAG | 0.867 | 0.667 | 0.200 | [0.00, 0.40] | 0 |
+| B1 iterative RAG | 0.933 | 0.667 | 0.267 | [0.13, 0.43] | 12 (11 round-limit stops, 1 uncited source) |
+| M0 gold premises | **1.000** | 0.067 | **0.933** | [0.83, 1.00] | 0 |
+| M1 generated premises | **0.167** | 0.033 | **0.133** | [0.00, 0.30] | 1 (ungrounded verdict) |
+
+Paired differences in J (95% bootstrap): M1 - B0 -0.07 [-0.30, +0.17]; M1 - B1 -0.13 [-0.37, +0.10];
+M1 - best baseline -0.13 [-0.37, +0.10]; **M1 - M0 -0.80 [-0.97, -0.60]**; M0 - best baseline
++0.67 [+0.50, +0.83].
+
+### Viability of M1 (all five required)
+
+| Condition | Result |
+| --- | --- |
+| A complete coverage >= 0.90 | **fail** (0.167) |
+| B J >= 0.65 | **fail** (0.133) |
+| C advantage over the best baseline >= +0.25 (or CI > 0 and >= +0.20) | **fail** (-0.133) |
+| D J(M1) >= 0.75 x J(M0) | **fail** (0.133 vs 0.700 required) |
+| E >= 90% structurally usable | pass (30/30) |
+
+M0 was strong (coverage 1.00, J 0.93, +0.67 over the best baseline), and all three no-signal flags
+were set (delta over baselines < 0.10, M1 coverage < 0.75, J < 0.40). By the fixed partition that is
+`NO_END_TO_END_SIGNAL`, not `ORACLE_DEPENDENT`.
+
+### Generated-premise diagnostics (deterministic flags only)
+
+Structurally usable 30/30 (100%); generation failures 0; mean 2.23 premises per question against
+3.47 gold leaves; duplicate-premise rate 0.0; non-assertion rate 0.0; proof-graph conversion 30/30;
+generation cost $0.0052 (16,894 tokens). **The generated premises are well-formed. They fail on
+sufficiency, not on format.** M1 abstained in 90% of all cases and in 25 of 30 COMPLETE cases:
+generated premises are general or derived statements (for example, "Burning gasoline or diesel
+releases pollutants into the atmosphere"), which the verbatim leaf facts of the pool do not state
+or entail on their own, so they stay UNRESOLVED even when the evidence is complete. No LLM judged
+whether a premise is semantically correct, so this is a reading of the pattern, not a measured
+premise-quality figure.
+
+### Answer text, cost
+
+Answer match among complete-evidence answers is a weak proxy: exact match B0 0.19, B1 0.04, M0 0.11,
+M1 0.00; normalized match 0.50, 0.21, 0.36, 0.40 (small, differently sized denominators; no verdict
+uses them). Logical cost for all 60 cases per system: B0 $0.004, B1 $0.006, M0 $0.009, M1 $0.010
+(including $0.0052 generation). Calls: 60, 82, 92, 66.
+
+### Degradation from gold to generated premises
+
+COMPLETE answer rate 1.000 -> 0.167; MISSING_ONE answer rate 0.067 -> 0.033; **J 0.933 -> 0.133
+(-0.80)**. M1's low false-answer rate on MISSING_ONE is not discrimination; it is blanket
+abstention.
+
+### Disclosures and limits
+
+* B1's 11 round-limit stops are the existing iterative baseline's behaviour under the same 3-round
+  ceiling (counted as no answer, as pre-registered). Even if all 12 B1 errors were answers, its J could
+  rise by at most 0.2 and could not make M1 viable.
+* One M1 case errored on an ungrounded judge verdict (RESOLVED without citing evidence) and is counted
+  as no answer, as pre-registered; it was not repaired.
+* Leaf-only pools make the gold premises' verbatim match unusually easy for M0; M1 premises need not
+  match the leaves. Both effects are inherent to the pre-registered design and were disclosed in
+  advance. The result does not show that no better premise generator exists; it shows this
+  single-pass question-only generator does not preserve the signal.
+* 30 examples on one dataset; sample-level intervals are over questions.
+
+## Answer to the go/no-go question
+
+**No.** Automatic premise generation did not preserve the premise-only sufficiency signal: J fell
+from 0.93 with gold premises to 0.13 with generated premises, no better than naive RAG. The
+mandatory stop rule fires: the research project stops here and premise-only is archived as a
+component result that works only given good premises.
