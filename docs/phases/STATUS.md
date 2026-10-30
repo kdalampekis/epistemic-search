@@ -157,3 +157,11 @@ bar on coverage (0.889 vs 0.90) and did not beat premise-only on J (delta -0.02,
 setting. New spend $0.0939. See [RV2-E](../experiments/RV2_E_PIVOT.md) and
 [plan](../experiments/RV2_E_PIVOT_PLAN.md). The ledger is halted again (cancelled in-flight
 request); not cleared.
+
+## RV2-F (generated-premise sufficiency): pre-registered, not yet run
+
+Final go/no-go for the surviving idea: question -> generated premises -> whole-evidence check ->
+ANSWER iff all resolved. Four systems on 30 fresh EntailmentBank dev examples (COMPLETE vs
+MISSING_ONE), cap $0.40. Thresholds, classification and the mandatory stop rule are committed in
+[RV2-F](../experiments/RV2_F_GENERATED_PREMISES.md) before any model call. Ledger halt audited and
+cleared per policy: [audit](../results/rv2/rv2_f/ledger_halt_audit.md).

@@ -32,6 +32,8 @@ from epistemic_search.reproduction import bundle_reproduction, verify_reproducti
 from epistemic_search.rv1 import add_assessor, aggregate_rv1, init_rv1, validate_rv1
 from epistemic_search.rv2_audit import audit_datasets
 from epistemic_search.rv2_decision import write as write_decision
+from epistemic_search.rv2_f import stage_estimate as f_estimate
+from epistemic_search.rv2_f import stage_run as f_run
 from epistemic_search.rv2_pivot import stage_estimate as pivot_estimate
 from epistemic_search.rv2_pivot import stage_run as pivot_run
 from epistemic_search.rv2_retrieval import stage_estimate as retrieval_estimate
@@ -274,6 +276,20 @@ def rv2_pivot(stage: Literal["estimate", "run"]) -> None:
         typer.echo(f"RV2-E {stage} failed: {exc}", err=True)
         raise typer.Exit(code=1) from exc
     keys = ("plans", "chosen_per_size") if stage == "estimate" else ("metrics", "ledger")
+    typer.echo(json.dumps({k: result[k] for k in keys}, indent=2, default=str))
+
+
+@app.command("rv2-f")
+def rv2_f(stage: Literal["estimate", "run"]) -> None:
+    """RV2-F: generated-premise sufficiency (final go/no-go). Paid; ledger cap $0.40."""
+    try:
+        result = f_estimate() if stage == "estimate" else f_run()
+    except (OSError, ValueError, RuntimeError) as exc:
+        typer.echo(f"RV2-F {stage} failed: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    keys = (
+        ("planning_cost_usd", "chosen_examples") if stage == "estimate" else ("analysis", "ledger")
+    )
     typer.echo(json.dumps({k: result[k] for k in keys}, indent=2, default=str))
 
 

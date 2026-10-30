@@ -121,7 +121,13 @@ class BeliefConfig(Schema):
 
 
 Method = Literal[
-    "closed_book", "naive_rag", "iterative_rag", "premise_only", "premise_state", "epistemic_search"
+    "closed_book",
+    "naive_rag",
+    "iterative_rag",
+    "premise_only",
+    "premise_state",
+    "sufficiency_check",
+    "epistemic_search",
 ]
 
 

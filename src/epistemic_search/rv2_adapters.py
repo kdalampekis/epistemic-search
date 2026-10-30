@@ -323,6 +323,31 @@ def controlled_conditions(ex: EBExample, seed: int, n_distractors: int = 4) -> l
     return cases
 
 
+def leaf_conditions(ex: EBExample, seed: int) -> list[ControlledCase]:
+    """RV2-F: COMPLETE (every gold leaf) and MISSING_ONE (one seeded leaf removed); no distractors.
+
+    Stored as C1 (COMPLETE) and C2 (MISSING_ONE). The removed leaf uses the same seeded rule as
+    every other RV2 experiment.
+    """
+    removed = min(ex.leaves, key=lambda s: order_key(seed, "removed-leaf", f"{ex.id}:{s}"))
+    every = [
+        PoolDoc(key="unassigned", text=t, role="leaf", leaf_id=s) for s, t in ex.leaves.items()
+    ]
+    plan = {"C1": (every, None), "C2": ([d for d in every if d.leaf_id != removed], removed)}
+    cases = []
+    for name, (docs, gone) in plan.items():
+        ordered = sorted(docs, key=lambda d: order_key(seed, f"order-{name}", f"{ex.id}:{d.text}"))
+        cases.append(
+            ControlledCase(
+                example_id=ex.id,
+                condition=name,
+                removed_leaf=gone,
+                docs=[d.model_copy(update={"key": f"doc{i + 1}"}) for i, d in enumerate(ordered)],
+            )
+        )
+    return cases
+
+
 def retrieval_conditions(ex: EBExample, seed: int) -> list[ControlledCase]:
     """Retrieval-bearing pools: the dataset's full 25-sentence context, with or without one leaf.
 
