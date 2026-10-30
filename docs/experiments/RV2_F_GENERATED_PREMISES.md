@@ -254,8 +254,8 @@ abstention.
 ### Disclosures and limits
 
 * B1's 11 round-limit stops are the existing iterative baseline's behaviour under the same 3-round
-  ceiling (counted as no answer, as pre-registered). Even if all 12 B1 errors were answers, its J could
-  rise by at most 0.2 and could not make M1 viable.
+  ceiling (counted as no answer, as pre-registered). B1 is a comparison baseline, not the system
+  under test; M1's own failure (coverage 0.17) does not depend on it.
 * One M1 case errored on an ungrounded judge verdict (RESOLVED without citing evidence) and is counted
   as no answer, as pre-registered; it was not repaired.
 * Leaf-only pools make the gold premises' verbatim match unusually easy for M0; M1 premises need not
