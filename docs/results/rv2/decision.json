@@ -1,0 +1,60 @@
+{
+  "classification": {
+    "class": "NOT_PROMISING_IN_CURRENT_FORM",
+    "rule": "2: Q2 = NO"
+  },
+  "complete_epistemic_search_examples": 27,
+  "inputs_present": {
+    "RV2-A": true,
+    "RV2-B": true,
+    "RV2-C": true,
+    "RV2-D": true
+  },
+  "questions": {
+    "Q1_gold_structure_and_evidence_behaves_correctly": {
+      "answer_hit_rate": 0.11764705882352941,
+      "coverage_on_complete": 0.9444444444444444,
+      "verdict": "UNDETERMINED"
+    },
+    "Q2_detects_insufficiency_better_than_baselines": {
+      "ci95": [
+        -0.462962962962963,
+        -0.12962962962962965
+      ],
+      "delta_J": -0.2962962962962964,
+      "es_coverage_on_complete": 0.9444444444444444,
+      "verdict": "NO"
+    },
+    "Q3_distractors_do_not_cause_false_closure": {
+      "best_baseline_answer_rate_C3": 0.14814814814814814,
+      "es_answer_rate_C3": 0.37037037037037035,
+      "verdict": "NO"
+    },
+    "Q4_oracle_structure_materially_beats_generated": {
+      "J_generated": 0.05555555555555558,
+      "J_oracle": 0.4444444444444444,
+      "examples": 18,
+      "gap": 0.38888888888888884,
+      "verdict": "YES"
+    },
+    "Q5_premise_directed_retrieval_more_efficient": {
+      "best_plain": "iterative_rag",
+      "best_premise_directed": "premise_only",
+      "ci95": [
+        -0.4021739130434782,
+        -0.2282608695652174
+      ],
+      "gap_best_premise_directed_minus_best_plain": -0.31521739130434784,
+      "mean_searches": {
+        "iterative_rag": 2.108695652173913,
+        "premise_only": 2.0
+      },
+      "search_ratio": 0.9484536082474226,
+      "verdict": "NO"
+    },
+    "stance": {
+      "works": true
+    }
+  },
+  "rule_source": "docs/experiments/RV2_EXTERNAL_VALIDATION_PLAN.md (pre-registered)"
+}

@@ -1,0 +1,65 @@
+{
+  "chosen_per_dataset": 72,
+  "experiment": "RV2-D retrieval only",
+  "hard_cap_usd": "0.50",
+  "ledger_after_probe": {
+    "cumulative_project_cost_usd": "0.232127700",
+    "generation_attempts": 2047,
+    "halted": null,
+    "pending_attempts": 0,
+    "remaining_usd": "49.767872300",
+    "run_cap_usd": "0.50",
+    "run_id": "rv2-d-retrieval-v1",
+    "run_spent_plus_reserved_usd": "0.0034543",
+    "settled_physical_usage": {
+      "project": {
+        "api_calls": 4094,
+        "cache_write_tokens": 283824,
+        "cached_input_tokens": 0,
+        "completion_tokens": 274171,
+        "latency_seconds": 5827.670263025211,
+        "model_calls": 2047,
+        "preflight_calls": 2047,
+        "prompt_tokens": 879466,
+        "reasoning_tokens": 182155
+      },
+      "run": {
+        "api_calls": 52,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "completion_tokens": 4736,
+        "latency_seconds": 87.90089458203875,
+        "model_calls": 26,
+        "preflight_calls": 26,
+        "prompt_tokens": 10863,
+        "reasoning_tokens": 3253
+      }
+    },
+    "total_cap_usd": "50",
+    "validation_reserve_usd": "5"
+  },
+  "plans": {
+    "48": {
+      "planning_cost_usd": 0.2007216,
+      "questions": 96
+    },
+    "72": {
+      "planning_cost_usd": 0.3010824,
+      "questions": 144
+    }
+  },
+  "probe_logical_cost_per_question_usd": 0.00209085,
+  "probe_mean_case_seconds": 10.894308067741804,
+  "probe_questions": [
+    [
+      "2wikimultihop",
+      "88c1666c085711ebbd5aac1f6bf848b6"
+    ],
+    [
+      "hotpotqa",
+      "5a78d01d55429974737f78b3"
+    ]
+  ],
+  "rule": "largest per-dataset size in (72, 48) with planning cost <= 80% of the cap",
+  "run_id": "rv2-d-retrieval-v1"
+}

@@ -1,0 +1,1081 @@
+{
+  "case_rows": 185,
+  "code": "tag epistemic-search-v1.1",
+  "datasets": {
+    "2wikimultihop": "dev",
+    "hotpotqa": "dev distractor"
+  },
+  "estimate": {
+    "chosen_per_dataset": 72,
+    "experiment": "RV2-D retrieval only",
+    "hard_cap_usd": "0.50",
+    "ledger_after_probe": {
+      "cumulative_project_cost_usd": "0.232127700",
+      "generation_attempts": 2047,
+      "halted": null,
+      "pending_attempts": 0,
+      "remaining_usd": "49.767872300",
+      "run_cap_usd": "0.50",
+      "run_id": "rv2-d-retrieval-v1",
+      "run_spent_plus_reserved_usd": "0.0034543",
+      "settled_physical_usage": {
+        "project": {
+          "api_calls": 4094,
+          "cache_write_tokens": 283824,
+          "cached_input_tokens": 0,
+          "completion_tokens": 274171,
+          "latency_seconds": 5827.670263025211,
+          "model_calls": 2047,
+          "preflight_calls": 2047,
+          "prompt_tokens": 879466,
+          "reasoning_tokens": 182155
+        },
+        "run": {
+          "api_calls": 52,
+          "cache_write_tokens": 0,
+          "cached_input_tokens": 0,
+          "completion_tokens": 4736,
+          "latency_seconds": 87.90089458203875,
+          "model_calls": 26,
+          "preflight_calls": 26,
+          "prompt_tokens": 10863,
+          "reasoning_tokens": 3253
+        }
+      },
+      "total_cap_usd": "50",
+      "validation_reserve_usd": "5"
+    },
+    "plans": {
+      "48": {
+        "planning_cost_usd": 0.2007216,
+        "questions": 96
+      },
+      "72": {
+        "planning_cost_usd": 0.3010824,
+        "questions": 144
+      }
+    },
+    "probe_logical_cost_per_question_usd": 0.00209085,
+    "probe_mean_case_seconds": 10.894308067741804,
+    "probe_questions": [
+      [
+        "2wikimultihop",
+        "88c1666c085711ebbd5aac1f6bf848b6"
+      ],
+      [
+        "hotpotqa",
+        "5a78d01d55429974737f78b3"
+      ]
+    ],
+    "rule": "largest per-dataset size in (72, 48) with planning cost <= 80% of the cap",
+    "run_id": "rv2-d-retrieval-v1"
+  },
+  "excluded_pilot_ids": [
+    "1105",
+    "1118315c0bdd11eba7f7acde48001122",
+    "28b6cbf808d511ebbd98ac1f6bf848b6",
+    "2bf61f58088a11ebbd6eac1f6bf848b6",
+    "5352c0240baf11ebab90acde48001122",
+    "5a7363ec5542991f29ee2dd7",
+    "5a75d9b4554299109176e5a7",
+    "5a7b3ec95542995eb53be8d3",
+    "5a7fb1765542992e7d278d20",
+    "5a80ad19554299485f5986a8",
+    "5a86eee85542994775f60787",
+    "5a8a5c0d554299515336137b",
+    "5abc089b5542993f40c73c57",
+    "5ae6050f55429929b0807a5e",
+    "5ae63b2255429908198fa526",
+    "7aa50b6a08a711ebbd7fac1f6bf848b6",
+    "80774c5508f911ebbdaaac1f6bf848b6",
+    "88",
+    "92dc836e0bdd11eba7f7acde48001122",
+    "a0b2a4ce0baf11ebab90acde48001122",
+    "a3b95abe0bdc11eba7f7acde48001122",
+    "f7ccb422088311ebbd6dac1f6bf848b6"
+  ],
+  "experiment": "RV2-D retrieval only",
+  "ledger": {
+    "cumulative_project_cost_usd": "0.302384225",
+    "generation_attempts": 2533,
+    "halted": "API failure with uncertain charge; maximum reservation retained",
+    "pending_attempts": 1,
+    "remaining_usd": "49.697615775",
+    "run_cap_usd": "0.50",
+    "run_id": "rv2-d-retrieval-v1",
+    "run_spent_plus_reserved_usd": "0.073710825",
+    "settled_physical_usage": {
+      "project": {
+        "api_calls": 5064,
+        "cache_write_tokens": 295166,
+        "cached_input_tokens": 0,
+        "completion_tokens": 367202,
+        "latency_seconds": 7414.276718723937,
+        "model_calls": 2532,
+        "preflight_calls": 2532,
+        "prompt_tokens": 1092877,
+        "reasoning_tokens": 247829
+      },
+      "run": {
+        "api_calls": 1022,
+        "cache_write_tokens": 11342,
+        "cached_input_tokens": 0,
+        "completion_tokens": 97767,
+        "latency_seconds": 1674.5073502807645,
+        "model_calls": 511,
+        "preflight_calls": 511,
+        "prompt_tokens": 224274,
+        "reasoning_tokens": 68927
+      }
+    },
+    "total_cap_usd": "50",
+    "validation_reserve_usd": "5"
+  },
+  "metrics": {
+    "2wikimultihop": {
+      "epistemic_search": {
+        "all_gold_retrieved": 0.21739130434782608,
+        "duplicate_rate": 0.356060606060606,
+        "errors_or_budget_stops": 1,
+        "gold_document_recall": 0.5434782608695652,
+        "gold_fact_recall": 0.5434782608695652,
+        "logical_cost_usd": 0.020309,
+        "mean_searches": 1.9565217391304348,
+        "model_calls": 189,
+        "new_api_cost_usd": 0.015381,
+        "questions": 23,
+        "retrieved_tokens": 370.7826086956522,
+        "searches_to_all_gold_censored_mean": 3.347826086956522,
+        "useful_gold_per_search": 0.8030303030303031
+      },
+      "iterative_rag": {
+        "all_gold_retrieved": 0.7391304347826086,
+        "duplicate_rate": 0.18478260869565216,
+        "errors_or_budget_stops": 7,
+        "gold_document_recall": 0.8695652173913043,
+        "gold_fact_recall": 0.8695652173913043,
+        "logical_cost_usd": 0.005900725,
+        "mean_searches": 2.130434782608696,
+        "model_calls": 49,
+        "new_api_cost_usd": 0.00528265,
+        "questions": 23,
+        "retrieved_tokens": 376.04347826086956,
+        "searches_to_all_gold_censored_mean": 2.391304347826087,
+        "useful_gold_per_search": 1.144927536231884
+      },
+      "naive_rag": {
+        "all_gold_retrieved": 0.21739130434782608,
+        "duplicate_rate": 0.0,
+        "errors_or_budget_stops": 0,
+        "gold_document_recall": 0.5108695652173914,
+        "gold_fact_recall": 0.5108695652173914,
+        "logical_cost_usd": 0.00195185,
+        "mean_searches": 1.0,
+        "model_calls": 23,
+        "new_api_cost_usd": 0.00188155,
+        "questions": 23,
+        "retrieved_tokens": 186.34782608695653,
+        "searches_to_all_gold_censored_mean": 3.347826086956522,
+        "useful_gold_per_search": 1.173913043478261
+      },
+      "premise_only": {
+        "all_gold_retrieved": 0.21739130434782608,
+        "duplicate_rate": 0.3939393939393939,
+        "errors_or_budget_stops": 1,
+        "gold_document_recall": 0.5434782608695652,
+        "gold_fact_recall": 0.5434782608695652,
+        "logical_cost_usd": 0.02038885,
+        "mean_searches": 2.0434782608695654,
+        "model_calls": 70,
+        "new_api_cost_usd": 0.016953175,
+        "questions": 23,
+        "retrieved_tokens": 394.2173913043478,
+        "searches_to_all_gold_censored_mean": 3.347826086956522,
+        "useful_gold_per_search": 0.7727272727272727
+      }
+    },
+    "Q5": {
+      "best_plain": "iterative_rag",
+      "best_premise_directed": "premise_only",
+      "ci95": [
+        -0.4021739130434782,
+        -0.2282608695652174
+      ],
+      "gap_best_premise_directed_minus_best_plain": -0.31521739130434784,
+      "mean_searches": {
+        "iterative_rag": 2.108695652173913,
+        "premise_only": 2.0
+      },
+      "search_ratio": 0.9484536082474226,
+      "verdict": "NO"
+    },
+    "complete_questions": 46,
+    "hotpotqa": {
+      "epistemic_search": {
+        "all_gold_retrieved": 0.043478260869565216,
+        "duplicate_rate": 0.356060606060606,
+        "errors_or_budget_stops": 1,
+        "gold_document_recall": 0.391304347826087,
+        "gold_fact_recall": 0.391304347826087,
+        "logical_cost_usd": 0.0166961,
+        "mean_searches": 1.9130434782608696,
+        "model_calls": 165,
+        "new_api_cost_usd": 0.0127337,
+        "questions": 23,
+        "retrieved_tokens": 338.4782608695652,
+        "searches_to_all_gold_censored_mean": 3.869565217391304,
+        "useful_gold_per_search": 0.4848484848484848
+      },
+      "iterative_rag": {
+        "all_gold_retrieved": 0.5217391304347826,
+        "duplicate_rate": 0.20652173913043478,
+        "errors_or_budget_stops": 7,
+        "gold_document_recall": 0.6956521739130435,
+        "gold_fact_recall": 0.7000000000000001,
+        "logical_cost_usd": 0.0052808,
+        "mean_searches": 2.0869565217391304,
+        "model_calls": 48,
+        "new_api_cost_usd": 0.0043591,
+        "questions": 23,
+        "retrieved_tokens": 316.69565217391306,
+        "searches_to_all_gold_censored_mean": 2.9565217391304346,
+        "useful_gold_per_search": 0.7391304347826086
+      },
+      "naive_rag": {
+        "all_gold_retrieved": 0.043478260869565216,
+        "duplicate_rate": 0.0,
+        "errors_or_budget_stops": 0,
+        "gold_document_recall": 0.3695652173913043,
+        "gold_fact_recall": 0.3695652173913043,
+        "logical_cost_usd": 0.0018094,
+        "mean_searches": 1.0,
+        "model_calls": 23,
+        "new_api_cost_usd": 0.0018094,
+        "questions": 23,
+        "retrieved_tokens": 166.30434782608697,
+        "searches_to_all_gold_censored_mean": 3.869565217391304,
+        "useful_gold_per_search": 0.7391304347826086
+      },
+      "premise_only": {
+        "all_gold_retrieved": 0.043478260869565216,
+        "duplicate_rate": 0.40151515151515155,
+        "errors_or_budget_stops": 1,
+        "gold_document_recall": 0.391304347826087,
+        "gold_fact_recall": 0.391304347826087,
+        "logical_cost_usd": 0.01570345,
+        "mean_searches": 1.9565217391304348,
+        "model_calls": 68,
+        "new_api_cost_usd": 0.012931675,
+        "questions": 23,
+        "retrieved_tokens": 350.69565217391306,
+        "searches_to_all_gold_censored_mean": 3.869565217391304,
+        "useful_gold_per_search": 0.446969696969697
+      }
+    },
+    "pooled": {
+      "epistemic_search": {
+        "all_gold_retrieved": 0.13043478260869565,
+        "duplicate_rate": 0.356060606060606,
+        "errors_or_budget_stops": 2,
+        "gold_document_recall": 0.4673913043478261,
+        "gold_fact_recall": 0.4673913043478261,
+        "logical_cost_usd": 0.0370051,
+        "mean_searches": 1.934782608695652,
+        "model_calls": 354,
+        "new_api_cost_usd": 0.0281147,
+        "questions": 46,
+        "retrieved_tokens": 354.6304347826087,
+        "searches_to_all_gold_censored_mean": 3.608695652173913,
+        "useful_gold_per_search": 0.6439393939393939
+      },
+      "iterative_rag": {
+        "all_gold_retrieved": 0.6304347826086957,
+        "duplicate_rate": 0.1956521739130435,
+        "errors_or_budget_stops": 14,
+        "gold_document_recall": 0.782608695652174,
+        "gold_fact_recall": 0.7847826086956522,
+        "logical_cost_usd": 0.011181525,
+        "mean_searches": 2.108695652173913,
+        "model_calls": 97,
+        "new_api_cost_usd": 0.00964175,
+        "questions": 46,
+        "retrieved_tokens": 346.3695652173913,
+        "searches_to_all_gold_censored_mean": 2.6739130434782608,
+        "useful_gold_per_search": 0.9420289855072465
+      },
+      "naive_rag": {
+        "all_gold_retrieved": 0.13043478260869565,
+        "duplicate_rate": 0.0,
+        "errors_or_budget_stops": 0,
+        "gold_document_recall": 0.44021739130434784,
+        "gold_fact_recall": 0.44021739130434784,
+        "logical_cost_usd": 0.0037612500000000003,
+        "mean_searches": 1.0,
+        "model_calls": 46,
+        "new_api_cost_usd": 0.00369095,
+        "questions": 46,
+        "retrieved_tokens": 176.32608695652175,
+        "searches_to_all_gold_censored_mean": 3.608695652173913,
+        "useful_gold_per_search": 0.9565217391304348
+      },
+      "premise_only": {
+        "all_gold_retrieved": 0.13043478260869565,
+        "duplicate_rate": 0.3977272727272727,
+        "errors_or_budget_stops": 2,
+        "gold_document_recall": 0.4673913043478261,
+        "gold_fact_recall": 0.4673913043478261,
+        "logical_cost_usd": 0.0360923,
+        "mean_searches": 2.0,
+        "model_calls": 138,
+        "new_api_cost_usd": 0.02988485,
+        "questions": 46,
+        "retrieved_tokens": 372.45652173913044,
+        "searches_to_all_gold_censored_mean": 3.608695652173913,
+        "useful_gold_per_search": 0.6098484848484849
+      }
+    }
+  },
+  "model": "gpt-6-luna",
+  "reasoning_effort": "medium",
+  "run_id": "rv2-d-retrieval-v1",
+  "sample": [
+    [
+      "2wikimultihop",
+      "88c1666c085711ebbd5aac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a78d01d55429974737f78b3",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "366860a5086711ebbd5eac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5adfc77b554299603e4183ab",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "f1a9a49e0bdd11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5a90740a5542990a98493658",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "18f0a0220baf11ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5a83041355429966c78a6ae8",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "a1fc7b00088211ebbd6dac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5ab56e085542992aa134a315",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "293efbb2096911ebbdafac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5ab9ddef5542994dbf019875",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "b2db6b6c0bdd11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5a89fea655429970aeb701eb",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "1734c9b60baf11ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5a84be095542992a431d1a97",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "fbae3264089411ebbd75ac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a77d3f555429967ab1052c5",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "54eb9ff0097511ebbdb0ac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a7b215f55429931da12c9e3",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "03a6c6060bdc11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5ae4ca6355429913cc204507",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "6a8a2f880bb011ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5ae54b6355429908b63265cc",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "0adc72c408b511ebbd88ac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a8463945542992ef85e23d9",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "62c07e0108e611ebbda5ac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a835a265542992ef85e2281",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "f299dd600bdd11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5ab7d33d5542992aa3b8c859",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "f0231ce60baf11ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5adf3feb5542993a75d2644c",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "ad193b1808b411ebbd88ac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5abf931f5542990832d3a158",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "e6e862f208b511ebbd88ac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5abbdaac5542992ccd8e7fc0",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "6add3d560bdb11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5ade126355429939a52fe7ea",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "dc6e054e0baf11ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5ab9aed855429970cfb8eb6d",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "e4fbb7ad08b611ebbd88ac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a8f5bb45542992414482a77",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "aea6eec3097611ebbdb0ac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a8781b65542993e715abf8f",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "62c67f960bdc11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5ac274fc55429963665199c1",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "f4a66ac60bae11ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5a7fc6e45542992e7d278d73",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "85b6ab18087e11ebbd6bac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5ab48c325542996a3a969f93",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "295f9dee08fc11ebbdadac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5ae4d7fc5542990ba0bbb16f",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "2b9f37500bdd11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5ab7c3df5542993667794003",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "8eb5dfe20bb011ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5a8e42d15542995a26add4a6",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "c99725d6085811ebbd5bac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5ae4ea2a5542993aec5ec0ee",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "52bd3f41097011ebbdb0ac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a8c49655542995e66a47598",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "2f25d8720bdb11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5a7b086a5542992d025e673a",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "02912df60baf11ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5a8b59a65542995d1e6f137c",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "5dd21fb508a711ebbd7fac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5ac4e9ab5542996feb3fe974",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "2d6d46a1086311ebbd5eac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a76387d554299109176e6ba",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "96a1b68a0bd911eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5a85f98e5542996432c57152",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "495d61cc0bb011ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5a7199725542994082a3e88f",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "636a86b808d511ebbd98ac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5ade51515542992fa25da745",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "0edf5dbf08d811ebbd9aac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a7f3361554299306751369a",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "6bda7b1c0bde11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5ab94bc2554299743d22eacf",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "58e236320baf11ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5a876f785542993e715abf42",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "9b087dc208c711ebbd91ac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5ae0613d5542993d6555eb22",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "bc29cc49085611ebbd59ac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5ae43d7f5542996836b02c59",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "022e38200bde11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5a8485fa5542992a431d1a41",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "7729acf00bb011ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5ae3639b5542991a06ce99b2",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "4ebd4dc608c711ebbd91ac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a7619765542992db9473728",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "025e0636088c11ebbd6fac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a7345185542992359bc32cb",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "086d798a0bde11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5ac4ec9955429924173fb4da",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "4293552c0bb011ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5ac3a4ab5542993915413870",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "fbae3262089411ebbd75ac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a7a69365542996c55b2dd9b",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "e2cecd29096711ebbdafac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a794f8155429970f5fffe95",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "8ba66b4c0bdc11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5a73984355429908901be307",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "bb388cb40baf11ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5a8197905542995ce29dcc10",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "b1395d3e089311ebbd75ac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a79186f55429907847277af",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "43c31e26089911ebbd77ac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a7269fa5542992359bc308d",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "1d4198820bde11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5a75ac415542992d0ec05fdb",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "2002bf0c0bb011ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5ade64c7554299728e26c710",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "f1c07a3f089511ebbd75ac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5ac2c22e5542990b17b15485",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "64c134bc08b211ebbd85ac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a838eba5542992ef85e22fe",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "57511f820bdb11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5a8c5eca554299240d9c213d",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "6d273fd80bb011ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5ae17a9b5542990adbacf7a2",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "3a0f751c086211ebbd5dac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a84de5f5542991dd0999e07",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "6bb80b9c087b11ebbd68ac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5a89dfcc55429946c8d6e9f0",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "b6b306fa0bdd11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5ae7385d5542992ae0d163da",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "e820bc480bae11ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5a7577145542996c70cfaf03",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "a27454d508bb11ebbd88ac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5adbfbd555429947ff173893",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "e23884ee095a11ebbdaeac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5ab819065542995dae37ea3c",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "21e70b7e0bde11eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5a8f93f5554299458435d67e",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "3d2951d60bb011ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5aba67c255429955dce3ee10",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "ac96e828084d11ebbd56ac1f6bf848b6",
+      "bridge_comparison"
+    ],
+    [
+      "hotpotqa",
+      "5ae701b2554299572ea54680",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "5412c02008d211ebbd95ac1f6bf848b6",
+      "comparison"
+    ],
+    [
+      "hotpotqa",
+      "5ae2c4d75542991a06ce98d0",
+      "comparison"
+    ],
+    [
+      "2wikimultihop",
+      "60fd4e7c0bd911eba7f7acde48001122",
+      "compositional"
+    ],
+    [
+      "hotpotqa",
+      "5abd5b0355429933744ab789",
+      "bridge"
+    ],
+    [
+      "2wikimultihop",
+      "18e9a16e0baf11ebab90acde48001122",
+      "inference"
+    ],
+    [
+      "hotpotqa",
+      "5ab499a55542996a3a969f9f",
+      "comparison"
+    ]
+  ],
+  "sampling_seed": 20261029,
+  "seed": 42,
+  "settings": {
+    "budget": {
+      "max_cost_usd": null,
+      "max_documents": 6,
+      "max_latency_seconds": 600.0,
+      "max_llm_calls": 24,
+      "max_retrieved_tokens": 50000,
+      "max_search_calls": 3,
+      "max_total_llm_input_tokens": 100000,
+      "max_total_llm_output_tokens": 32768
+    },
+    "k": 2,
+    "max_rounds": 3
+  },
+  "stopped_by_cap": "API failure with uncertain charge; maximum reservation retained",
+  "wall_seconds": 1650.0412074170308
+}
