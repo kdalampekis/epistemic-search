@@ -120,17 +120,17 @@ def gold(case: QueryCase) -> tuple[set[str], list[tuple[str, int]]]:
 
 
 def searches(result: RunResult) -> list[tuple[str, list[tuple[str, str]]]]:
-    """(query, [(source id, title)]) for every search, in order, read from the trace."""
+    """(query, [(source id, title)]) for every search, in order, read from the trace.
+
+    A SEARCH event's payload is ``{"query", "k", "response"}``.
+    """
     out = []
     for event in result.trace:
         if event.type == "SEARCH":
             payload: Any = event.payload
-            response = SearchResponse.model_validate(payload)
+            response = SearchResponse.model_validate(payload["response"])
             out.append(
-                (
-                    str(response.results[0].query) if response.results else "",
-                    [(r.source.id, r.source.title) for r in response.results],
-                )
+                (str(payload["query"]), [(r.source.id, r.source.title) for r in response.results])
             )
     return out
 

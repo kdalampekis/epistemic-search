@@ -55,7 +55,11 @@ def trace(searches: list[list[str]]) -> RunResult:
                 component="search",
                 timestamp=datetime(2026, 1, 1, tzinfo=UTC),
                 usage=response.usage,
-                payload=response.model_dump(mode="json"),
+                payload={
+                    "query": f"query{n}",
+                    "k": 2,
+                    "response": response.model_dump(mode="json"),
+                },
             )
         )
     return RunResult(
