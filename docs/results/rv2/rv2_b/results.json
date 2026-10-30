@@ -1,0 +1,303 @@
+{
+  "arms": [
+    {
+      "mode": "oracle",
+      "oracle_structure": true,
+      "systems": [
+        "epistemic_search"
+      ]
+    },
+    {
+      "mode": "generated",
+      "oracle_structure": false,
+      "systems": [
+        "epistemic_search"
+      ]
+    }
+  ],
+  "case_rows": {
+    "generated": 72,
+    "oracle": 72
+  },
+  "code": "tag epistemic-search-v1.1 + oracle injection harness",
+  "conditions": [
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+  ],
+  "dataset": "entailmentbank task_2 dev",
+  "estimate": {
+    "chosen_examples": 18,
+    "chosen_per_size": 6,
+    "experiment": "RV2-B oracle structure",
+    "hard_cap_usd": "0.25",
+    "ledger_after_probe": {
+      "cumulative_project_cost_usd": "0.097130425",
+      "generation_attempts": 501,
+      "halted": null,
+      "pending_attempts": 0,
+      "remaining_usd": "49.902869575",
+      "run_cap_usd": "0.25",
+      "run_id": "rv2-b-oracle-structure-v1",
+      "run_spent_plus_reserved_usd": "0.002405325",
+      "settled_physical_usage": {
+        "project": {
+          "api_calls": 1002,
+          "cache_write_tokens": 201985,
+          "cached_input_tokens": 0,
+          "completion_tokens": 106068,
+          "latency_seconds": 1777.1779642592883,
+          "model_calls": 501,
+          "preflight_calls": 501,
+          "prompt_tokens": 390468,
+          "reasoning_tokens": 72365
+        },
+        "run": {
+          "api_calls": 48,
+          "cache_write_tokens": 1093,
+          "cached_input_tokens": 0,
+          "completion_tokens": 3366,
+          "latency_seconds": 67.2190809630556,
+          "model_calls": 24,
+          "preflight_calls": 24,
+          "prompt_tokens": 6950,
+          "reasoning_tokens": 2362
+        }
+      },
+      "total_cap_usd": "50",
+      "validation_reserve_usd": "5"
+    },
+    "plans": {
+      "6": {
+        "examples": 18,
+        "planning_cost_usd": 0.1898547
+      },
+      "9": {
+        "examples": 27,
+        "planning_cost_usd": 0.28478205
+      }
+    },
+    "probe_example": "Mercury_SC_405505",
+    "probe_leaves": 3,
+    "probe_logical_cost_usd": 0.006780525,
+    "probe_mean_case_seconds": 0.0326242968585575,
+    "probe_new_api_cost_usd": 0.0,
+    "rule": "largest per-size in (9, 6) with planning cost <= 80% of the cap",
+    "run_id": "rv2-b-oracle-structure-v1"
+  },
+  "experiment": "RV2-B oracle structure",
+  "ledger": {
+    "cumulative_project_cost_usd": "0.180905150",
+    "generation_attempts": 1466,
+    "halted": null,
+    "pending_attempts": 0,
+    "remaining_usd": "49.819094850",
+    "run_cap_usd": "0.25",
+    "run_id": "rv2-b-oracle-structure-v1",
+    "run_spent_plus_reserved_usd": "0.086180050",
+    "settled_physical_usage": {
+      "project": {
+        "api_calls": 2932,
+        "cache_write_tokens": 263478,
+        "cached_input_tokens": 0,
+        "completion_tokens": 213157,
+        "latency_seconds": 4091.994521081564,
+        "model_calls": 1466,
+        "preflight_calls": 1466,
+        "prompt_tokens": 677397,
+        "reasoning_tokens": 144922
+      },
+      "run": {
+        "api_calls": 1978,
+        "cache_write_tokens": 62586,
+        "cached_input_tokens": 0,
+        "completion_tokens": 110455,
+        "latency_seconds": 2382.0356377853313,
+        "model_calls": 989,
+        "preflight_calls": 989,
+        "prompt_tokens": 293879,
+        "reasoning_tokens": 74919
+      }
+    },
+    "total_cap_usd": "50",
+    "validation_reserve_usd": "5"
+  },
+  "metrics": {
+    "Q4": {
+      "J_generated": 0.05555555555555558,
+      "J_oracle": 0.4444444444444444,
+      "examples": 18,
+      "gap": 0.38888888888888884,
+      "verdict": "YES"
+    },
+    "conditional_on_valid_generated_decomposition": {
+      "J_generated": 0.07692307692307693,
+      "J_oracle": 0.46153846153846156,
+      "examples": 13,
+      "gap": 0.38461538461538464,
+      "generated": {
+        "J": 0.07692307692307693,
+        "abstention_rate": 0.6153846153846154,
+        "answer_hit_rate_among_complete_answers": 0.45454545454545453,
+        "answer_rate": {
+          "C1": 0.38461538461538464,
+          "C2": 0.3076923076923077,
+          "C3": 0.38461538461538464,
+          "C4": 0.46153846153846156
+        },
+        "blocker_localization_exact": 0.0,
+        "cases": 52,
+        "completion_tokens": 116892,
+        "coverage_on_complete": 0.4230769230769231,
+        "errors_and_budget_stops": 0,
+        "examples": 13,
+        "logical_cost_usd": 0.0841383,
+        "mean_answer_f1_among_complete_answers": 0.47101626235346017,
+        "mean_latency_seconds": 16.844826808447788,
+        "mean_unresolved_premises": {
+          "C1": 1.0769230769230769,
+          "C2": 1.3846153846153846,
+          "C3": 1.0769230769230769,
+          "C4": 0.7692307692307693
+        },
+        "model_calls": 1068,
+        "new_api_cost_usd": 0.031514,
+        "no_progress_stops": 32,
+        "prompt_tokens": 254914,
+        "proof_completion_accuracy": 0.4230769230769231,
+        "removed_leaf_among_blockers": 0.0,
+        "search_calls": 84,
+        "selective_risk": 0.75,
+        "span_rejections": 0,
+        "unsupported_answer_rate": 0.34615384615384615
+      }
+    },
+    "example_ids": [
+      "ACTAAP_2014_5_10",
+      "AIMS_2009_4_17",
+      "CSZ30661",
+      "CSZ_2008_5_CSZ20111",
+      "LEAP_2004_4_10259",
+      "MCAS_1998_8_9",
+      "MCAS_2004_5_6",
+      "MSA_2013_5_36",
+      "Mercury_401790",
+      "Mercury_7007508",
+      "Mercury_7010080",
+      "Mercury_SC_401224",
+      "Mercury_SC_405505",
+      "Mercury_SC_407308",
+      "NAEP_2000_4_S12+7",
+      "NYSEDREGENTS_2006_8_10",
+      "NYSEDREGENTS_2009_4_20",
+      "TIMSS_2007_4_pg48"
+    ],
+    "examples_with_both_arms": 18,
+    "generated": {
+      "J": 0.05555555555555558,
+      "abstention_rate": 0.4444444444444444,
+      "answer_hit_rate_among_complete_answers": 0.45454545454545453,
+      "answer_rate": {
+        "C1": 0.2777777777777778,
+        "C2": 0.2222222222222222,
+        "C3": 0.2777777777777778,
+        "C4": 0.3333333333333333
+      },
+      "blocker_localization_exact": 0.0,
+      "cases": 72,
+      "completion_tokens": 131852,
+      "coverage_on_complete": 0.3055555555555556,
+      "errors_and_budget_stops": 20,
+      "examples": 18,
+      "logical_cost_usd": 0.0922611,
+      "mean_answer_f1_among_complete_answers": 0.47101626235346017,
+      "mean_latency_seconds": 12.618769632490714,
+      "mean_unresolved_premises": {
+        "C1": 0.7777777777777778,
+        "C2": 1.0,
+        "C3": 0.7777777777777778,
+        "C4": 0.5555555555555556
+      },
+      "model_calls": 1088,
+      "new_api_cost_usd": 0.0331063,
+      "no_progress_stops": 32,
+      "prompt_tokens": 261342,
+      "proof_completion_accuracy": 0.5833333333333334,
+      "removed_leaf_among_blockers": 0.0,
+      "search_calls": 84,
+      "selective_risk": 0.75,
+      "span_rejections": 0,
+      "unsupported_answer_rate": 0.25
+    },
+    "generated_decomposition_validity": {
+      "examples": 18,
+      "note": "invalid = the model's graph failed the pipeline's structural validation",
+      "rate": 0.7222222222222222,
+      "valid": 13
+    },
+    "oracle": {
+      "J": 0.4444444444444444,
+      "abstention_rate": 0.3055555555555556,
+      "answer_hit_rate_among_complete_answers": 0.18181818181818182,
+      "answer_rate": {
+        "C1": 0.9444444444444444,
+        "C2": 0.4444444444444444,
+        "C3": 0.5,
+        "C4": 0.8888888888888888
+      },
+      "blocker_localization_exact": 0.5277777777777778,
+      "cases": 72,
+      "completion_tokens": 178727,
+      "coverage_on_complete": 0.9166666666666666,
+      "errors_and_budget_stops": 0,
+      "examples": 18,
+      "logical_cost_usd": 0.13679805,
+      "mean_answer_f1_among_complete_answers": 0.30669245278034235,
+      "mean_latency_seconds": 19.55806880220027,
+      "mean_unresolved_premises": {
+        "C1": 0.1111111111111111,
+        "C2": 0.5555555555555556,
+        "C3": 0.5,
+        "C4": 0.16666666666666666
+      },
+      "model_calls": 1793,
+      "new_api_cost_usd": 0.050668425,
+      "no_progress_stops": 22,
+      "prompt_tokens": 460708,
+      "proof_completion_accuracy": 0.9166666666666666,
+      "removed_leaf_among_blockers": 0.5277777777777778,
+      "search_calls": 94,
+      "selective_risk": 0.88,
+      "span_rejections": 0,
+      "unsupported_answer_rate": 0.4722222222222222
+    }
+  },
+  "model": "gpt-6-luna",
+  "reasoning_effort": "medium",
+  "run_id": "rv2-b-oracle-structure-v1",
+  "sample_ids": [
+    "Mercury_SC_405505",
+    "Mercury_SC_407308",
+    "MCAS_1998_8_9",
+    "CSZ30661",
+    "NYSEDREGENTS_2009_4_20",
+    "AIMS_2009_4_17",
+    "Mercury_SC_401224",
+    "MCAS_2004_5_6",
+    "CSZ_2008_5_CSZ20111",
+    "Mercury_7007508",
+    "NYSEDREGENTS_2006_8_10",
+    "ACTAAP_2014_5_10",
+    "Mercury_7010080",
+    "MSA_2013_5_36",
+    "Mercury_401790",
+    "NAEP_2000_4_S12+7",
+    "TIMSS_2007_4_pg48",
+    "LEAP_2004_4_10259"
+  ],
+  "sampling_seed": 20261029,
+  "seed": 42,
+  "stopped_by_cap": null,
+  "wall_seconds": 2344.2356675419724
+}

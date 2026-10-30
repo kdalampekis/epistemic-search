@@ -1,0 +1,59 @@
+{
+  "chosen_examples": 18,
+  "chosen_per_size": 6,
+  "experiment": "RV2-B oracle structure",
+  "hard_cap_usd": "0.25",
+  "ledger_after_probe": {
+    "cumulative_project_cost_usd": "0.097130425",
+    "generation_attempts": 501,
+    "halted": null,
+    "pending_attempts": 0,
+    "remaining_usd": "49.902869575",
+    "run_cap_usd": "0.25",
+    "run_id": "rv2-b-oracle-structure-v1",
+    "run_spent_plus_reserved_usd": "0.002405325",
+    "settled_physical_usage": {
+      "project": {
+        "api_calls": 1002,
+        "cache_write_tokens": 201985,
+        "cached_input_tokens": 0,
+        "completion_tokens": 106068,
+        "latency_seconds": 1777.1779642592883,
+        "model_calls": 501,
+        "preflight_calls": 501,
+        "prompt_tokens": 390468,
+        "reasoning_tokens": 72365
+      },
+      "run": {
+        "api_calls": 48,
+        "cache_write_tokens": 1093,
+        "cached_input_tokens": 0,
+        "completion_tokens": 3366,
+        "latency_seconds": 67.2190809630556,
+        "model_calls": 24,
+        "preflight_calls": 24,
+        "prompt_tokens": 6950,
+        "reasoning_tokens": 2362
+      }
+    },
+    "total_cap_usd": "50",
+    "validation_reserve_usd": "5"
+  },
+  "plans": {
+    "6": {
+      "examples": 18,
+      "planning_cost_usd": 0.1898547
+    },
+    "9": {
+      "examples": 27,
+      "planning_cost_usd": 0.28478205
+    }
+  },
+  "probe_example": "Mercury_SC_405505",
+  "probe_leaves": 3,
+  "probe_logical_cost_usd": 0.006780525,
+  "probe_mean_case_seconds": 0.0326242968585575,
+  "probe_new_api_cost_usd": 0.0,
+  "rule": "largest per-size in (9, 6) with planning cost <= 80% of the cap",
+  "run_id": "rv2-b-oracle-structure-v1"
+}
