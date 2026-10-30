@@ -147,12 +147,13 @@ aggregate. See the [RV1 summary](../experiments/RV1_SUMMARY.md) for the failure
 distribution and its caveats. A human spot-check has not been done. The 22 pilot questions
 are development data and cannot serve as a test set. RV2 has not started.
 
-## RV2-E (pivot validation of the simpler architecture)
+## RV2-E (pivot validation of the simpler architecture): complete
 
-After the RV2 decision (`NOT_PROMISING_IN_CURRENT_FORM`), one last narrow test was designed:
-premise-state (per-premise RESOLVED / UNRESOLVED / CONFLICTING judged from the whole evidence set,
-fixed controller, no per-document stance or formal closure) against premise-only and the
-baselines on fresh EntailmentBank examples, with a pre-registered rule
-([plan](../experiments/RV2_E_PIVOT_PLAN.md)). Method, tests and plan are committed; **no model
-call has been made**. Running it needs an explicit decision to clear the ledger halt left by the
-RV2-D uncertain-charge failure. If it loses, the project stops.
+Result under the pre-registered rule: **`PREMISE_ONLY_SUFFICES`**. Premise-only replicated on 27
+fresh EntailmentBank examples (J 0.87 vs 0.09-0.11 for naive and iterative RAG). Premise-state
+(per-premise status judged from the whole evidence set, fixed controller) missed its viability
+bar on coverage (0.889 vs 0.90) and did not beat premise-only on J (delta -0.02, 95% CI
+[-0.17, +0.13]); it showed a supported but confounded search-recall advantage in the secondary
+setting. New spend $0.0939. See [RV2-E](../experiments/RV2_E_PIVOT.md) and
+[plan](../experiments/RV2_E_PIVOT_PLAN.md). The ledger is halted again (cancelled in-flight
+request); not cleared.

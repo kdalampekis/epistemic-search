@@ -1,0 +1,61 @@
+{
+  "chosen_examples": 32,
+  "chosen_per_size": 12,
+  "experiment": "RV2-E pivot validation",
+  "hard_cap_usd": "0.50",
+  "ledger_after_probe": {
+    "cumulative_project_cost_usd": "0.304822225",
+    "generation_attempts": 2561,
+    "halted": null,
+    "pending_attempts": 0,
+    "remaining_usd": "49.695177775",
+    "run_cap_usd": "0.50",
+    "run_id": "rv2-e-pivot-v1",
+    "run_spent_plus_reserved_usd": "0.0024380",
+    "settled_physical_usage": {
+      "project": {
+        "api_calls": 5122,
+        "cache_write_tokens": 295166,
+        "cached_input_tokens": 0,
+        "completion_tokens": 369966,
+        "latency_seconds": 7471.883055810817,
+        "model_calls": 2561,
+        "preflight_calls": 2561,
+        "prompt_tokens": 1103437,
+        "reasoning_tokens": 248772
+      },
+      "run": {
+        "api_calls": 56,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "completion_tokens": 2764,
+        "latency_seconds": 57.60633708687965,
+        "model_calls": 28,
+        "preflight_calls": 28,
+        "prompt_tokens": 10560,
+        "reasoning_tokens": 943
+      }
+    },
+    "total_cap_usd": "50",
+    "validation_reserve_usd": "5"
+  },
+  "plans": {
+    "12": {
+      "examples": 32,
+      "planning_cost_usd": 0.0977504
+    },
+    "4": {
+      "examples": 12,
+      "planning_cost_usd": 0.0366564
+    },
+    "8": {
+      "examples": 24,
+      "planning_cost_usd": 0.0733128
+    }
+  },
+  "probe_example": "NYSEDREGENTS_2016_4_18",
+  "probe_logical_cost_usd": 0.0030547,
+  "probe_mean_case_seconds": 2.4608792812456763,
+  "rule": "largest per-size in (12, 8, 4) with planning cost <= 80% of the cap",
+  "run_id": "rv2-e-pivot-v1"
+}

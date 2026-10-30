@@ -1,0 +1,384 @@
+{
+  "case_rows": {
+    "given": 432,
+    "lexical": 214
+  },
+  "code": "tag epistemic-search-v1.1.1 + premise_state",
+  "conditions": {
+    "given": [
+      "C1",
+      "C2",
+      "C3",
+      "C4"
+    ],
+    "lexical": [
+      "R1",
+      "R2"
+    ]
+  },
+  "dataset": "entailmentbank task_2 dev (fresh examples)",
+  "estimate": {
+    "chosen_examples": 32,
+    "chosen_per_size": 12,
+    "experiment": "RV2-E pivot validation",
+    "hard_cap_usd": "0.50",
+    "ledger_after_probe": {
+      "cumulative_project_cost_usd": "0.304822225",
+      "generation_attempts": 2561,
+      "halted": null,
+      "pending_attempts": 0,
+      "remaining_usd": "49.695177775",
+      "run_cap_usd": "0.50",
+      "run_id": "rv2-e-pivot-v1",
+      "run_spent_plus_reserved_usd": "0.0024380",
+      "settled_physical_usage": {
+        "project": {
+          "api_calls": 5122,
+          "cache_write_tokens": 295166,
+          "cached_input_tokens": 0,
+          "completion_tokens": 369966,
+          "latency_seconds": 7471.883055810817,
+          "model_calls": 2561,
+          "preflight_calls": 2561,
+          "prompt_tokens": 1103437,
+          "reasoning_tokens": 248772
+        },
+        "run": {
+          "api_calls": 56,
+          "cache_write_tokens": 0,
+          "cached_input_tokens": 0,
+          "completion_tokens": 2764,
+          "latency_seconds": 57.60633708687965,
+          "model_calls": 28,
+          "preflight_calls": 28,
+          "prompt_tokens": 10560,
+          "reasoning_tokens": 943
+        }
+      },
+      "total_cap_usd": "50",
+      "validation_reserve_usd": "5"
+    },
+    "plans": {
+      "12": {
+        "examples": 32,
+        "planning_cost_usd": 0.0977504
+      },
+      "4": {
+        "examples": 12,
+        "planning_cost_usd": 0.0366564
+      },
+      "8": {
+        "examples": 24,
+        "planning_cost_usd": 0.0733128
+      }
+    },
+    "probe_example": "NYSEDREGENTS_2016_4_18",
+    "probe_logical_cost_usd": 0.0030547,
+    "probe_mean_case_seconds": 2.4608792812456763,
+    "rule": "largest per-size in (12, 8, 4) with planning cost <= 80% of the cap",
+    "run_id": "rv2-e-pivot-v1"
+  },
+  "experiment": "RV2-E pivot validation",
+  "ledger": {
+    "cumulative_project_cost_usd": "0.396240875",
+    "generation_attempts": 3258,
+    "halted": "Cancelled API attempt; any pending maximum charge remains reserved",
+    "pending_attempts": 1,
+    "remaining_usd": "49.603759125",
+    "run_cap_usd": "0.50",
+    "run_id": "rv2-e-pivot-v1",
+    "run_spent_plus_reserved_usd": "0.09385665",
+    "settled_physical_usage": {
+      "project": {
+        "api_calls": 6514,
+        "cache_write_tokens": 295166,
+        "cached_input_tokens": 0,
+        "completion_tokens": 486839,
+        "latency_seconds": 9536.990637472016,
+        "model_calls": 3257,
+        "preflight_calls": 3257,
+        "prompt_tokens": 1412206,
+        "reasoning_tokens": 308844
+      },
+      "run": {
+        "api_calls": 1448,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "completion_tokens": 119637,
+        "latency_seconds": 2122.713918748079,
+        "model_calls": 724,
+        "preflight_calls": 724,
+        "prompt_tokens": 319329,
+        "reasoning_tokens": 61015
+      }
+    },
+    "total_cap_usd": "50",
+    "validation_reserve_usd": "5"
+  },
+  "metrics": {
+    "E_A": {
+      "iterative_rag": {
+        "J": 0.09259259259259256,
+        "abstention_rate": 0.0,
+        "answer_hit_rate_among_complete_answers": 0.14,
+        "answer_rate": {
+          "C1": 0.9629629629629629,
+          "C2": 0.8518518518518519,
+          "C3": 0.8148148148148148,
+          "C4": 0.8888888888888888
+        },
+        "cases": 108,
+        "completion_tokens": 13606,
+        "coverage_on_complete": 0.9259259259259259,
+        "errors_and_budget_stops": 13,
+        "examples": 27,
+        "logical_cost_usd": 0.0116602,
+        "mean_answer_f1_among_complete_answers": 0.25452376777386504,
+        "mean_latency_seconds": 2.379669234196492,
+        "model_calls": 134,
+        "new_api_cost_usd": 0.0095498,
+        "prompt_tokens": 48572,
+        "search_calls": 134,
+        "selective_risk": 0.9263157894736842,
+        "span_rejections": 0,
+        "unsupported_answer_rate": 0.8333333333333334
+      },
+      "naive_rag": {
+        "J": 0.11111111111111116,
+        "abstention_rate": 0.14814814814814814,
+        "answer_hit_rate_among_complete_answers": 0.40816326530612246,
+        "answer_rate": {
+          "C1": 0.9259259259259259,
+          "C2": 0.8148148148148148,
+          "C3": 0.7777777777777778,
+          "C4": 0.8888888888888888
+        },
+        "cases": 108,
+        "completion_tokens": 9790,
+        "coverage_on_complete": 0.9074074074074074,
+        "errors_and_budget_stops": 0,
+        "examples": 27,
+        "logical_cost_usd": 0.0080854,
+        "mean_answer_f1_among_complete_answers": 0.480118771042193,
+        "mean_latency_seconds": 2.273548966453678,
+        "model_calls": 108,
+        "new_api_cost_usd": 0.0080854,
+        "prompt_tokens": 31904,
+        "search_calls": 108,
+        "selective_risk": 0.782608695652174,
+        "span_rejections": 0,
+        "unsupported_answer_rate": 0.7962962962962963
+      },
+      "premise_only": {
+        "J": 0.8703703703703703,
+        "abstention_rate": 0.46296296296296297,
+        "answer_hit_rate_among_complete_answers": 0.25,
+        "answer_rate": {
+          "C1": 0.9629629629629629,
+          "C2": 0.1111111111111111,
+          "C3": 0.07407407407407407,
+          "C4": 0.9629629629629629
+        },
+        "cases": 108,
+        "completion_tokens": 24759,
+        "coverage_on_complete": 0.9629629629629629,
+        "errors_and_budget_stops": 1,
+        "examples": 27,
+        "logical_cost_usd": 0.0216939,
+        "mean_answer_f1_among_complete_answers": 0.3823917249474753,
+        "mean_latency_seconds": 3.076239176352155,
+        "model_calls": 157,
+        "new_api_cost_usd": 0.0158381,
+        "prompt_tokens": 93144,
+        "search_calls": 157,
+        "selective_risk": 0.7719298245614035,
+        "span_rejections": 0,
+        "unsupported_answer_rate": 0.09259259259259259
+      },
+      "premise_state": {
+        "J": 0.8518518518518519,
+        "abstention_rate": 0.5185185185185185,
+        "answer_hit_rate_among_complete_answers": 0.5833333333333334,
+        "answer_rate": {
+          "C1": 0.8888888888888888,
+          "C2": 0.0,
+          "C3": 0.07407407407407407,
+          "C4": 0.8888888888888888
+        },
+        "blocker_localization_exact": 0.9259259259259259,
+        "cases": 108,
+        "completion_tokens": 42372,
+        "coverage_on_complete": 0.8888888888888888,
+        "errors_and_budget_stops": 2,
+        "examples": 27,
+        "logical_cost_usd": 0.0313326,
+        "mean_answer_f1_among_complete_answers": 0.5455489327615765,
+        "mean_latency_seconds": 3.940435207184809,
+        "mean_unresolved_premises": {
+          "C1": 0.0,
+          "C2": 0.9629629629629629,
+          "C3": 0.8888888888888888,
+          "C4": 0.0
+        },
+        "model_calls": 214,
+        "new_api_cost_usd": 0.020364,
+        "no_progress_stops": 50,
+        "prompt_tokens": 101466,
+        "proof_completion_accuracy": 1.0,
+        "removed_leaf_among_blockers": 0.9259259259259259,
+        "search_calls": 158,
+        "selective_risk": 0.44,
+        "span_rejections": 0,
+        "unsupported_answer_rate": 0.037037037037037035
+      }
+    },
+    "E_B": {
+      "complete_examples": 26,
+      "recall_gain_M2_minus_M1": {
+        "lower": 0.060897435897436014,
+        "point": 0.1397435897435897,
+        "upper": 0.22756410256410264
+      },
+      "systems": {
+        "iterative_rag": {
+          "J": 0.0,
+          "answer_rate_R1_complete": 0.6153846153846154,
+          "answer_rate_R2_missing": 0.6153846153846154,
+          "logical_cost_usd": 0.007822,
+          "mean_searches": 1.9615384615384615,
+          "required_leaf_recall_R1": 0.29743589743589743
+        },
+        "naive_rag": {
+          "J": 0.038461538461538436,
+          "answer_rate_R1_complete": 0.4230769230769231,
+          "answer_rate_R2_missing": 0.38461538461538464,
+          "logical_cost_usd": 0.0028084,
+          "mean_searches": 1.0,
+          "required_leaf_recall_R1": 0.23141025641025642
+        },
+        "premise_only": {
+          "J": 0.2692307692307692,
+          "answer_rate_R1_complete": 0.5,
+          "answer_rate_R2_missing": 0.23076923076923078,
+          "logical_cost_usd": 0.0256086,
+          "mean_searches": 2.5961538461538463,
+          "required_leaf_recall_R1": 0.6551282051282052
+        },
+        "premise_state": {
+          "J": 0.2692307692307693,
+          "answer_rate_R1_complete": 0.38461538461538464,
+          "answer_rate_R2_missing": 0.11538461538461539,
+          "logical_cost_usd": 0.026209,
+          "mean_searches": 2.75,
+          "required_leaf_recall_R1": 0.7948717948717949
+        }
+      }
+    },
+    "complete_examples": 27,
+    "decision_inputs": {
+      "J": {
+        "iterative_rag": 0.09259259259259256,
+        "naive_rag": 0.11111111111111116,
+        "premise_only": 0.8703703703703703,
+        "premise_state": 0.8518518518518519
+      },
+      "R1_premise_only_viable": true,
+      "R2_premise_state_viable": false,
+      "best_baseline_J": 0.11111111111111116,
+      "cost_ratio_M2_over_M1": 1.4443046201927732,
+      "coverage_on_complete": {
+        "iterative_rag": 0.9259259259259259,
+        "naive_rag": 0.9074074074074074,
+        "premise_only": 0.9629629629629629,
+        "premise_state": 0.8888888888888888
+      },
+      "delta_J_M2_minus_M1": {
+        "lower": -0.16666666666666674,
+        "point": -0.01851851851851849,
+        "upper": 0.12962962962962965
+      },
+      "search_gain": true,
+      "sufficiency_gain": false
+    },
+    "example_ids": [
+      "ACTAAP_2010_7_1",
+      "AKDE&ED_2008_4_1",
+      "MCAS_2007_8_5169",
+      "Mercury_7024150",
+      "Mercury_7068653",
+      "Mercury_7084000",
+      "Mercury_7128905",
+      "Mercury_7158708",
+      "Mercury_7180915",
+      "Mercury_7212118",
+      "Mercury_7246978",
+      "Mercury_7271285",
+      "Mercury_LBS10959",
+      "Mercury_LBS11005",
+      "Mercury_SC_400200",
+      "Mercury_SC_401189",
+      "Mercury_SC_408664",
+      "Mercury_SC_409886",
+      "Mercury_SC_417575",
+      "Mercury_SC_LBS10900",
+      "NCEOGA_2013_5_29",
+      "NCEOGA_2013_5_57",
+      "NYSEDREGENTS_2016_4_1",
+      "NYSEDREGENTS_2016_4_18",
+      "TIMSS_2007_8_pg100",
+      "VASoL_2009_3_3",
+      "VASoL_2010_5_31"
+    ],
+    "outcome": {
+      "class": "PREMISE_ONLY_SUFFICES",
+      "rule": "R1 holds; M2 adds nothing (or is not viable)"
+    }
+  },
+  "model": "gpt-6-luna",
+  "reasoning_effort": "medium",
+  "run_id": "rv2-e-pivot-v1",
+  "sample_ids": [
+    "NYSEDREGENTS_2016_4_18",
+    "ACTAAP_2010_7_1",
+    "Mercury_7180915",
+    "NCEOGA_2013_5_29",
+    "VASoL_2009_3_3",
+    "Mercury_7068653",
+    "Mercury_7084000",
+    "Mercury_LBS11005",
+    "MCAS_2007_8_5169",
+    "Mercury_SC_417575",
+    "AKDE&ED_2008_4_1",
+    "Mercury_7246978",
+    "Mercury_LBS10959",
+    "NYSEDREGENTS_2016_4_1",
+    "NCEOGA_2013_5_57",
+    "Mercury_7128905",
+    "Mercury_7024150",
+    "Mercury_SC_408664",
+    "Mercury_SC_400200",
+    "Mercury_SC_LBS10900",
+    "Mercury_7158708",
+    "Mercury_SC_401189",
+    "TIMSS_2007_8_pg100",
+    "Mercury_SC_409886",
+    "Mercury_7271285",
+    "VASoL_2010_5_31",
+    "Mercury_7212118",
+    "Mercury_7084263",
+    "OHAT_2007_8_25",
+    "MCAS_1999_8_34",
+    "Mercury_SC_411888",
+    "MDSA_2010_5_2"
+  ],
+  "sampling_seed": 20261029,
+  "seed": 42,
+  "stopped_by_cap": "Cancelled API attempt; any pending maximum charge remains reserved",
+  "systems": {
+    "B0": "naive_rag",
+    "B1": "iterative_rag",
+    "M1": "premise_only",
+    "M2": "premise_state"
+  },
+  "wall_seconds": 2281.244603291969
+}
