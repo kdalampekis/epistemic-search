@@ -166,3 +166,13 @@ premise-only 0.13 (coverage 0.17), naive RAG 0.20, iterative RAG 0.27. Generated
 well-formed (30/30 structurally usable) but insufficiently resolvable from the evidence. Spend $0.0327.
 The project stops; no RV3. See [RV2-F](../experiments/RV2_F_GENERATED_PREMISES.md) (pre-registration
 and results) and the [ledger audit](../results/rv2/rv2_f/ledger_halt_audit.md).
+
+## RV2-G (evidence-grounded decomposition): pre-registered, not yet run
+
+New, narrowly scoped diagnostic derived from RV2-F: decompose from question + the evidence actually
+available, separating evidence-level facts from derived claims, then judge sufficiency from the whole
+evidence set. Four systems (naive RAG, RV2-F question-only premises, gold premises, evidence-grounded
+M2) on 30 fresh EntailmentBank dev examples (2-, 3- and 6-leaf proofs; the 3-5 leaf supply is exhausted
+after RV2-F), cap $0.30. Thresholds, classification and interpretation rules are committed in
+[RV2-G](../experiments/RV2_G_EVIDENCE_GROUNDED_DECOMPOSITION.md) before any model call. The RV2-F
+`NO_END_TO_END_SIGNAL` result and the other frozen conclusions are unchanged.

@@ -127,6 +127,7 @@ Method = Literal[
     "premise_only",
     "premise_state",
     "sufficiency_check",
+    "grounded_decomposition",
     "epistemic_search",
 ]
 

@@ -1,0 +1,52 @@
+{
+  "eligible_leaf_counts": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "experiment": "RV2-G evidence-grounded decomposition",
+  "leaf_counts": {
+    "2": 10,
+    "3": 10,
+    "4": 0,
+    "5": 0,
+    "6": 10
+  },
+  "overlap_with_excluded": [],
+  "sample_ids": [
+    "Mercury_7084525",
+    "Mercury_7121765",
+    "Mercury_SC_406660",
+    "Mercury_SC_LBS10587",
+    "MCAS_8_2015_16",
+    "TIMSS_2003_8_pg97",
+    "Mercury_SC_400022",
+    "Mercury_SC_402240",
+    "Mercury_7166635",
+    "Mercury_7011375",
+    "OHAT_2009_5_44",
+    "Mercury_SC_400689",
+    "Mercury_SC_400064",
+    "Mercury_SC_413558",
+    "Mercury_SC_401220",
+    "MCAS_2006_8_35",
+    "Mercury_7083370",
+    "Mercury_SC_416158",
+    "MDSA_2007_8_47",
+    "NYSEDREGENTS_2004_4_29",
+    "Mercury_7097545",
+    "Mercury_7013178",
+    "VASoL_2008_3_2",
+    "MCAS_2004_8_16",
+    "ACTAAP_2009_5_6",
+    "NYSEDREGENTS_2005_4_29",
+    "TIMSS_2011_4_pg64",
+    "Mercury_405939",
+    "MSA_2015_5_46",
+    "NCEOGA_2013_5_7"
+  ],
+  "sampling_seed": 20261029,
+  "target_n": 30
+}
